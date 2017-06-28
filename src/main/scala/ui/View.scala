@@ -45,8 +45,9 @@ object View extends App {
   }
 
   val formatedBoard = formatBoard(board, 3) 
-  val testDialog: List[String] = List("This", "That")
-  renderDialog(testDialog)
+
+  renderWhitespace(3)
+  renderDialog(Dialog.en("greeting"))
 
   
   renderBoard(formatedBoard, 1)
