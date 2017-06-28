@@ -12,6 +12,10 @@ object View extends App {
     }
   }
 
+  def renderDialog(dialog: String*): Unit = {
+    for (string <- dialog) println(string)
+  }
+
   //formats the board into a list of lists, one for each row
   def formatBoard(board: List[Any], grouping: Int): List[List[Any]] = {
     board.grouped(grouping).toList
@@ -41,7 +45,10 @@ object View extends App {
   }
 
   val formatedBoard = formatBoard(board, 3) 
+  val testDialog: List[String] = List("This", "That")
+  renderDialog(testDialog)
 
+  
   renderBoard(formatedBoard, 1)
 }
 
