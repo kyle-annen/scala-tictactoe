@@ -1,10 +1,6 @@
 package tictactoe 
 
 object View extends App {
-
-  //remove, simply a placeholder value for development
-  val board = List(1,2,3,4,5,6,7,8,9)
-
   //renders the number of blank lines provided as an argument
   def renderWhitespace(n: Int): Unit = {
     for( i <- 1 to n ) {
