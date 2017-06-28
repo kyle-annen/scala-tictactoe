@@ -13,7 +13,7 @@ object View extends App {
   }
 
   //formats the board into a list of lists, one for each row
-  def formatBoard(board: List[Any], grouping: Int): List[Any] = {
+  def formatBoard(board: List[Any], grouping: Int): List[List[Any]] = {
     board.grouped(grouping).toList
   }
   //formats rows into strings that represent a tictactoe row 
@@ -23,15 +23,20 @@ object View extends App {
   }
 
   //renders the board to the console
-  def renderBoard(fBoard: List[Any], boardPadding: Int): Unit = {
-    val hLine = "===+===+==="
-    val nRows = fBoard.length
+  def renderBoard(fBoard: List[List[Any]], boardPadding: Int): Unit = {
+    val hLine: String = "===+===+==="
+    val nRows: Int = fBoard.length
+    
     renderWhitespace(boardPadding)
+
     for (i <- 0 to nRows - 1) {
-      println(formatRow(fBoard( i - 1 )))
+      val row: List[Any] = fBoard(i)
+      val formatedRow: String = formatRow(row)
+      println(formatedRow)
       if (i < nRows - 1) 
         println(hLine)
     }
+
     renderWhitespace(boardPadding)
   }
 
