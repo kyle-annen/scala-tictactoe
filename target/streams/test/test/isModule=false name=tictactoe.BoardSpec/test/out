@@ -5,3 +5,11 @@
 [0m[[0minfo[0m] [0m[32m- should return a list of row lists[0m[0m
 [0m[[0minfo[0m] [0m[32mreturnColumns[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return a list of column lists[0m[0m
+[0m[[0minfo[0m] [0m[32mreturnDiagonals[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return a list of diagonal lists[0m[0m
+[0m[[0minfo[0m] [0m[32mcheckSets[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return true if one list in a list of lists has identical values internally[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return return false if no list in a list of lists has identical values[0m[0m
+[0m[[0minfo[0m] [0m[32mcheckWin[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return true if a winning board[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return false if not a winning board[0m[0m
