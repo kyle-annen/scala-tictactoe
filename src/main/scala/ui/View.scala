@@ -12,6 +12,7 @@ object View extends App {
     }
   }
 
+  //renders strings of text to the console
   def renderDialog(dialog: String*): Unit = {
     for (string <- dialog) println(string)
   }
@@ -30,9 +31,9 @@ object View extends App {
   def renderBoard(fBoard: List[List[Any]], boardPadding: Int): Unit = {
     val hLine: String = "===+===+==="
     val nRows: Int = fBoard.length
-    
+    //renders white space above the board 
     renderWhitespace(boardPadding)
-
+    //loop to render the board to the console
     for (i <- 0 to nRows - 1) {
       val row: List[Any] = fBoard(i)
       val formatedRow: String = formatRow(row)
@@ -40,17 +41,9 @@ object View extends App {
       if (i < nRows - 1) 
         println(hLine)
     }
-
+    //renders whitespace below the board
     renderWhitespace(boardPadding)
   }
-
-  val formatedBoard = formatBoard(board, 3) 
-
-  renderWhitespace(3)
-  renderDialog(Dialog.en("greeting"))
-
-  
-  renderBoard(formatedBoard, 1)
 }
 
 
