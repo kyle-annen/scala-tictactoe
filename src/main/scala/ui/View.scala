@@ -2,36 +2,42 @@ package tictactoe
 
 object View extends App {
 
-  val board = List(1,2,3,4,5,6,7,8)
+  //remove, simply a placeholder value for development
+  val board = List(1,2,3,4,5,6,7,8,9)
 
+  //renders the number of blank lines provided as an argument
+  def renderWhitespace(n: Int): Unit = {
+    for( i <- 1 to n ) {
+      println()
+    }
+  }
+
+  //formats the board into a list of lists, one for each row
+  def formatBoard(board: List[Any], grouping: Int): List[Any] = {
+    board.grouped(grouping).toList
+  }
+  //formats rows into strings that represent a tictactoe row 
   def formatRow(row: List[Any]): String = {
     val struct: String = " %d | %d | %d "
     struct.format(row(0), row(1), row(2))
   }
 
-  def renderWhitespace(n: Int): Unit = {
-    for( i <- 1 to 10 ) {
-      println()
-    }
-  }
-
-  def renderBoard(board: List[Any]): Unit = {
-    val row1 = board.slice(0,3)
-    val row2 = board.slice(2,6)
-    val row3 = board.slice(5,9)
+  //renders the board to the console
+  def renderBoard(fBoard: List[Any], boardPadding: Int): Unit = {
     val hLine = "===+===+==="
-
-    renderWhitespace(10)
-    println(formatRow(row1))
-    println(hLine)
-    println(formatRow(row2))
-    println(hLine)
-    println(formatRow(row3))
-    renderWhitespace(10)
+    val nRows = fBoard.length
+    renderWhitespace(boardPadding)
+    for (i <- 0 to nRows - 1) {
+      println(formatRow(fBoard( i - 1 )))
+      if (i < nRows - 1) 
+        println(hLine)
+    }
+    renderWhitespace(boardPadding)
   }
 
-  
-  renderBoard(board)
+  val formatedBoard = formatBoard(board, 3) 
+
+  renderBoard(formatedBoard, 1)
 }
 
 
