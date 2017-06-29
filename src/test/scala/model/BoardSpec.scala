@@ -62,6 +62,14 @@ class BoardSpec extends FunSpec {
 
             assert( actual === expected)
         }
+
+        it("should return true if there is a diagonal win") {
+            val testBoard: List[Any] = List("x",2,3,4,"x",6,7,8,"x")
+            val expected: Boolean = true
+            val actual = Board.checkSets(Board.returnDiagonals(testBoard))
+
+            assert(actual === expected)
+        }
     }
 
     describe("checkWin") {
@@ -79,7 +87,30 @@ class BoardSpec extends FunSpec {
             val actual = Board.checkWin(testBoard)
 
             assert(actual === expected)
-
         }
     }
+
+    describe("checkTie") {
+        it("should return false if there is a winner") {
+            val testBoard: List[Any] = List("x",2,3,4,"x",6,7,8,"x")
+            val expected: Boolean = false
+            val actual = Board.checkTie(testBoard)
+
+            assert(actual === expected)
+        }
+    }
+
+    describe("gameOver") {
+        it("should return a List[Boolean, String]") (pending)
+
+        it("should return false if the game is not over") (pending)
+
+        it("should return true if the game is over") (pending)
+
+        it("should return 'tie' if a tie") (pending)
+
+        it("should return 'X' if X is the winner") (pending)
+
+    }
+
 }
