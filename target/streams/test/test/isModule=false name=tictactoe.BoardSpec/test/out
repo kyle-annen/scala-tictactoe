@@ -15,15 +15,14 @@
 [0m[[0minfo[0m] [0m[32m- should return true if a winning board[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return false if not a winning board[0m[0m
 [0m[[0minfo[0m] [0m[32m*checkSpace[0m[0m
-[0m[[0minfo[0m] [0m[31m- should return true if there is open spaces *** FAILED ***[0m[0m
-[0m[[0minfo[0m] [0m[31m  false did not equal true (BoardSpec.scala:100)[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return true if there is open spaces[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return false if there is no open spaces[0m[0m
 [0m[[0minfo[0m] [0m[32m*checkTie[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return true if there is no tie (pending)[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return false if there is winner and no tie (pending)[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return false if there is no tie[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return false if there are moves left[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return true if no winner and no moves[0m[0m
+[0m[[0minfo[0m] [0m[32m- should be false if there is a winner and no moves[0m[0m
 [0m[[0minfo[0m] [0m[32m*gameOver[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return a List[Boolean, String] (pending)[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return false if the game is not over (pending)[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return true if the game is over (pending)[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return 'tie' if a tie (pending)[0m[0m
-[0m[[0minfo[0m] [0m[33m- should return 'X' if X is the winner (pending)[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return true if no moves are left[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return false if moves are left and no winner[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return true if there is a winning set[0m[0m

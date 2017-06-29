@@ -48,18 +48,16 @@ object Board {
     }
 
     def checkSpace(board: List[Any]): Boolean = {
-        board.map(x => x.getClass.getSimpleName == "Integer").foldLeft(true)(_ && _)
-
+        board.map(x => x.getClass.getSimpleName == "Integer").foldLeft(false)(_ || _)
     }
 
     def checkTie(board: List[Any]): Boolean = {
-        false
+        checkSpace(board) && checkWin(board)
 
     }
 
     def gameOver(board: List[Any]): Boolean = {
-        false
-
+        checkWin(board) || !checkSpace(board)
     }
 
 }

@@ -93,7 +93,7 @@ class BoardSpec extends FunSpec {
 
     describe("*checkSpace") {
         it("should return true if there is open spaces") {
-            val testBoard: List[Any] = List(1,2,3,4,5,6,7,8,9)
+            val testBoard: List[Any] = (1 to 9).toList 
             val expected: Boolean = true
             val actual = Board.checkSpace(testBoard)
 
@@ -111,23 +111,73 @@ class BoardSpec extends FunSpec {
 
     describe("*checkTie") {
 
-        it("should return true if there is no tie") (pending)
+        it("should return false if there is no tie") {
+            val testBoard: List[Any] = (1 to 9).toList
+            val expected: Boolean = false
+            val actual = Board.checkTie(testBoard)
 
-        it("should return false if there is winner and no tie") (pending)
+            assert(actual === expected)
+        }
 
+        it("should return false if there are moves left") {
+            val testBoard: List[Any] = List("x","o","x",
+                                            "x","o","x",
+                                            "o","x",9)
+            val expected: Boolean = false
+            val actual = Board.checkTie(testBoard)
+
+            assert(actual === expected)
+        }
+
+        it("should return true if no winner and no moves") {
+            val testBoard: List[Any] = List("x","o","x",
+                                            "x","o","x",
+                                            "o","x","o")
+            val expected: Boolean = false
+            val actual = Board.checkTie(testBoard)
+
+            assert(actual === expected)
+        }
+
+        it("should be false if there is a winner and no moves") {
+            val testBoard: List[Any] = List("x","o","x",
+                                            "x","o","x",
+                                            "o","x","x")
+            val expected: Boolean = false
+            val actual = Board.checkTie(testBoard)
+
+            assert(actual === expected)
+
+        }
     }
 
     describe("*gameOver") {
-        it("should return a List[Boolean, String]") (pending)
+       it("should return true if no moves are left") {
+            val testBoard: List[Any] = List("x","o","x",
+                                            "x","o","x",
+                                            "o","x","o")
+            val expected: Boolean = true 
+            val actual = Board.gameOver(testBoard)
 
-        it("should return false if the game is not over") (pending)
+            assert(actual === expected)
+       }
 
-        it("should return true if the game is over") (pending)
+       it("should return false if moves are left and no winner") {
+            val testBoard: List[Any] = List("x","o","x",
+                                            "x","o","x",
+                                            "o","x",9)
+            val expected: Boolean = false 
+            val actual = Board.gameOver(testBoard)
 
-        it("should return 'tie' if a tie") (pending)
+            assert(actual === expected)
+       }
 
-        it("should return 'X' if X is the winner") (pending)
+       it("should return true if there is a winning set") {
+           val testBoard: List[Any] = List("x","x","x",4,5,6,7,8,9)
+           val expected: Boolean = true
+           val actual = Board.gameOver(testBoard)
 
+            assert(actual === expected)
+       }
     }
-
 }
