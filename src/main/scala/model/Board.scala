@@ -1,7 +1,11 @@
 package tictactoe
 
 object Board {
-    val initialBoardState: List[Any] = List(1,2,3,4,5,6,7,8,9)
+    
+    //intitialilzes the board
+    def initBoard(dimension: Int): List[Any] = {
+        List.range(1, dimension + 1, 1)
+    }
 
     //returns the dimensions of the board
     def returnDimension(board: List[Any]): Int = {

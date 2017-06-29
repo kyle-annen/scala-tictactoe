@@ -1,6 +1,6 @@
 [0m[[0minfo[0m] [0m[32mBoardSpec:[0m[0m
-[0m[[0minfo[0m] [0m[32minitialBoardState[0m[0m
-[0m[[0minfo[0m] [0m[32m- should be a list of length 9[0m[0m
+[0m[[0minfo[0m] [0m[32minitBoard[0m[0m
+[0m[[0minfo[0m] [0m[32m- it shoudl return a List of the size indicated, from 1 to Dimension[0m[0m
 [0m[[0minfo[0m] [0m[32mreturnRows[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return a list of row lists[0m[0m
 [0m[[0minfo[0m] [0m[32mreturnColumns[0m[0m

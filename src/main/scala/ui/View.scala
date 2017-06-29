@@ -1,6 +1,6 @@
 package tictactoe 
 
-object View extends App {
+object View {
   //renders the number of blank lines provided as an argument
   def renderWhitespace(n: Int): Unit = {
     for( i <- 1 to n ) {

@@ -5,9 +5,12 @@ import org.scalatest.Matchers._
 
 class BoardSpec extends FunSpec {
 
-    describe("initialBoardState") {
-        it("should be a list of length 9") {
-            Board.initialBoardState.length should be (9)
+    describe("initBoard") {
+        it("it shoudl return a List of the size indicated, from 1 to Dimension") {
+            val expected: List[Any] = List(1,2,3,4,5,6,7,8,9)
+            val actual = Board.initBoard(9)
+            
+            assert(actual === expected)
         }
     }
 
