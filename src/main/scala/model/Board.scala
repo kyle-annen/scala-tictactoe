@@ -47,28 +47,32 @@ object Board {
         diaBool || rowBool || colBool
     }
 
+    //returns true if open moves, false if board if full
     def checkSpace(board: List[Any]): Boolean = {
         board.map(x => x.getClass.getSimpleName == "Integer").foldLeft(false)(_ || _)
     }
 
+    //return true if there is a tie, false if there is not tie
     def checkTie(board: List[Any]): Boolean = {
         checkSpace(board) && checkWin(board)
     }
 
-
+    //return true if the game is over, false if not
     def gameOver(board: List[Any]): Boolean = {
         checkWin(board) || !checkSpace(board)
     }
 
+    //returns a list, first value a boolean, second the text of the winner
+    //if there is no winner, the text is "none"
+    //ex. X wins, return List(true, "X")
+    //ex. if no winner, reutnr List(false, "none")
     def getWinner(board: List[Any]): List[Any] = {
         val allSets = returnDiagonals(board) ::: returnColumns(board) ::: returnRows(board)
-
         for(set <- allSets) {
             if(set.forall(_ == set.head)) {
                 return List(true, set.head)
             }
         }
-
         return List(false, "none")
     }
 }
