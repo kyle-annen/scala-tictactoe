@@ -47,10 +47,14 @@ object Board {
         diaBool || rowBool || colBool
     }
 
-    def checkTie(board: List[Any]): Boolean = {
-        val winStatus: Boolean = checkWin(board)
+    def checkSpace(board: List[Any]): Boolean = {
+        board.map(x => x.getClass.getSimpleName == "Integer").foldLeft(true)(_ && _)
 
-        !winStatus
+    }
+
+    def checkTie(board: List[Any]): Boolean = {
+        false
+
     }
 
     def gameOver(board: List[Any]): Boolean = {
