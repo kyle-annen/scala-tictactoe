@@ -4,7 +4,7 @@
 		module="scalaex_2.12"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20170628090854"
+		publication="20170629084247"
 	>
 		<description>
 		scalaEx
@@ -24,6 +24,7 @@
 		<conf name="docs" visibility="public" description=""/>
 		<conf name="pom" visibility="public" description=""/>
 		<conf name="scala-tool" visibility="private" description=""/>
+		<conf name="scoveragePlugin" visibility="private" description=""/>
 	</configurations>
 	<publications>
 		<artifact name="scalaex_2.12" type="pom" ext="pom" conf="pom"/>

@@ -1,0 +1,659 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          ui/View.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe 
+</span>2 <span style=''>
+</span>3 <span style=''>object View {
+</span>4 <span style=''>  //renders the number of blank lines provided as an argument
+</span>5 <span style=''>  def renderWhitespace(n: Int): Unit = {
+</span>6 <span style=''>    </span><span style='background: #F0ADAD'>for( i &lt;- 1 to n ) {
+</span>7 <span style=''></span><span style='background: #F0ADAD'>      println()</span><span style=''>
+</span>8 <span style=''>    }
+</span>9 <span style=''>  }
+</span>10 <span style=''>
+</span>11 <span style=''>  //renders strings of text to the console
+</span>12 <span style=''>  def renderDialog(dialog: String*): Unit = {
+</span>13 <span style=''>    </span><span style='background: #F0ADAD'>for (string &lt;- dialog) println(string)</span><span style=''>
+</span>14 <span style=''>  }
+</span>15 <span style=''>
+</span>16 <span style=''>  //formats the board into a list of lists, one for each row
+</span>17 <span style=''>  def formatBoard(board: List[Any], grouping: Int): List[List[Any]] = {
+</span>18 <span style=''>    </span><span style='background: #AEF1AE'>board.grouped(grouping).toList</span><span style=''>
+</span>19 <span style=''>  }
+</span>20 <span style=''>  //formats rows into strings that represent a tictactoe row 
+</span>21 <span style=''>  def formatRow(row: List[Any]): String = {
+</span>22 <span style=''>    val struct: String = </span><span style='background: #AEF1AE'>&quot; %d | %d | %d &quot;</span><span style=''>
+</span>23 <span style=''>    </span><span style='background: #AEF1AE'>struct.format(row(0), row(1), row(2))</span><span style=''>
+</span>24 <span style=''>  }
+</span>25 <span style=''>
+</span>26 <span style=''>  //renders the board to the console
+</span>27 <span style=''>  def renderBoard(fBoard: List[List[Any]], boardPadding: Int): Unit = {
+</span>28 <span style=''>    val hLine: String = </span><span style='background: #F0ADAD'>&quot;===+===+===&quot;</span><span style=''>
+</span>29 <span style=''>    val nRows: Int = </span><span style='background: #F0ADAD'>fBoard.length</span><span style=''>
+</span>30 <span style=''>    //renders white space above the board 
+</span>31 <span style=''>    </span><span style='background: #F0ADAD'>renderWhitespace(boardPadding)</span><span style=''>
+</span>32 <span style=''>    //loop to render the board to the console
+</span>33 <span style=''>    </span><span style='background: #F0ADAD'>for (i &lt;- 0 to nRows - 1) {
+</span>34 <span style=''></span><span style='background: #F0ADAD'>      val row: List[Any] = fBoard(i)
+</span>35 <span style=''></span><span style='background: #F0ADAD'>      val formatedRow: String = formatRow(row)
+</span>36 <span style=''></span><span style='background: #F0ADAD'>      println(formatedRow)
+</span>37 <span style=''></span><span style='background: #F0ADAD'>      if (i &lt; nRows - 1) 
+</span>38 <span style=''></span><span style='background: #F0ADAD'>        println(hLine)
+</span>39 <span style=''></span><span style='background: #F0ADAD'>    }</span><span style=''>
+</span>40 <span style=''>    //renders whitespace below the board
+</span>41 <span style=''>    </span><span style='background: #F0ADAD'>renderWhitespace(boardPadding)</span><span style=''>
+</span>42 <span style=''>  }
+</span>43 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          6
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          141
+          -
+          177
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.Range.foreach
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.intWrapper(1).to(n).foreach[Unit](((i: Int) =&gt; scala.Predef.println()))
+        </td>
+      </tr><tr>
+        <td>
+          6
+        </td>
+        <td>
+          57
+        </td>
+        <td>
+          151
+          -
+          152
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          7
+        </td>
+        <td>
+          58
+        </td>
+        <td>
+          168
+          -
+          177
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println()
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          61
+        </td>
+        <td>
+          282
+          -
+          320
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.IterableLike.foreach
+        </td>
+        <td style="background: #F0ADAD">
+          dialog.foreach[Unit](((string: String) =&gt; scala.Predef.println(string)))
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          60
+        </td>
+        <td>
+          305
+          -
+          320
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(string)
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          62
+        </td>
+        <td>
+          463
+          -
+          493
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.TraversableOnce.toList
+        </td>
+        <td style="background: #AEF1AE">
+          board.grouped(grouping).toList
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          63
+        </td>
+        <td>
+          629
+          -
+          645
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot; %d | %d | %d &quot;
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          65
+        </td>
+        <td>
+          672
+          -
+          678
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #AEF1AE">
+          row.apply(1)
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          64
+        </td>
+        <td>
+          664
+          -
+          670
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #AEF1AE">
+          row.apply(0)
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          67
+        </td>
+        <td>
+          650
+          -
+          687
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.StringLike.format
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(struct).format(row.apply(0), row.apply(1), row.apply(2))
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          66
+        </td>
+        <td>
+          680
+          -
+          686
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #AEF1AE">
+          row.apply(2)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          68
+        </td>
+        <td>
+          826
+          -
+          839
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          &quot;===+===+===&quot;
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          69
+        </td>
+        <td>
+          861
+          -
+          874
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.length
+        </td>
+        <td style="background: #F0ADAD">
+          fBoard.length
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          70
+        </td>
+        <td>
+          922
+          -
+          952
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #F0ADAD">
+          View.this.renderWhitespace(boardPadding)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          71
+        </td>
+        <td>
+          1013
+          -
+          1014
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          0
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          82
+        </td>
+        <td>
+          1003
+          -
+          1196
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.Range.foreach
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.intWrapper(0).to(nRows.-(1)).foreach[Unit](((i: Int) =&gt; {
+  val row: List[Any] = fBoard.apply(i);
+  val formatedRow: String = View.this.formatRow(row);
+  scala.Predef.println(formatedRow);
+  if (i.&lt;(nRows.-(1)))
+    scala.Predef.println(hLine)
+  else
+    ()
+}))
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          72
+        </td>
+        <td>
+          1018
+          -
+          1027
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #F0ADAD">
+          nRows.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          1058
+          -
+          1067
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #F0ADAD">
+          fBoard.apply(i)
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          74
+        </td>
+        <td>
+          1100
+          -
+          1114
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.formatRow
+        </td>
+        <td style="background: #F0ADAD">
+          View.this.formatRow(row)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          75
+        </td>
+        <td>
+          1121
+          -
+          1141
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(formatedRow)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          77
+        </td>
+        <td>
+          1152
+          -
+          1165
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.&lt;
+        </td>
+        <td style="background: #F0ADAD">
+          i.&lt;(nRows.-(1))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          80
+        </td>
+        <td>
+          1148
+          -
+          1148
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          76
+        </td>
+        <td>
+          1156
+          -
+          1165
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #F0ADAD">
+          nRows.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          81
+        </td>
+        <td>
+          1148
+          -
+          1148
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          79
+        </td>
+        <td>
+          1176
+          -
+          1190
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(hLine)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          78
+        </td>
+        <td>
+          1176
+          -
+          1190
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(hLine)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          83
+        </td>
+        <td>
+          1242
+          -
+          1272
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #F0ADAD">
+          View.this.renderWhitespace(boardPadding)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

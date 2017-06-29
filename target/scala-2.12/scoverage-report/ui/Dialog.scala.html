@@ -1,0 +1,244 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          ui/Dialog.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
+</span>2 <span style=''>
+</span>3 <span style=''>object Dialog {
+</span>4 <span style=''>    val en = </span><span style='background: #AEF1AE'>Map(
+</span>5 <span style=''></span><span style='background: #AEF1AE'>        &quot;greeting&quot; -&gt; &quot;Let's play TicTacToe!&quot;,
+</span>6 <span style=''></span><span style='background: #AEF1AE'>        &quot;turnPrompt&quot; -&gt; &quot;It's your turn.&quot;,
+</span>7 <span style=''></span><span style='background: #AEF1AE'>        &quot;playerAnnounce&quot; -&gt; &quot;Player &quot;,
+</span>8 <span style=''></span><span style='background: #AEF1AE'>        &quot;gameOver&quot; -&gt; &quot;Game Over&quot;,
+</span>9 <span style=''></span><span style='background: #AEF1AE'>        &quot;win&quot; -&gt; &quot;You have won the game!&quot;,
+</span>10 <span style=''></span><span style='background: #AEF1AE'>        &quot;tie&quot; -&gt; &quot;The game is a tie.&quot;,
+</span>11 <span style=''></span><span style='background: #AEF1AE'>        &quot;invalidPlay&quot; -&gt; &quot;That selection is invalid.&quot;,
+</span>12 <span style=''></span><span style='background: #AEF1AE'>        &quot;inputPrompt&quot; -&gt; &quot;Please input the number of an open space.&quot;
+</span>13 <span style=''></span><span style='background: #AEF1AE'>    )</span><span style=''> 
+</span>14 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          4
+        </td>
+        <td>
+          56
+        </td>
+        <td>
+          48
+          -
+          428
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          5
+        </td>
+        <td>
+          48
+        </td>
+        <td>
+          61
+          -
+          98
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          6
+        </td>
+        <td>
+          49
+        </td>
+        <td>
+          108
+          -
+          141
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          7
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          151
+          -
+          180
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          8
+        </td>
+        <td>
+          51
+        </td>
+        <td>
+          190
+          -
+          215
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          9
+        </td>
+        <td>
+          52
+        </td>
+        <td>
+          225
+          -
+          258
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          53
+        </td>
+        <td>
+          268
+          -
+          297
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          54
+        </td>
+        <td>
+          307
+          -
+          352
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          55
+        </td>
+        <td>
+          362
+          -
+          422
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>
