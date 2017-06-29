@@ -14,6 +14,16 @@ class BoardSpec extends FunSpec {
         }
     }
 
+    describe("*returnValidInputs") {
+        it("should return open moves of the board in a list") {
+            val testBoard: List[Any] = List("x","o","x",3,4,5,"x","o","x")
+            val expected: List[Any] = List(3,4,5)
+            val actual = Board.returnValidInputs(testBoard)
+
+            assert( actual === expected )
+        }
+    }
+
     describe("*returnRows") {
         it("should return a list of row lists") {
             val testBoard: List[Any] = (1 to 9).toList 

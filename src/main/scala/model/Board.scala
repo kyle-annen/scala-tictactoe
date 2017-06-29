@@ -7,6 +7,11 @@ object Board {
         List.range(1, dimension + 1, 1)
     }
 
+    //returns a list of valid inputs for the board
+    def returnValidInputs(board: List[Any]) = {
+        board.filter((x: Any) => x.getClass.getSimpleName == "Integer") 
+    }
+
     //returns the dimensions of the board
     def returnDimension(board: List[Any]): Int = {
         Math.sqrt(board.length).toInt
