@@ -180,4 +180,23 @@ class BoardSpec extends FunSpec {
             assert(actual === expected)
        }
     }
+
+    describe("*getWinner") {
+        it("should return a list containing true and the winning token") {
+            val testBoard: List[Any] = List("x","x","x",4,5,6,7,8,9)
+            val expected: List[Any] = List(true, "x")
+            val actual = Board.getWinner(testBoard)
+
+            assert(actual === expected)
+        }
+
+        it("should return a list of false and string 'none' if no winner is found") {
+            val testBoard: List[Any] = List(1,2,3,4,"x",6,7,8,9)
+            val expected: List[Any] = List(false, "none")
+            val actual = Board.getWinner(testBoard)
+
+            assert(actual === expected)
+
+        }
+    }
 }

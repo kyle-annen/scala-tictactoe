@@ -53,11 +53,22 @@ object Board {
 
     def checkTie(board: List[Any]): Boolean = {
         checkSpace(board) && checkWin(board)
-
     }
+
 
     def gameOver(board: List[Any]): Boolean = {
         checkWin(board) || !checkSpace(board)
     }
 
+    def getWinner(board: List[Any]): List[Any] = {
+        val allSets = returnDiagonals(board) ::: returnColumns(board) ::: returnRows(board)
+
+        for(set <- allSets) {
+            if(set.forall(_ == set.head)) {
+                return List(true, set.head)
+            }
+        }
+
+        return List(false, "none")
+    }
 }
