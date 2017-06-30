@@ -1,5 +1,5 @@
 package tictactoe
-//game object congains the game loop and runs the game
+//game object contains the game loop and runs the game
 object Game extends App {
     //initializes the player map
     def initPlayers() = Map(1 -> "X", 2 -> "O")
