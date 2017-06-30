@@ -29,33 +29,35 @@ object Game extends App {
         val updatedBoard = board.patch(boardMove - 1, userToken, 1)
         //get boolen for whether the game is over
         val gameOver = Board.gameOver(updatedBoard)
-
-
+        //if the game is over, use the end progression
         if(gameOver) {
+            //render whitespace
             View.renderWhitespace(50)
+            //set the formatting for the end board
             val endBoard = View.formatBoard(updatedBoard, 3)
+            //render the last board to the console
             View.renderBoard(endBoard, 3)
+            //render the game over message
             View.renderDialog("The game is over!")
-
+            //get the boolean for whether the game is won or not
             val isWin = Board.checkWin(updatedBoard)
-
+            //conditional loop to render a winner or a tie
             if (isWin) {
+                //render the winning dialog
                 View.renderDialog(playerNumAnnounce, dialogLang("win"))
             } else {
+                //render the tie dialog
                 View.renderDialog(dialogLang("tie"))
             }
-            
-
+            //render the ending whitespace
             View.renderWhitespace(15)
+        //if the game is not over, progress with recursion
         } else {
             //set the next player
             val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
-            //recursively call the game
+            //recursively call the game the game loop
             go(updatedBoard, players, dialogLang, false, nextPlayer)
-
         }
-
-
     }
     //greet the player
     View.renderDialog(Dialog.en("greeting"))
