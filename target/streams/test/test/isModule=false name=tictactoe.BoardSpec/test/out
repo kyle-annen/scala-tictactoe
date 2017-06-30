@@ -1,6 +1,8 @@
 [0m[[0minfo[0m] [0m[32mBoardSpec:[0m[0m
 [0m[[0minfo[0m] [0m[32m*initBoard[0m[0m
 [0m[[0minfo[0m] [0m[32m- it should return a List of the size indicated, from 1 to Dimension[0m[0m
+[0m[[0minfo[0m] [0m[32m*returnValidInputs[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return open moves of the board in a list[0m[0m
 [0m[[0minfo[0m] [0m[32m*returnRows[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return a list of row lists[0m[0m
 [0m[[0minfo[0m] [0m[32m*returnColumns[0m[0m
@@ -26,3 +28,6 @@
 [0m[[0minfo[0m] [0m[32m- should return true if no moves are left[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return false if moves are left and no winner[0m[0m
 [0m[[0minfo[0m] [0m[32m- should return true if there is a winning set[0m[0m
+[0m[[0minfo[0m] [0m[32m*getWinner[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return a list containing true and the winning token[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return a list of false and string 'none' if no winner is found[0m[0m

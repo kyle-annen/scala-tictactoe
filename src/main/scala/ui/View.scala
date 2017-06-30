@@ -19,8 +19,9 @@ object View {
   }
   //formats rows into strings that represent a tictactoe row 
   def formatRow(row: List[Any]): String = {
-    val struct: String = " %d | %d | %d "
-    struct.format(row(0), row(1), row(2))
+    val noLeadingSpace: String = row mkString " | "
+    val fBoard: String = " " + noLeadingSpace
+    fBoard
   }
 
   //renders the board to the console
