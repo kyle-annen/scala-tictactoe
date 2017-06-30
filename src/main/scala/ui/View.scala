@@ -10,7 +10,10 @@ object View {
 
   //renders strings of text to the console
   def renderDialog(dialog: String*): Unit = {
-    for (string <- dialog) println(string)
+    for (string <- dialog) {
+      val paddedString: String = "   " + string
+      println(paddedString)
+    }
   }
 
   //formats the board into a list of lists, one for each row
@@ -26,14 +29,14 @@ object View {
 
   //renders the board to the console
   def renderBoard(fBoard: List[List[Any]], boardPadding: Int): Unit = {
-    val hLine: String = "===+===+==="
+    val hLine: String = "       ===+===+==="
     val nRows: Int = fBoard.length
     //renders white space above the board 
     renderWhitespace(boardPadding)
     //loop to render the board to the console
     for (i <- 0 to nRows - 1) {
       val row: List[Any] = fBoard(i)
-      val formatedRow: String = formatRow(row)
+      val formatedRow: String = "       " + formatRow(row)
       println(formatedRow)
       if (i < nRows - 1) 
         println(hLine)
