@@ -1,5 +1,5 @@
 package tictactoe 
-
+//view handles all the rendering to the console
 object View {
   //renders the number of blank lines provided as an argument
   def renderWhitespace(n: Int): Unit = {

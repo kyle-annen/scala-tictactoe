@@ -1,5 +1,5 @@
 package tictactoe
-
+//Board handles the board initialization and returns states of the board
 object Board {
     
     //intitialilzes the board

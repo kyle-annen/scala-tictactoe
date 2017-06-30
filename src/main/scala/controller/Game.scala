@@ -1,9 +1,9 @@
 package tictactoe
-
+//game object congains the game loop and runs the game
 object Game extends App {
-
+    //initializes the player map
     def initPlayers() = Map(1 -> "X", 2 -> "O")
-
+    //game recursive logic loop
     def go(board: List[Any], players: Map[Int, String], 
            dialogLang: Map[String, String], gameOver: Boolean, currentPlayer: Int) {
         //clear console
@@ -13,34 +13,36 @@ object Game extends App {
         //render the board
         View.renderBoard(fBoard, 3)
         //construct the player and number
-        val playerNumAnnounce = dialogLang("playerAnnounce") + currentPlayer
+        val playerNumAnnounce: String = dialogLang("playerAnnounce") + currentPlayer
         //render the player announcement and turn prompt
         View.renderDialog(playerNumAnnounce)
         //get valid plays 
-        val validPlays = Board.returnValidInputs(board)
-        val inputPrompt = dialogLang("inputPrompt")
-        val invalidPlay = dialogLang("invalidPlay")
+        val validPlays: List[Any] = Board.returnValidInputs(board)
+        //set values for concise method calls
+        val inputPrompt: String = dialogLang("inputPrompt")
+        //set values for concise method calls
+        val invalidPlay: String = dialogLang("invalidPlay")
         //get user play
         val userPlay: String = IO.getValidMove(validPlays, inputPrompt,  invalidPlay)
         val boardMove: Int = userPlay.toInt
         //get the user token
-        val userToken = players(currentPlayer)
+        val userToken: String = players(currentPlayer)
         //create new board with updated value
-        val updatedBoard = board.patch(boardMove - 1, userToken, 1)
+        val updatedBoard: List[Any] = board.patch(boardMove - 1, userToken, 1)
         //get boolen for whether the game is over
-        val gameOver = Board.gameOver(updatedBoard)
+        val gameOver: Boolean = Board.gameOver(updatedBoard)
         //if the game is over, use the end progression
         if(gameOver) {
             //render whitespace
             View.renderWhitespace(50)
             //set the formatting for the end board
-            val endBoard = View.formatBoard(updatedBoard, 3)
+            val endBoard: List[List[Any]] = View.formatBoard(updatedBoard, 3)
             //render the last board to the console
             View.renderBoard(endBoard, 3)
             //render the game over message
             View.renderDialog("The game is over!")
             //get the boolean for whether the game is won or not
-            val isWin = Board.checkWin(updatedBoard)
+            val isWin: Boolean = Board.checkWin(updatedBoard)
             //conditional loop to render a winner or a tie
             if (isWin) {
                 //render the winning dialog
