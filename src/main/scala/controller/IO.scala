@@ -16,11 +16,16 @@ object IO {
                 View.renderDialog(invalidPlay)
                 View.renderDialog(inputPrompt)
                 val input: String = getUserInput()
-                val inputValidity = validValues.contains(input.toInt)
-                go(inputValidity, input)
+
+                try {
+                    val inputValidity = validValues.contains(input.toInt)
+                    go(inputValidity, input)
+               } catch {
+                    case _: Throwable => go(false, input)
+               }
             }
         }
 
-        go(false, "placeholder")
+        go(false, "none")
     }
 }
