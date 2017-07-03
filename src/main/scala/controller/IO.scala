@@ -2,6 +2,7 @@ package tictactoe
 //IO handles the user input
 object IO {
 //returns the users input from the console
+/**
   def getUserInput(): String = {
   //get the value from the user
     val userInput = scala.io.StdIn.readLine().trim
@@ -33,4 +34,5 @@ object IO {
 
   go(false, "none")
   }
+  */
 }

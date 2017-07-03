@@ -4,6 +4,7 @@ object Game extends App {
     //initializes the player map
     def initPlayers() = Map(1 -> "X", 2 -> "O")
     //game recursive logic loop
+    /**
     def go(board: List[Any], players: Map[Int, String], 
            dialogLang: Map[String, String], gameOver: Boolean, currentPlayer: Int) {
         //clear console
@@ -65,4 +66,5 @@ object Game extends App {
     View.renderDialog(Dialog.en("greeting"))
     //run the recursive game loop
     go(Board.initBoard(9), initPlayers(), Dialog.en, false, 1)
+    */
 }
