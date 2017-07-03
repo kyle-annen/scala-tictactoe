@@ -4,11 +4,10 @@ import org.scalatest._
 
 class ViewSpec extends FunSpec {
 
-  val TestBlankBoard = List(
-    1,2,3,
-    4,5,6,
-    7,8,9)
+  
   def testPrint(s: String): String = s
+  val testBoard3x3blank: List[String] = (1 to 9).toList.map(x=>x.toString)
+  val testBoard5x5blank: List[String] = (1 to 25).toList.map(x=>x.toString)
 
   describe("renderWhitespace") {
     it("renders n number of linebreaks") {
@@ -40,11 +39,50 @@ class ViewSpec extends FunSpec {
 
       assert(actual === expected)
     }
-
-    
   }
 
-  describe("formatBoard") (pending)
+  describe("formatBoard") {
+    it("format a normal board into groups") {
+      val expected = List(
+        List("1","2","3"),
+        List("4","5","6"),
+        List("7","8","9")
+      )
+      val actual = View.formatBoard(testBoard3x3blank)
+      assert(actual == expected)
+    }
+
+    it("format a large board into groups") {
+      val expected = List(
+        List("1","2","3","4","5"),
+        List("6","7","8","9","10"),
+        List("11","12","13","14","15"),
+        List("16","17","18","19","20"),
+        List("21","22","23","24","25")
+      )
+      val actual = View.formatBoard(testBoard5x5blank)
+      assert(actual == expected)
+    }
+  } 
+
+  describe("formatRow") {
+    it("format the row of the board") {
+      val testRow = List("1","2","X")
+      val expected = " 1 | 2 | X"
+      val actual = View.formatRow(testRow)
+      assert(actual === expected)
+    }
+  }
+
+  describe("renderBoard") {
+    it("render a 3x3 board") {
+      val expected = "\n 1 | 2 | 3\n===+===+===\n 4 | 5 | 6\n===+===+===\n 7 | 8 | 9\n"
+      val fBoard = View.formatBoard(testBoard3x3blank)
+      val actual = View.renderBoard(testPrint,fBoard,0)
+      assert(actual === expected)
+    }
+  }
+
 
 
   

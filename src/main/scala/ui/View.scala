@@ -28,7 +28,8 @@ object View {
   }
 
   //formats the board into a list of lists, one for each row
-  def formatBoard(board: List[String], grouping: Int): List[List[String]] = {
+  def formatBoard(board: List[String]): List[List[String]] = {
+    val grouping = Math.sqrt(board.length).toInt
     board.grouped(grouping).toList
   }
   //formats rows into strings that represent a tictactoe row 
