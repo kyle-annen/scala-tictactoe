@@ -4,16 +4,6 @@ import org.scalatest._
 
 class ViewSpec extends FunSpec {
 
-  describe("formatRow") {
-    it("should correctly format row") {
-      val testRowList: List[Any] = List(1,2,3) 
-      val expected: String = " 1 | 2 | 3 "
-      val actual: String = View.formatRow(testRowList)
-
-      assert(actual === expected)
-    }
-  }
-
   describe("renderWhitespace") {}
 
   describe("formatBoard") {

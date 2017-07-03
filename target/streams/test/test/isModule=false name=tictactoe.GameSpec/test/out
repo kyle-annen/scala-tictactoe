@@ -1,1 +1,3 @@
 [0m[[0minfo[0m] [0m[32mGameSpec:[0m[0m
+[0m[[0minfo[0m] [0m[32minitPlayers[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return an Map[Int,String] of the players[0m[0m
