@@ -2,12 +2,12 @@ package tictactoe
 //IO handles the user input
 object IO {
 
-  def getInput(): String = {
+  def getInput(callCount: Int = 0): String = {
     scala.io.StdIn.readLine().trim
   }
 
-  def getUserInput(getInput: () => String): String = {
-    val userInput = getInput().trim 
+  def getUserInput(getInput: Int => String): String = {
+    val userInput = getInput(0).trim 
       userInput
     }
   //prompts the user input, validates against values, reprompts if incorrect input,
@@ -17,28 +17,30 @@ object IO {
       inputPrompt: String, 
       invalidPlay: String,
       output: String => Any,
-      getInput: Unit => String,
+      getInput: Int => String,
       leftPadding: Int) =  {
       
-      def go(validity: Boolean, input: String ): String  = {
-        View.renderDialog(output, leftPadding, inputPrompt)
+      def go(validity: Boolean, input: String, callCount: Int = 0): String  = {
+
         if(validity) {
           input
         } else {
           View.renderDialog(output,leftPadding,inputPrompt)
-          val input: String = getInput() 
+          val input: String = getInput(callCount) 
           try {
-            val inputValidity = validValues.contains(input.toInt)
-            go(inputValidity, input)
+            val inputValidity = validValues.contains(input)
+            val newCallCount = callCount + 1
+            go(inputValidity, input, newCallCount)
           } catch {
             case _: Throwable => {
             View.renderDialog(output,leftPadding,invalidPlay)
-            go(false, input)
+            val nextCallCount = callCount + 1
+            go(false, input, nextCallCount)
           }
         }
       }
     }
 
-  go(false, "none")
+  go(false, "none", 0)
   }
 }
