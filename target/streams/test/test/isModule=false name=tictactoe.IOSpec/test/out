@@ -1,6 +1,0 @@
-[0m[[0minfo[0m] [0m[32mIOSpec:[0m[0m
-[0m[[0minfo[0m] [0m[32mgetUserInput[0m[0m
-[0m[[0minfo[0m] [0m[32m- should return the users input[0m[0m
-[0m[[0minfo[0m] [0m[32m- trims the user input[0m[0m
-[0m[[0minfo[0m] [0m[32mgetValidMove[0m[0m
-[0m[[0minfo[0m] [0m[32m- returns only valid inputs[0m[0m

@@ -23,7 +23,7 @@
         <div class="tab-content">
           <div class="tab-pane active" id="codegrid">
             <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
-</span>2 <span style=''>
+</span>2 <span style=''>//Board handles the board initialization and returns states of the board
 </span>3 <span style=''>object Board {
 </span>4 <span style=''>    
 </span>5 <span style=''>    //intitialilzes the board
@@ -31,47 +31,80 @@
 </span>7 <span style=''>        </span><span style='background: #AEF1AE'>List.range(1, dimension + 1, 1)</span><span style=''>
 </span>8 <span style=''>    }
 </span>9 <span style=''>
-</span>10 <span style=''>    //returns the dimensions of the board
-</span>11 <span style=''>    def returnDimension(board: List[Any]): Int = {
-</span>12 <span style=''>        </span><span style='background: #AEF1AE'>Math.sqrt(board.length).toInt</span><span style=''>
+</span>10 <span style=''>    //returns a list of valid inputs for the board
+</span>11 <span style=''>    def returnValidInputs(board: List[Any]) = {
+</span>12 <span style=''>        </span><span style='background: #AEF1AE'>board.filter((x: Any) =&gt; x.getClass.getSimpleName == &quot;Integer&quot;)</span><span style=''> 
 </span>13 <span style=''>    }
-</span>14 <span style=''>    //returns a list of the row lists
-</span>15 <span style=''>    def returnRows(board: List[Any]): List[List[Any]] = {
-</span>16 <span style=''>        val rowNum = </span><span style='background: #AEF1AE'>returnDimension(board)</span><span style=''>
-</span>17 <span style=''>        </span><span style='background: #AEF1AE'>board.grouped(rowNum).toList</span><span style=''>
+</span>14 <span style=''>
+</span>15 <span style=''>    //returns the dimensions of the board
+</span>16 <span style=''>    def returnDimension(board: List[Any]): Int = {
+</span>17 <span style=''>        </span><span style='background: #AEF1AE'>Math.sqrt(board.length).toInt</span><span style=''>
 </span>18 <span style=''>    }
-</span>19 <span style=''>    
-</span>20 <span style=''>    //returns a list of column lists
-</span>21 <span style=''>    def returnColumns(board: List[Any]): List[List[Any]] = {
-</span>22 <span style=''>        val colNum = </span><span style='background: #AEF1AE'>returnDimension(board)</span><span style=''>
-</span>23 <span style=''>        val boardLen = </span><span style='background: #AEF1AE'>board.length</span><span style=''>
-</span>24 <span style=''>        </span><span style='background: #AEF1AE'>List.range(1, colNum + 1, 1).map(x =&gt; List.range(x, boardLen + 1, colNum))</span><span style=''>
-</span>25 <span style=''>    }
-</span>26 <span style=''>
-</span>27 <span style=''>    //returns a list of diagonal lists
-</span>28 <span style=''>    def returnDiagonals(board: List[Any]): List[List[Any]] = {
-</span>29 <span style=''>        val diaLen = </span><span style='background: #AEF1AE'>returnDimension(board)</span><span style=''>
-</span>30 <span style=''>        val boardLen = </span><span style='background: #AEF1AE'>board.length</span><span style=''>
-</span>31 <span style=''>        val dia1: List[Int] = </span><span style='background: #AEF1AE'>List.range(1, boardLen + 1, diaLen + 1)</span><span style=''>
-</span>32 <span style=''>        val dia2: List[Int] = </span><span style='background: #AEF1AE'>List.range(diaLen, boardLen - 1, diaLen - 1)</span><span style=''>
-</span>33 <span style=''>        </span><span style='background: #AEF1AE'>List(dia1, dia2)</span><span style=''>
-</span>34 <span style=''>    }
-</span>35 <span style=''>
-</span>36 <span style=''>    //checks to see if a provided list of lists has a list with identical internal values
-</span>37 <span style=''>    def checkSets(sets: List[List[Any]]): Boolean = {
-</span>38 <span style=''>        val setBooleans = </span><span style='background: #AEF1AE'>sets.map(set =&gt; set.forall(_ == set.head))</span><span style=''>
-</span>39 <span style=''>        </span><span style='background: #AEF1AE'>setBooleans.foldLeft(setBooleans(0))(_ || _)</span><span style=''>
-</span>40 <span style=''>    }
-</span>41 <span style=''>
-</span>42 <span style=''>    //returns a boolean, checks diagonals, columns and rows for identical values
-</span>43 <span style=''>    def checkWin(board: List[Any]): Boolean = {
-</span>44 <span style=''>        val diaBool = </span><span style='background: #AEF1AE'>checkSets(returnDiagonals(board))</span><span style=''>
-</span>45 <span style=''>        val rowBool = </span><span style='background: #AEF1AE'>checkSets(returnRows(board))</span><span style=''>
-</span>46 <span style=''>        val colBool = </span><span style='background: #AEF1AE'>checkSets(returnColumns(board))</span><span style=''>
-</span>47 <span style=''>        </span><span style='background: #AEF1AE'>diaBool || rowBool || colBool</span><span style=''>
-</span>48 <span style=''>    }
-</span>49 <span style=''>
-</span>50 <span style=''>}
+</span>19 <span style=''>    //returns a list of the row lists
+</span>20 <span style=''>    def returnRows(board: List[Any]): List[List[Any]] = {
+</span>21 <span style=''>        val rowNum: Int = </span><span style='background: #AEF1AE'>returnDimension(board)</span><span style=''>
+</span>22 <span style=''>        </span><span style='background: #AEF1AE'>board.grouped(rowNum).toList</span><span style=''>
+</span>23 <span style=''>    }
+</span>24 <span style=''>    
+</span>25 <span style=''>    //returns a list of column lists
+</span>26 <span style=''>    def returnColumns(board: List[Any]): List[List[Any]] = {
+</span>27 <span style=''>        val colNum: Int = </span><span style='background: #AEF1AE'>returnDimension(board)</span><span style=''>
+</span>28 <span style=''>        val boardLen: Int = </span><span style='background: #AEF1AE'>board.length</span><span style=''>
+</span>29 <span style=''>        </span><span style='background: #AEF1AE'>List.range(1, colNum + 1, 1).map(x =&gt; List.range(x, boardLen + 1, colNum).map(x =&gt; board(x - 1)))</span><span style=''>
+</span>30 <span style=''>    }
+</span>31 <span style=''>
+</span>32 <span style=''>    //returns a list of diagonal lists
+</span>33 <span style=''>    def returnDiagonals(board: List[Any]): List[List[Any]] = {
+</span>34 <span style=''>        val diaLen: Int = </span><span style='background: #AEF1AE'>returnDimension(board)</span><span style=''>
+</span>35 <span style=''>        val boardLen: Int = </span><span style='background: #AEF1AE'>board.length</span><span style=''>
+</span>36 <span style=''>        val dia1: List[Any] = </span><span style='background: #AEF1AE'>List.range(1, boardLen + 1, diaLen + 1).map(x =&gt; board(x - 1))</span><span style=''>
+</span>37 <span style=''>        val dia2: List[Any] = </span><span style='background: #AEF1AE'>List.range(diaLen, boardLen - 1, diaLen - 1).map(x =&gt; board(x - 1))</span><span style=''>
+</span>38 <span style=''>        </span><span style='background: #AEF1AE'>List(dia1, dia2)</span><span style=''>
+</span>39 <span style=''>    }
+</span>40 <span style=''>
+</span>41 <span style=''>    //checks to see if a provided list of lists has a list with identical internal values
+</span>42 <span style=''>    def checkSets(sets: List[List[Any]]): Boolean = {
+</span>43 <span style=''>        val setBooleans: List[Boolean] = </span><span style='background: #AEF1AE'>sets.map(set =&gt; set.forall(_ == set.head))</span><span style=''>
+</span>44 <span style=''>        </span><span style='background: #AEF1AE'>setBooleans.foldLeft(setBooleans(0))(_ || _)</span><span style=''>
+</span>45 <span style=''>    }
+</span>46 <span style=''>
+</span>47 <span style=''>    //returns a boolean, checks diagonals, columns and rows for identical values
+</span>48 <span style=''>    def checkWin(board: List[Any]): Boolean = {
+</span>49 <span style=''>        val diaBool: Boolean = </span><span style='background: #AEF1AE'>checkSets(returnDiagonals(board))</span><span style=''>
+</span>50 <span style=''>        val rowBool: Boolean = </span><span style='background: #AEF1AE'>checkSets(returnRows(board))</span><span style=''>
+</span>51 <span style=''>        val colBool: Boolean = </span><span style='background: #AEF1AE'>checkSets(returnColumns(board))</span><span style=''>
+</span>52 <span style=''>        </span><span style='background: #AEF1AE'>diaBool || rowBool || colBool</span><span style=''>
+</span>53 <span style=''>    }
+</span>54 <span style=''>
+</span>55 <span style=''>    //returns true if open moves, false if board if full
+</span>56 <span style=''>    def checkSpace(board: List[Any]): Boolean = {
+</span>57 <span style=''>        </span><span style='background: #AEF1AE'>board.map(x =&gt; x.getClass.getSimpleName == &quot;Integer&quot;).foldLeft(false)(_ || _)</span><span style=''>
+</span>58 <span style=''>    }
+</span>59 <span style=''>
+</span>60 <span style=''>    //return true if there is a tie, false if there is not tie
+</span>61 <span style=''>    def checkTie(board: List[Any]): Boolean = {
+</span>62 <span style=''>        </span><span style='background: #AEF1AE'>checkSpace(board) &amp;&amp; checkWin(board)</span><span style=''>
+</span>63 <span style=''>    }
+</span>64 <span style=''>
+</span>65 <span style=''>    //return true if the game is over, false if not
+</span>66 <span style=''>    def gameOver(board: List[Any]): Boolean = {
+</span>67 <span style=''>        </span><span style='background: #AEF1AE'>checkWin(board) || !checkSpace(board)</span><span style=''>
+</span>68 <span style=''>    }
+</span>69 <span style=''>
+</span>70 <span style=''>    //returns a list, first value a boolean, second the text of the winner
+</span>71 <span style=''>    //if there is no winner, the text is &quot;none&quot;
+</span>72 <span style=''>    //ex. X wins, return List(true, &quot;X&quot;)
+</span>73 <span style=''>    //ex. if no winner, reutnr List(false, &quot;none&quot;)
+</span>74 <span style=''>    def getWinner(board: List[Any]): List[Any] = {
+</span>75 <span style=''>        val allSets = returnDiagonals(board) </span><span style='background: #AEF1AE'>::: returnColumns(board) ::: returnRows(board)</span><span style=''>
+</span>76 <span style=''>        </span><span style='background: #AEF1AE'>for(set &lt;- allSets) {
+</span>77 <span style=''></span><span style='background: #AEF1AE'>            if(set.forall(_ == set.head)) {
+</span>78 <span style=''></span><span style='background: #AEF1AE'>                return List(true, set.head)
+</span>79 <span style=''></span><span style='background: #AEF1AE'>            }</span><span style=''>
+</span>80 <span style=''>        }
+</span>81 <span style=''>        return </span><span style='background: #AEF1AE'>List(false, &quot;none&quot;)</span><span style=''>
+</span>82 <span style=''>    }
+</span>83 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -88,12 +121,33 @@
           7
         </td>
         <td>
-          2
+          17
         </td>
         <td>
-          140
+          227
           -
-          153
+          228
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          7
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          212
+          -
+          225
         </td>
         <td>
           Apply
@@ -109,12 +163,12 @@
           7
         </td>
         <td>
-          5
+          19
         </td>
         <td>
-          126
+          198
           -
-          157
+          229
         </td>
         <td>
           ApplyToImplicitArgs
@@ -130,12 +184,12 @@
           7
         </td>
         <td>
-          4
+          18
         </td>
         <td>
-          136
+          208
           -
-          136
+          208
         </td>
         <td>
           Select
@@ -151,33 +205,12 @@
           7
         </td>
         <td>
-          1
+          15
         </td>
         <td>
-          137
+          209
           -
-          138
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          1
-        </td>
-      </tr><tr>
-        <td>
-          7
-        </td>
-        <td>
-          3
-        </td>
-        <td>
-          155
-          -
-          156
+          210
         </td>
         <td>
           Literal
@@ -193,12 +226,54 @@
           12
         </td>
         <td>
-          7
+          20
         </td>
         <td>
-          266
+          369
           -
-          295
+          406
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.getClass().getSimpleName().==(&quot;Integer&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          21
+        </td>
+        <td>
+          344
+          -
+          407
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.TraversableLike.filter
+        </td>
+        <td style="background: #AEF1AE">
+          board.filter(((x: Any) =&gt; x.getClass().getSimpleName().==(&quot;Integer&quot;)))
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          23
+        </td>
+        <td>
+          517
+          -
+          546
         </td>
         <td>
           Select
@@ -211,15 +286,15 @@
         </td>
       </tr><tr>
         <td>
-          12
+          17
         </td>
         <td>
-          6
+          22
         </td>
         <td>
-          276
+          527
           -
-          288
+          539
         </td>
         <td>
           Select
@@ -232,15 +307,15 @@
         </td>
       </tr><tr>
         <td>
-          16
+          21
         </td>
         <td>
-          8
+          24
         </td>
         <td>
-          419
+          675
           -
-          441
+          697
         </td>
         <td>
           Apply
@@ -253,15 +328,15 @@
         </td>
       </tr><tr>
         <td>
-          17
+          22
         </td>
         <td>
-          9
+          25
         </td>
         <td>
-          450
+          706
           -
-          478
+          734
         </td>
         <td>
           Select
@@ -274,15 +349,15 @@
         </td>
       </tr><tr>
         <td>
-          22
+          27
         </td>
         <td>
-          10
+          26
         </td>
         <td>
-          609
+          870
           -
-          631
+          892
         </td>
         <td>
           Apply
@@ -295,15 +370,15 @@
         </td>
       </tr><tr>
         <td>
-          23
+          28
         </td>
         <td>
-          11
+          27
         </td>
         <td>
-          655
+          921
           -
-          667
+          933
         </td>
         <td>
           Select
@@ -316,78 +391,57 @@
         </td>
       </tr><tr>
         <td>
-          24
+          29
         </td>
         <td>
-          17
+          32
         </td>
         <td>
-          724
+          994
           -
-          724
+          1006
         </td>
         <td>
-          Select
+          Apply
         </td>
         <td>
-          scala.math.Numeric.IntIsIntegral
+          scala.Int.+
         </td>
         <td style="background: #AEF1AE">
-          math.this.Numeric.IntIsIntegral
+          boardLen.+(1)
         </td>
       </tr><tr>
         <td>
-          24
+          29
         </td>
         <td>
-          20
+          35
         </td>
         <td>
-          676
+          1025
           -
-          750
+          1037
         </td>
         <td>
-          ApplyToImplicitArgs
+          Apply
         </td>
         <td>
-          scala.collection.immutable.List.map
+          scala.collection.LinearSeqOptimized.apply
         </td>
         <td style="background: #AEF1AE">
-          scala.collection.immutable.List.range[Int](1, colNum.+(1), 1)(math.this.Numeric.IntIsIntegral).map[List[Int], List[List[Any]]](((x: Int) =&gt; scala.collection.immutable.List.range[Int](x, boardLen.+(1), colNum)(math.this.Numeric.IntIsIntegral)))(immutable.this.List.canBuildFrom[List[Int]])
+          board.apply(x.-(1))
         </td>
       </tr><tr>
         <td>
-          24
+          29
         </td>
         <td>
-          14
+          29
         </td>
         <td>
-          702
+          956
           -
-          703
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          1
-        </td>
-      </tr><tr>
-        <td>
-          24
-        </td>
-        <td>
-          13
-        </td>
-        <td>
-          690
-          -
-          700
+          966
         </td>
         <td>
           Apply
@@ -400,36 +454,15 @@
         </td>
       </tr><tr>
         <td>
-          24
+          29
         </td>
         <td>
-          16
+          38
         </td>
         <td>
-          728
+          974
           -
-          740
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Int.+
-        </td>
-        <td style="background: #AEF1AE">
-          boardLen.+(1)
-        </td>
-      </tr><tr>
-        <td>
-          24
-        </td>
-        <td>
-          19
-        </td>
-        <td>
-          708
-          -
-          708
+          974
         </td>
         <td>
           TypeApply
@@ -438,61 +471,19 @@
           scala.collection.immutable.List.canBuildFrom
         </td>
         <td style="background: #AEF1AE">
-          immutable.this.List.canBuildFrom[List[Int]]
+          immutable.this.List.canBuildFrom[List[Any]]
         </td>
       </tr><tr>
         <td>
-          24
+          29
         </td>
         <td>
-          18
+          31
         </td>
         <td>
-          714
+          952
           -
-          749
-        </td>
-        <td>
-          ApplyToImplicitArgs
-        </td>
-        <td>
-          scala.collection.generic.GenTraversableFactory.range
-        </td>
-        <td style="background: #AEF1AE">
-          scala.collection.immutable.List.range[Int](x, boardLen.+(1), colNum)(math.this.Numeric.IntIsIntegral)
-        </td>
-      </tr><tr>
-        <td>
-          24
-        </td>
-        <td>
-          12
-        </td>
-        <td>
-          687
-          -
-          688
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          1
-        </td>
-      </tr><tr>
-        <td>
-          24
-        </td>
-        <td>
-          15
-        </td>
-        <td>
-          686
-          -
-          686
+          952
         </td>
         <td>
           Select
@@ -508,12 +499,159 @@
           29
         </td>
         <td>
-          21
+          34
         </td>
         <td>
-          881
+          1031
           -
-          903
+          1036
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          x.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          37
+        </td>
+        <td>
+          980
+          -
+          1038
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.range[Int](x, boardLen.+(1), colNum)(math.this.Numeric.IntIsIntegral).map[Any, List[Any]](((x: Int) =&gt; board.apply(x.-(1))))(immutable.this.List.canBuildFrom[Any])
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          28
+        </td>
+        <td>
+          953
+          -
+          954
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          36
+        </td>
+        <td>
+          1019
+          -
+          1019
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[Any]
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          30
+        </td>
+        <td>
+          968
+          -
+          969
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          39
+        </td>
+        <td>
+          942
+          -
+          1039
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.range[Int](1, colNum.+(1), 1)(math.this.Numeric.IntIsIntegral).map[List[Any], List[List[Any]]](((x: Int) =&gt; scala.collection.immutable.List.range[Int](x, boardLen.+(1), colNum)(math.this.Numeric.IntIsIntegral).map[Any, List[Any]](((x: Int) =&gt; board.apply(x.-(1))))(immutable.this.List.canBuildFrom[Any])))(immutable.this.List.canBuildFrom[List[Any]])
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          33
+        </td>
+        <td>
+          990
+          -
+          990
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.math.Numeric.IntIsIntegral
+        </td>
+        <td style="background: #AEF1AE">
+          math.this.Numeric.IntIsIntegral
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          1175
+          -
+          1197
         </td>
         <td>
           Apply
@@ -526,15 +664,15 @@
         </td>
       </tr><tr>
         <td>
-          30
+          35
         </td>
         <td>
-          22
+          41
         </td>
         <td>
-          927
+          1226
           -
-          939
+          1238
         </td>
         <td>
           Select
@@ -547,57 +685,15 @@
         </td>
       </tr><tr>
         <td>
-          31
+          36
         </td>
         <td>
-          23
+          44
         </td>
         <td>
-          981
+          1297
           -
-          982
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          1
-        </td>
-      </tr><tr>
-        <td>
-          31
-        </td>
-        <td>
-          26
-        </td>
-        <td>
-          980
-          -
-          980
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          scala.math.Numeric.IntIsIntegral
-        </td>
-        <td style="background: #AEF1AE">
-          math.this.Numeric.IntIsIntegral
-        </td>
-      </tr><tr>
-        <td>
-          31
-        </td>
-        <td>
-          25
-        </td>
-        <td>
-          998
-          -
-          1008
+          1307
         </td>
         <td>
           Apply
@@ -610,36 +706,78 @@
         </td>
       </tr><tr>
         <td>
-          31
+          36
         </td>
         <td>
-          27
+          47
         </td>
         <td>
-          970
+          1318
           -
-          1009
+          1330
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #AEF1AE">
+          board.apply(x.-(1))
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          46
+        </td>
+        <td>
+          1324
+          -
+          1329
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          x.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          49
+        </td>
+        <td>
+          1269
+          -
+          1331
         </td>
         <td>
           ApplyToImplicitArgs
         </td>
         <td>
-          scala.collection.generic.GenTraversableFactory.range
+          scala.collection.immutable.List.map
         </td>
         <td style="background: #AEF1AE">
-          scala.collection.immutable.List.range[Int](1, boardLen.+(1), diaLen.+(1))(math.this.Numeric.IntIsIntegral)
+          scala.collection.immutable.List.range[Int](1, boardLen.+(1), diaLen.+(1))(math.this.Numeric.IntIsIntegral).map[Any, List[Any]](((x: Int) =&gt; board.apply(x.-(1))))(immutable.this.List.canBuildFrom[Any])
         </td>
       </tr><tr>
         <td>
-          31
+          36
         </td>
         <td>
-          24
+          43
         </td>
         <td>
-          984
+          1283
           -
-          996
+          1295
         </td>
         <td>
           Apply
@@ -652,78 +790,15 @@
         </td>
       </tr><tr>
         <td>
-          32
+          36
         </td>
         <td>
-          29
+          45
         </td>
         <td>
-          1073
+          1279
           -
-          1083
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Int.-
-        </td>
-        <td style="background: #AEF1AE">
-          diaLen.-(1)
-        </td>
-      </tr><tr>
-        <td>
-          32
-        </td>
-        <td>
-          31
-        </td>
-        <td>
-          1040
-          -
-          1084
-        </td>
-        <td>
-          ApplyToImplicitArgs
-        </td>
-        <td>
-          scala.collection.generic.GenTraversableFactory.range
-        </td>
-        <td style="background: #AEF1AE">
-          scala.collection.immutable.List.range[Int](diaLen, boardLen.-(1), diaLen.-(1))(math.this.Numeric.IntIsIntegral)
-        </td>
-      </tr><tr>
-        <td>
-          32
-        </td>
-        <td>
-          28
-        </td>
-        <td>
-          1059
-          -
-          1071
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Int.-
-        </td>
-        <td style="background: #AEF1AE">
-          boardLen.-(1)
-        </td>
-      </tr><tr>
-        <td>
-          32
-        </td>
-        <td>
-          30
-        </td>
-        <td>
-          1050
-          -
-          1050
+          1279
         </td>
         <td>
           Select
@@ -736,15 +811,204 @@
         </td>
       </tr><tr>
         <td>
-          33
+          36
         </td>
         <td>
-          32
+          48
         </td>
         <td>
-          1093
+          1312
           -
-          1109
+          1312
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[Any]
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          42
+        </td>
+        <td>
+          1280
+          -
+          1281
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          1381
+          -
+          1393
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          boardLen.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          53
+        </td>
+        <td>
+          1422
+          -
+          1427
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          x.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          56
+        </td>
+        <td>
+          1362
+          -
+          1429
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.range[Int](diaLen, boardLen.-(1), diaLen.-(1))(math.this.Numeric.IntIsIntegral).map[Any, List[Any]](((x: Int) =&gt; board.apply(x.-(1))))(immutable.this.List.canBuildFrom[Any])
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          55
+        </td>
+        <td>
+          1410
+          -
+          1410
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[Any]
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          52
+        </td>
+        <td>
+          1372
+          -
+          1372
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.math.Numeric.IntIsIntegral
+        </td>
+        <td style="background: #AEF1AE">
+          math.this.Numeric.IntIsIntegral
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          54
+        </td>
+        <td>
+          1416
+          -
+          1428
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #AEF1AE">
+          board.apply(x.-(1))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          51
+        </td>
+        <td>
+          1395
+          -
+          1405
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          diaLen.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          57
+        </td>
+        <td>
+          1438
+          -
+          1454
         </td>
         <td>
           Apply
@@ -753,40 +1017,19 @@
           scala.collection.immutable.List.apply
         </td>
         <td style="background: #AEF1AE">
-          scala.collection.immutable.List.apply[List[Int]](dia1, dia2)
+          scala.collection.immutable.List.apply[List[Any]](dia1, dia2)
         </td>
       </tr><tr>
         <td>
-          38
+          43
         </td>
         <td>
-          35
+          59
         </td>
         <td>
-          1303
+          1674
           -
-          1328
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.LinearSeqOptimized.forall
-        </td>
-        <td style="background: #AEF1AE">
-          set.forall(((x$1: Any) =&gt; x$1.==(set.head)))
-        </td>
-      </tr><tr>
-        <td>
-          38
-        </td>
-        <td>
-          34
-        </td>
-        <td>
-          1314
-          -
-          1327
+          1687
         </td>
         <td>
           Apply
@@ -799,15 +1042,15 @@
         </td>
       </tr><tr>
         <td>
-          38
+          43
         </td>
         <td>
-          37
+          62
         </td>
         <td>
-          1287
+          1647
           -
-          1329
+          1689
         </td>
         <td>
           ApplyToImplicitArgs
@@ -820,36 +1063,15 @@
         </td>
       </tr><tr>
         <td>
-          38
+          43
         </td>
         <td>
-          36
+          58
         </td>
         <td>
-          1295
+          1679
           -
-          1295
-        </td>
-        <td>
-          TypeApply
-        </td>
-        <td>
-          scala.collection.immutable.List.canBuildFrom
-        </td>
-        <td style="background: #AEF1AE">
-          immutable.this.List.canBuildFrom[Boolean]
-        </td>
-      </tr><tr>
-        <td>
-          38
-        </td>
-        <td>
-          33
-        </td>
-        <td>
-          1319
-          -
-          1327
+          1687
         </td>
         <td>
           Select
@@ -862,36 +1084,57 @@
         </td>
       </tr><tr>
         <td>
-          39
+          43
         </td>
         <td>
-          38
+          61
         </td>
         <td>
-          1359
+          1655
           -
-          1373
+          1655
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[Boolean]
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          60
+        </td>
+        <td>
+          1663
+          -
+          1688
         </td>
         <td>
           Apply
         </td>
         <td>
-          scala.collection.LinearSeqOptimized.apply
+          scala.collection.LinearSeqOptimized.forall
         </td>
         <td style="background: #AEF1AE">
-          setBooleans.apply(0)
+          set.forall(((x$1: Any) =&gt; x$1.==(set.head)))
         </td>
       </tr><tr>
         <td>
-          39
+          44
         </td>
         <td>
-          40
+          65
         </td>
         <td>
-          1338
+          1698
           -
-          1382
+          1742
         </td>
         <td>
           Apply
@@ -904,15 +1147,15 @@
         </td>
       </tr><tr>
         <td>
-          39
+          44
         </td>
         <td>
-          39
+          64
         </td>
         <td>
-          1375
+          1735
           -
-          1381
+          1741
         </td>
         <td>
           Apply
@@ -928,33 +1171,33 @@
           44
         </td>
         <td>
-          41
+          63
         </td>
         <td>
-          1551
+          1719
           -
-          1573
+          1733
         </td>
         <td>
           Apply
         </td>
         <td>
-          tictactoe.Board.returnDiagonals
+          scala.collection.LinearSeqOptimized.apply
         </td>
         <td style="background: #AEF1AE">
-          Board.this.returnDiagonals(board)
+          setBooleans.apply(0)
         </td>
       </tr><tr>
         <td>
-          44
+          49
         </td>
         <td>
-          42
+          67
         </td>
         <td>
-          1541
+          1910
           -
-          1574
+          1943
         </td>
         <td>
           Apply
@@ -967,36 +1210,36 @@
         </td>
       </tr><tr>
         <td>
-          45
+          49
         </td>
         <td>
-          44
+          66
         </td>
         <td>
-          1597
+          1920
           -
-          1625
+          1942
         </td>
         <td>
           Apply
         </td>
         <td>
-          tictactoe.Board.checkSets
+          tictactoe.Board.returnDiagonals
         </td>
         <td style="background: #AEF1AE">
-          Board.this.checkSets(Board.this.returnRows(board))
+          Board.this.returnDiagonals(board)
         </td>
       </tr><tr>
         <td>
-          45
+          50
         </td>
         <td>
-          43
+          68
         </td>
         <td>
-          1607
+          1985
           -
-          1624
+          2002
         </td>
         <td>
           Apply
@@ -1009,15 +1252,36 @@
         </td>
       </tr><tr>
         <td>
-          46
+          50
         </td>
         <td>
-          46
+          69
         </td>
         <td>
-          1648
+          1975
           -
-          1679
+          2003
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkSets
+        </td>
+        <td style="background: #AEF1AE">
+          Board.this.checkSets(Board.this.returnRows(board))
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          71
+        </td>
+        <td>
+          2035
+          -
+          2066
         </td>
         <td>
           Apply
@@ -1030,15 +1294,15 @@
         </td>
       </tr><tr>
         <td>
-          46
+          51
         </td>
         <td>
-          45
+          70
         </td>
         <td>
-          1658
+          2045
           -
-          1678
+          2065
         </td>
         <td>
           Apply
@@ -1051,15 +1315,15 @@
         </td>
       </tr><tr>
         <td>
-          47
+          52
         </td>
         <td>
-          47
+          72
         </td>
         <td>
-          1688
+          2075
           -
-          1717
+          2104
         </td>
         <td>
           Apply
@@ -1069,6 +1333,453 @@
         </td>
         <td style="background: #AEF1AE">
           diaBool.||(rowBool).||(colBool)
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          77
+        </td>
+        <td>
+          2227
+          -
+          2304
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          board.map[Boolean, List[Boolean]](((x: Any) =&gt; x.getClass().getSimpleName().==(&quot;Integer&quot;)))(immutable.this.List.canBuildFrom[Boolean]).foldLeft[Boolean](false)(((x$4: Boolean, x$5: Boolean) =&gt; x$4.||(x$5)))
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          74
+        </td>
+        <td>
+          2236
+          -
+          2236
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[Boolean]
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          2242
+          -
+          2279
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.getClass().getSimpleName().==(&quot;Integer&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          76
+        </td>
+        <td>
+          2297
+          -
+          2303
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Boolean.||
+        </td>
+        <td style="background: #AEF1AE">
+          x$4.||(x$5)
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          75
+        </td>
+        <td>
+          2290
+          -
+          2295
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          false
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          79
+        </td>
+        <td>
+          2431
+          -
+          2467
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Boolean.&amp;&amp;
+        </td>
+        <td style="background: #AEF1AE">
+          Board.this.checkSpace(board).&amp;&amp;(Board.this.checkWin(board))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          78
+        </td>
+        <td>
+          2452
+          -
+          2467
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkWin
+        </td>
+        <td style="background: #AEF1AE">
+          Board.this.checkWin(board)
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          80
+        </td>
+        <td>
+          2602
+          -
+          2620
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Boolean.unary_!
+        </td>
+        <td style="background: #AEF1AE">
+          Board.this.checkSpace(board).unary_!
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          81
+        </td>
+        <td>
+          2583
+          -
+          2620
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Boolean.||
+        </td>
+        <td style="background: #AEF1AE">
+          Board.this.checkWin(board).||(Board.this.checkSpace(board).unary_!)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          82
+        </td>
+        <td>
+          2939
+          -
+          2985
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.:::
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  &lt;synthetic&gt; &lt;artifact&gt; val x$6: List[List[Any]] = Board.this.returnColumns(board);
+  Board.this.returnRows(board).:::[List[Any]](x$6)
+}.:::[List[Any]](x$7)
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          92
+        </td>
+        <td>
+          2994
+          -
+          3117
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.foreach
+        </td>
+        <td style="background: #AEF1AE">
+          allSets.foreach[Unit](((set: List[Any]) =&gt; if (set.forall(((x$8: Any) =&gt; x$8.==(set.head))))
+  return scala.collection.immutable.List.apply[Any](true, set.head)
+else
+  ()))
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          83
+        </td>
+        <td>
+          3047
+          -
+          3055
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IterableLike.head
+        </td>
+        <td style="background: #AEF1AE">
+          set.head
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          91
+        </td>
+        <td>
+          3028
+          -
+          3028
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          85
+        </td>
+        <td>
+          3031
+          -
+          3056
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.forall
+        </td>
+        <td style="background: #AEF1AE">
+          set.forall(((x$8: Any) =&gt; x$8.==(set.head)))
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          90
+        </td>
+        <td>
+          3028
+          -
+          3028
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          84
+        </td>
+        <td>
+          3042
+          -
+          3055
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Any.==
+        </td>
+        <td style="background: #AEF1AE">
+          x$8.==(set.head)
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          86
+        </td>
+        <td>
+          3088
+          -
+          3092
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          true
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          89
+        </td>
+        <td>
+          3076
+          -
+          3103
+        </td>
+        <td>
+          Return
+        </td>
+        <td>
+          tictactoe.Board.getWinner
+        </td>
+        <td style="background: #AEF1AE">
+          return scala.collection.immutable.List.apply[Any](true, set.head)
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          88
+        </td>
+        <td>
+          3083
+          -
+          3103
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[Any](true, set.head)
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          87
+        </td>
+        <td>
+          3094
+          -
+          3102
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IterableLike.head
+        </td>
+        <td style="background: #AEF1AE">
+          set.head
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          93
+        </td>
+        <td>
+          3143
+          -
+          3162
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[Any](false, &quot;none&quot;)
         </td>
       </tr>
     </table>
