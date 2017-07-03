@@ -13,11 +13,18 @@ object View {
   }
 
   //renders strings of text to the console
-  def renderDialog(output: String => Any, dialog: String*) = {
-    for (string <- dialog) {
-      val paddedString: String = "   " + string
-      output(paddedString)
-    }
+  def renderDialog(
+    output: String => Any, 
+    leftPadding: Int,
+    dialog: String*) = {
+    
+    val sPad = " " * leftPadding
+    val fDialog = dialog.foldLeft("")(
+      (a, b) => a + sPad + b + "\n")
+      .dropRight(1)
+    
+    output(fDialog)
+   
   }
 
   //formats the board into a list of lists, one for each row
