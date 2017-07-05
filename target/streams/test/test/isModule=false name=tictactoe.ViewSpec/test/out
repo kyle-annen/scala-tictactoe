@@ -1,7 +1,0 @@
-[0m[[0minfo[0m] [0m[32mViewSpec:[0m[0m
-[0m[[0minfo[0m] [0m[32mformatRow[0m[0m
-[0m[[0minfo[0m] [0m[32m- should correctly format row[0m[0m
-[0m[[0minfo[0m] [0m[32mrenderWhitespace[0m[0m
-[0m[[0minfo[0m] [0m[32mformatBoard[0m[0m
-[0m[[0minfo[0m] [0m[32m- should group a list into a list of list of length provided[0m[0m
-[0m[[0minfo[0m] [0m[32mrenderBoard[0m[0m

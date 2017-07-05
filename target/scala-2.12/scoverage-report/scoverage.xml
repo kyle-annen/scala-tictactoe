@@ -1,228 +1,187 @@
 <scoverage 
-statement-count="83" statements-invoked="62" statement-rate="74.70" branch-rate="0.00" version="1.0" timestamp="1498743769294">
+statement-count="214" statements-invoked="194" statement-rate="90.65" branch-rate="100.00" version="1.0" timestamp="1499287753986">
     <packages>
-        <package name="tictactoe" statement-count="83" statements-invoked="62" statement-rate="74.70">
+        <package name="tictactoe" statement-count="214" statements-invoked="194" statement-rate="90.65">
             <classes>
                 <class 
-                name="tictactoe.Dialog" filename="ui/Dialog.scala" statement-count="9" statements-invoked="9" statement-rate="100.00" branch-rate="100.00">
-                    <methods>
-                        <method 
-                        name="tictactoe/Dialog/&lt;none&gt;" statement-count="9" statements-invoked="9" statement-rate="100.00" branch-rate="100.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="151" end="180" line="7" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="268" end="297" line="10" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="48" end="428" line="4" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="362" end="422" line="12" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="108" end="141" line="6" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="225" end="258" line="9" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="307" end="352" line="11" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="61" end="98" line="5" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="190" end="215" line="8" branch="false" invocation-count="1" ignored="false">
-</statement>
-                            </statements>
-</method>
-                    </methods>
-</class>
-                <class 
-                name="tictactoe.View" filename="ui/View.scala" statement-count="27" statements-invoked="6" statement-rate="22.22" branch-rate="0.00">
-                    <methods>
-                        <method 
-                        name="tictactoe/View/formatBoard" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatBoard" start="463" end="493" line="18" branch="false" invocation-count="1" ignored="false">
-</statement>
-                            </statements>
-</method>
-                        <method 
-                        name="tictactoe/View/renderDialog" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderDialog" start="282" end="320" line="13" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderDialog" start="305" end="320" line="13" branch="false" invocation-count="0" ignored="false">
-</statement>
-                            </statements>
-</method>
-                        <method 
-                        name="tictactoe/View/renderWhitespace" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderWhitespace" start="141" end="177" line="6" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderWhitespace" start="168" end="177" line="7" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderWhitespace" start="151" end="152" line="6" branch="false" invocation-count="0" ignored="false">
-</statement>
-                            </statements>
-</method>
-                        <method 
-                        name="tictactoe/View/formatRow" statement-count="5" statements-invoked="5" statement-rate="100.00" branch-rate="100.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="672" end="678" line="23" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="664" end="670" line="23" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="650" end="687" line="23" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="629" end="645" line="22" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="680" end="686" line="23" branch="false" invocation-count="1" ignored="false">
-</statement>
-                            </statements>
-</method>
-                        <method 
-                        name="tictactoe/View/renderBoard" statement-count="16" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1242" end="1272" line="41" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1152" end="1165" line="37" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="826" end="839" line="28" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1148" end="1148" line="37" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1013" end="1014" line="33" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1100" end="1114" line="35" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1003" end="1196" line="33" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1058" end="1067" line="34" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1156" end="1165" line="37" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1176" end="1190" line="38" branch="true" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="922" end="952" line="31" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="861" end="874" line="29" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1176" end="1190" line="38" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1018" end="1027" line="33" branch="false" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1148" end="1148" line="37" branch="true" invocation-count="0" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1121" end="1141" line="36" branch="false" invocation-count="0" ignored="false">
-</statement>
-                            </statements>
-</method>
-                    </methods>
-</class>
-                <class 
-                name="tictactoe.Board" filename="model/Board.scala" statement-count="47" statements-invoked="47" statement-rate="100.00" branch-rate="100.00">
+                name="tictactoe.Board" filename="model/Board.scala" statement-count="81" statements-invoked="81" statement-rate="100.00" branch-rate="100.00">
                     <methods>
                         <method 
                         name="tictactoe/Board/returnRows" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
                             <statements>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnRows" start="419" end="441" line="16" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnRows" start="603" end="625" line="20" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnRows" start="450" end="478" line="17" branch="false" invocation-count="1" ignored="false">
-</statement>
-                            </statements>
-</method>
-                        <method 
-                        name="tictactoe/Board/returnDiagonals" statement-count="12" statements-invoked="12" statement-rate="100.00" branch-rate="100.00">
-                            <statements>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="981" end="982" line="31" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1093" end="1109" line="33" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="980" end="980" line="31" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1073" end="1083" line="32" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="927" end="939" line="30" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1040" end="1084" line="32" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="998" end="1008" line="31" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1059" end="1071" line="32" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="970" end="1009" line="31" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="881" end="903" line="29" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1050" end="1050" line="32" branch="false" invocation-count="1" ignored="false">
-</statement>
-                                <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="984" end="996" line="31" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnRows" start="630" end="658" line="21" branch="false" invocation-count="1" ignored="false">
 </statement>
                             </statements>
 </method>
                         <method 
-                        name="tictactoe/Board/initBoard" statement-count="5" statements-invoked="5" statement-rate="100.00" branch-rate="100.00">
+                        name="tictactoe/Board/getWinner" statement-count="10" statements-invoked="10" statement-rate="100.00" branch-rate="100.00">
                             <statements>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="140" end="153" line="7" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2213" end="2213" line="65" branch="true" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="126" end="157" line="7" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2232" end="2240" line="65" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="136" end="136" line="7" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2294" end="2300" line="69" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="137" end="138" line="7" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2216" end="2241" line="65" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="155" end="156" line="7" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2213" end="2213" line="65" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2134" end="2180" line="63" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2185" end="2276" line="64" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2227" end="2240" line="65" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2253" end="2268" line="66" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="getWinner" start="2260" end="2268" line="66" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Board/returnValidInputs" statement-count="9" statements-invoked="9" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="366" end="408" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="322" end="323" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="328" end="328" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="384" end="407" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="304" end="320" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="334" end="344" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="300" end="300" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="290" end="345" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnValidInputs" start="301" end="302" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Board/gameOver" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="gameOver" start="2020" end="2038" line="59" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="gameOver" start="2001" end="2038" line="59" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Board/returnDiagonals" statement-count="16" statements-invoked="16" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1096" end="1167" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1207" end="1207" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1107" end="1108" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1197" end="1273" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1106" end="1106" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1124" end="1134" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1245" end="1245" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1139" end="1139" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1230" end="1240" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1054" end="1066" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1216" end="1228" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1007" end="1029" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1251" end="1272" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1110" end="1122" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1145" end="1166" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDiagonals" start="1278" end="1294" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Board/initBoard" statement-count="7" statements-invoked="7" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="161" end="213" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="172" end="173" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="171" end="171" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="196" end="196" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="190" end="191" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="175" end="188" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="initBoard" start="202" end="212" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Board/checkSpace" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSpace" start="1845" end="1846" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSpace" start="1808" end="1847" line="51" branch="false" invocation-count="1" ignored="false">
 </statement>
                             </statements>
 </method>
@@ -230,63 +189,83 @@ statement-count="83" statements-invoked="62" statement-rate="74.70" branch-rate=
                         name="tictactoe/Board/checkWin" statement-count="7" statements-invoked="7" statement-rate="100.00" branch-rate="100.00">
                             <statements>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1551" end="1573" line="44" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1636" end="1653" line="45" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1597" end="1625" line="45" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1682" end="1713" line="46" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1688" end="1717" line="47" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1565" end="1598" line="44" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1648" end="1679" line="46" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1692" end="1712" line="46" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1607" end="1624" line="45" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1626" end="1654" line="45" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1658" end="1678" line="46" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1718" end="1747" line="47" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1541" end="1574" line="44" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkWin" start="1575" end="1597" line="44" branch="false" invocation-count="1" ignored="false">
 </statement>
                             </statements>
 </method>
                         <method 
-                        name="tictactoe/Board/returnColumns" statement-count="11" statements-invoked="11" statement-rate="100.00" branch-rate="100.00">
+                        name="tictactoe/Board/returnColumns" statement-count="14" statements-invoked="14" statement-rate="100.00" branch-rate="100.00">
                             <statements>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="724" end="724" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="841" end="842" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="655" end="667" line="23" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="815" end="912" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="676" end="750" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="863" end="863" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="702" end="703" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="892" end="892" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="690" end="700" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="798" end="810" line="26" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="728" end="740" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="751" end="773" line="25" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="609" end="631" line="22" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="898" end="910" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="708" end="708" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="847" end="847" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="714" end="749" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="829" end="839" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="687" end="688" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="867" end="879" line="27" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="686" end="686" line="24" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="904" end="909" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="826" end="827" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="853" end="911" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnColumns" start="825" end="825" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Board/checkTie" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkTie" start="1906" end="1942" line="55" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkTie" start="1927" end="1942" line="55" branch="false" invocation-count="1" ignored="false">
 </statement>
                             </statements>
 </method>
@@ -294,28 +273,28 @@ statement-count="83" statements-invoked="62" statement-rate="74.70" branch-rate=
                         name="tictactoe/Board/checkSets" statement-count="8" statements-invoked="8" statement-rate="100.00" branch-rate="100.00">
                             <statements>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1303" end="1328" line="38" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1419" end="1432" line="39" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1359" end="1373" line="39" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1392" end="1434" line="39" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1338" end="1382" line="39" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1476" end="1482" line="40" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1314" end="1327" line="38" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1424" end="1432" line="39" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1287" end="1329" line="38" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1400" end="1400" line="39" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1295" end="1295" line="38" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1408" end="1433" line="39" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1375" end="1381" line="39" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1460" end="1474" line="40" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1319" end="1327" line="38" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="checkSets" start="1439" end="1483" line="40" branch="false" invocation-count="1" ignored="false">
 </statement>
                             </statements>
 </method>
@@ -323,10 +302,498 @@ statement-count="83" statements-invoked="62" statement-rate="74.70" branch-rate=
                         name="tictactoe/Board/returnDimension" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
                             <statements>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDimension" start="266" end="295" line="12" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDimension" start="484" end="513" line="16" branch="false" invocation-count="1" ignored="false">
 </statement>
                                 <statement 
-                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDimension" start="276" end="288" line="12" branch="false" invocation-count="1" ignored="false">
+                                package="tictactoe" class="Board" class-type="Object" full-class-name="tictactoe.Board" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala" method="returnDimension" start="494" end="506" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="tictactoe.View" filename="ui/View.scala" statement-count="23" statements-invoked="23" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="tictactoe/View/formatBoard" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatBoard" start="519" end="549" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatBoard" start="485" end="514" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatBoard" start="495" end="507" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/View/renderDialog" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderDialog" start="264" end="281" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderDialog" start="382" end="397" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderDialog" start="300" end="377" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/View/renderWhitespace" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderWhitespace" start="134" end="148" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderWhitespace" start="121" end="129" line="7" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/View/padLeft" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="padLeft" start="759" end="770" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/View/formatRow" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="635" end="653" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="formatRow" start="679" end="699" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/View/renderBoard" statement-count="12" statements-invoked="12" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1089" end="1114" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1065" end="1115" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="973" end="986" line="41" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1289" end="1310" line="48" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1010" end="1043" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1020" end="1020" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1081" end="1081" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1187" end="1283" line="47" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="939" end="951" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="901" end="914" line="39" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1135" end="1162" line="44" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="View" class-type="Object" full-class-name="tictactoe.View" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala" method="renderBoard" start="1028" end="1042" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="tictactoe.Dialog" filename="ui/Dialog.scala" statement-count="25" statements-invoked="25" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="tictactoe/Dialog/&lt;none&gt;" statement-count="25" statements-invoked="25" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="283" end="316" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="575" end="599" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="48" end="796" line="4" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="414" end="474" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="669" end="686" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="57" end="61" line="5" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="641" end="661" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="361" end="406" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="121" end="164" line="7" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="57" end="481" line="5" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="721" end="746" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="543" end="567" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="250" end="275" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="487" end="792" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="495" end="792" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="506" end="535" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="324" end="353" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="607" end="633" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="694" end="713" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="76" end="113" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="65" end="481" line="5" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="213" end="242" line="9" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="487" end="491" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="754" end="786" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Dialog" class-type="Object" full-class-name="tictactoe.Dialog" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala" method="&lt;none&gt;" start="172" end="205" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="tictactoe.Game" filename="controller/Game.scala" statement-count="74" statements-invoked="55" statement-rate="74.32" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="tictactoe/Game/initPlayers" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="initPlayers" start="141" end="149" line="4" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="initPlayers" start="131" end="139" line="4" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="initPlayers" start="127" end="150" line="4" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Game/go" statement-count="41" statements-invoked="41" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1537" end="1692" line="53" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2600" end="2601" line="86" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1933" end="1961" line="68" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2319" end="2395" line="78" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2634" end="2647" line="87" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2112" end="2159" line="73" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2419" end="2476" line="80" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1133" end="1178" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1861" end="1879" line="65" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2256" end="2284" line="75" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1896" end="1897" line="65" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1984" end="2541" line="70" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1359" end="1389" line="48" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2531" end="2535" line="84" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2547" end="2860" line="85" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2319" end="2395" line="78" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2600" end="2601" line="86" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1476" end="1501" line="50" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1830" end="1903" line="64" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1105" end="1128" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2607" end="2608" line="86" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2419" end="2476" line="80" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1770" end="1792" line="63" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2075" end="2105" line="72" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2166" end="2228" line="74" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1265" end="1322" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1881" end="1890" line="65" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2492" end="2524" line="83" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2654" end="2854" line="88" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1856" end="1879" line="65" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2205" end="2227" line="74" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1216" end="1260" line="45" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2580" end="2598" line="86" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1420" end="1445" line="49" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1839" end="1839" line="64" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2377" end="2394" line="78" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1045" end="1086" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2458" end="2475" line="80" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="2607" end="2608" line="86" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1727" end="1741" line="62" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="go" start="1992" end="2033" line="71" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Game/setLanguage" statement-count="11" statements-invoked="11" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="489" end="503" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="588" end="619" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="258" end="327" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="542" end="728" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="297" end="326" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="726" end="727" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="387" end="410" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="415" end="504" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="450" end="504" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="629" end="661" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="setLanguage" start="332" end="364" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/Game/main" statement-count="19" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="2987" end="2994" line="104" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3139" end="3146" line="112" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="2975" end="3012" line="104" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3175" end="3186" line="115" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3021" end="3021" line="106" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="2934" end="2941" line="103" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3078" end="3107" line="109" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3056" end="3069" line="108" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3019" end="3196" line="106" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3130" end="3131" line="111" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="2912" end="2947" line="103" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3164" end="3167" line="114" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3000" end="3011" line="104" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="2996" end="2998" line="104" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3154" end="3156" line="113" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3029" end="3047" line="107" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3194" end="3195" line="116" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="2943" end="2946" line="103" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="Game" class-type="Object" full-class-name="tictactoe.Game" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala" method="main" start="3116" end="3121" line="110" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="tictactoe.IO" filename="controller/IO.scala" statement-count="11" statements-invoked="10" statement-rate="90.91" branch-rate="100.00">
+                    <methods>
+                        <method name="tictactoe/IO/go" statement-count="9" statements-invoked="9" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="873" end="897" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="597" end="648" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="784" end="789" line="29" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="883" end="896" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="916" end="937" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="721" end="748" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="675" end="694" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="813" end="864" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="go" start="803" end="905" line="30" branch="true" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+                        </method>
+                        <method 
+                        name="tictactoe/IO/getInput" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="getInput" start="167" end="197" line="7" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="tictactoe/IO/getUserInput" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="tictactoe" class="IO" class-type="Object" full-class-name="tictactoe.IO" source="/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala" method="getUserInput" start="279" end="295" line="11" branch="false" invocation-count="1" ignored="false">
 </statement>
                             </statements>
 </method>

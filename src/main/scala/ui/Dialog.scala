@@ -1,14 +1,28 @@
 package tictactoe
 
 object Dialog {
-    val en = Map(
-        "greeting" -> "Let's play TicTacToe!",
-        "turnPrompt" -> "It's your turn.",
-        "playerAnnounce" -> "Player ",
-        "gameOver" -> "Game Over",
-        "win" -> "You have won the game!",
-        "tie" -> "The game is a tie.",
-        "invalidPlay" -> "That selection is invalid.",
-        "inputPrompt" -> "Please input the number of an open space."
-    ) 
+  val lang = Map(
+    "EN" -> Map(
+      "greeting" -> "Let's play TicTacToe!",
+      "selectLang" -> "Please select a language.",
+      "turnPrompt" -> "It's your turn.",
+      "playerAnnounce" -> "Player ",
+      "gameOver" -> "Game Over",
+      "win" -> "You have won the game!",
+      "tie" -> "The game is a tie.",
+      "invalidPlay" -> "That selection is invalid.",
+      "inputPrompt" -> "Please input the number of an open space." 
+    ),
+    "CN" -> Map(
+      "greeting" -> "我们玩TicTacToe！",
+      "selectLang" -> "请选择语言。",
+      "turnPrompt" -> "现在轮到你了",
+      "playerAnnounce" -> "播放机 ",
+      "gameOver" -> "游戏结束",
+      "win" -> "你赢了游戏！",
+      "tie" -> "游戏是一个领带。",
+      "invalidPlay" -> "该选择无效。",
+      "inputPrompt" -> "请输入一个开放空间的数量。"
+    )
+  ) 
 }

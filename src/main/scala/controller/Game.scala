@@ -1,68 +1,119 @@
 package tictactoe
 //game object contains the game loop and runs the game
-object Game extends App {
-    //initializes the player map
-    def initPlayers() = Map(1 -> "X", 2 -> "O")
-    //game recursive logic loop
-    def go(board: List[Any], players: Map[Int, String], 
-           dialogLang: Map[String, String], gameOver: Boolean, currentPlayer: Int) {
-        //clear console
-        View.renderWhitespace(50)
-        //format the board for rendering
-        val fBoard = View.formatBoard(board, 3)
-        //render the board
-        View.renderBoard(fBoard, 3)
-        //construct the player and number
-        val playerNumAnnounce: String = dialogLang("playerAnnounce") + currentPlayer
-        //render the player announcement and turn prompt
-        View.renderDialog(playerNumAnnounce)
-        //get valid plays 
-        val validPlays: List[Any] = Board.returnValidInputs(board)
-        //set values for concise method calls
-        val inputPrompt: String = dialogLang("inputPrompt")
-        //set values for concise method calls
-        val invalidPlay: String = dialogLang("invalidPlay")
-        //get user play
-        val userPlay: String = IO.getValidMove(validPlays, inputPrompt,  invalidPlay)
-        val boardMove: Int = userPlay.toInt
-        //get the user token
-        val userToken: String = players(currentPlayer)
-        //create new board with updated value
-        val updatedBoard: List[Any] = board.patch(boardMove - 1, userToken, 1)
-        //get boolen for whether the game is over
-        val gameOver: Boolean = Board.gameOver(updatedBoard)
-        //if the game is over, use the end progression
-        if(gameOver) {
-            //render whitespace
-            View.renderWhitespace(50)
-            //set the formatting for the end board
-            val endBoard: List[List[Any]] = View.formatBoard(updatedBoard, 3)
-            //render the last board to the console
-            View.renderBoard(endBoard, 3)
-            //render the game over message
-            View.renderDialog("The game is over!")
-            //get the boolean for whether the game is won or not
-            val isWin: Boolean = Board.checkWin(updatedBoard)
-            //conditional loop to render a winner or a tie
-            if (isWin) {
-                //render the winning dialog
-                View.renderDialog(playerNumAnnounce, dialogLang("win"))
-            } else {
-                //render the tie dialog
-                View.renderDialog(dialogLang("tie"))
-            }
-            //render the ending whitespace
-            View.renderWhitespace(15)
-        //if the game is not over, progress with recursion
-        } else {
-            //set the next player
-            val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
-            //recursively call the game the game loop
-            go(updatedBoard, players, dialogLang, false, nextPlayer)
-        }
+object Game {
+  def initPlayers(): Map[Int, String] = Map(1 -> "X", 2 -> "O")
+
+  def setLanguage(
+    output: String => Any,
+    leftPadding: Int,
+    getInput: Int => String ) = {
+    View.renderDialog(output, leftPadding, Dialog.lang("EN")("greeting"))
+    View.renderWhitespace(output, 2)
+    val langOptions = Dialog.lang.keys.toList
+    for(option <- langOptions) {
+      View.renderDialog(output, leftPadding, " - " + option)
     }
-    //greet the player
-    View.renderDialog(Dialog.en("greeting"))
-    //run the recursive game loop
-    go(Board.initBoard(9), initPlayers(), Dialog.en, false, 1)
+    val langSelection = 
+      IO.getValidMove(
+        langOptions,
+        Dialog.lang("EN")("selectLang"),
+        Dialog.lang("EN")("invalidPlay"),
+        output,
+        getInput,
+        leftPadding,
+        0)
+    langSelection
+  }
+  
+  def go(
+    board: List[String], 
+    players: Map[Int, String], 
+    dialogLang: Map[String, String], 
+    gameOver: Boolean, 
+    currentPlayer: Int,
+    output: String => Any,
+    leftPadding: Int,
+    whiteSpace: Int,
+    getInput: Int => String,
+    loopCount: Int): Boolean = {
+
+    View.renderWhitespace(output, whiteSpace)
+
+    val fBoard = View.formatBoard(board)
+    View.renderBoard(output, fBoard, leftPadding)
+
+    val playerNumAnnounce: String = dialogLang("playerAnnounce") + currentPlayer
+    View.renderDialog(output, leftPadding, playerNumAnnounce)
+
+    val validPlays: List[String] = Board.returnValidInputs(board)
+    val inputPrompt: String = dialogLang("inputPrompt")
+    val invalidPlay: String = dialogLang("invalidPlay")
+
+    val userPlay: String = 
+      IO.getValidMove(
+        validPlays, 
+        inputPrompt,  
+        invalidPlay,
+        output,
+        getInput,
+        leftPadding,
+        loopCount)
+        
+    val boardMove: Int = userPlay.toInt
+    val userToken: String = players(currentPlayer)
+    val updatedBoard: List[String] = board.map(
+      x => if (x == boardMove.toString) userToken else x
+    )
+
+    val gameOver: Boolean = Board.gameOver(updatedBoard)
+    
+    if(gameOver) {
+      View.renderWhitespace(output, whiteSpace)
+      val endBoard: List[List[String]] = View.formatBoard(updatedBoard)
+      View.renderBoard(output, endBoard, leftPadding)
+      View.renderDialog(output, leftPadding, dialogLang("gameOver"))
+      val isWin: Boolean = Board.checkWin(updatedBoard)
+      
+      if (isWin) {
+        View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang("win"))
+      } else {
+        View.renderDialog(output, leftPadding, dialogLang("tie"))
+      }
+
+      View.renderWhitespace(output, 5)
+      true
+    } else {
+      val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
+      val newLoopCount = loopCount + 1
+      go(
+        updatedBoard, 
+        players, 
+        dialogLang, 
+        false, 
+        nextPlayer, 
+        output,
+        leftPadding, 
+        whiteSpace,
+        getInput,
+        newLoopCount)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    View.renderWhitespace(println, 100)
+    val selectedLanguage = setLanguage(println, 15, IO.getInput) 
+
+    go(
+      Board.initBoard(9), 
+      initPlayers(), 
+      Dialog.lang(selectedLanguage), 
+      false, 
+      1,
+      println,
+      15,
+      100,
+      IO.getInput,
+      1)
+  }
+
 }

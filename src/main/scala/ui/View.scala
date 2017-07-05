@@ -1,48 +1,51 @@
 package tictactoe 
-//view handles all the rendering to the console
+
 object View {
-  //renders the number of blank lines provided as an argument
-  def renderWhitespace(n: Int): Unit = {
-    for( i <- 1 to n ) {
-      println()
-    }
+
+  
+  def renderWhitespace(output: String => Any, n: Int) = {
+    val wSpace: String = "\n" * n
+    output(wSpace)
   }
 
-  //renders strings of text to the console
-  def renderDialog(dialog: String*): Unit = {
-    for (string <- dialog) {
-      val paddedString: String = "   " + string
-      println(paddedString)
-    }
+  def renderDialog(
+    output: String => Any, 
+    leftPadding: Int,
+    dialog: String*) = {
+    val sPad = " " * leftPadding
+    val fDialog = dialog.foldLeft("")(
+      (a, b) => a + sPad + b + "\n")
+      .dropRight(1)
+    output(fDialog)
   }
 
-  //formats the board into a list of lists, one for each row
-  def formatBoard(board: List[Any], grouping: Int): List[List[Any]] = {
+  def formatBoard(board: List[String]): List[List[String]] = {
+    val grouping = Math.sqrt(board.length).toInt
     board.grouped(grouping).toList
   }
-  //formats rows into strings that represent a tictactoe row 
-  def formatRow(row: List[Any]): String = {
+
+  def formatRow(row: List[String]): String = {
     val noLeadingSpace: String = row mkString " | "
     val fBoard: String = " " + noLeadingSpace
     fBoard
   }
 
-  //renders the board to the console
-  def renderBoard(fBoard: List[List[Any]], boardPadding: Int): Unit = {
-    val hLine: String = "       ===+===+==="
+  def padLeft(s: String, n: Int): String = " " * n + s
+
+  def renderBoard(
+    output: String => Any,
+    fBoard: List[List[String]], 
+    leftPadding: Int) = {
+    val hLine: String = "===+===+==="
+    val hLineLen: Int = hLine.length
     val nRows: Int = fBoard.length
-    //renders white space above the board 
-    renderWhitespace(boardPadding)
-    //loop to render the board to the console
-    for (i <- 0 to nRows - 1) {
-      val row: List[Any] = fBoard(i)
-      val formatedRow: String = "       " + formatRow(row)
-      println(formatedRow)
-      if (i < nRows - 1) 
-        println(hLine)
-    }
-    //renders whitespace below the board
-    renderWhitespace(boardPadding)
+    val formatedRows = fBoard.map(row => formatRow(row))
+    val paddedRows = formatedRows.map(row => padLeft(row, leftPadding))
+    val padHLine = padLeft(hLine, leftPadding)
+    val formatedBoard = paddedRows.foldLeft("")(
+      (a,b) => a + "\n" + b + "\n" + padHLine
+    ).dropRight(hLineLen) 
+    output(formatedBoard)
   }
 }
 

@@ -1,46 +1,37 @@
 package tictactoe
 //IO handles the user input
 object IO {
-    //returns the users input from the console
-    def getUserInput(): String = {
-        //get the value from the user
-        val userInput = scala.io.StdIn.readLine().trim
-        //implicit return
-        userInput
-    }
-    //prompts the user input, validates against values, reprompts if incorrect input,
-    //and returns the value
-    def getValidMove(validValues: List[Any], inputPrompt: String, invalidPlay: String) =  {
-        //recursive lopt
-        def go(validity: Boolean, input: String ): String  = {
-            //if the input is valid, return the value
-            if(validity) {
-                input
-            //if not valid
-            } else {
-                //re-prompt the user
-                View.renderDialog(inputPrompt)
-                //get the input from the user
-                val input: String = getUserInput()
-                //try catch handles invalid inputs
-                try {
-                    //checks the validity of the input
-                    //***this will FAIL if not a number
-                    val inputValidity = validValues.contains(input.toInt)
-                    //recursively calls the loop
-                    go(inputValidity, input)
-               } catch {
-                    //for not a number value, or other failure
-                    case _: Throwable => {
-                        //inform the user of the ivalid play
-                        View.renderDialog(invalidPlay)
-                        //recursively call the loop
-                        go(false, input)
-                    }
-               }
-            }
-        }
 
-        go(false, "none")
+  //callCount agrument used purely for mocking / testing
+  def getInput(callCount: Int = 0): String = {
+    scala.io.StdIn.readLine().trim
+  }
+
+  def getUserInput(getInput: Int => String): String = {
+    val userInput = getInput(0).trim 
+    userInput
+  }
+  
+  def getValidMove(
+    validValues: List[String], 
+    inputPrompt: String, 
+    invalidPlay: String,
+    output: String => Any,
+    getInput: Int => String,
+    leftPadding: Int,
+    callCount: Int): String = {
+    
+    def go(input: String, callCount: Int): String  = {
+      View.renderDialog(output, leftPadding, inputPrompt)
+      val input: String = getInput(callCount)
+      val inputValidity = validValues.contains(input)
+      if (inputValidity) {
+        input
+      } else {
+        View.renderDialog(output, leftPadding, invalidPlay)
+        go(input, callCount + 1)
+      }
     }
+    go("none", callCount)
+  }
 }
