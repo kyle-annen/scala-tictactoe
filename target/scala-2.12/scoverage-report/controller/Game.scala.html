@@ -24,7 +24,7 @@
           <div class="tab-pane active" id="codegrid">
             <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
 </span>2 <span style=''>//game object contains the game loop and runs the game
-</span>3 <span style=''>object Game extends App {
+</span>3 <span style=''>object Game {
 </span>4 <span style=''>  def initPlayers(): Map[Int, String] = </span><span style='background: #AEF1AE'>Map(1 -&gt; &quot;X&quot;, 2 -&gt; &quot;O&quot;)</span><span style=''>
 </span>5 <span style=''>
 </span>6 <span style=''>  def setLanguage(
@@ -101,7 +101,7 @@
 </span>77 <span style=''></span><span style='background: #AEF1AE'>      if (isWin) {
 </span>78 <span style=''></span><span style='background: #AEF1AE'>        View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang(&quot;win&quot;))
 </span>79 <span style=''></span><span style='background: #AEF1AE'>      } else {
-</span>80 <span style=''></span><span style='background: #AEF1AE'>        </span><span style='background: #F0ADAD'>View.renderDialog(output, leftPadding, dialogLang(&quot;tie&quot;))</span><span style='background: #AEF1AE'>
+</span>80 <span style=''></span><span style='background: #AEF1AE'>        View.renderDialog(output, leftPadding, dialogLang(&quot;tie&quot;))
 </span>81 <span style=''></span><span style='background: #AEF1AE'>      }
 </span>82 <span style=''></span><span style='background: #AEF1AE'>
 </span>83 <span style=''></span><span style='background: #AEF1AE'>      View.renderWhitespace(output, 5)
@@ -122,21 +122,25 @@
 </span>98 <span style=''></span><span style='background: #AEF1AE'>        newLoopCount)
 </span>99 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
 </span>100 <span style=''>  }
-</span>101 <span style=''>  </span><span style='background: #F0ADAD'>View.renderWhitespace(println, 100)</span><span style=''>
-</span>102 <span style=''>  val selectedLanguage = </span><span style='background: #F0ADAD'>setLanguage(println, 15, IO.getInput)</span><span style=''> 
-</span>103 <span style=''>
-</span>104 <span style=''>  </span><span style='background: #F0ADAD'>go(
-</span>105 <span style=''></span><span style='background: #F0ADAD'>    Board.initBoard(9), 
-</span>106 <span style=''></span><span style='background: #F0ADAD'>    initPlayers(), 
-</span>107 <span style=''></span><span style='background: #F0ADAD'>    Dialog.lang(selectedLanguage), 
-</span>108 <span style=''></span><span style='background: #F0ADAD'>    false, 
-</span>109 <span style=''></span><span style='background: #F0ADAD'>    1,
-</span>110 <span style=''></span><span style='background: #F0ADAD'>    println,
-</span>111 <span style=''></span><span style='background: #F0ADAD'>    15,
-</span>112 <span style=''></span><span style='background: #F0ADAD'>    100,
-</span>113 <span style=''></span><span style='background: #F0ADAD'>    IO.getInput,
-</span>114 <span style=''></span><span style='background: #F0ADAD'>    1)</span><span style=''>
-</span>115 <span style=''>}
+</span>101 <span style=''>
+</span>102 <span style=''>  def main(args: Array[String]): Unit = {
+</span>103 <span style=''>    </span><span style='background: #F0ADAD'>View.renderWhitespace(println, 100)</span><span style=''>
+</span>104 <span style=''>    val selectedLanguage = </span><span style='background: #F0ADAD'>setLanguage(println, 15, IO.getInput)</span><span style=''> 
+</span>105 <span style=''>
+</span>106 <span style=''>    </span><span style='background: #F0ADAD'>go(
+</span>107 <span style=''></span><span style='background: #F0ADAD'>      Board.initBoard(9), 
+</span>108 <span style=''></span><span style='background: #F0ADAD'>      initPlayers(), 
+</span>109 <span style=''></span><span style='background: #F0ADAD'>      Dialog.lang(selectedLanguage), 
+</span>110 <span style=''></span><span style='background: #F0ADAD'>      false, 
+</span>111 <span style=''></span><span style='background: #F0ADAD'>      1,
+</span>112 <span style=''></span><span style='background: #F0ADAD'>      println,
+</span>113 <span style=''></span><span style='background: #F0ADAD'>      15,
+</span>114 <span style=''></span><span style='background: #F0ADAD'>      100,
+</span>115 <span style=''></span><span style='background: #F0ADAD'>      IO.getInput,
+</span>116 <span style=''></span><span style='background: #F0ADAD'>      1)</span><span style=''>
+</span>117 <span style=''>  }
+</span>118 <span style=''>
+</span>119 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -156,9 +160,9 @@
           2
         </td>
         <td>
-          153
+          141
           -
-          161
+          149
         </td>
         <td>
           Apply
@@ -177,9 +181,9 @@
           1
         </td>
         <td>
-          143
+          131
           -
-          151
+          139
         </td>
         <td>
           Apply
@@ -198,9 +202,9 @@
           3
         </td>
         <td>
-          139
+          127
           -
-          162
+          150
         </td>
         <td>
           Apply
@@ -219,9 +223,9 @@
           5
         </td>
         <td>
-          270
+          258
           -
-          339
+          327
         </td>
         <td>
           Apply
@@ -240,9 +244,9 @@
           4
         </td>
         <td>
-          309
+          297
           -
-          338
+          326
         </td>
         <td>
           Apply
@@ -261,9 +265,9 @@
           6
         </td>
         <td>
-          344
+          332
           -
-          376
+          364
         </td>
         <td>
           Apply
@@ -282,9 +286,9 @@
           7
         </td>
         <td>
-          399
+          387
           -
-          422
+          410
         </td>
         <td>
           Select
@@ -303,9 +307,9 @@
           10
         </td>
         <td>
-          427
+          415
           -
-          516
+          504
         </td>
         <td>
           Apply
@@ -324,9 +328,9 @@
           8
         </td>
         <td>
-          501
+          489
           -
-          515
+          503
         </td>
         <td>
           Apply
@@ -345,9 +349,9 @@
           9
         </td>
         <td>
-          462
+          450
           -
-          516
+          504
         </td>
         <td>
           Apply
@@ -366,9 +370,9 @@
           14
         </td>
         <td>
-          554
+          542
           -
-          740
+          728
         </td>
         <td>
           Apply
@@ -387,9 +391,9 @@
           11
         </td>
         <td>
-          600
+          588
           -
-          631
+          619
         </td>
         <td>
           Apply
@@ -408,9 +412,9 @@
           12
         </td>
         <td>
-          641
+          629
           -
-          673
+          661
         </td>
         <td>
           Apply
@@ -429,9 +433,9 @@
           13
         </td>
         <td>
-          738
+          726
           -
-          739
+          727
         </td>
         <td>
           Literal
@@ -450,9 +454,9 @@
           15
         </td>
         <td>
-          1057
+          1045
           -
-          1098
+          1086
         </td>
         <td>
           Apply
@@ -471,9 +475,9 @@
           16
         </td>
         <td>
-          1117
+          1105
           -
-          1140
+          1128
         </td>
         <td>
           Apply
@@ -492,9 +496,9 @@
           17
         </td>
         <td>
-          1145
+          1133
           -
-          1190
+          1178
         </td>
         <td>
           Apply
@@ -513,9 +517,9 @@
           18
         </td>
         <td>
-          1228
+          1216
           -
-          1272
+          1260
         </td>
         <td>
           Apply
@@ -534,9 +538,9 @@
           19
         </td>
         <td>
-          1277
+          1265
           -
-          1334
+          1322
         </td>
         <td>
           Apply
@@ -555,9 +559,9 @@
           20
         </td>
         <td>
-          1371
+          1359
           -
-          1401
+          1389
         </td>
         <td>
           Apply
@@ -576,9 +580,9 @@
           21
         </td>
         <td>
-          1432
+          1420
           -
-          1457
+          1445
         </td>
         <td>
           Apply
@@ -597,9 +601,9 @@
           22
         </td>
         <td>
-          1488
+          1476
           -
-          1513
+          1501
         </td>
         <td>
           Apply
@@ -618,9 +622,9 @@
           23
         </td>
         <td>
-          1549
+          1537
           -
-          1704
+          1692
         </td>
         <td>
           Apply
@@ -639,9 +643,9 @@
           24
         </td>
         <td>
-          1739
+          1727
           -
-          1753
+          1741
         </td>
         <td>
           Select
@@ -660,9 +664,9 @@
           25
         </td>
         <td>
-          1782
+          1770
           -
-          1804
+          1792
         </td>
         <td>
           Apply
@@ -681,9 +685,9 @@
           31
         </td>
         <td>
-          1842
+          1830
           -
-          1915
+          1903
         </td>
         <td>
           ApplyToImplicitArgs
@@ -705,9 +709,9 @@ else
           30
         </td>
         <td>
-          1851
+          1839
           -
-          1851
+          1839
         </td>
         <td>
           TypeApply
@@ -726,9 +730,9 @@ else
           26
         </td>
         <td>
-          1873
+          1861
           -
-          1891
+          1879
         </td>
         <td>
           Apply
@@ -747,9 +751,9 @@ else
           29
         </td>
         <td>
-          1908
+          1896
           -
-          1909
+          1897
         </td>
         <td>
           Ident
@@ -768,9 +772,9 @@ else
           28
         </td>
         <td>
-          1893
+          1881
           -
-          1902
+          1890
         </td>
         <td>
           Ident
@@ -789,9 +793,9 @@ else
           27
         </td>
         <td>
-          1868
+          1856
           -
-          1891
+          1879
         </td>
         <td>
           Apply
@@ -810,9 +814,9 @@ else
           32
         </td>
         <td>
-          1945
+          1933
           -
-          1973
+          1961
         </td>
         <td>
           Apply
@@ -831,9 +835,9 @@ else
           47
         </td>
         <td>
-          1996
+          1984
           -
-          2553
+          2541
         </td>
         <td>
           Block
@@ -864,9 +868,9 @@ else
           33
         </td>
         <td>
-          2004
+          1992
           -
-          2045
+          2033
         </td>
         <td>
           Apply
@@ -885,9 +889,9 @@ else
           34
         </td>
         <td>
-          2087
+          2075
           -
-          2117
+          2105
         </td>
         <td>
           Apply
@@ -906,9 +910,9 @@ else
           35
         </td>
         <td>
-          2124
+          2112
           -
-          2171
+          2159
         </td>
         <td>
           Apply
@@ -927,9 +931,9 @@ else
           37
         </td>
         <td>
-          2178
+          2166
           -
-          2240
+          2228
         </td>
         <td>
           Apply
@@ -948,9 +952,9 @@ else
           36
         </td>
         <td>
-          2217
+          2205
           -
-          2239
+          2227
         </td>
         <td>
           Apply
@@ -969,9 +973,9 @@ else
           38
         </td>
         <td>
-          2268
+          2256
           -
-          2296
+          2284
         </td>
         <td>
           Apply
@@ -990,9 +994,9 @@ else
           41
         </td>
         <td>
-          2331
+          2319
           -
-          2407
+          2395
         </td>
         <td>
           Block
@@ -1011,9 +1015,9 @@ else
           40
         </td>
         <td>
-          2331
+          2319
           -
-          2407
+          2395
         </td>
         <td>
           Apply
@@ -1032,9 +1036,9 @@ else
           39
         </td>
         <td>
-          2389
+          2377
           -
-          2406
+          2394
         </td>
         <td>
           Apply
@@ -1053,9 +1057,9 @@ else
           44
         </td>
         <td>
-          2431
+          2419
           -
-          2488
+          2476
         </td>
         <td>
           Block
@@ -1063,7 +1067,7 @@ else
         <td>
           tictactoe.View.renderDialog
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;))
         </td>
       </tr><tr>
@@ -1074,9 +1078,9 @@ else
           43
         </td>
         <td>
-          2431
+          2419
           -
-          2488
+          2476
         </td>
         <td>
           Apply
@@ -1084,7 +1088,7 @@ else
         <td>
           tictactoe.View.renderDialog
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;))
         </td>
       </tr><tr>
@@ -1095,9 +1099,9 @@ else
           42
         </td>
         <td>
-          2470
+          2458
           -
-          2487
+          2475
         </td>
         <td>
           Apply
@@ -1105,7 +1109,7 @@ else
         <td>
           scala.collection.MapLike.apply
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           dialogLang.apply(&quot;tie&quot;)
         </td>
       </tr><tr>
@@ -1116,9 +1120,9 @@ else
           45
         </td>
         <td>
-          2504
+          2492
           -
-          2536
+          2524
         </td>
         <td>
           Apply
@@ -1137,9 +1141,9 @@ else
           46
         </td>
         <td>
-          2543
+          2531
           -
-          2547
+          2535
         </td>
         <td>
           Literal
@@ -1158,9 +1162,9 @@ else
           55
         </td>
         <td>
-          2559
+          2547
           -
-          2872
+          2860
         </td>
         <td>
           Block
@@ -1186,9 +1190,9 @@ else
           50
         </td>
         <td>
-          2612
+          2600
           -
-          2613
+          2601
         </td>
         <td>
           Block
@@ -1207,9 +1211,9 @@ else
           49
         </td>
         <td>
-          2612
+          2600
           -
-          2613
+          2601
         </td>
         <td>
           Literal
@@ -1228,9 +1232,9 @@ else
           52
         </td>
         <td>
-          2619
+          2607
           -
-          2620
+          2608
         </td>
         <td>
           Block
@@ -1249,9 +1253,9 @@ else
           48
         </td>
         <td>
-          2592
+          2580
           -
-          2610
+          2598
         </td>
         <td>
           Apply
@@ -1270,9 +1274,9 @@ else
           51
         </td>
         <td>
-          2619
+          2607
           -
-          2620
+          2608
         </td>
         <td>
           Literal
@@ -1291,9 +1295,9 @@ else
           53
         </td>
         <td>
-          2646
+          2634
           -
-          2659
+          2647
         </td>
         <td>
           Apply
@@ -1312,9 +1316,9 @@ else
           54
         </td>
         <td>
-          2666
+          2654
           -
-          2866
+          2854
         </td>
         <td>
           Apply
@@ -1327,15 +1331,15 @@ else
         </td>
       </tr><tr>
         <td>
-          101
+          103
         </td>
         <td>
           56
         </td>
         <td>
-          2901
+          2934
           -
-          2908
+          2941
         </td>
         <td>
           Apply
@@ -1348,15 +1352,15 @@ else
         </td>
       </tr><tr>
         <td>
-          101
+          103
         </td>
         <td>
           58
         </td>
         <td>
-          2879
+          2912
           -
-          2914
+          2947
         </td>
         <td>
           Apply
@@ -1371,15 +1375,15 @@ else
         </td>
       </tr><tr>
         <td>
-          101
+          103
         </td>
         <td>
           57
         </td>
         <td>
-          2910
+          2943
           -
-          2913
+          2946
         </td>
         <td>
           Literal
@@ -1392,15 +1396,15 @@ else
         </td>
       </tr><tr>
         <td>
-          102
+          104
         </td>
         <td>
           59
         </td>
         <td>
-          2952
+          2987
           -
-          2959
+          2994
         </td>
         <td>
           Apply
@@ -1413,15 +1417,15 @@ else
         </td>
       </tr><tr>
         <td>
-          102
+          104
         </td>
         <td>
           62
         </td>
         <td>
-          2940
+          2975
           -
-          2977
+          3012
         </td>
         <td>
           Apply
@@ -1438,15 +1442,15 @@ else
         </td>
       </tr><tr>
         <td>
-          102
+          104
         </td>
         <td>
           61
         </td>
         <td>
-          2965
+          3000
           -
-          2976
+          3011
         </td>
         <td>
           Apply
@@ -1459,15 +1463,15 @@ else
         </td>
       </tr><tr>
         <td>
-          102
+          104
         </td>
         <td>
           60
         </td>
         <td>
-          2961
+          2996
           -
-          2963
+          2998
         </td>
         <td>
           Literal
@@ -1480,15 +1484,36 @@ else
         </td>
       </tr><tr>
         <td>
-          104
+          106
         </td>
         <td>
           74
         </td>
         <td>
-          2982
+          3021
           -
-          3139
+          3021
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          3019
+          -
+          3196
         </td>
         <td>
           Apply
@@ -1497,7 +1522,7 @@ else
           tictactoe.Game.go
         </td>
         <td style="background: #F0ADAD">
-          Game.this.go(Board.initBoard(9), Game.this.initPlayers(), Dialog.lang.apply(Game.this.selectedLanguage), false, 1, {
+          Game.this.go(Board.initBoard(9), Game.this.initPlayers(), Dialog.lang.apply(selectedLanguage), false, 1, {
   ((x: Any) =&gt; scala.Predef.println(x))
 }, 15, 100, {
   ((callCount: Int) =&gt; IO.getInput(callCount))
@@ -1505,15 +1530,15 @@ else
         </td>
       </tr><tr>
         <td>
-          105
+          107
         </td>
         <td>
           63
         </td>
         <td>
-          2990
+          3029
           -
-          3008
+          3047
         </td>
         <td>
           Apply
@@ -1526,15 +1551,15 @@ else
         </td>
       </tr><tr>
         <td>
-          106
+          108
         </td>
         <td>
           64
         </td>
         <td>
-          3015
+          3056
           -
-          3028
+          3069
         </td>
         <td>
           Apply
@@ -1547,36 +1572,15 @@ else
         </td>
       </tr><tr>
         <td>
-          107
+          109
         </td>
         <td>
           65
         </td>
         <td>
-          3047
+          3078
           -
-          3063
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          tictactoe.Game.selectedLanguage
-        </td>
-        <td style="background: #F0ADAD">
-          Game.this.selectedLanguage
-        </td>
-      </tr><tr>
-        <td>
-          107
-        </td>
-        <td>
-          66
-        </td>
-        <td>
-          3035
-          -
-          3064
+          3107
         </td>
         <td>
           Apply
@@ -1585,19 +1589,19 @@ else
           scala.collection.MapLike.apply
         </td>
         <td style="background: #F0ADAD">
-          Dialog.lang.apply(Game.this.selectedLanguage)
+          Dialog.lang.apply(selectedLanguage)
         </td>
       </tr><tr>
         <td>
-          108
+          110
         </td>
         <td>
-          67
+          66
         </td>
         <td>
-          3071
+          3116
           -
-          3076
+          3121
         </td>
         <td>
           Literal
@@ -1610,15 +1614,15 @@ else
         </td>
       </tr><tr>
         <td>
-          109
+          111
         </td>
         <td>
-          68
+          67
         </td>
         <td>
-          3083
+          3130
           -
-          3084
+          3131
         </td>
         <td>
           Literal
@@ -1631,15 +1635,15 @@ else
         </td>
       </tr><tr>
         <td>
-          110
+          112
         </td>
         <td>
-          69
+          68
         </td>
         <td>
-          3090
+          3139
           -
-          3097
+          3146
         </td>
         <td>
           Apply
@@ -1652,15 +1656,15 @@ else
         </td>
       </tr><tr>
         <td>
-          111
+          113
         </td>
         <td>
-          70
+          69
         </td>
         <td>
-          3103
+          3154
           -
-          3105
+          3156
         </td>
         <td>
           Literal
@@ -1673,15 +1677,15 @@ else
         </td>
       </tr><tr>
         <td>
-          112
+          114
         </td>
         <td>
-          71
+          70
         </td>
         <td>
-          3111
+          3164
           -
-          3114
+          3167
         </td>
         <td>
           Literal
@@ -1694,15 +1698,15 @@ else
         </td>
       </tr><tr>
         <td>
-          113
+          115
         </td>
         <td>
-          72
+          71
         </td>
         <td>
-          3120
+          3175
           -
-          3131
+          3186
         </td>
         <td>
           Apply
@@ -1715,15 +1719,15 @@ else
         </td>
       </tr><tr>
         <td>
-          114
+          116
         </td>
         <td>
-          73
+          72
         </td>
         <td>
-          3137
+          3194
           -
-          3138
+          3195
         </td>
         <td>
           Literal
