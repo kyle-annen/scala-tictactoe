@@ -2,6 +2,26 @@ package tictactoe
 //game object contains the game loop and runs the game
 object Game extends App {
   def initPlayers(): Map[Int, String] = Map(1 -> "X", 2 -> "O")
+
+  def setLanguage(
+    output: String => Unit,
+    leftPadding: Int) = {
+    View.renderDialog(output, leftPadding, Dialog.lang("EN")("greeting"))
+    View.renderWhitespace(output, 2)
+    val langOptions = Dialog.lang.keys.toList
+    for(option <- langOptions) {
+      View.renderDialog(output, leftPadding, " - " + option)
+    }
+    val langSelection = 
+      IO.getValidMove(
+        langOptions,
+        Dialog.lang("EN")("selectLang"),
+        Dialog.lang("EN")("invalidPlay"),
+        output,
+        IO.getInput,
+        leftPadding)
+    langSelection
+  }
   
   def go(
     board: List[String], 
@@ -71,14 +91,12 @@ object Game extends App {
     }
   }
 
-  View.renderDialog(
-    println,
-    15,
-    Dialog.en("greeting"))
+  val selectedLanguage = setLanguage(println, 15) 
+
   go(
     Board.initBoard(9), 
     initPlayers(), 
-    Dialog.en, 
+    Dialog.lang(selectedLanguage), 
     false, 
     1,
     println,
