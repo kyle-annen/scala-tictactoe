@@ -72,7 +72,7 @@ object Game extends App {
   }
 
   View.renderDialog(
-    View.print,
+    println,
     15,
     Dialog.en("greeting"))
   go(
@@ -81,7 +81,7 @@ object Game extends App {
     Dialog.en, 
     false, 
     1,
-    View.print,
+    println,
     15,
     30)
 }

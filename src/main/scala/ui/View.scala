@@ -2,7 +2,6 @@ package tictactoe
 
 object View {
 
-  def print(s: String): Unit = Console.println(s)
   
   def renderWhitespace(output: String => Any, n: Int) = {
     val wSpace: String = "\n" * n
