@@ -17,7 +17,6 @@ object View {
     val fDialog = dialog.foldLeft("")(
       (a, b) => a + sPad + b + "\n")
       .dropRight(1)
-    
     output(fDialog)
   }
 

@@ -8,7 +8,7 @@ object IO {
   }
 
   def getUserInput(getInput: Int => String): String = {
-  val userInput = getInput(0).trim 
+    val userInput = getInput(0).trim 
     userInput
   }
   

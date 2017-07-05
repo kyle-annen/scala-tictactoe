@@ -19,7 +19,7 @@ class ViewSpec extends FunSpec {
   }
 
   describe("renderDialog") {
-    it("renders dialog one string without line breaks") {
+    it("renders dialog of one string without line breaks") {
       val expected = "this is a test"
       val actual = View.renderDialog(testPrint, 0, "this is a test") 
       assert(actual === expected)
