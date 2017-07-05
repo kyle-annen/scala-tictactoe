@@ -5,7 +5,7 @@ import org.scalatest.Matchers._
 
 class BoardSpec extends FunSpec {
 
-describe("*initBoard") {
+describe("initBoard") {
   it("it should return a List of the size indicated, from 1 to Dimension") {
     val expected: List[String] = (1 to 9).toList.map(x => x.toString)
     val actual = Board.initBoard(9)
@@ -13,7 +13,7 @@ describe("*initBoard") {
   }
 }
 
-describe("*returnValidInputs") {
+describe("returnValidInputs") {
   it("should return open moves of the board in a list") {
     val testBoard: List[String] = List(
       "x","o","x",
@@ -25,7 +25,7 @@ describe("*returnValidInputs") {
   }
 }
 
-describe("*returnRows") {
+describe("returnRows") {
   it("should return a list of row lists") {
     val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
     val expected: List[List[String]] = List(
@@ -37,7 +37,7 @@ describe("*returnRows") {
   }
 }
 
-describe("*returnColumns") {
+describe("returnColumns") {
   it("should return a list of column lists") {
     val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
     val expected: List[List[String]] = List(
@@ -49,7 +49,7 @@ describe("*returnColumns") {
   }
 }
 
-describe("*returnDiagonals") {
+describe("returnDiagonals") {
   it("should return a list of diagonal lists") {
     val testBoard: List[String] = (1 to 9).toList.map(x => x.toString) 
     val expected: List[List[String]] = List(
@@ -92,7 +92,7 @@ describe("*checkSets") {
   }
 }
 
-describe("*checkWin") {
+describe("checkWin") {
   it("should return true if a winning board") {
     val testBoard: List[String] = List(
       "x","x","x",
@@ -115,7 +115,7 @@ describe("*checkWin") {
 }
 
 
-describe("*checkSpace") {
+describe("checkSpace") {
   it("should return true if there is open spaces") {
     val testBoard: List[String] = (1 to 9).toList.map(x => x.toString) 
     val expected: Boolean = true
@@ -131,7 +131,7 @@ describe("*checkSpace") {
   }
 }
 
-  describe("*checkTie") {
+  describe("checkTie") {
     it("should return false if there is no tie") {
     val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
     val expected: Boolean = false
@@ -170,7 +170,7 @@ describe("*checkSpace") {
   }
 }
 
-describe("*gameOver") {
+describe("gameOver") {
   it("should return true if no moves are left") {
     val testBoard: List[String] = List(
       "x","o","x",
@@ -185,7 +185,7 @@ describe("*gameOver") {
     val testBoard: List[String] = List(
       "x","o","x",
       "x","o","x",
-      "o","x","9")
+      "o","x","9") 
     val expected: Boolean = false 
     val actual = Board.gameOver(testBoard)
     assert(actual === expected)
@@ -202,7 +202,7 @@ describe("*gameOver") {
   }
 }
 
-describe("*getWinner") {
+describe("getWinner") {
   it("should return a list containing true and the winning token") {
     val testBoard: List[String] = List(
       "x","x","x",
