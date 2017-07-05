@@ -1,0 +1,1742 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          controller/Game.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
+</span>2 <span style=''>//game object contains the game loop and runs the game
+</span>3 <span style=''>object Game extends App {
+</span>4 <span style=''>  def initPlayers(): Map[Int, String] = </span><span style='background: #AEF1AE'>Map(1 -&gt; &quot;X&quot;, 2 -&gt; &quot;O&quot;)</span><span style=''>
+</span>5 <span style=''>
+</span>6 <span style=''>  def setLanguage(
+</span>7 <span style=''>    output: String =&gt; Any,
+</span>8 <span style=''>    leftPadding: Int,
+</span>9 <span style=''>    getInput: Int =&gt; String ) = {
+</span>10 <span style=''>    </span><span style='background: #AEF1AE'>View.renderDialog(output, leftPadding, Dialog.lang(&quot;EN&quot;)(&quot;greeting&quot;))</span><span style=''>
+</span>11 <span style=''>    </span><span style='background: #AEF1AE'>View.renderWhitespace(output, 2)</span><span style=''>
+</span>12 <span style=''>    val langOptions = </span><span style='background: #AEF1AE'>Dialog.lang.keys.toList</span><span style=''>
+</span>13 <span style=''>    </span><span style='background: #AEF1AE'>for(option &lt;- langOptions) {
+</span>14 <span style=''></span><span style='background: #AEF1AE'>      View.renderDialog(output, leftPadding, &quot; - &quot; + option)</span><span style=''>
+</span>15 <span style=''>    }
+</span>16 <span style=''>    val langSelection = 
+</span>17 <span style=''>      </span><span style='background: #AEF1AE'>IO.getValidMove(
+</span>18 <span style=''></span><span style='background: #AEF1AE'>        langOptions,
+</span>19 <span style=''></span><span style='background: #AEF1AE'>        Dialog.lang(&quot;EN&quot;)(&quot;selectLang&quot;),
+</span>20 <span style=''></span><span style='background: #AEF1AE'>        Dialog.lang(&quot;EN&quot;)(&quot;invalidPlay&quot;),
+</span>21 <span style=''></span><span style='background: #AEF1AE'>        output,
+</span>22 <span style=''></span><span style='background: #AEF1AE'>        getInput,
+</span>23 <span style=''></span><span style='background: #AEF1AE'>        leftPadding,
+</span>24 <span style=''></span><span style='background: #AEF1AE'>        0)</span><span style=''>
+</span>25 <span style=''>    langSelection
+</span>26 <span style=''>  }
+</span>27 <span style=''>  
+</span>28 <span style=''>  def go(
+</span>29 <span style=''>    board: List[String], 
+</span>30 <span style=''>    players: Map[Int, String], 
+</span>31 <span style=''>    dialogLang: Map[String, String], 
+</span>32 <span style=''>    gameOver: Boolean, 
+</span>33 <span style=''>    currentPlayer: Int,
+</span>34 <span style=''>    output: String =&gt; Any,
+</span>35 <span style=''>    leftPadding: Int,
+</span>36 <span style=''>    whiteSpace: Int,
+</span>37 <span style=''>    getInput: Int =&gt; String,
+</span>38 <span style=''>    loopCount: Int): Boolean = {
+</span>39 <span style=''>
+</span>40 <span style=''>    </span><span style='background: #AEF1AE'>View.renderWhitespace(output, whiteSpace)</span><span style=''>
+</span>41 <span style=''>
+</span>42 <span style=''>    val fBoard = </span><span style='background: #AEF1AE'>View.formatBoard(board)</span><span style=''>
+</span>43 <span style=''>    </span><span style='background: #AEF1AE'>View.renderBoard(output, fBoard, leftPadding)</span><span style=''>
+</span>44 <span style=''>
+</span>45 <span style=''>    val playerNumAnnounce: String = </span><span style='background: #AEF1AE'>dialogLang(&quot;playerAnnounce&quot;) + currentPlayer</span><span style=''>
+</span>46 <span style=''>    </span><span style='background: #AEF1AE'>View.renderDialog(output, leftPadding, playerNumAnnounce)</span><span style=''>
+</span>47 <span style=''>
+</span>48 <span style=''>    val validPlays: List[String] = </span><span style='background: #AEF1AE'>Board.returnValidInputs(board)</span><span style=''>
+</span>49 <span style=''>    val inputPrompt: String = </span><span style='background: #AEF1AE'>dialogLang(&quot;inputPrompt&quot;)</span><span style=''>
+</span>50 <span style=''>    val invalidPlay: String = </span><span style='background: #AEF1AE'>dialogLang(&quot;invalidPlay&quot;)</span><span style=''>
+</span>51 <span style=''>
+</span>52 <span style=''>    val userPlay: String = 
+</span>53 <span style=''>      </span><span style='background: #AEF1AE'>IO.getValidMove(
+</span>54 <span style=''></span><span style='background: #AEF1AE'>        validPlays, 
+</span>55 <span style=''></span><span style='background: #AEF1AE'>        inputPrompt,  
+</span>56 <span style=''></span><span style='background: #AEF1AE'>        invalidPlay,
+</span>57 <span style=''></span><span style='background: #AEF1AE'>        output,
+</span>58 <span style=''></span><span style='background: #AEF1AE'>        getInput,
+</span>59 <span style=''></span><span style='background: #AEF1AE'>        leftPadding,
+</span>60 <span style=''></span><span style='background: #AEF1AE'>        loopCount)</span><span style=''>
+</span>61 <span style=''>        
+</span>62 <span style=''>    val boardMove: Int = </span><span style='background: #AEF1AE'>userPlay.toInt</span><span style=''>
+</span>63 <span style=''>    val userToken: String = </span><span style='background: #AEF1AE'>players(currentPlayer)</span><span style=''>
+</span>64 <span style=''>    val updatedBoard: List[String] = </span><span style='background: #AEF1AE'>board.map(
+</span>65 <span style=''></span><span style='background: #AEF1AE'>      x =&gt; if (x == boardMove.toString) userToken else x
+</span>66 <span style=''></span><span style='background: #AEF1AE'>    )</span><span style=''>
+</span>67 <span style=''>
+</span>68 <span style=''>    val gameOver: Boolean = </span><span style='background: #AEF1AE'>Board.gameOver(updatedBoard)</span><span style=''>
+</span>69 <span style=''>    
+</span>70 <span style=''>    if(gameOver) </span><span style='background: #AEF1AE'>{
+</span>71 <span style=''></span><span style='background: #AEF1AE'>      View.renderWhitespace(output, whiteSpace)
+</span>72 <span style=''></span><span style='background: #AEF1AE'>      val endBoard: List[List[String]] = View.formatBoard(updatedBoard)
+</span>73 <span style=''></span><span style='background: #AEF1AE'>      View.renderBoard(output, endBoard, leftPadding)
+</span>74 <span style=''></span><span style='background: #AEF1AE'>      View.renderDialog(output, leftPadding, dialogLang(&quot;gameOver&quot;))
+</span>75 <span style=''></span><span style='background: #AEF1AE'>      val isWin: Boolean = Board.checkWin(updatedBoard)
+</span>76 <span style=''></span><span style='background: #AEF1AE'>      
+</span>77 <span style=''></span><span style='background: #AEF1AE'>      if (isWin) {
+</span>78 <span style=''></span><span style='background: #AEF1AE'>        View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang(&quot;win&quot;))
+</span>79 <span style=''></span><span style='background: #AEF1AE'>      } else {
+</span>80 <span style=''></span><span style='background: #AEF1AE'>        </span><span style='background: #F0ADAD'>View.renderDialog(output, leftPadding, dialogLang(&quot;tie&quot;))</span><span style='background: #AEF1AE'>
+</span>81 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>82 <span style=''></span><span style='background: #AEF1AE'>
+</span>83 <span style=''></span><span style='background: #AEF1AE'>      View.renderWhitespace(output, 5)
+</span>84 <span style=''></span><span style='background: #AEF1AE'>      true
+</span>85 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''> else </span><span style='background: #AEF1AE'>{
+</span>86 <span style=''></span><span style='background: #AEF1AE'>      val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
+</span>87 <span style=''></span><span style='background: #AEF1AE'>      val newLoopCount = loopCount + 1
+</span>88 <span style=''></span><span style='background: #AEF1AE'>      go(
+</span>89 <span style=''></span><span style='background: #AEF1AE'>        updatedBoard, 
+</span>90 <span style=''></span><span style='background: #AEF1AE'>        players, 
+</span>91 <span style=''></span><span style='background: #AEF1AE'>        dialogLang, 
+</span>92 <span style=''></span><span style='background: #AEF1AE'>        false, 
+</span>93 <span style=''></span><span style='background: #AEF1AE'>        nextPlayer, 
+</span>94 <span style=''></span><span style='background: #AEF1AE'>        output,
+</span>95 <span style=''></span><span style='background: #AEF1AE'>        leftPadding, 
+</span>96 <span style=''></span><span style='background: #AEF1AE'>        whiteSpace,
+</span>97 <span style=''></span><span style='background: #AEF1AE'>        getInput,
+</span>98 <span style=''></span><span style='background: #AEF1AE'>        newLoopCount)
+</span>99 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>100 <span style=''>  }
+</span>101 <span style=''>  </span><span style='background: #F0ADAD'>View.renderWhitespace(println, 100)</span><span style=''>
+</span>102 <span style=''>  val selectedLanguage = </span><span style='background: #F0ADAD'>setLanguage(println, 15, IO.getInput)</span><span style=''> 
+</span>103 <span style=''>
+</span>104 <span style=''>  </span><span style='background: #F0ADAD'>go(
+</span>105 <span style=''></span><span style='background: #F0ADAD'>    Board.initBoard(9), 
+</span>106 <span style=''></span><span style='background: #F0ADAD'>    initPlayers(), 
+</span>107 <span style=''></span><span style='background: #F0ADAD'>    Dialog.lang(selectedLanguage), 
+</span>108 <span style=''></span><span style='background: #F0ADAD'>    false, 
+</span>109 <span style=''></span><span style='background: #F0ADAD'>    1,
+</span>110 <span style=''></span><span style='background: #F0ADAD'>    println,
+</span>111 <span style=''></span><span style='background: #F0ADAD'>    15,
+</span>112 <span style=''></span><span style='background: #F0ADAD'>    100,
+</span>113 <span style=''></span><span style='background: #F0ADAD'>    IO.getInput,
+</span>114 <span style=''></span><span style='background: #F0ADAD'>    1)</span><span style=''>
+</span>115 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          4
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          153
+          -
+          161
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](2).-&gt;[String](&quot;O&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          4
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          143
+          -
+          151
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](1).-&gt;[String](&quot;X&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          4
+        </td>
+        <td>
+          3
+        </td>
+        <td>
+          139
+          -
+          162
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, String](scala.Predef.ArrowAssoc[Int](1).-&gt;[String](&quot;X&quot;), scala.Predef.ArrowAssoc[Int](2).-&gt;[String](&quot;O&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          5
+        </td>
+        <td>
+          270
+          -
+          339
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, Dialog.lang.apply(&quot;EN&quot;).apply(&quot;greeting&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          4
+        </td>
+        <td>
+          309
+          -
+          338
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Dialog.lang.apply(&quot;EN&quot;).apply(&quot;greeting&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          6
+        </td>
+        <td>
+          344
+          -
+          376
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderWhitespace(output, 2)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          7
+        </td>
+        <td>
+          399
+          -
+          422
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.TraversableOnce.toList
+        </td>
+        <td style="background: #AEF1AE">
+          Dialog.lang.keys.toList
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          427
+          -
+          516
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.foreach
+        </td>
+        <td style="background: #AEF1AE">
+          langOptions.foreach[Any](((option: String) =&gt; View.renderDialog(output, leftPadding, &quot; - &quot;.+(option))))
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          8
+        </td>
+        <td>
+          501
+          -
+          515
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          &quot; - &quot;.+(option)
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          9
+        </td>
+        <td>
+          462
+          -
+          516
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, &quot; - &quot;.+(option))
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          14
+        </td>
+        <td>
+          554
+          -
+          740
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.IO.getValidMove
+        </td>
+        <td style="background: #AEF1AE">
+          IO.getValidMove(langOptions, Dialog.lang.apply(&quot;EN&quot;).apply(&quot;selectLang&quot;), Dialog.lang.apply(&quot;EN&quot;).apply(&quot;invalidPlay&quot;), output, getInput, leftPadding, 0)
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          11
+        </td>
+        <td>
+          600
+          -
+          631
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Dialog.lang.apply(&quot;EN&quot;).apply(&quot;selectLang&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          12
+        </td>
+        <td>
+          641
+          -
+          673
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Dialog.lang.apply(&quot;EN&quot;).apply(&quot;invalidPlay&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          13
+        </td>
+        <td>
+          738
+          -
+          739
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          0
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          1057
+          -
+          1098
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderWhitespace(output, whiteSpace)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          1117
+          -
+          1140
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.formatBoard
+        </td>
+        <td style="background: #AEF1AE">
+          View.formatBoard(board)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          17
+        </td>
+        <td>
+          1145
+          -
+          1190
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderBoard
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderBoard(output, fBoard, leftPadding)
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          18
+        </td>
+        <td>
+          1228
+          -
+          1272
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;playerAnnounce&quot;).+(currentPlayer)
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          19
+        </td>
+        <td>
+          1277
+          -
+          1334
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, playerNumAnnounce)
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          20
+        </td>
+        <td>
+          1371
+          -
+          1401
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.returnValidInputs
+        </td>
+        <td style="background: #AEF1AE">
+          Board.returnValidInputs(board)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          21
+        </td>
+        <td>
+          1432
+          -
+          1457
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;inputPrompt&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          22
+        </td>
+        <td>
+          1488
+          -
+          1513
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;invalidPlay&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          23
+        </td>
+        <td>
+          1549
+          -
+          1704
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.IO.getValidMove
+        </td>
+        <td style="background: #AEF1AE">
+          IO.getValidMove(validPlays, inputPrompt, invalidPlay, output, getInput, leftPadding, loopCount)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          24
+        </td>
+        <td>
+          1739
+          -
+          1753
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.immutable.StringLike.toInt
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(userPlay).toInt
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          25
+        </td>
+        <td>
+          1782
+          -
+          1804
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          players.apply(currentPlayer)
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          31
+        </td>
+        <td>
+          1842
+          -
+          1915
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          board.map[String, List[String]](((x: String) =&gt; if (x.==(boardMove.toString()))
+  userToken
+else
+  x))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          30
+        </td>
+        <td>
+          1851
+          -
+          1851
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          26
+        </td>
+        <td>
+          1873
+          -
+          1891
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Any.toString
+        </td>
+        <td style="background: #AEF1AE">
+          boardMove.toString()
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          29
+        </td>
+        <td>
+          1908
+          -
+          1909
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.Game.x
+        </td>
+        <td style="background: #AEF1AE">
+          x
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          28
+        </td>
+        <td>
+          1893
+          -
+          1902
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.Game.userToken
+        </td>
+        <td style="background: #AEF1AE">
+          userToken
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          27
+        </td>
+        <td>
+          1868
+          -
+          1891
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(boardMove.toString())
+        </td>
+      </tr><tr>
+        <td>
+          68
+        </td>
+        <td>
+          32
+        </td>
+        <td>
+          1945
+          -
+          1973
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.gameOver
+        </td>
+        <td style="background: #AEF1AE">
+          Board.gameOver(updatedBoard)
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          47
+        </td>
+        <td>
+          1996
+          -
+          2553
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  View.renderWhitespace(output, whiteSpace);
+  val endBoard: List[List[String]] = View.formatBoard(updatedBoard);
+  View.renderBoard(output, endBoard, leftPadding);
+  View.renderDialog(output, leftPadding, dialogLang.apply(&quot;gameOver&quot;));
+  val isWin: Boolean = Board.checkWin(updatedBoard);
+  if (isWin)
+    View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang.apply(&quot;win&quot;))
+  else
+    View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;));
+  View.renderWhitespace(output, 5);
+  true
+}
+        </td>
+      </tr><tr>
+        <td>
+          71
+        </td>
+        <td>
+          33
+        </td>
+        <td>
+          2004
+          -
+          2045
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderWhitespace(output, whiteSpace)
+        </td>
+      </tr><tr>
+        <td>
+          72
+        </td>
+        <td>
+          34
+        </td>
+        <td>
+          2087
+          -
+          2117
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.formatBoard
+        </td>
+        <td style="background: #AEF1AE">
+          View.formatBoard(updatedBoard)
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          35
+        </td>
+        <td>
+          2124
+          -
+          2171
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderBoard
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderBoard(output, endBoard, leftPadding)
+        </td>
+      </tr><tr>
+        <td>
+          74
+        </td>
+        <td>
+          37
+        </td>
+        <td>
+          2178
+          -
+          2240
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, dialogLang.apply(&quot;gameOver&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          74
+        </td>
+        <td>
+          36
+        </td>
+        <td>
+          2217
+          -
+          2239
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;gameOver&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          38
+        </td>
+        <td>
+          2268
+          -
+          2296
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkWin
+        </td>
+        <td style="background: #AEF1AE">
+          Board.checkWin(updatedBoard)
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          41
+        </td>
+        <td>
+          2331
+          -
+          2407
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang.apply(&quot;win&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          2331
+          -
+          2407
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang.apply(&quot;win&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          39
+        </td>
+        <td>
+          2389
+          -
+          2406
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;win&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          80
+        </td>
+        <td>
+          44
+        </td>
+        <td>
+          2431
+          -
+          2488
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #F0ADAD">
+          View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          80
+        </td>
+        <td>
+          43
+        </td>
+        <td>
+          2431
+          -
+          2488
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #F0ADAD">
+          View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          80
+        </td>
+        <td>
+          42
+        </td>
+        <td>
+          2470
+          -
+          2487
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #F0ADAD">
+          dialogLang.apply(&quot;tie&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          83
+        </td>
+        <td>
+          45
+        </td>
+        <td>
+          2504
+          -
+          2536
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderWhitespace(output, 5)
+        </td>
+      </tr><tr>
+        <td>
+          84
+        </td>
+        <td>
+          46
+        </td>
+        <td>
+          2543
+          -
+          2547
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          true
+        </td>
+      </tr><tr>
+        <td>
+          85
+        </td>
+        <td>
+          55
+        </td>
+        <td>
+          2559
+          -
+          2872
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val nextPlayer: Int = if (currentPlayer.==(1))
+    2
+  else
+    1;
+  val newLoopCount: Int = loopCount.+(1);
+  Game.this.go(updatedBoard, players, dialogLang, false, nextPlayer, output, leftPadding, whiteSpace, getInput, newLoopCount)
+}
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          2612
+          -
+          2613
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          2
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          49
+        </td>
+        <td>
+          2612
+          -
+          2613
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          2
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          52
+        </td>
+        <td>
+          2619
+          -
+          2620
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          48
+        </td>
+        <td>
+          2592
+          -
+          2610
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.==
+        </td>
+        <td style="background: #AEF1AE">
+          currentPlayer.==(1)
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          51
+        </td>
+        <td>
+          2619
+          -
+          2620
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          87
+        </td>
+        <td>
+          53
+        </td>
+        <td>
+          2646
+          -
+          2659
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.+
+        </td>
+        <td style="background: #AEF1AE">
+          loopCount.+(1)
+        </td>
+      </tr><tr>
+        <td>
+          88
+        </td>
+        <td>
+          54
+        </td>
+        <td>
+          2666
+          -
+          2866
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Game.go
+        </td>
+        <td style="background: #AEF1AE">
+          Game.this.go(updatedBoard, players, dialogLang, false, nextPlayer, output, leftPadding, whiteSpace, getInput, newLoopCount)
+        </td>
+      </tr><tr>
+        <td>
+          101
+        </td>
+        <td>
+          56
+        </td>
+        <td>
+          2901
+          -
+          2908
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(x)
+        </td>
+      </tr><tr>
+        <td>
+          101
+        </td>
+        <td>
+          58
+        </td>
+        <td>
+          2879
+          -
+          2914
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderWhitespace
+        </td>
+        <td style="background: #F0ADAD">
+          View.renderWhitespace({
+  ((x: Any) =&gt; scala.Predef.println(x))
+}, 100)
+        </td>
+      </tr><tr>
+        <td>
+          101
+        </td>
+        <td>
+          57
+        </td>
+        <td>
+          2910
+          -
+          2913
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          100
+        </td>
+      </tr><tr>
+        <td>
+          102
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          2952
+          -
+          2959
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(x)
+        </td>
+      </tr><tr>
+        <td>
+          102
+        </td>
+        <td>
+          62
+        </td>
+        <td>
+          2940
+          -
+          2977
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Game.setLanguage
+        </td>
+        <td style="background: #F0ADAD">
+          Game.this.setLanguage({
+  ((x: Any) =&gt; scala.Predef.println(x))
+}, 15, {
+  ((callCount: Int) =&gt; IO.getInput(callCount))
+})
+        </td>
+      </tr><tr>
+        <td>
+          102
+        </td>
+        <td>
+          61
+        </td>
+        <td>
+          2965
+          -
+          2976
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.IO.getInput
+        </td>
+        <td style="background: #F0ADAD">
+          IO.getInput(callCount)
+        </td>
+      </tr><tr>
+        <td>
+          102
+        </td>
+        <td>
+          60
+        </td>
+        <td>
+          2961
+          -
+          2963
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          15
+        </td>
+      </tr><tr>
+        <td>
+          104
+        </td>
+        <td>
+          74
+        </td>
+        <td>
+          2982
+          -
+          3139
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Game.go
+        </td>
+        <td style="background: #F0ADAD">
+          Game.this.go(Board.initBoard(9), Game.this.initPlayers(), Dialog.lang.apply(Game.this.selectedLanguage), false, 1, {
+  ((x: Any) =&gt; scala.Predef.println(x))
+}, 15, 100, {
+  ((callCount: Int) =&gt; IO.getInput(callCount))
+}, 1)
+        </td>
+      </tr><tr>
+        <td>
+          105
+        </td>
+        <td>
+          63
+        </td>
+        <td>
+          2990
+          -
+          3008
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.initBoard
+        </td>
+        <td style="background: #F0ADAD">
+          Board.initBoard(9)
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          64
+        </td>
+        <td>
+          3015
+          -
+          3028
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Game.initPlayers
+        </td>
+        <td style="background: #F0ADAD">
+          Game.this.initPlayers()
+        </td>
+      </tr><tr>
+        <td>
+          107
+        </td>
+        <td>
+          65
+        </td>
+        <td>
+          3047
+          -
+          3063
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.Game.selectedLanguage
+        </td>
+        <td style="background: #F0ADAD">
+          Game.this.selectedLanguage
+        </td>
+      </tr><tr>
+        <td>
+          107
+        </td>
+        <td>
+          66
+        </td>
+        <td>
+          3035
+          -
+          3064
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #F0ADAD">
+          Dialog.lang.apply(Game.this.selectedLanguage)
+        </td>
+      </tr><tr>
+        <td>
+          108
+        </td>
+        <td>
+          67
+        </td>
+        <td>
+          3071
+          -
+          3076
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          false
+        </td>
+      </tr><tr>
+        <td>
+          109
+        </td>
+        <td>
+          68
+        </td>
+        <td>
+          3083
+          -
+          3084
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          110
+        </td>
+        <td>
+          69
+        </td>
+        <td>
+          3090
+          -
+          3097
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(x)
+        </td>
+      </tr><tr>
+        <td>
+          111
+        </td>
+        <td>
+          70
+        </td>
+        <td>
+          3103
+          -
+          3105
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          15
+        </td>
+      </tr><tr>
+        <td>
+          112
+        </td>
+        <td>
+          71
+        </td>
+        <td>
+          3111
+          -
+          3114
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          100
+        </td>
+      </tr><tr>
+        <td>
+          113
+        </td>
+        <td>
+          72
+        </td>
+        <td>
+          3120
+          -
+          3131
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.IO.getInput
+        </td>
+        <td style="background: #F0ADAD">
+          IO.getInput(callCount)
+        </td>
+      </tr><tr>
+        <td>
+          114
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          3137
+          -
+          3138
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          1
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

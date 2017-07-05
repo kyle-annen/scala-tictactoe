@@ -1,11 +1,12 @@
 package tictactoe
 //game object contains the game loop and runs the game
-object Game extends App {
+object Game {
   def initPlayers(): Map[Int, String] = Map(1 -> "X", 2 -> "O")
 
   def setLanguage(
-    output: String => Unit,
-    leftPadding: Int) = {
+    output: String => Any,
+    leftPadding: Int,
+    getInput: Int => String ) = {
     View.renderDialog(output, leftPadding, Dialog.lang("EN")("greeting"))
     View.renderWhitespace(output, 2)
     val langOptions = Dialog.lang.keys.toList
@@ -18,8 +19,9 @@ object Game extends App {
         Dialog.lang("EN")("selectLang"),
         Dialog.lang("EN")("invalidPlay"),
         output,
-        IO.getInput,
-        leftPadding)
+        getInput,
+        leftPadding,
+        0)
     langSelection
   }
   
@@ -29,10 +31,11 @@ object Game extends App {
     dialogLang: Map[String, String], 
     gameOver: Boolean, 
     currentPlayer: Int,
-    output: String => Unit,
+    output: String => Any,
     leftPadding: Int,
-    whiteSpace: Int): Unit = {
-    
+    whiteSpace: Int,
+    getInput: Int => String,
+    loopCount: Int): Boolean = {
 
     View.renderWhitespace(output, whiteSpace)
 
@@ -52,8 +55,9 @@ object Game extends App {
         inputPrompt,  
         invalidPlay,
         output,
-        IO.getInput,
-        leftPadding)
+        getInput,
+        leftPadding,
+        loopCount)
         
     val boardMove: Int = userPlay.toInt
     val userToken: String = players(currentPlayer)
@@ -77,8 +81,10 @@ object Game extends App {
       }
 
       View.renderWhitespace(output, 5)
+      true
     } else {
       val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
+      val newLoopCount = loopCount + 1
       go(
         updatedBoard, 
         players, 
@@ -87,19 +93,27 @@ object Game extends App {
         nextPlayer, 
         output,
         leftPadding, 
-        whiteSpace)
+        whiteSpace,
+        getInput,
+        newLoopCount)
     }
   }
 
-  val selectedLanguage = setLanguage(println, 15) 
+  def main(args: Array[String]): Unit = {
+    View.renderWhitespace(println, 100)
+    val selectedLanguage = setLanguage(println, 15, IO.getInput) 
 
-  go(
-    Board.initBoard(9), 
-    initPlayers(), 
-    Dialog.lang(selectedLanguage), 
-    false, 
-    1,
-    println,
-    15,
-    30)
+    go(
+      Board.initBoard(9), 
+      initPlayers(), 
+      Dialog.lang(selectedLanguage), 
+      false, 
+      1,
+      println,
+      15,
+      100,
+      IO.getInput,
+      1)
+  }
+
 }

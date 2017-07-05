@@ -1,12 +1,12 @@
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.BoardSpec, org.scalatest.tools.Framework$$anon$1@30cff969, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.DialogSpec, org.scalatest.tools.Framework$$anon$1@30cff969, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.GameSpec, org.scalatest.tools.Framework$$anon$1@30cff969, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.IOSpec, org.scalatest.tools.Framework$$anon$1@30cff969, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.ViewSpec, org.scalatest.tools.Framework$$anon$1@30cff969, false, [SuiteSelector])[0m
-[0m[[0minfo[0m] [0m[36mRun completed in 270 milliseconds.[0m[0m
-[0m[[0minfo[0m] [0m[36mTotal number of tests run: 36[0m[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.ViewSpec, org.scalatest.tools.Framework$$anon$1@1851d7a4, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.IOSpec, org.scalatest.tools.Framework$$anon$1@1851d7a4, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.GameSpec, org.scalatest.tools.Framework$$anon$1@1851d7a4, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.BoardSpec, org.scalatest.tools.Framework$$anon$1@1851d7a4, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.DialogSpec, org.scalatest.tools.Framework$$anon$1@1851d7a4, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0m[36mRun completed in 299 milliseconds.[0m[0m
+[0m[[0minfo[0m] [0m[36mTotal number of tests run: 39[0m[0m
 [0m[[0minfo[0m] [0m[36mSuites: completed 5, aborted 0[0m[0m
-[0m[[0minfo[0m] [0m[36mTests: succeeded 36, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0minfo[0m] [0m[36mTests: succeeded 39, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0minfo[0m] [0m[32mAll tests passed.[0m[0m
 [0m[[0mdebug[0m] [0mPassed tests:[0m
 [0m[[0mdebug[0m] [0m	tictactoe.IOSpec[0m

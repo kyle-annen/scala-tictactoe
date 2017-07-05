@@ -18,9 +18,10 @@ object IO {
     invalidPlay: String,
     output: String => Any,
     getInput: Int => String,
-    leftPadding: Int) =  {
+    leftPadding: Int,
+    callCount: Int): String = {
     
-    def go(input: String, callCount: Int = 0): String  = {
+    def go(input: String, callCount: Int): String  = {
       View.renderDialog(output, leftPadding, inputPrompt)
       val input: String = getInput(callCount)
       val inputValidity = validValues.contains(input)
@@ -31,7 +32,6 @@ object IO {
         go(input, callCount + 1)
       }
     }
-    go("none", 0)
+    go("none", callCount)
   }
-
 }

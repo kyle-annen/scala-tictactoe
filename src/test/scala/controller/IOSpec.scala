@@ -40,8 +40,7 @@ class IOSpec extends FunSpec {
       val expected: String = "1"
       val actual: String = IO.getValidMove(
         validList, testString, testString,
-        testPrint, mockInput, 0)
-        
+        testPrint, mockInput, 0, 0)
       assert(actual === expected)
     } 
   }
