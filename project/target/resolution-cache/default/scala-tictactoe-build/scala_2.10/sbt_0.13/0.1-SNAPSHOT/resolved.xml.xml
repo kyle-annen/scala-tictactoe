@@ -4,7 +4,7 @@
 		module="scala-tictactoe-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20170705083310"
+		publication="20170706134548"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>

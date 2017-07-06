@@ -85,35 +85,34 @@ object Game {
     } else {
       val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
       val newLoopCount = loopCount + 1
+
       go(
-        updatedBoard, 
-        players, 
-        dialogLang, 
-        false, 
-        nextPlayer, 
-        output,
-        leftPadding, 
-        whiteSpace,
-        getInput,
-        newLoopCount)
+        updatedBoard, players, dialogLang, false, nextPlayer, output,
+        leftPadding, whiteSpace, getInput, newLoopCount)
     }
   }
 
+  def setup(
+    board: List[String], 
+    players: Map[Int, String], 
+    gameOver: Boolean, 
+    currentPlayer: Int,
+    output: String => Any,
+    leftPadding: Int,
+    whiteSpace: Int,
+    getInput: Int => String,
+    loopCount: Int): Boolean = {
+      View.renderWhitespace(output, 100)
+      val selectedLanguage = setLanguage(output, 15, getInput)
+
+      go(
+        board, players, Dialog.lang(selectedLanguage), gameOver, currentPlayer, 
+        output, leftPadding, whiteSpace, getInput, loopCount)
+    } 
+
   def main(args: Array[String]): Unit = {
-    View.renderWhitespace(println, 100)
-    val selectedLanguage = setLanguage(println, 15, IO.getInput) 
-
-    go(
-      Board.initBoard(9), 
-      initPlayers(), 
-      Dialog.lang(selectedLanguage), 
-      false, 
-      1,
-      println,
-      15,
-      100,
-      IO.getInput,
-      1)
+    setup(
+      Board.initBoard(9), initPlayers(), false, 
+      1, println, 15, 100, IO.getInput, 1)
   }
-
 }
