@@ -42,6 +42,16 @@ class GameSpec extends FunSpec {
     }
   }
 
+  def mockInput5RoundsFinish(callCount: Int): String = {
+    callCount match {
+      case 1 => "1"
+      case 2 => "2"
+      case 3 => "4"
+      case 4 => "3"
+      case 5 => "7"
+    }
+  }
+
   describe("initPlayers") {
     it("initializes players") {
       val expected = Map(1 -> "X", 2 -> "O")
@@ -99,6 +109,26 @@ class GameSpec extends FunSpec {
         1)
 
       assert(actual == expected)
+    }
+
+    it("will end early if there is a victory") {
+      val testBoard = (1 to 9).toList.map(x => x.toString)
+      val testPlayers = Game.initPlayers
+      val expected = true
+      val actual = Game.go(
+        testBoard,
+        testPlayers,
+        Dialog.lang("EN"),
+        false,
+        1,
+        testPrint,
+        0,
+        0,
+        mockInput5RoundsFinish,
+        1)
+
+      assert(actual == expected)
+      
     }
   }
 }
