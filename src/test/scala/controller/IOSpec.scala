@@ -17,14 +17,14 @@ class IOSpec extends FunSpec {
   }
 
   describe("getUserInput") {
-    it("should return the users input") {
+    it("can get the user's input") {
       def mockInputText(n: Int): String = "test"
       val expected: String = "test"
       val actual = IO.getUserInput(mockInputText)
       assert(actual === expected)
     }
 
-    it("trims the user input") {
+    it("can get user input and eliminate spaces") {
       def mockInputText(n: Int): String = " test "
       val expected: String = "test"
       val actual = IO.getUserInput(mockInputText)
@@ -33,7 +33,7 @@ class IOSpec extends FunSpec {
   }
 
   describe("getValidMove") {
-    it("returns only valid inputs") {
+    it("will not accept bad input") {
       
       val testString: String = "test string"
       val validList: List[String] = List("1","2","3")

@@ -21,7 +21,7 @@ object Game {
         output,
         getInput,
         leftPadding,
-        0)
+        1)
     langSelection
   }
   

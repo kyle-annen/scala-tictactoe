@@ -1,50 +1,56 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite hostname="Kyles-MacBook-Pro.local" name="tictactoe.BoardSpec" tests="21" errors="0" failures="0" skipped="0" time="0.057">
+<testsuite hostname="Kyles-MacBook-Pro.local" name="tictactoe.BoardSpec" tests="24" errors="0" failures="0" skipped="0" time="0.056">
                      <properties>
       <property name="jline.esc.timeout" value="0"/><property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/><property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib"/><property name="java.vm.version" value="25.131-b11"/><property name="gopherProxySet" value="false"/><property name="java.vm.vendor" value="Oracle Corporation"/><property name="java.vendor.url" value="http://java.oracle.com/"/><property name="path.separator" value=":"/><property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/><property name="file.encoding.pkg" value="sun.io"/><property name="user.country" value="US"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="sun.os.patch.level" value="unknown"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="user.dir" value="/Users/kyleannen/Code/scala-tictactoe"/><property name="java.runtime.version" value="1.8.0_131-b11"/><property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/><property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/endorsed"/><property name="os.arch" value="x86_64"/><property name="java.io.tmpdir" value="/var/folders/2t/7btgblb91k3c8xy6sqgs68240000gn/T/"/><property name="line.separator" value="
 "/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="os.name" value="Mac OS X"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="java.library.path" value="/Users/kyleannen/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.class.version" value="52.0"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="os.version" value="10.12"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="user.home" value="/Users/kyleannen"/><property name="user.timezone" value="America/Chicago"/><property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/><property name="file.encoding" value="UTF-8"/><property name="java.specification.version" value="1.8"/><property name="java.class.path" value="/usr/local/Cellar/sbt/0.13.15/libexec/bin/sbt-launch.jar"/><property name="user.name" value="kyleannen"/><property name="jline.shutdownhook" value="false"/><property name="java.vm.specification.version" value="1.8"/><property name="sun.java.command" value="/usr/local/Cellar/sbt/0.13.15/libexec/bin/sbt-launch.jar test"/><property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre"/><property name="sun.arch.data.model" value="64"/><property name="user.language" value="en"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/><property name="java.vm.info" value="mixed mode"/><property name="java.version" value="1.8.0_131"/><property name="java.ext.dirs" value="/Users/kyleannen/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/><property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/classes"/><property name="java.vendor" value="Oracle Corporation"/><property name="file.separator" value="/"/><property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="sun.cpu.endian" value="little"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.isalist" value=""/>
     </properties>
-                     <testcase classname="tictactoe.BoardSpec" name="initBoard it should return a List of the size indicated, from 1 to Dimension" time="0.036">
+                     <testcase classname="tictactoe.BoardSpec" name="initBoard board can be created in 3x3 grid" time="0.032">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnValidInputs should return open moves of the board in a list" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="initBoard board can be created in 4x4 grid" time="0.0">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnRows should return a list of row lists" time="0.003">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="initBoard board can be created in 5x5 grid" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnColumns should return a list of column lists" time="0.003">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="initBoard board can be created in 6x6 grid" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnDiagonals should return a list of diagonal lists" time="0.002">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnValidInputs returns open spaces on the board" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="*checkSets should return true if one list in a list of lists has identical values internally" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnRows returns the rows of the board" time="0.004">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="*checkSets should return return false if no list in a list of lists has identical values" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnColumns returns the columns of the board" time="0.003">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="*checkSets should return true if there is a diagonal win" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="returnDiagonals returns the diagonals of the board" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkWin should return true if a winning board" time="0.0">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSets detects if a row/column/diagonal is a winning combo" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkWin should return false if not a winning board" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSets detects if no row/column/diagonal has winning combo" time="0.0">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSpace should return true if there is open spaces" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSets detects if a diagonal winning combo" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSpace should return false if there is no open spaces" time="0.0">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkWin detects a winning board" time="0.002">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie should return false if there is no tie" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkWin detects a non-winning board" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie should return false if there are moves left" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSpace detects if there are open spaces on the board" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie should return true if no winner and no moves" time="0.0">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkSpace detects if there are no spaces open on the board" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie should be false if there is a winner and no moves" time="0.0">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie determins not tie if board is blank" time="0.002">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="gameOver should return true if no moves are left" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie detects no tie if moves are open" time="0.0">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="gameOver should return false if moves are left and no winner" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie detects tie if no spaces are left and no winner" time="0.0">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="gameOver should return true if there is a winning set" time="0.001">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="checkTie detects a tie if no winner and no open moves" time="0.0">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="getWinner should return a list containing true and the winning token" time="0.002">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="gameOver game is over if tie and no moves open" time="0.001">
                                                  
-                                               </testcase><testcase classname="tictactoe.BoardSpec" name="getWinner should return a list of false and string 'none' if no winner is found" time="0.0">
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="gameOver no game over if spaces are open and no winner" time="0.001">
+                                                 
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="gameOver game over if there is a winning combo" time="0.0">
+                                                 
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="getWinner can identify the winner's token" time="0.001">
+                                                 
+                                               </testcase><testcase classname="tictactoe.BoardSpec" name="getWinner can identify if there is no winner" time="0.001">
                                                  
                                                </testcase>
                      <system-out></system-out>

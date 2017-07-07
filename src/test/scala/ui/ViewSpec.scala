@@ -1,6 +1,6 @@
 package tictactoe 
 
-import org.scalatest._
+import org.scalatest.FunSpec
 
 class ViewSpec extends FunSpec {
 
@@ -33,7 +33,7 @@ class ViewSpec extends FunSpec {
       assert(actual === expected)
     }
 
-    it("add line breaks for multiple string args passed") {
+    it("each message renders on own line") {
       val expected = "1\n2\n3"
       val actual = View.renderDialog(testPrint, 0, "1", "2", "3")
 
@@ -42,7 +42,7 @@ class ViewSpec extends FunSpec {
   }
 
   describe("formatBoard") {
-    it("format a normal board into groups") {
+    it("formats a normal board into groups") {
       val expected = List(
         List("1","2","3"),
         List("4","5","6"),
@@ -66,7 +66,7 @@ class ViewSpec extends FunSpec {
   } 
 
   describe("formatRow") {
-    it("format the row of the board") {
+    it("formats the row of the board") {
       val testRow = List("1","2","X")
       val expected = " 1 | 2 | X"
       val actual = View.formatRow(testRow)
@@ -75,7 +75,7 @@ class ViewSpec extends FunSpec {
   }
 
   describe("renderBoard") {
-    it("render a 3x3 board") {
+    it("renders a 3x3 board") {
       val expected = "\n 1 | 2 | 3\n===+===+===\n 4 | 5 | 6\n===+===+===\n 7 | 8 | 9\n"
       val fBoard = View.formatBoard(testBoard3x3blank)
       val actual = View.renderBoard(testPrint,fBoard,0)
