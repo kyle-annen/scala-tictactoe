@@ -2,8 +2,11 @@
 [0m[[0minfo[0m] [0m[32minitPlayers[0m[0m
 [0m[[0minfo[0m] [0m[32m- initializes players[0m[0m
 [0m[[0minfo[0m] [0m[32msetLanguage[0m[0m
-[0m[[0minfo[0m] [0m[32m- set the language of the game[0m[0m
+[0m[[0minfo[0m] [0m[32m- sets the language of the game[0m[0m
 [0m[[0minfo[0m] [0m[32mgo[0m[0m
-[0m[[0minfo[0m] [0m[32m- be able to be played[0m[0m
-[0m[[0minfo[0m] [0m[32m- can end in tie[0m[0m
-[0m[[0minfo[0m] [0m[32m- will end early if there is a victory[0m[0m
+[0m[[0minfo[0m] [0m[32m- the game will finish if there is a winner[0m[0m
+[0m[[0minfo[0m] [0m[32m- the game will end if there is a tie[0m[0m
+[0m[[0minfo[0m] [0m[32m- the game will end early if there is a winner[0m[0m
+[0m[[0minfo[0m] [0m[32msetup[0m[0m
+[0m[[0minfo[0m] [0m[32m- English can be chosen and game played[0m[0m
+[0m[[0minfo[0m] [0m[32m- Chinese can be chosen and the game played[0m[0m

@@ -61,7 +61,7 @@ class GameSpec extends FunSpec {
   }
 
   describe("setLanguage") {
-    it("set the language of the game") {
+    it("sets the language of the game") {
       val expected = "CN"
       val actual = 
         Game.setLanguage(
@@ -73,7 +73,7 @@ class GameSpec extends FunSpec {
   }
 
   describe("go") {
-    it("be able to be played") {
+    it("the game will finish if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = Game.initPlayers
       val expected = true
@@ -92,7 +92,7 @@ class GameSpec extends FunSpec {
       assert(actual == expected)
     }
 
-    it("can end in tie") {
+    it("the game will end if there is a tie") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = Game.initPlayers
       val expected = true
@@ -111,7 +111,7 @@ class GameSpec extends FunSpec {
       assert(actual == expected)
     }
 
-    it("will end early if there is a victory") {
+    it("the game will end early if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = Game.initPlayers
       val expected = true
@@ -128,7 +128,75 @@ class GameSpec extends FunSpec {
         1)
 
       assert(actual == expected)
-      
     }
   }
+
+  describe("setup") {
+
+    def mockInputEnglish9round(callCount: Int): String = {
+      callCount match {
+        case 0 => "1"
+        case 1 => "EN"
+        case 2 => "1"
+        case 3 => "4"
+        case 4 => "2"
+        case 5 => "7"
+        case 6 => "3"
+        case 7 => "5"
+        case 8 => "6"
+        case 9 => "8"
+        case 10 => "9"
+      }
+    }
+
+    it("English can be chosen and game played") {
+      val testBoard = (1 to 9).toList.map(x => x.toString)
+      val testPlayers = Game.initPlayers
+      val expected = true
+      val actual = Game.setup(
+        testBoard,
+        testPlayers,
+        1,
+        testPrint,
+        0,
+        0,
+        mockInputEnglish9round,
+        1)
+
+      assert(actual == expected)
+    }
+
+    def mockInputChinese9round(callCount: Int): String = {
+      callCount match {
+        case 0 => "1"
+        case 1 => "CN"
+        case 2 => "1"
+        case 3 => "4"
+        case 4 => "2"
+        case 5 => "7"
+        case 6 => "3"
+        case 7 => "5"
+        case 8 => "6"
+        case 9 => "8"
+        case 10 => "9"
+      }
+    }   
+
+    it("Chinese can be chosen and the game played") {
+      val testBoard = (1 to 9).toList.map(x => x.toString)
+      val testPlayers = Game.initPlayers
+      val expected = true
+      val actual = Game.setup( 
+        testBoard,
+        testPlayers,
+        1,
+        testPrint,
+        0,
+        0,
+        mockInputChinese9round,
+        1)
+
+      assert(actual == expected)
+    }
+  } 
 }

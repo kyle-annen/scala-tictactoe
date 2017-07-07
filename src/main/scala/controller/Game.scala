@@ -95,7 +95,6 @@ object Game {
   def setup(
     board: List[String], 
     players: Map[Int, String], 
-    gameOver: Boolean, 
     currentPlayer: Int,
     output: String => Any,
     leftPadding: Int,
@@ -106,13 +105,13 @@ object Game {
       val selectedLanguage = setLanguage(output, 15, getInput)
 
       go(
-        board, players, Dialog.lang(selectedLanguage), gameOver, currentPlayer, 
+        board, players, Dialog.lang(selectedLanguage), false, currentPlayer, 
         output, leftPadding, whiteSpace, getInput, loopCount)
     } 
 
   def main(args: Array[String]): Unit = {
     setup(
-      Board.initBoard(9), initPlayers(), false, 
+      Board.initBoard(9), initPlayers(),
       1, println, 15, 100, IO.getInput, 1)
   }
 }

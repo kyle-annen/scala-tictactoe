@@ -109,38 +109,36 @@
 </span>85 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''> else </span><span style='background: #AEF1AE'>{
 </span>86 <span style=''></span><span style='background: #AEF1AE'>      val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
 </span>87 <span style=''></span><span style='background: #AEF1AE'>      val newLoopCount = loopCount + 1
-</span>88 <span style=''></span><span style='background: #AEF1AE'>      go(
-</span>89 <span style=''></span><span style='background: #AEF1AE'>        updatedBoard, 
-</span>90 <span style=''></span><span style='background: #AEF1AE'>        players, 
-</span>91 <span style=''></span><span style='background: #AEF1AE'>        dialogLang, 
-</span>92 <span style=''></span><span style='background: #AEF1AE'>        false, 
-</span>93 <span style=''></span><span style='background: #AEF1AE'>        nextPlayer, 
-</span>94 <span style=''></span><span style='background: #AEF1AE'>        output,
-</span>95 <span style=''></span><span style='background: #AEF1AE'>        leftPadding, 
-</span>96 <span style=''></span><span style='background: #AEF1AE'>        whiteSpace,
-</span>97 <span style=''></span><span style='background: #AEF1AE'>        getInput,
-</span>98 <span style=''></span><span style='background: #AEF1AE'>        newLoopCount)
-</span>99 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
-</span>100 <span style=''>  }
-</span>101 <span style=''>
-</span>102 <span style=''>  def main(args: Array[String]): Unit = {
-</span>103 <span style=''>    </span><span style='background: #F0ADAD'>View.renderWhitespace(println, 100)</span><span style=''>
-</span>104 <span style=''>    val selectedLanguage = </span><span style='background: #F0ADAD'>setLanguage(println, 15, IO.getInput)</span><span style=''> 
-</span>105 <span style=''>
-</span>106 <span style=''>    </span><span style='background: #F0ADAD'>go(
-</span>107 <span style=''></span><span style='background: #F0ADAD'>      Board.initBoard(9), 
-</span>108 <span style=''></span><span style='background: #F0ADAD'>      initPlayers(), 
-</span>109 <span style=''></span><span style='background: #F0ADAD'>      Dialog.lang(selectedLanguage), 
-</span>110 <span style=''></span><span style='background: #F0ADAD'>      false, 
-</span>111 <span style=''></span><span style='background: #F0ADAD'>      1,
-</span>112 <span style=''></span><span style='background: #F0ADAD'>      println,
-</span>113 <span style=''></span><span style='background: #F0ADAD'>      15,
-</span>114 <span style=''></span><span style='background: #F0ADAD'>      100,
-</span>115 <span style=''></span><span style='background: #F0ADAD'>      IO.getInput,
-</span>116 <span style=''></span><span style='background: #F0ADAD'>      1)</span><span style=''>
-</span>117 <span style=''>  }
-</span>118 <span style=''>
-</span>119 <span style=''>}
+</span>88 <span style=''></span><span style='background: #AEF1AE'>
+</span>89 <span style=''></span><span style='background: #AEF1AE'>      go(
+</span>90 <span style=''></span><span style='background: #AEF1AE'>        updatedBoard, players, dialogLang, false, nextPlayer, output,
+</span>91 <span style=''></span><span style='background: #AEF1AE'>        leftPadding, whiteSpace, getInput, newLoopCount)
+</span>92 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>93 <span style=''>  }
+</span>94 <span style=''>
+</span>95 <span style=''>  def setup(
+</span>96 <span style=''>    board: List[String], 
+</span>97 <span style=''>    players: Map[Int, String], 
+</span>98 <span style=''>    currentPlayer: Int,
+</span>99 <span style=''>    output: String =&gt; Any,
+</span>100 <span style=''>    leftPadding: Int,
+</span>101 <span style=''>    whiteSpace: Int,
+</span>102 <span style=''>    getInput: Int =&gt; String,
+</span>103 <span style=''>    loopCount: Int): Boolean = {
+</span>104 <span style=''>      </span><span style='background: #AEF1AE'>View.renderWhitespace(output, 100)</span><span style=''>
+</span>105 <span style=''>      val selectedLanguage = </span><span style='background: #AEF1AE'>setLanguage(output, 15, getInput)</span><span style=''>
+</span>106 <span style=''>
+</span>107 <span style=''>      </span><span style='background: #AEF1AE'>go(
+</span>108 <span style=''></span><span style='background: #AEF1AE'>        board, players, Dialog.lang(selectedLanguage), false, currentPlayer, 
+</span>109 <span style=''></span><span style='background: #AEF1AE'>        output, leftPadding, whiteSpace, getInput, loopCount)</span><span style=''>
+</span>110 <span style=''>    } 
+</span>111 <span style=''>
+</span>112 <span style=''>  def main(args: Array[String]): Unit = {
+</span>113 <span style=''>    </span><span style='background: #F0ADAD'>setup(
+</span>114 <span style=''></span><span style='background: #F0ADAD'>      Board.initBoard(9), initPlayers(),
+</span>115 <span style=''></span><span style='background: #F0ADAD'>      1, println, 15, 100, IO.getInput, 1)</span><span style=''>
+</span>116 <span style=''>  }
+</span>117 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -1164,7 +1162,7 @@ else
         <td>
           2547
           -
-          2860
+          2791
         </td>
         <td>
           Block
@@ -1310,15 +1308,15 @@ else
         </td>
       </tr><tr>
         <td>
-          88
+          89
         </td>
         <td>
           54
         </td>
         <td>
-          2654
+          2655
           -
-          2854
+          2785
         </td>
         <td>
           Apply
@@ -1331,36 +1329,15 @@ else
         </td>
       </tr><tr>
         <td>
-          103
+          104
         </td>
         <td>
           56
         </td>
         <td>
-          2934
+          3030
           -
-          2941
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Predef.println
-        </td>
-        <td style="background: #F0ADAD">
-          scala.Predef.println(x)
-        </td>
-      </tr><tr>
-        <td>
-          103
-        </td>
-        <td>
-          58
-        </td>
-        <td>
-          2912
-          -
-          2947
+          3064
         </td>
         <td>
           Apply
@@ -1368,64 +1345,20 @@ else
         <td>
           tictactoe.View.renderWhitespace
         </td>
-        <td style="background: #F0ADAD">
-          View.renderWhitespace({
-  ((x: Any) =&gt; scala.Predef.println(x))
-}, 100)
+        <td style="background: #AEF1AE">
+          View.renderWhitespace(output, 100)
         </td>
       </tr><tr>
         <td>
-          103
+          105
         </td>
         <td>
           57
         </td>
         <td>
-          2943
+          3094
           -
-          2946
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #F0ADAD">
-          100
-        </td>
-      </tr><tr>
-        <td>
-          104
-        </td>
-        <td>
-          59
-        </td>
-        <td>
-          2987
-          -
-          2994
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Predef.println
-        </td>
-        <td style="background: #F0ADAD">
-          scala.Predef.println(x)
-        </td>
-      </tr><tr>
-        <td>
-          104
-        </td>
-        <td>
-          62
-        </td>
-        <td>
-          2975
-          -
-          3012
+          3127
         </td>
         <td>
           Apply
@@ -1433,45 +1366,41 @@ else
         <td>
           tictactoe.Game.setLanguage
         </td>
-        <td style="background: #F0ADAD">
-          Game.this.setLanguage({
-  ((x: Any) =&gt; scala.Predef.println(x))
-}, 15, {
-  ((callCount: Int) =&gt; IO.getInput(callCount))
-})
+        <td style="background: #AEF1AE">
+          Game.this.setLanguage(output, 15, getInput)
         </td>
       </tr><tr>
         <td>
-          104
-        </td>
-        <td>
-          61
-        </td>
-        <td>
-          3000
-          -
-          3011
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          tictactoe.IO.getInput
-        </td>
-        <td style="background: #F0ADAD">
-          IO.getInput(callCount)
-        </td>
-      </tr><tr>
-        <td>
-          104
+          107
         </td>
         <td>
           60
         </td>
         <td>
-          2996
+          3135
           -
-          2998
+          3278
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Game.go
+        </td>
+        <td style="background: #AEF1AE">
+          Game.this.go(board, players, Dialog.lang.apply(selectedLanguage), false, currentPlayer, output, leftPadding, whiteSpace, getInput, loopCount)
+        </td>
+      </tr><tr>
+        <td>
+          108
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          3194
+          -
+          3199
         </td>
         <td>
           Literal
@@ -1479,20 +1408,41 @@ else
         <td>
           &lt;nosymbol&gt;
         </td>
-        <td style="background: #F0ADAD">
-          15
+        <td style="background: #AEF1AE">
+          false
         </td>
       </tr><tr>
         <td>
-          106
+          108
         </td>
         <td>
-          74
+          58
         </td>
         <td>
-          3021
+          3163
           -
-          3021
+          3192
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Dialog.lang.apply(selectedLanguage)
+        </td>
+      </tr><tr>
+        <td>
+          113
+        </td>
+        <td>
+          70
+        </td>
+        <td>
+          3338
+          -
+          3338
         </td>
         <td>
           Literal
@@ -1505,24 +1455,24 @@ else
         </td>
       </tr><tr>
         <td>
-          106
+          113
         </td>
         <td>
-          73
+          69
         </td>
         <td>
-          3019
+          3333
           -
-          3196
+          3423
         </td>
         <td>
           Apply
         </td>
         <td>
-          tictactoe.Game.go
+          tictactoe.Game.setup
         </td>
         <td style="background: #F0ADAD">
-          Game.this.go(Board.initBoard(9), Game.this.initPlayers(), Dialog.lang.apply(selectedLanguage), false, 1, {
+          Game.this.setup(Board.initBoard(9), Game.this.initPlayers(), 1, {
   ((x: Any) =&gt; scala.Predef.println(x))
 }, 15, 100, {
   ((callCount: Int) =&gt; IO.getInput(callCount))
@@ -1530,36 +1480,15 @@ else
         </td>
       </tr><tr>
         <td>
-          107
+          114
         </td>
         <td>
-          63
+          62
         </td>
         <td>
-          3029
+          3366
           -
-          3047
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          tictactoe.Board.initBoard
-        </td>
-        <td style="background: #F0ADAD">
-          Board.initBoard(9)
-        </td>
-      </tr><tr>
-        <td>
-          108
-        </td>
-        <td>
-          64
-        </td>
-        <td>
-          3056
-          -
-          3069
+          3379
         </td>
         <td>
           Apply
@@ -1572,57 +1501,36 @@ else
         </td>
       </tr><tr>
         <td>
-          109
+          114
         </td>
         <td>
-          65
+          61
         </td>
         <td>
-          3078
+          3346
           -
-          3107
+          3364
         </td>
         <td>
           Apply
         </td>
         <td>
-          scala.collection.MapLike.apply
+          tictactoe.Board.initBoard
         </td>
         <td style="background: #F0ADAD">
-          Dialog.lang.apply(selectedLanguage)
+          Board.initBoard(9)
         </td>
       </tr><tr>
         <td>
-          110
+          115
         </td>
         <td>
-          66
+          68
         </td>
         <td>
-          3116
+          3421
           -
-          3121
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #F0ADAD">
-          false
-        </td>
-      </tr><tr>
-        <td>
-          111
-        </td>
-        <td>
-          67
-        </td>
-        <td>
-          3130
-          -
-          3131
+          3422
         </td>
         <td>
           Literal
@@ -1635,36 +1543,15 @@ else
         </td>
       </tr><tr>
         <td>
-          112
+          115
         </td>
         <td>
-          68
+          65
         </td>
         <td>
-          3139
+          3399
           -
-          3146
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Predef.println
-        </td>
-        <td style="background: #F0ADAD">
-          scala.Predef.println(x)
-        </td>
-      </tr><tr>
-        <td>
-          113
-        </td>
-        <td>
-          69
-        </td>
-        <td>
-          3154
-          -
-          3156
+          3401
         </td>
         <td>
           Literal
@@ -1677,36 +1564,36 @@ else
         </td>
       </tr><tr>
         <td>
-          114
+          115
         </td>
         <td>
-          70
+          64
         </td>
         <td>
-          3164
+          3390
           -
-          3167
+          3397
         </td>
         <td>
-          Literal
+          Apply
         </td>
         <td>
-          &lt;nosymbol&gt;
+          scala.Predef.println
         </td>
         <td style="background: #F0ADAD">
-          100
+          scala.Predef.println(x)
         </td>
       </tr><tr>
         <td>
           115
         </td>
         <td>
-          71
+          67
         </td>
         <td>
-          3175
+          3408
           -
-          3186
+          3419
         </td>
         <td>
           Apply
@@ -1719,15 +1606,15 @@ else
         </td>
       </tr><tr>
         <td>
-          116
+          115
         </td>
         <td>
-          72
+          63
         </td>
         <td>
-          3194
+          3387
           -
-          3195
+          3388
         </td>
         <td>
           Literal
@@ -1737,6 +1624,27 @@ else
         </td>
         <td style="background: #F0ADAD">
           1
+        </td>
+      </tr><tr>
+        <td>
+          115
+        </td>
+        <td>
+          66
+        </td>
+        <td>
+          3403
+          -
+          3406
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          100
         </td>
       </tr>
     </table>
