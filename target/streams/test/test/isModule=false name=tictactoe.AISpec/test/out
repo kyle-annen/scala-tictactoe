@@ -1,0 +1,15 @@
+[0m[[0minfo[0m] [0m[32mAISpec:[0m[0m
+[0m[[0minfo[0m] [0m[32mminimax[0m[0m
+[0m[[0minfo[0m] [0m[31m- scores a two move board correctly *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  java.lang.UnsupportedOperationException: empty.maxBy[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.collection.TraversableOnce.maxBy(TraversableOnce.scala:236)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.collection.TraversableOnce.maxBy$(TraversableOnce.scala:234)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.collection.AbstractTraversable.maxBy(Traversable.scala:104)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.miniMax$1(AI.scala:68)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.$anonfun$getComputerMove$2(AI.scala:61)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.$anonfun$getComputerMove$2$adapted(AI.scala:23)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.collection.immutable.List.map(List.scala:283)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.miniMax$1(AI.scala:23)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.$anonfun$getComputerMove$2(AI.scala:41)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.$anonfun$getComputerMove$2$adapted(AI.scala:23)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m

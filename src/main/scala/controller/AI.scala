@@ -29,7 +29,6 @@ object AI {
             Map(move -> 0)
           } else {
             val maxBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
-            println(maxBoardMove)
             val maxWin = Board.checkWin(maxBoardMove)
             val maxTie = Board.checkTie(maxBoardMove)
             if(maxWin) {
@@ -49,7 +48,6 @@ object AI {
             Map(move -> 0)
           } else {
             val minBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
-            println(minBoardMove)
             val minWin = Board.checkWin(minBoardMove)
             val minTie = Board.checkTie(minBoardMove)
             if(minWin) {

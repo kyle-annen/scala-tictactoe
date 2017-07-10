@@ -171,7 +171,7 @@ class BoardSpec extends FunSpec {
         "x","o","x",
         "x","o","x",
         "o","x","o")
-      val expected: Boolean = false
+      val expected: Boolean = true 
       val actual = Board.checkTie(testBoard)
       assert(actual === expected)
     }
@@ -181,7 +181,7 @@ class BoardSpec extends FunSpec {
         "x","o","x",
         "x","o","x",
         "o","x","x")
-      val expected: Boolean = false
+      val expected: Boolean = true 
       val actual = Board.checkTie(testBoard)
       assert(actual === expected)
     }

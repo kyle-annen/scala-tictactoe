@@ -10,8 +10,8 @@ class AISpec extends FunSpec {
         "x", "o", "x",
         "x", "o", "x",
         "o", "8", "9")
-      val expectedMove = List("9", "x")
-      val actualMove = AI.minimax(testboard, "x")
+      val expectedMove: Int = 8 
+      val actualMove = AI.getComputerMove(testBoard, "x", "o", "x")
 
       assert(actualMove === expectedMove)
     }
