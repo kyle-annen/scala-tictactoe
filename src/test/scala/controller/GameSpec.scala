@@ -178,13 +178,13 @@ class GameSpec extends FunSpec {
         case 9 => "8"
         case 10 => "9"
       }
-    }   
+    }
 
     it("Chinese can be chosen and the game played") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = Game.initPlayers
       val expected = true
-      val actual = Game.setup( 
+      val actual = Game.setup(
         testBoard,
         testPlayers,
         1,
@@ -196,5 +196,5 @@ class GameSpec extends FunSpec {
 
       assert(actual == expected)
     }
-  } 
+  }
 }

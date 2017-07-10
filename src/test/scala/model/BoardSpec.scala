@@ -1,5 +1,4 @@
 package tictactoe 
-
 import org.scalatest._
 import org.scalatest.Matchers._
 
@@ -47,8 +46,8 @@ class BoardSpec extends FunSpec {
     it("returns the rows of the board") {
       val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
       val expected: List[List[String]] = List(
-        List("1","2","3"), 
-        List("4","5","6"), 
+        List("1","2","3"),
+        List("4","5","6"),
         List("7","8","9"))
       val actual: List[List[String]] = Board.returnRows(testBoard)
       assert( actual === expected )
@@ -59,8 +58,8 @@ class BoardSpec extends FunSpec {
     it("returns the columns of the board") {
       val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
       val expected: List[List[String]] = List(
-        List("1","4","7"), 
-        List("2","5","8"), 
+        List("1","4","7"),
+        List("2","5","8"),
         List("3","6","9"))
       val actual: List[List[String]] = Board.returnColumns(testBoard)
       assert( actual === expected )
@@ -69,9 +68,9 @@ class BoardSpec extends FunSpec {
 
   describe("returnDiagonals") {
     it("returns the diagonals of the board") {
-      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString) 
+      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
       val expected: List[List[String]] = List(
-        List("1","5","9"), 
+        List("1","5","9"),
         List("3","5","7"))
       val actual: List[List[String]] = Board.returnDiagonals(testBoard)
       assert( actual === expected )
@@ -135,7 +134,7 @@ class BoardSpec extends FunSpec {
 
   describe("checkSpace") {
     it("detects if there are open spaces on the board") {
-      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString) 
+      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
       val expected: Boolean = true
       val actual = Board.checkSpace(testBoard)
       assert(actual === expected)
@@ -194,7 +193,7 @@ class BoardSpec extends FunSpec {
         "x","o","x",
         "x","o","x",
         "o","x","o")
-      val expected: Boolean = true 
+      val expected: Boolean = true
       val actual = Board.gameOver(testBoard)
       assert(actual === expected)
     }
@@ -203,8 +202,8 @@ class BoardSpec extends FunSpec {
       val testBoard: List[String] = List(
         "x","o","x",
         "x","o","x",
-        "o","x","9") 
-      val expected: Boolean = false 
+        "o","x","9")
+      val expected: Boolean = false
       val actual = Board.gameOver(testBoard)
       assert(actual === expected)
     }

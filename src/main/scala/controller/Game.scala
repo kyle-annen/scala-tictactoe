@@ -13,7 +13,7 @@ object Game {
     for(option <- langOptions) {
       View.renderDialog(output, leftPadding, " - " + option)
     }
-    val langSelection = 
+    val langSelection =
       IO.getValidMove(
         langOptions,
         Dialog.lang("EN")("selectLang"),
@@ -24,12 +24,12 @@ object Game {
         1)
     langSelection
   }
-  
+
   def go(
-    board: List[String], 
-    players: Map[Int, String], 
-    dialogLang: Map[String, String], 
-    gameOver: Boolean, 
+    board: List[String],
+    players: Map[Int, String],
+    dialogLang: Map[String, String],
+    gameOver: Boolean,
     currentPlayer: Int,
     output: String => Any,
     leftPadding: Int,
@@ -49,16 +49,16 @@ object Game {
     val inputPrompt: String = dialogLang("inputPrompt")
     val invalidPlay: String = dialogLang("invalidPlay")
 
-    val userPlay: String = 
+    val userPlay: String =
       IO.getValidMove(
-        validPlays, 
-        inputPrompt,  
+        validPlays,
+        inputPrompt,
         invalidPlay,
         output,
         getInput,
         leftPadding,
         loopCount)
-        
+
     val boardMove: Int = userPlay.toInt
     val userToken: String = players(currentPlayer)
     val updatedBoard: List[String] = board.map(
@@ -66,14 +66,14 @@ object Game {
     )
 
     val gameOver: Boolean = Board.gameOver(updatedBoard)
-    
+
     if(gameOver) {
       View.renderWhitespace(output, whiteSpace)
       val endBoard: List[List[String]] = View.formatBoard(updatedBoard)
       View.renderBoard(output, endBoard, leftPadding)
       View.renderDialog(output, leftPadding, dialogLang("gameOver"))
       val isWin: Boolean = Board.checkWin(updatedBoard)
-      
+
       if (isWin) {
         View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang("win"))
       } else {
@@ -93,8 +93,8 @@ object Game {
   }
 
   def setup(
-    board: List[String], 
-    players: Map[Int, String], 
+    board: List[String],
+    players: Map[Int, String],
     currentPlayer: Int,
     output: String => Any,
     leftPadding: Int,
@@ -105,9 +105,9 @@ object Game {
       val selectedLanguage = setLanguage(output, 15, getInput)
 
       go(
-        board, players, Dialog.lang(selectedLanguage), false, currentPlayer, 
+        board, players, Dialog.lang(selectedLanguage), false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount)
-    } 
+    }
 
   def main(args: Array[String]): Unit = {
     setup(
