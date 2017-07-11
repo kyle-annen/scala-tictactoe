@@ -6,12 +6,14 @@ object Game {
   def setLanguage(
     output: String => Any,
     leftPadding: Int,
-    getInput: Int => String ) = {
+    getInput: Int => String): String = {
+
     View.renderDialog(output, leftPadding, Dialog.lang("EN")("greeting"))
     View.renderWhitespace(output, 2)
-    val langOptions = Dialog.lang.keys.toList
+    val langOptions = ( 1 to Dialog.lang.keys.size).toList.map(x => x.toString)
+    val langKeys = Dialog.lang.keys.toList
     for(option <- langOptions) {
-      View.renderDialog(output, leftPadding, " - " + option)
+      View.renderDialog(output, leftPadding, option + " - " + langKeys(option.toInt - 1))
     }
     val langSelection = IO.getValidMove(
       langOptions,
@@ -21,12 +23,13 @@ object Game {
       getInput,
       leftPadding,
       1)
-    langSelection
+    val langKey = langKeys(langSelection.toInt - 1)
+    langKey
   }
 
   def setPlayer(
-    output: String => Any, 
-    leftPadding: Int, 
+    output: String => Any,
+    leftPadding: Int,
     getInput: Int => String,
     dialogLang: Map[String, String],
     playerNum: Int,
@@ -36,10 +39,13 @@ object Game {
     val pPrompt = dialogLang("selectPlayerType")
     val pHuman = dialogLang("pTypeHuman")
     val pComp = dialogLang("pTypeComputer")
-    val prompt = pAnnounce + "\n" + pPrompt + "\n" + pHuman + "\n" + pComp 
+    val prompt = pAnnounce + "\n" +  " " * leftPadding +
+      pPrompt + "\n" +  " " * leftPadding +
+      pHuman + "\n" + " " * leftPadding +
+      pComp
     val pTypeOptions: List[String] = List("1","2")
     val playerType = IO.getValidMove(
-      pTypeOptions, 
+      pTypeOptions,
       prompt,
       dialogLang("invalidPlay"),
       output,
