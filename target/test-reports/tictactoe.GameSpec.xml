@@ -1,22 +1,93 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite hostname="Kyles-MacBook-Pro.local" name="tictactoe.GameSpec" tests="7" errors="0" failures="0" skipped="0" time="0.108">
+<testsuite hostname="Kyles-MacBook-Pro.local" name="tictactoe.GameSpec" tests="6" errors="0" failures="1" skipped="0" time="0.085">
                      <properties>
       <property name="jline.esc.timeout" value="0"/><property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/><property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib"/><property name="java.vm.version" value="25.131-b11"/><property name="gopherProxySet" value="false"/><property name="java.vm.vendor" value="Oracle Corporation"/><property name="java.vendor.url" value="http://java.oracle.com/"/><property name="path.separator" value=":"/><property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/><property name="file.encoding.pkg" value="sun.io"/><property name="user.country" value="US"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="sun.os.patch.level" value="unknown"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="user.dir" value="/Users/kyleannen/Code/scala-tictactoe"/><property name="java.runtime.version" value="1.8.0_131-b11"/><property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/><property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/endorsed"/><property name="os.arch" value="x86_64"/><property name="java.io.tmpdir" value="/var/folders/2t/7btgblb91k3c8xy6sqgs68240000gn/T/"/><property name="line.separator" value="
 "/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="os.name" value="Mac OS X"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="java.library.path" value="/Users/kyleannen/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.class.version" value="52.0"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="os.version" value="10.12"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="user.home" value="/Users/kyleannen"/><property name="user.timezone" value="America/Chicago"/><property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/><property name="file.encoding" value="UTF-8"/><property name="java.specification.version" value="1.8"/><property name="java.class.path" value="/usr/local/Cellar/sbt/0.13.15/libexec/bin/sbt-launch.jar"/><property name="user.name" value="kyleannen"/><property name="jline.shutdownhook" value="false"/><property name="java.vm.specification.version" value="1.8"/><property name="sun.java.command" value="/usr/local/Cellar/sbt/0.13.15/libexec/bin/sbt-launch.jar test"/><property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre"/><property name="sun.arch.data.model" value="64"/><property name="user.language" value="en"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/><property name="java.vm.info" value="mixed mode"/><property name="java.version" value="1.8.0_131"/><property name="java.ext.dirs" value="/Users/kyleannen/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/><property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/classes"/><property name="java.vendor" value="Oracle Corporation"/><property name="file.separator" value="/"/><property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="sun.cpu.endian" value="little"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.isalist" value=""/>
     </properties>
-                     <testcase classname="tictactoe.GameSpec" name="initPlayers initializes players" time="0.033">
+                     <testcase classname="tictactoe.GameSpec" name="setLanguage sets the language of the game" time="0.064">
+                                                 <failure message="2 (of class java.lang.Integer)" type="scala.MatchError">scala.MatchError: 2 (of class java.lang.Integer)
+	at tictactoe.GameSpec.mockInput(GameSpec.scala:11)
+	at tictactoe.GameSpec.$anonfun$new$4(GameSpec.scala:64)
+	at tictactoe.GameSpec.$anonfun$new$4$adapted(GameSpec.scala:64)
+	at tictactoe.IO$.go$1(IO.scala:26)
+	at tictactoe.IO$.getValidMove(IO.scala:35)
+	at tictactoe.Game$.setLanguage(Game.scala:24)
+	at tictactoe.GameSpec.$anonfun$new$2(GameSpec.scala:64)
+	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
+	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
+	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
+	at org.scalatest.Transformer.apply(Transformer.scala:22)
+	at org.scalatest.Transformer.apply(Transformer.scala:20)
+	at org.scalatest.FunSpecLike$$anon$1.apply(FunSpecLike.scala:454)
+	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
+	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
+	at org.scalatest.FunSpec.withFixture(FunSpec.scala:1630)
+	at org.scalatest.FunSpecLike.invokeWithFixture$1(FunSpecLike.scala:452)
+	at org.scalatest.FunSpecLike.$anonfun$runTest$1(FunSpecLike.scala:464)
+	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:289)
+	at org.scalatest.FunSpecLike.runTest(FunSpecLike.scala:464)
+	at org.scalatest.FunSpecLike.runTest$(FunSpecLike.scala:446)
+	at org.scalatest.FunSpec.runTest(FunSpec.scala:1630)
+	at org.scalatest.FunSpecLike.$anonfun$runTests$1(FunSpecLike.scala:497)
+	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:396)
+	at scala.collection.immutable.List.foreach(List.scala:389)
+	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:384)
+	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:373)
+	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:410)
+	at scala.collection.immutable.List.foreach(List.scala:389)
+	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:384)
+	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:379)
+	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:461)
+	at org.scalatest.FunSpecLike.runTests(FunSpecLike.scala:497)
+	at org.scalatest.FunSpecLike.runTests$(FunSpecLike.scala:496)
+	at org.scalatest.FunSpec.runTests(FunSpec.scala:1630)
+	at org.scalatest.Suite.run(Suite.scala:1147)
+	at org.scalatest.Suite.run$(Suite.scala:1129)
+	at org.scalatest.FunSpec.org$scalatest$FunSpecLike$$super$run(FunSpec.scala:1630)
+	at org.scalatest.FunSpecLike.$anonfun$run$1(FunSpecLike.scala:501)
+	at org.scalatest.SuperEngine.runImpl(Engine.scala:521)
+	at org.scalatest.FunSpecLike.run(FunSpecLike.scala:501)
+	at org.scalatest.FunSpecLike.run$(FunSpecLike.scala:500)
+	at org.scalatest.FunSpec.run(FunSpec.scala:1630)
+	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:314)
+	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:507)
+	at sbt.TestRunner.runTest$1(TestFramework.scala:76)
+	at sbt.TestRunner.run(TestFramework.scala:85)
+	at sbt.TestFramework$$anon$2$$anonfun$$init$$1$$anonfun$apply$8.apply(TestFramework.scala:202)
+	at sbt.TestFramework$$anon$2$$anonfun$$init$$1$$anonfun$apply$8.apply(TestFramework.scala:202)
+	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:185)
+	at sbt.TestFramework$$anon$2$$anonfun$$init$$1.apply(TestFramework.scala:202)
+	at sbt.TestFramework$$anon$2$$anonfun$$init$$1.apply(TestFramework.scala:202)
+	at sbt.TestFunction.apply(TestFramework.scala:207)
+	at sbt.Tests$$anonfun$9.apply(Tests.scala:216)
+	at sbt.Tests$$anonfun$9.apply(Tests.scala:216)
+	at sbt.std.Transform$$anon$3$$anonfun$apply$2.apply(System.scala:44)
+	at sbt.std.Transform$$anon$3$$anonfun$apply$2.apply(System.scala:44)
+	at sbt.std.Transform$$anon$4.work(System.scala:63)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:228)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:228)
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:17)
+	at sbt.Execute.work(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:228)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:228)
+	at sbt.ConcurrentRestrictions$$anon$4$$anonfun$1.apply(ConcurrentRestrictions.scala:159)
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:28)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+</failure>
+                                               </testcase><testcase classname="tictactoe.GameSpec" name="go the game will finish if there is a winner" time="0.003">
                                                  
-                                               </testcase><testcase classname="tictactoe.GameSpec" name="setLanguage sets the language of the game" time="0.007">
+                                               </testcase><testcase classname="tictactoe.GameSpec" name="go the game will end if there is a tie" time="0.004">
                                                  
-                                               </testcase><testcase classname="tictactoe.GameSpec" name="go the game will finish if there is a winner" time="0.021">
+                                               </testcase><testcase classname="tictactoe.GameSpec" name="go the game will end early if there is a winner" time="0.005">
                                                  
-                                               </testcase><testcase classname="tictactoe.GameSpec" name="go the game will end if there is a tie" time="0.017">
+                                               </testcase><testcase classname="tictactoe.GameSpec" name="setup English can be chosen and game played" time="0.004">
                                                  
-                                               </testcase><testcase classname="tictactoe.GameSpec" name="go the game will end early if there is a winner" time="0.013">
-                                                 
-                                               </testcase><testcase classname="tictactoe.GameSpec" name="setup English can be chosen and game played" time="0.009">
-                                                 
-                                               </testcase><testcase classname="tictactoe.GameSpec" name="setup Chinese can be chosen and the game played" time="0.008">
+                                               </testcase><testcase classname="tictactoe.GameSpec" name="setup Chinese can be chosen and the game played" time="0.005">
                                                  
                                                </testcase>
                      <system-out></system-out>

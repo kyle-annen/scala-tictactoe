@@ -20,7 +20,7 @@ object AI {
       
       val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
 
-      val scores = openMoves.map( move =>
+      val scores = openMoves.map(move =>
         //maxpath
         if(curT == maxT) {
           val maxScore = 1000 - depth
@@ -66,7 +66,6 @@ object AI {
       val tupleScore = mapScores.maxBy(_._2)
       val mapScore = Map(tupleScore._1 -> tupleScore._2)
       mapScore
-
     }
     //call the recursive function
     val result = miniMax(origBoardState, 1, maxPlayerToken, minPlayerToken, maxPlayerToken)

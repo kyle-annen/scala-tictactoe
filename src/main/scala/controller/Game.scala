@@ -1,7 +1,6 @@
 package tictactoe
 //game object contains the game loop and runs the game
 object Game {
-  def initPlayers(): Map[Int, (String, String)] = Map(1 -> ("", ""), 2 -> ("",""))
 
   def setLanguage(
     output: String => Any,
@@ -101,7 +100,7 @@ object Game {
       val compPlay: Int = AI.getComputerMove(board, userToken, oppToken, userToken) + 1
       compPlay
     }
-    
+
     val updatedBoard: List[String] = board.map(
       x => if (x == boardMove.toString) userToken else x
     )

@@ -1,4 +1,4 @@
-package tictactoe 
+package tictactoe
 
 import org.scalatest._
 import org.scalatest.Matchers._
@@ -6,7 +6,7 @@ import org.scalatest.Matchers._
 class GameSpec extends FunSpec {
 
   def testPrint(s: String): Unit = return
-  
+
   def mockInput(callCount: Int): String = {
     callCount match {
       case 0 => "en"
@@ -52,18 +52,12 @@ class GameSpec extends FunSpec {
     }
   }
 
-  describe("initPlayers") {
-    it("initializes players") {
-      val expected = Map(1 -> "X", 2 -> "O")
-      val actual = Game.initPlayers
-      assert(actual == expected)
-    }
-  }
+  val mockPlayers: Map[Int, (String, String)] = Map(1 -> ("human", "X"), 2 -> ("human", "O"))
 
   describe("setLanguage") {
     it("sets the language of the game") {
       val expected = "CN"
-      val actual = 
+      val actual =
         Game.setLanguage(
           testPrint,
           3,
@@ -75,7 +69,7 @@ class GameSpec extends FunSpec {
   describe("go") {
     it("the game will finish if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
-      val testPlayers = Game.initPlayers
+      val testPlayers = mockPlayers
       val expected = true
       val actual = Game.go(
         testBoard,
@@ -94,7 +88,7 @@ class GameSpec extends FunSpec {
 
     it("the game will end if there is a tie") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
-      val testPlayers = Game.initPlayers
+      val testPlayers = mockPlayers
       val expected = true
       val actual = Game.go(
         testBoard,
@@ -113,7 +107,7 @@ class GameSpec extends FunSpec {
 
     it("the game will end early if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
-      val testPlayers = Game.initPlayers
+      val testPlayers = mockPlayers
       val expected = true
       val actual = Game.go(
         testBoard,
@@ -135,26 +129,25 @@ class GameSpec extends FunSpec {
 
     def mockInputEnglish9round(callCount: Int): String = {
       callCount match {
-        case 1 => "EN"
+        case 1 => "1"
         case 2 => "1"
-        case 3 => "4"
-        case 4 => "2"
-        case 5 => "7"
-        case 6 => "3"
-        case 7 => "5"
+        case 3 => "1"
+        case 4 => "1"
+        case 5 => "1"
+        case 6 => "4"
+        case 7 => "2"
         case 8 => "6"
-        case 9 => "8"
+        case 9 => "3"
         case 10 => "9"
       }
     }
 
     it("English can be chosen and game played") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
-      val testPlayers = Game.initPlayers
+      val testPlayers = mockPlayers
       val expected = true
       val actual = Game.setup(
         testBoard,
-        testPlayers,
         1,
         testPrint,
         0,
@@ -167,14 +160,14 @@ class GameSpec extends FunSpec {
 
     def mockInputChinese9round(callCount: Int): String = {
       callCount match {
-        case 1 => "CN"
+        case 1 => "1"
         case 2 => "1"
-        case 3 => "4"
-        case 4 => "2"
+        case 3 => "1"
+        case 4 => "1"
         case 5 => "7"
-        case 6 => "3"
+        case 6 => "2"
         case 7 => "5"
-        case 8 => "6"
+        case 8 => "3"
         case 9 => "8"
         case 10 => "9"
       }
@@ -182,11 +175,10 @@ class GameSpec extends FunSpec {
 
     it("Chinese can be chosen and the game played") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
-      val testPlayers = Game.initPlayers
+      val testPlayers = mockPlayers
       val expected = true
       val actual = Game.setup(
         testBoard,
-        testPlayers,
         1,
         testPrint,
         0,

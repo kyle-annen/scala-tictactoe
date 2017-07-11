@@ -6,9 +6,9 @@
     </properties>
                      <testcase classname="tictactoe.IOSpec" name="getUserInput can get the user's input" time="0.033">
                                                  
-                                               </testcase><testcase classname="tictactoe.IOSpec" name="getUserInput can get user input and eliminate spaces" time="0.001">
+                                               </testcase><testcase classname="tictactoe.IOSpec" name="getUserInput can get user input and eliminate spaces" time="0.0">
                                                  
-                                               </testcase><testcase classname="tictactoe.IOSpec" name="getValidMove will not accept bad input" time="0.002">
+                                               </testcase><testcase classname="tictactoe.IOSpec" name="getValidMove will not accept bad input" time="0.003">
                                                  
                                                </testcase>
                      <system-out></system-out>
