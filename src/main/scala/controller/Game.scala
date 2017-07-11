@@ -53,7 +53,7 @@ object Game {
 
   def go(
     board: List[String],
-    players: Map[Int, String],
+    players: Map[Int, (String, String)],
     dialogLang: Map[String, String],
     gameOver: Boolean,
     currentPlayer: Int,
@@ -74,19 +74,28 @@ object Game {
     val validPlays: List[String] = Board.returnValidInputs(board)
     val inputPrompt: String = dialogLang("inputPrompt")
     val invalidPlay: String = dialogLang("invalidPlay")
-
-    val userPlay: String =
-      IO.getValidMove(
-        validPlays,
-        inputPrompt,
-        invalidPlay,
-        output,
-        getInput,
-        leftPadding,
-        loopCount)
-
-    val boardMove: Int = userPlay.toInt
-    val userToken: String = players(currentPlayer)
+    val playerType: String = players(currentPlayer)._1
+    val userToken: String = players(currentPlayer)._2
+    val oppToken: String = if(userToken == "X") "O" else "X"
+    //get the move value
+    val boardMove = if(playerType == "human") {
+      //human move
+      val humanPlay: String =
+        IO.getValidMove(
+          validPlays,
+          inputPrompt,
+          invalidPlay,
+          output,
+          getInput,
+          leftPadding,
+          loopCount)
+      humanPlay
+    } else {
+      //AI computer move
+      val compPlay: Int = AI.getComputerMove(board, userToken, oppToken, userToken) + 1
+      compPlay
+    }
+    
     val updatedBoard: List[String] = board.map(
       x => if (x == boardMove.toString) userToken else x
     )
@@ -120,24 +129,26 @@ object Game {
 
   def setup(
     board: List[String],
-    players: Map[Int, String],
     currentPlayer: Int,
     output: String => Any,
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
     loopCount: Int): Boolean = {
-      View.renderWhitespace(output, 100)
-      val selectedLanguage = setLanguage(output, 15, getInput)
+      View.renderWhitespace(output, whiteSpace)
+      val selectedLanguage = setLanguage(output, leftPadding, getInput)
+      val gameLang = Dialog.lang(selectedLanguage)
+
+      val player1 = setPlayer(println, leftPadding, getInput, gameLang, 1, "X")
+      val player2 = setPlayer(println, leftPadding, getInput, gameLang, 2, "O")
+      val players = List(player1, player2).flatten.toMap
 
       go(
-        board, players, Dialog.lang(selectedLanguage), false, currentPlayer,
+        board, players, gameLang, false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount)
     }
 
   def main(args: Array[String]): Unit = {
-    setup(
-      Board.initBoard(9), initPlayers(),
-      1, println, 15, 100, IO.getInput, 1)
+    setup(Board.initBoard(9), 1, println, 15, 100, IO.getInput, 1)
   }
 }
