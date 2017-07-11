@@ -3,12 +3,12 @@ package tictactoe
 object AI {
 
   def getComputerMove(
-    origBoardState: List[String], 
-    maxPlayerToken: String, 
+    origBoardState: List[String],
+    maxPlayerToken: String,
     minPlayerToken: String,
     currentPlayerToken: String): Int = {
 
-    var alpha: Int = 0 
+    var alpha: Int = 0
     var beta: Int = 0
     
     def miniMax(
@@ -61,8 +61,8 @@ object AI {
           }
         }
       )
-      // return the max map here  
-      val mapScores = scores.flatten.toMap  
+      // return the max map here
+      val mapScores = scores.flatten.toMap
       val tupleScore = mapScores.maxBy(_._2)
       val mapScore = Map(tupleScore._1 -> tupleScore._2)
       mapScore
@@ -73,4 +73,4 @@ object AI {
     result.keys.head
   }
 }
-// val board = List("X","O","X","X","O","X","7","8","9") 
+// val board = List("X","O","X","X","O","X","7","8","9")

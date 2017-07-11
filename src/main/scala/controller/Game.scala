@@ -1,7 +1,7 @@
 package tictactoe
 //game object contains the game loop and runs the game
 object Game {
-  def initPlayers(): Map[Int, String] = Map(1 -> "X", 2 -> "O")
+  def initPlayers(): Map[Int, (String, String)] = Map(1 -> ("", ""), 2 -> ("",""))
 
   def setLanguage(
     output: String => Any,
@@ -13,16 +13,42 @@ object Game {
     for(option <- langOptions) {
       View.renderDialog(output, leftPadding, " - " + option)
     }
-    val langSelection =
-      IO.getValidMove(
-        langOptions,
-        Dialog.lang("EN")("selectLang"),
-        Dialog.lang("EN")("invalidPlay"),
-        output,
-        getInput,
-        leftPadding,
-        1)
+    val langSelection = IO.getValidMove(
+      langOptions,
+      Dialog.lang("EN")("selectLang"),
+      Dialog.lang("EN")("invalidPlay"),
+      output,
+      getInput,
+      leftPadding,
+      1)
     langSelection
+  }
+
+  def setPlayer(
+    output: String => Any, 
+    leftPadding: Int, 
+    getInput: Int => String,
+    dialogLang: Map[String, String],
+    playerNum: Int,
+    playerToken: String) = {
+
+    val pAnnounce = dialogLang("playerAnnounce") + playerNum.toString
+    val pPrompt = dialogLang("selectPlayerType")
+    val pHuman = dialogLang("pTypeHuman")
+    val pComp = dialogLang("pTypeComputer")
+    val prompt = pAnnounce + "\n" + pPrompt + "\n" + pHuman + "\n" + pComp 
+    val pTypeOptions: List[String] = List("1","2")
+    val playerType = IO.getValidMove(
+      pTypeOptions, 
+      prompt,
+      dialogLang("invalidPlay"),
+      output,
+      getInput,
+      leftPadding,
+      1)
+    val pType = if(playerType == "1") "human" else "computer"
+    val player = Map(playerNum -> (pType, playerToken))
+    player
   }
 
   def go(
