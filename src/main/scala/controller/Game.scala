@@ -55,7 +55,7 @@ object Game {
     getInput: Int => String,
     dialogLang: Map[String, String],
     playerNum: Int,
-    playerToken: String) = {
+    playerToken: String): Map[Int, (String, String)] = {
 
     val pAnnounce = dialogLang("playerAnnounce") + playerNum.toString
     val pPrompt = dialogLang("selectPlayerType")

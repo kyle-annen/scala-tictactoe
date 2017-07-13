@@ -1,6 +1,9 @@
 [0m[[0minfo[0m] [0m[32mGameSpec:[0m[0m
 [0m[[0minfo[0m] [0m[32msetLanguage[0m[0m
 [0m[[0minfo[0m] [0m[32m- sets the language of the game[0m[0m
+[0m[[0minfo[0m] [0m[32msetPlayer[0m[0m
+[0m[[0minfo[0m] [0m[32m- can select a human player[0m[0m
+[0m[[0minfo[0m] [0m[32m- can select a computer player[0m[0m
 [0m[[0minfo[0m] [0m[32mgo[0m[0m
 [0m[[0minfo[0m] [0m[32m- the game will finish if there is a winner[0m[0m
 [0m[[0minfo[0m] [0m[32m- the game will end if there is a tie[0m[0m

@@ -7,6 +7,7 @@ class ViewSpec extends FunSpec {
 
   def testPrint(s: String): String = s
   val testBoard3x3blank: List[String] = (1 to 9).toList.map(x=>x.toString)
+  val testBoard4x4blank: List[String] = (1 to 16).toList.map(x=>x.toString)
   val testBoard5x5blank: List[String] = (1 to 25).toList.map(x=>x.toString)
 
   describe("renderWhitespace") {
@@ -78,6 +79,17 @@ class ViewSpec extends FunSpec {
     it("renders a 3x3 board") {
       val expected = "\n 1 | 2 | 3 \n===+===+===\n 4 | 5 | 6 \n===+===+===\n 7 | 8 | 9 \n"
       val fBoard = View.formatBoard(testBoard3x3blank)
+      val actual = View.renderBoard(testPrint,fBoard,0)
+      assert(actual === expected)
+    }
+
+    it("renders a 4x4 board") {
+      val expected =
+        "\n  1  |  2  |  3  |  4  \n=====+=====+=====+=====" +
+        "\n  5  |  6  |  7  |  8  \n=====+=====+=====+=====" +
+        "\n  9  |  10 |  11 |  12 \n=====+=====+=====+=====" +
+        "\n  13 |  14 |  15 |  16 \n"
+      val fBoard = View.formatBoard(testBoard4x4blank)
       val actual = View.renderBoard(testPrint,fBoard,0)
       assert(actual === expected)
     }
