@@ -1,15 +1,14 @@
-package tictactoe 
+package tictactoe
 
 object View {
 
-  
   def renderWhitespace(output: String => Any, n: Int) = {
     val wSpace: String = "\n" * n
     output(wSpace)
   }
 
   def renderDialog(
-    output: String => Any, 
+    output: String => Any,
     leftPadding: Int,
     dialog: String*) = {
     val sPad = " " * leftPadding
@@ -24,27 +23,37 @@ object View {
     board.grouped(grouping).toList
   }
 
-  def formatRow(row: List[String]): String = {
-    val noLeadingSpace: String = row mkString " | "
-    val fBoard: String = " " + noLeadingSpace
-    fBoard
+  def formatRow(row: List[String], cellWidth: Int): String = {
+    val leftPad = (cellWidth - 1) / 2
+    val bigNumRightPad = leftPad - 1
+    val formatCells = row.map { x =>
+      if(x.length < 2) {
+        (" " * leftPad) + x + (" " * leftPad) + "|"
+      } else {
+        (" " * leftPad) + x + (" " * bigNumRightPad) + "|"
+      }
+    }
+    val formatedRow = formatCells.foldLeft("")((a,b) => a + b).dropRight(1)
+    formatedRow
   }
 
   def padLeft(s: String, n: Int): String = " " * n + s
 
   def renderBoard(
     output: String => Any,
-    fBoard: List[List[String]], 
+    fBoard: List[List[String]],
     leftPadding: Int) = {
-    val hLine: String = "===+===+==="
+    val width: Int = fBoard.length
+    val cellWidth: Int = if(width > 3) 5 else 3
+    val hLine: String = ((("=" * cellWidth) + "+") * width).dropRight(1)
     val hLineLen: Int = hLine.length
     val nRows: Int = fBoard.length
-    val formatedRows = fBoard.map(row => formatRow(row))
+    val formatedRows = fBoard.map(row => formatRow(row, cellWidth))
     val paddedRows = formatedRows.map(row => padLeft(row, leftPadding))
     val padHLine = padLeft(hLine, leftPadding)
     val formatedBoard = paddedRows.foldLeft("")(
       (a,b) => a + "\n" + b + "\n" + padHLine
-    ).dropRight(hLineLen) 
+    ).dropRight(hLineLen)
     output(formatedBoard)
   }
 }

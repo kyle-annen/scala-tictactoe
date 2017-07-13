@@ -81,9 +81,6 @@ object Game {
     val invalidPlay: String = dialogLang("invalidPlay")
     val playerType: String = players(currentPlayer)._1
     val userToken: String = players(currentPlayer)._2
-    println("players: " + players)
-    println("token: " + userToken)
-    println("currentPlayer: " + currentPlayer)
     val oppToken: String = if(userToken == "X") "O" else "X"
     //get the move value
     val boardMove = if(playerType == "human") {
@@ -147,8 +144,8 @@ object Game {
       val selectedLanguage = setLanguage(output, leftPadding, getInput)
       val gameLang = Dialog.lang(selectedLanguage)
 
-      val player1 = setPlayer(println, leftPadding, getInput, gameLang, 1, "X")
-      val player2 = setPlayer(println, leftPadding, getInput, gameLang, 2, "O")
+      val player1 = setPlayer(output, leftPadding, getInput, gameLang, 1, "X")
+      val player2 = setPlayer(output, leftPadding, getInput, gameLang, 2, "O")
       val players = List(player1, player2).flatten.toMap
 
       go(
@@ -157,6 +154,6 @@ object Game {
     }
 
   def main(args: Array[String]): Unit = {
-    setup(Board.initBoard(9), 1, println, 15, 100, IO.getInput, 1)
+    setup(Board.initBoard(16), 1, println, 15, 100, IO.getInput, 1)
   }
 }

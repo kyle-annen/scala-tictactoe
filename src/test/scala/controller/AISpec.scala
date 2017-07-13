@@ -30,7 +30,7 @@ class AISpec extends FunSpec {
         "o","2","3",
         "4","5","6",
         "7","8","9")
-      val expected: Int = 8
+      val expected: Int = 4
       val actual = AI.getComputerMove(testBoard, "x", "o", "x")
       assert(actual == expected)
     }

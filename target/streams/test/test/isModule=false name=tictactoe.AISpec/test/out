@@ -2,5 +2,4 @@
 [0m[[0minfo[0m] [0m[32mgetComputerMove[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a two move board correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a simple win correctly[0m[0m
-[0m[[0minfo[0m] [0m[31m- take the appropriate second move *** FAILED ***[0m[0m
-[0m[[0minfo[0m] [0m[31m  5 did not equal 8 (AISpec.scala:35)[0m[0m
+[0m[[0minfo[0m] [0m[32m- take the appropriate second move[0m[0m
