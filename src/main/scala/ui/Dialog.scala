@@ -15,7 +15,8 @@ object Dialog {
       "win" -> "You have won the game!",
       "tie" -> "The game is a tie.",
       "invalidPlay" -> "That selection is invalid.",
-      "inputPrompt" -> "Please input the number of an open space."
+      "inputPrompt" -> "Please input the number of an open space.",
+      "continuePlaying" -> "Do you want to play again? Input [y] for yes, [n] to exit"
     ),
     "CN" -> Map(
       "greeting" -> "我们玩TicTacToe！",

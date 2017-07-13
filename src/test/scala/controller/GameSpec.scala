@@ -151,4 +151,22 @@ class GameSpec extends FunSpec {
       assert(actual == expected)
     }
   }
+
+  describe("contLoop") {
+    it("allows the game quit") {
+      def mockContTestInput(callCount: Int): String = {
+        callCount match {
+          case 1 => "2"
+          case 2 => "2"
+          case 3 => "2"
+          case 4 => "3"
+          case 5 => "n"
+        }
+      }
+      val expected = Map(1 -> false)
+      val actual = Game.contLoop(testPrint, mockContTestInput)
+      assert(actual === expected)
+    }
+  }
+
 }

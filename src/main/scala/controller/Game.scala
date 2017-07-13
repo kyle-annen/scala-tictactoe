@@ -14,6 +14,7 @@ object Game {
     for(option <- langOptions) {
       View.renderDialog(output, leftPadding, option + " - " + langKeys(option.toInt - 1))
     }
+
     val langSelection = IO.getValidMove(
       langOptions,
       Dialog.lang("EN")("selectLang"),
@@ -176,11 +177,31 @@ object Game {
       go(
         board, players, gameLang, false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount)
-
-
     }
 
+
+  def contLoop(
+    output: String => Any,
+    getInput: Int => String): Map[Int, Boolean] = {
+    val gameOutcome = setup(1, output, 15, 100, getInput, 1)
+    val continuePlaying = IO.getValidMove(
+      List("y", "n"),
+      Dialog.lang("EN")("continuePlaying"),
+      Dialog.lang("EN")("invalidPlay"),
+      output,
+      getInput,
+      15,
+      1)
+    //recursive call
+    val contBoolean = if (continuePlaying == "y") true else false
+    if(contBoolean) {
+      contLoop(output, getInput)
+    } else {
+      gameOutcome
+    }
+  }
+
   def main(args: Array[String]): Unit = {
-    setup(1, println, 15, 100, IO.getInput, 1)
+    contLoop(println, IO.getInput)
   }
 }
