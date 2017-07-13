@@ -81,6 +81,9 @@ object Game {
     val invalidPlay: String = dialogLang("invalidPlay")
     val playerType: String = players(currentPlayer)._1
     val userToken: String = players(currentPlayer)._2
+    println("players: " + players)
+    println("token: " + userToken)
+    println("currentPlayer: " + currentPlayer)
     val oppToken: String = if(userToken == "X") "O" else "X"
     //get the move value
     val boardMove = if(playerType == "human") {
