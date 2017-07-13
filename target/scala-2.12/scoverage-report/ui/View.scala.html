@@ -22,56 +22,65 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="codegrid">
-            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe 
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
 </span>2 <span style=''>
 </span>3 <span style=''>object View {
 </span>4 <span style=''>
-</span>5 <span style=''>  
-</span>6 <span style=''>  def renderWhitespace(output: String =&gt; Any, n: Int) = {
-</span>7 <span style=''>    val wSpace: String = </span><span style='background: #AEF1AE'>&quot;\n&quot; * n</span><span style=''>
-</span>8 <span style=''>    </span><span style='background: #AEF1AE'>output(wSpace)</span><span style=''>
-</span>9 <span style=''>  }
-</span>10 <span style=''>
-</span>11 <span style=''>  def renderDialog(
-</span>12 <span style=''>    output: String =&gt; Any, 
-</span>13 <span style=''>    leftPadding: Int,
-</span>14 <span style=''>    dialog: String*) = {
-</span>15 <span style=''>    val sPad = </span><span style='background: #AEF1AE'>&quot; &quot; * leftPadding</span><span style=''>
-</span>16 <span style=''>    val fDialog = </span><span style='background: #AEF1AE'>dialog.foldLeft(&quot;&quot;)(
-</span>17 <span style=''></span><span style='background: #AEF1AE'>      (a, b) =&gt; a + sPad + b + &quot;\n&quot;)
-</span>18 <span style=''></span><span style='background: #AEF1AE'>      .dropRight(1)</span><span style=''>
-</span>19 <span style=''>    </span><span style='background: #AEF1AE'>output(fDialog)</span><span style=''>
-</span>20 <span style=''>  }
-</span>21 <span style=''>
-</span>22 <span style=''>  def formatBoard(board: List[String]): List[List[String]] = {
-</span>23 <span style=''>    val grouping = </span><span style='background: #AEF1AE'>Math.sqrt(board.length).toInt</span><span style=''>
-</span>24 <span style=''>    </span><span style='background: #AEF1AE'>board.grouped(grouping).toList</span><span style=''>
-</span>25 <span style=''>  }
-</span>26 <span style=''>
-</span>27 <span style=''>  def formatRow(row: List[String]): String = {
-</span>28 <span style=''>    val noLeadingSpace: String = </span><span style='background: #AEF1AE'>row mkString &quot; | &quot;</span><span style=''>
-</span>29 <span style=''>    val fBoard: String = </span><span style='background: #AEF1AE'>&quot; &quot; + noLeadingSpace</span><span style=''>
-</span>30 <span style=''>    fBoard
-</span>31 <span style=''>  }
-</span>32 <span style=''>
-</span>33 <span style=''>  def padLeft(s: String, n: Int): String = </span><span style='background: #AEF1AE'>&quot; &quot; * n + s</span><span style=''>
-</span>34 <span style=''>
-</span>35 <span style=''>  def renderBoard(
-</span>36 <span style=''>    output: String =&gt; Any,
-</span>37 <span style=''>    fBoard: List[List[String]], 
-</span>38 <span style=''>    leftPadding: Int) = {
-</span>39 <span style=''>    val hLine: String = </span><span style='background: #AEF1AE'>&quot;===+===+===&quot;</span><span style=''>
-</span>40 <span style=''>    val hLineLen: Int = </span><span style='background: #AEF1AE'>hLine.length</span><span style=''>
-</span>41 <span style=''>    val nRows: Int = </span><span style='background: #AEF1AE'>fBoard.length</span><span style=''>
-</span>42 <span style=''>    val formatedRows = </span><span style='background: #AEF1AE'>fBoard.map(row =&gt; formatRow(row))</span><span style=''>
-</span>43 <span style=''>    val paddedRows = </span><span style='background: #AEF1AE'>formatedRows.map(row =&gt; padLeft(row, leftPadding))</span><span style=''>
-</span>44 <span style=''>    val padHLine = </span><span style='background: #AEF1AE'>padLeft(hLine, leftPadding)</span><span style=''>
-</span>45 <span style=''>    val formatedBoard = </span><span style='background: #AEF1AE'>paddedRows.foldLeft(&quot;&quot;)(
-</span>46 <span style=''></span><span style='background: #AEF1AE'>      (a,b) =&gt; a + &quot;\n&quot; + b + &quot;\n&quot; + padHLine
-</span>47 <span style=''></span><span style='background: #AEF1AE'>    ).dropRight(hLineLen)</span><span style=''> 
-</span>48 <span style=''>    </span><span style='background: #AEF1AE'>output(formatedBoard)</span><span style=''>
-</span>49 <span style=''>  }
-</span>50 <span style=''>}
+</span>5 <span style=''>  def renderWhitespace(output: String =&gt; Any, n: Int) = {
+</span>6 <span style=''>    val wSpace: String = </span><span style='background: #AEF1AE'>&quot;\n&quot; * n</span><span style=''>
+</span>7 <span style=''>    </span><span style='background: #AEF1AE'>output(wSpace)</span><span style=''>
+</span>8 <span style=''>  }
+</span>9 <span style=''>
+</span>10 <span style=''>  def renderDialog(
+</span>11 <span style=''>    output: String =&gt; Any,
+</span>12 <span style=''>    leftPadding: Int,
+</span>13 <span style=''>    dialog: String*) = {
+</span>14 <span style=''>    val sPad = </span><span style='background: #AEF1AE'>&quot; &quot; * leftPadding</span><span style=''>
+</span>15 <span style=''>    val fDialog = </span><span style='background: #AEF1AE'>dialog.foldLeft(&quot;&quot;)(
+</span>16 <span style=''></span><span style='background: #AEF1AE'>      (a, b) =&gt; a + sPad + b + &quot;\n&quot;)
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      .dropRight(1)</span><span style=''>
+</span>18 <span style=''>    </span><span style='background: #AEF1AE'>output(fDialog)</span><span style=''>
+</span>19 <span style=''>  }
+</span>20 <span style=''>
+</span>21 <span style=''>  def formatBoard(board: List[String]): List[List[String]] = {
+</span>22 <span style=''>    val grouping = </span><span style='background: #AEF1AE'>Math.sqrt(board.length).toInt</span><span style=''>
+</span>23 <span style=''>    </span><span style='background: #AEF1AE'>board.grouped(grouping).toList</span><span style=''>
+</span>24 <span style=''>  }
+</span>25 <span style=''>
+</span>26 <span style=''>  def formatRow(row: List[String], cellWidth: Int): String = {
+</span>27 <span style=''>    val leftPad = </span><span style='background: #AEF1AE'>(cellWidth - 1) / 2</span><span style=''>
+</span>28 <span style=''>    val bigNumRightPad = </span><span style='background: #AEF1AE'>leftPad - 1</span><span style=''>
+</span>29 <span style=''>    val formatCells = </span><span style='background: #AEF1AE'>row.map { x =&gt;
+</span>30 <span style=''></span><span style='background: #AEF1AE'>      if(x.length &lt; 2) {
+</span>31 <span style=''></span><span style='background: #AEF1AE'>        (&quot; &quot; * leftPad) + x + (&quot; &quot; * leftPad) + &quot;|&quot;
+</span>32 <span style=''></span><span style='background: #AEF1AE'>      } else {
+</span>33 <span style=''></span><span style='background: #AEF1AE'>        (&quot; &quot; * leftPad) + x + (&quot; &quot; * bigNumRightPad) + &quot;|&quot;
+</span>34 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>35 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>36 <span style=''>    val formatedRow = </span><span style='background: #AEF1AE'>formatCells.foldLeft(&quot;&quot;)((a,b) =&gt; a + b).dropRight(1)</span><span style=''>
+</span>37 <span style=''>    formatedRow
+</span>38 <span style=''>  }
+</span>39 <span style=''>
+</span>40 <span style=''>  def padLeft(s: String, n: Int): String = </span><span style='background: #AEF1AE'>&quot; &quot; * n + s</span><span style=''>
+</span>41 <span style=''>
+</span>42 <span style=''>  def renderBoard(
+</span>43 <span style=''>    output: String =&gt; Any,
+</span>44 <span style=''>    fBoard: List[List[String]],
+</span>45 <span style=''>    leftPadding: Int) = {
+</span>46 <span style=''>    val width: Int = </span><span style='background: #AEF1AE'>fBoard.length</span><span style=''>
+</span>47 <span style=''>    val cellWidth: Int = if(</span><span style='background: #AEF1AE'>width &gt; 3</span><span style=''>) </span><span style='background: #AEF1AE'>5</span><span style=''> else </span><span style='background: #AEF1AE'>3</span><span style=''>
+</span>48 <span style=''>    val hLine: String = (</span><span style='background: #AEF1AE'>((&quot;=&quot; * cellWidth) + &quot;+&quot;) * width).dropRight(1)</span><span style=''>
+</span>49 <span style=''>    val hLineLen: Int = </span><span style='background: #AEF1AE'>hLine.length</span><span style=''>
+</span>50 <span style=''>    val nRows: Int = </span><span style='background: #AEF1AE'>fBoard.length</span><span style=''>
+</span>51 <span style=''>    val formatedRows = </span><span style='background: #AEF1AE'>fBoard.map(row =&gt; formatRow(row, cellWidth))</span><span style=''>
+</span>52 <span style=''>    val paddedRows = </span><span style='background: #AEF1AE'>formatedRows.map(row =&gt; padLeft(row, leftPadding))</span><span style=''>
+</span>53 <span style=''>    val padHLine = </span><span style='background: #AEF1AE'>padLeft(hLine, leftPadding)</span><span style=''>
+</span>54 <span style=''>    val formatedBoard = </span><span style='background: #AEF1AE'>paddedRows.foldLeft(&quot;&quot;)(
+</span>55 <span style=''></span><span style='background: #AEF1AE'>      (a,b) =&gt; a + &quot;\n&quot; + b + &quot;\n&quot; + padHLine
+</span>56 <span style=''></span><span style='background: #AEF1AE'>    ).dropRight(hLineLen)</span><span style=''>
+</span>57 <span style=''>    </span><span style='background: #AEF1AE'>output(formatedBoard)</span><span style=''>
+</span>58 <span style=''>  }
+</span>59 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -85,15 +94,15 @@
         <th>Code</th>
       </tr><tr>
         <td>
-          7
+          6
         </td>
         <td>
-          188
+          335
         </td>
         <td>
-          121
+          117
           -
-          129
+          125
         </td>
         <td>
           Apply
@@ -106,15 +115,15 @@
         </td>
       </tr><tr>
         <td>
-          8
+          7
         </td>
         <td>
-          189
+          336
         </td>
         <td>
-          134
+          130
           -
-          148
+          144
         </td>
         <td>
           Apply
@@ -127,15 +136,15 @@
         </td>
       </tr><tr>
         <td>
-          15
+          14
         </td>
         <td>
-          190
+          337
         </td>
         <td>
-          264
+          259
           -
-          281
+          276
         </td>
         <td>
           Apply
@@ -148,15 +157,15 @@
         </td>
       </tr><tr>
         <td>
-          18
+          17
         </td>
         <td>
-          191
+          338
         </td>
         <td>
-          300
+          295
           -
-          377
+          372
         </td>
         <td>
           Apply
@@ -169,15 +178,15 @@
         </td>
       </tr><tr>
         <td>
-          19
+          18
         </td>
         <td>
-          192
+          339
         </td>
         <td>
-          382
+          377
           -
-          397
+          392
         </td>
         <td>
           Apply
@@ -190,15 +199,36 @@
         </td>
       </tr><tr>
         <td>
-          23
+          22
         </td>
         <td>
-          194
+          340
         </td>
         <td>
-          485
+          490
           -
-          514
+          502
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.toDouble
+        </td>
+        <td style="background: #AEF1AE">
+          board.length.toDouble
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          341
+        </td>
+        <td>
+          480
+          -
+          509
         </td>
         <td>
           Select
@@ -214,33 +244,12 @@
           23
         </td>
         <td>
-          193
+          342
         </td>
         <td>
-          495
+          514
           -
-          507
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          scala.Int.toDouble
-        </td>
-        <td style="background: #AEF1AE">
-          board.length.toDouble
-        </td>
-      </tr><tr>
-        <td>
-          24
-        </td>
-        <td>
-          195
-        </td>
-        <td>
-          519
-          -
-          549
+          544
         </td>
         <td>
           Select
@@ -253,36 +262,123 @@
         </td>
       </tr><tr>
         <td>
-          28
+          27
         </td>
         <td>
-          196
+          343
         </td>
         <td>
-          635
+          631
           -
-          653
+          650
         </td>
         <td>
           Apply
         </td>
         <td>
-          scala.collection.TraversableOnce.mkString
+          scala.Int./
         </td>
         <td style="background: #AEF1AE">
-          row.mkString(&quot; | &quot;)
+          cellWidth.-(1)./(2)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          344
+        </td>
+        <td>
+          676
+          -
+          687
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          leftPad.-(1)
         </td>
       </tr><tr>
         <td>
           29
         </td>
         <td>
-          197
+          351
         </td>
         <td>
-          679
+          710
           -
-          699
+          889
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          row.map[String, List[String]](((x: String) =&gt; if (x.length().&lt;(2))
+  scala.Predef.augmentString(&quot; &quot;).*(leftPad).+(x).+(scala.Predef.augmentString(&quot; &quot;).*(leftPad)).+(&quot;|&quot;)
+else
+  scala.Predef.augmentString(&quot; &quot;).*(leftPad).+(x).+(scala.Predef.augmentString(&quot; &quot;).*(bigNumRightPad)).+(&quot;|&quot;)))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          350
+        </td>
+        <td>
+          718
+          -
+          718
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          345
+        </td>
+        <td>
+          734
+          -
+          746
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.&lt;
+        </td>
+        <td style="background: #AEF1AE">
+          x.length().&lt;(2)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          346
+        </td>
+        <td>
+          758
+          -
+          801
         </td>
         <td>
           Apply
@@ -291,19 +387,103 @@
           java.lang.String.+
         </td>
         <td style="background: #AEF1AE">
-          &quot; &quot;.+(noLeadingSpace)
+          scala.Predef.augmentString(&quot; &quot;).*(leftPad).+(x).+(scala.Predef.augmentString(&quot; &quot;).*(leftPad)).+(&quot;|&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          347
+        </td>
+        <td>
+          758
+          -
+          801
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(&quot; &quot;).*(leftPad).+(x).+(scala.Predef.augmentString(&quot; &quot;).*(leftPad)).+(&quot;|&quot;)
         </td>
       </tr><tr>
         <td>
           33
         </td>
         <td>
-          198
+          349
         </td>
         <td>
-          759
+          825
           -
-          770
+          875
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(&quot; &quot;).*(leftPad).+(x).+(scala.Predef.augmentString(&quot; &quot;).*(bigNumRightPad)).+(&quot;|&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          348
+        </td>
+        <td>
+          825
+          -
+          875
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(&quot; &quot;).*(leftPad).+(x).+(scala.Predef.augmentString(&quot; &quot;).*(bigNumRightPad)).+(&quot;|&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          352
+        </td>
+        <td>
+          912
+          -
+          965
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.dropRight
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(formatCells.foldLeft[String](&quot;&quot;)(((a: String, b: String) =&gt; a.+(b)))).dropRight(1)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          353
+        </td>
+        <td>
+          1030
+          -
+          1041
         </td>
         <td>
           Apply
@@ -316,57 +496,15 @@
         </td>
       </tr><tr>
         <td>
-          39
+          46
         </td>
         <td>
-          199
+          354
         </td>
         <td>
-          901
+          1168
           -
-          914
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;===+===+===&quot;
-        </td>
-      </tr><tr>
-        <td>
-          40
-        </td>
-        <td>
-          200
-        </td>
-        <td>
-          939
-          -
-          951
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.lang.String.length
-        </td>
-        <td style="background: #AEF1AE">
-          hLine.length()
-        </td>
-      </tr><tr>
-        <td>
-          41
-        </td>
-        <td>
-          201
-        </td>
-        <td>
-          973
-          -
-          986
+          1181
         </td>
         <td>
           Select
@@ -379,57 +517,183 @@
         </td>
       </tr><tr>
         <td>
-          42
+          47
         </td>
         <td>
-          202
+          355
         </td>
         <td>
-          1028
+          1210
           -
-          1042
+          1219
         </td>
         <td>
           Apply
         </td>
         <td>
-          tictactoe.View.formatRow
+          scala.Int.&gt;
         </td>
         <td style="background: #AEF1AE">
-          View.this.formatRow(row)
+          width.&gt;(3)
         </td>
       </tr><tr>
         <td>
-          42
+          47
         </td>
         <td>
-          204
+          358
         </td>
         <td>
-          1010
+          1228
           -
-          1043
+          1229
         </td>
         <td>
-          ApplyToImplicitArgs
+          Literal
         </td>
         <td>
-          scala.collection.immutable.List.map
+          &lt;nosymbol&gt;
         </td>
         <td style="background: #AEF1AE">
-          fBoard.map[String, List[String]](((row: List[String]) =&gt; View.this.formatRow(row)))(immutable.this.List.canBuildFrom[String])
+          3
         </td>
       </tr><tr>
         <td>
-          42
+          47
         </td>
         <td>
-          203
+          357
         </td>
         <td>
-          1020
+          1221
           -
-          1020
+          1222
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          5
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          359
+        </td>
+        <td>
+          1228
+          -
+          1229
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          3
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          356
+        </td>
+        <td>
+          1221
+          -
+          1222
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          5
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          360
+        </td>
+        <td>
+          1255
+          -
+          1302
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.dropRight
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(scala.Predef.augmentString(scala.Predef.augmentString(&quot;=&quot;).*(cellWidth).+(&quot;+&quot;)).*(width)).dropRight(1)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          361
+        </td>
+        <td>
+          1327
+          -
+          1339
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.length
+        </td>
+        <td style="background: #AEF1AE">
+          hLine.length()
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          362
+        </td>
+        <td>
+          1361
+          -
+          1374
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.length
+        </td>
+        <td style="background: #AEF1AE">
+          fBoard.length
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          364
+        </td>
+        <td>
+          1408
+          -
+          1408
         </td>
         <td>
           TypeApply
@@ -442,15 +706,78 @@
         </td>
       </tr><tr>
         <td>
-          43
+          51
         </td>
         <td>
-          205
+          363
         </td>
         <td>
-          1089
+          1416
           -
-          1114
+          1441
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.formatRow
+        </td>
+        <td style="background: #AEF1AE">
+          View.this.formatRow(row, cellWidth)
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          365
+        </td>
+        <td>
+          1398
+          -
+          1442
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          fBoard.map[String, List[String]](((row: List[String]) =&gt; View.this.formatRow(row, cellWidth)))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          367
+        </td>
+        <td>
+          1480
+          -
+          1480
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          366
+        </td>
+        <td>
+          1488
+          -
+          1513
         </td>
         <td>
           Apply
@@ -463,15 +790,15 @@
         </td>
       </tr><tr>
         <td>
-          43
+          52
         </td>
         <td>
-          207
+          368
         </td>
         <td>
-          1065
+          1464
           -
-          1115
+          1514
         </td>
         <td>
           ApplyToImplicitArgs
@@ -484,36 +811,15 @@
         </td>
       </tr><tr>
         <td>
-          43
+          53
         </td>
         <td>
-          206
+          369
         </td>
         <td>
-          1081
+          1534
           -
-          1081
-        </td>
-        <td>
-          TypeApply
-        </td>
-        <td>
-          scala.collection.immutable.List.canBuildFrom
-        </td>
-        <td style="background: #AEF1AE">
-          immutable.this.List.canBuildFrom[String]
-        </td>
-      </tr><tr>
-        <td>
-          44
-        </td>
-        <td>
-          208
-        </td>
-        <td>
-          1135
-          -
-          1162
+          1561
         </td>
         <td>
           Apply
@@ -526,15 +832,15 @@
         </td>
       </tr><tr>
         <td>
-          47
+          56
         </td>
         <td>
-          209
+          370
         </td>
         <td>
-          1187
+          1586
           -
-          1283
+          1682
         </td>
         <td>
           Apply
@@ -547,15 +853,15 @@
         </td>
       </tr><tr>
         <td>
-          48
+          57
         </td>
         <td>
-          210
+          371
         </td>
         <td>
-          1289
+          1687
           -
-          1310
+          1708
         </td>
         <td>
           Apply

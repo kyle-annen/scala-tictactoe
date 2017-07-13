@@ -29,27 +29,36 @@
 </span>5 <span style=''></span><span style='background: #AEF1AE'>    &quot;EN&quot; -&gt; Map(
 </span>6 <span style=''></span><span style='background: #AEF1AE'>      &quot;greeting&quot; -&gt; &quot;Let's play TicTacToe!&quot;,
 </span>7 <span style=''></span><span style='background: #AEF1AE'>      &quot;selectLang&quot; -&gt; &quot;Please select a language.&quot;,
-</span>8 <span style=''></span><span style='background: #AEF1AE'>      &quot;turnPrompt&quot; -&gt; &quot;It's your turn.&quot;,
-</span>9 <span style=''></span><span style='background: #AEF1AE'>      &quot;playerAnnounce&quot; -&gt; &quot;Player &quot;,
-</span>10 <span style=''></span><span style='background: #AEF1AE'>      &quot;gameOver&quot; -&gt; &quot;Game Over&quot;,
-</span>11 <span style=''></span><span style='background: #AEF1AE'>      &quot;win&quot; -&gt; &quot;You have won the game!&quot;,
-</span>12 <span style=''></span><span style='background: #AEF1AE'>      &quot;tie&quot; -&gt; &quot;The game is a tie.&quot;,
-</span>13 <span style=''></span><span style='background: #AEF1AE'>      &quot;invalidPlay&quot; -&gt; &quot;That selection is invalid.&quot;,
-</span>14 <span style=''></span><span style='background: #AEF1AE'>      &quot;inputPrompt&quot; -&gt; &quot;Please input the number of an open space.&quot; 
-</span>15 <span style=''></span><span style='background: #AEF1AE'>    ),
-</span>16 <span style=''></span><span style='background: #AEF1AE'>    &quot;CN&quot; -&gt; Map(
-</span>17 <span style=''></span><span style='background: #AEF1AE'>      &quot;greeting&quot; -&gt; &quot;我们玩TicTacToe！&quot;,
-</span>18 <span style=''></span><span style='background: #AEF1AE'>      &quot;selectLang&quot; -&gt; &quot;请选择语言。&quot;,
-</span>19 <span style=''></span><span style='background: #AEF1AE'>      &quot;turnPrompt&quot; -&gt; &quot;现在轮到你了&quot;,
-</span>20 <span style=''></span><span style='background: #AEF1AE'>      &quot;playerAnnounce&quot; -&gt; &quot;播放机 &quot;,
-</span>21 <span style=''></span><span style='background: #AEF1AE'>      &quot;gameOver&quot; -&gt; &quot;游戏结束&quot;,
-</span>22 <span style=''></span><span style='background: #AEF1AE'>      &quot;win&quot; -&gt; &quot;你赢了游戏！&quot;,
-</span>23 <span style=''></span><span style='background: #AEF1AE'>      &quot;tie&quot; -&gt; &quot;游戏是一个领带。&quot;,
-</span>24 <span style=''></span><span style='background: #AEF1AE'>      &quot;invalidPlay&quot; -&gt; &quot;该选择无效。&quot;,
-</span>25 <span style=''></span><span style='background: #AEF1AE'>      &quot;inputPrompt&quot; -&gt; &quot;请输入一个开放空间的数量。&quot;
-</span>26 <span style=''></span><span style='background: #AEF1AE'>    )
-</span>27 <span style=''></span><span style='background: #AEF1AE'>  )</span><span style=''> 
-</span>28 <span style=''>}
+</span>8 <span style=''></span><span style='background: #AEF1AE'>      &quot;selectPlayerType&quot; -&gt; &quot;Choose computer or human player.&quot;,
+</span>9 <span style=''></span><span style='background: #AEF1AE'>      &quot;pTypeHuman&quot; -&gt; &quot;1 - Human&quot;,
+</span>10 <span style=''></span><span style='background: #AEF1AE'>      &quot;pTypeComputer&quot; -&gt; &quot;2 - Computer&quot;,
+</span>11 <span style=''></span><span style='background: #AEF1AE'>      &quot;pickBoardSize&quot; -&gt; &quot;Select the board size.&quot;,
+</span>12 <span style=''></span><span style='background: #AEF1AE'>      &quot;turnPrompt&quot; -&gt; &quot;It's your turn.&quot;,
+</span>13 <span style=''></span><span style='background: #AEF1AE'>      &quot;playerAnnounce&quot; -&gt; &quot;Player &quot;,
+</span>14 <span style=''></span><span style='background: #AEF1AE'>      &quot;gameOver&quot; -&gt; &quot;Game Over&quot;,
+</span>15 <span style=''></span><span style='background: #AEF1AE'>      &quot;win&quot; -&gt; &quot;You have won the game!&quot;,
+</span>16 <span style=''></span><span style='background: #AEF1AE'>      &quot;tie&quot; -&gt; &quot;The game is a tie.&quot;,
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      &quot;invalidPlay&quot; -&gt; &quot;That selection is invalid.&quot;,
+</span>18 <span style=''></span><span style='background: #AEF1AE'>      &quot;inputPrompt&quot; -&gt; &quot;Please input the number of an open space.&quot;,
+</span>19 <span style=''></span><span style='background: #AEF1AE'>      &quot;continuePlaying&quot; -&gt; &quot;Do you want to play again? Input [y] for yes, [n] to exit&quot;
+</span>20 <span style=''></span><span style='background: #AEF1AE'>    ),
+</span>21 <span style=''></span><span style='background: #AEF1AE'>    &quot;CN&quot; -&gt; Map(
+</span>22 <span style=''></span><span style='background: #AEF1AE'>      &quot;greeting&quot; -&gt; &quot;我们玩TicTacToe！&quot;,
+</span>23 <span style=''></span><span style='background: #AEF1AE'>      &quot;selectLang&quot; -&gt; &quot;请选择语言。&quot;,
+</span>24 <span style=''></span><span style='background: #AEF1AE'>      &quot;selectPlayerType&quot; -&gt; &quot;选择电脑或人手。&quot;,
+</span>25 <span style=''></span><span style='background: #AEF1AE'>      &quot;pTypeHuman&quot; -&gt; &quot;1 - 人的&quot;,
+</span>26 <span style=''></span><span style='background: #AEF1AE'>      &quot;pTypeComputer&quot; -&gt; &quot;2 - 电脑&quot;,
+</span>27 <span style=''></span><span style='background: #AEF1AE'>      &quot;pickBoardSize&quot; -&gt; &quot;选择板的大小。&quot;,
+</span>28 <span style=''></span><span style='background: #AEF1AE'>      &quot;turnPrompt&quot; -&gt; &quot;现在轮到你了&quot;,
+</span>29 <span style=''></span><span style='background: #AEF1AE'>      &quot;playerAnnounce&quot; -&gt; &quot;播放机 &quot;,
+</span>30 <span style=''></span><span style='background: #AEF1AE'>      &quot;gameOver&quot; -&gt; &quot;游戏结束&quot;,
+</span>31 <span style=''></span><span style='background: #AEF1AE'>      &quot;win&quot; -&gt; &quot;你赢了游戏！&quot;,
+</span>32 <span style=''></span><span style='background: #AEF1AE'>      &quot;tie&quot; -&gt; &quot;游戏是一个领带。&quot;,
+</span>33 <span style=''></span><span style='background: #AEF1AE'>      &quot;invalidPlay&quot; -&gt; &quot;该选择无效。&quot;,
+</span>34 <span style=''></span><span style='background: #AEF1AE'>      &quot;inputPrompt&quot; -&gt; &quot;请输入一个开放空间的数量。&quot;
+</span>35 <span style=''></span><span style='background: #AEF1AE'>    )
+</span>36 <span style=''></span><span style='background: #AEF1AE'>  )</span><span style=''>
+</span>37 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -66,12 +75,12 @@
           4
         </td>
         <td>
-          187
+          334
         </td>
         <td>
           48
           -
-          796
+          1217
         </td>
         <td>
           Apply
@@ -80,19 +89,19 @@
           scala.collection.generic.GenMapFactory.apply
         </td>
         <td style="background: #AEF1AE">
-          scala.Predef.Map.apply[String, scala.collection.immutable.Map[String,String]](scala.Predef.ArrowAssoc[String](&quot;EN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;Please select a language.&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;))), scala.Predef.ArrowAssoc[String](&quot;CN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;我们玩TicTacToe！&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;请选择语言。&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;现在轮到你了&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;播放机 &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;游戏结束&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;你赢了游戏！&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;游戏是一个领带。&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;该选择无效。&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;请输入一个开放空间的数量。&quot;))))
+          scala.Predef.Map.apply[String, scala.collection.immutable.Map[String,String]](scala.Predef.ArrowAssoc[String](&quot;EN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;Please select a language.&quot;), scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;Choose computer or human player.&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - Human&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - Computer&quot;), scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;Select the board size.&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;), scala.Predef.ArrowAssoc[String](&quot;continuePlaying&quot;).-&gt;[String](&quot;Do you want to play again? Input [y] for yes, [n] to exit&quot;))), scala.Predef.ArrowAssoc[String](&quot;CN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;我们玩TicTacToe！&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;请选择语言。&quot;), scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;选择电脑或人手。&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - 人的&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - 电脑&quot;), scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;选择板的大小。&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;现在轮到你了&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;播放机 &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;游戏结束&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;你赢了游戏！&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;游戏是一个领带。&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;该选择无效。&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;请输入一个开放空间的数量。&quot;))))
         </td>
       </tr><tr>
         <td>
           5
         </td>
         <td>
-          173
+          316
         </td>
         <td>
           65
           -
-          481
+          759
         </td>
         <td>
           Apply
@@ -101,14 +110,14 @@
           scala.collection.generic.GenMapFactory.apply
         </td>
         <td style="background: #AEF1AE">
-          scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;Please select a language.&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;))
+          scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;Please select a language.&quot;), scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;Choose computer or human player.&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - Human&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - Computer&quot;), scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;Select the board size.&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;), scala.Predef.ArrowAssoc[String](&quot;continuePlaying&quot;).-&gt;[String](&quot;Do you want to play again? Input [y] for yes, [n] to exit&quot;))
         </td>
       </tr><tr>
         <td>
           5
         </td>
         <td>
-          163
+          301
         </td>
         <td>
           57
@@ -129,12 +138,12 @@
           5
         </td>
         <td>
-          174
+          317
         </td>
         <td>
           57
           -
-          481
+          759
         </td>
         <td>
           Apply
@@ -143,14 +152,14 @@
           scala.Predef.ArrowAssoc.-&gt;
         </td>
         <td style="background: #AEF1AE">
-          scala.Predef.ArrowAssoc[String](&quot;EN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;Please select a language.&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;)))
+          scala.Predef.ArrowAssoc[String](&quot;EN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;Let\'s play TicTacToe!&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;Please select a language.&quot;), scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;Choose computer or human player.&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - Human&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - Computer&quot;), scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;Select the board size.&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;It\'s your turn.&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;Player &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;Game Over&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;You have won the game!&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;The game is a tie.&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;That selection is invalid.&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;Please input the number of an open space.&quot;), scala.Predef.ArrowAssoc[String](&quot;continuePlaying&quot;).-&gt;[String](&quot;Do you want to play again? Input [y] for yes, [n] to exit&quot;)))
         </td>
       </tr><tr>
         <td>
           6
         </td>
         <td>
-          164
+          302
         </td>
         <td>
           76
@@ -171,7 +180,7 @@
           7
         </td>
         <td>
-          165
+          303
         </td>
         <td>
           121
@@ -192,12 +201,96 @@
           8
         </td>
         <td>
-          166
+          304
         </td>
         <td>
           172
           -
-          205
+          228
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;Choose computer or human player.&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          9
+        </td>
+        <td>
+          305
+        </td>
+        <td>
+          236
+          -
+          263
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - Human&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          306
+        </td>
+        <td>
+          271
+          -
+          304
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - Computer&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          307
+        </td>
+        <td>
+          312
+          -
+          355
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;Select the board size.&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          308
+        </td>
+        <td>
+          363
+          -
+          396
         </td>
         <td>
           Apply
@@ -210,15 +303,15 @@
         </td>
       </tr><tr>
         <td>
-          9
+          13
         </td>
         <td>
-          167
+          309
         </td>
         <td>
-          213
+          404
           -
-          242
+          433
         </td>
         <td>
           Apply
@@ -231,15 +324,15 @@
         </td>
       </tr><tr>
         <td>
-          10
+          14
         </td>
         <td>
-          168
+          310
         </td>
         <td>
-          250
+          441
           -
-          275
+          466
         </td>
         <td>
           Apply
@@ -252,15 +345,15 @@
         </td>
       </tr><tr>
         <td>
-          11
+          15
         </td>
         <td>
-          169
+          311
         </td>
         <td>
-          283
+          474
           -
-          316
+          507
         </td>
         <td>
           Apply
@@ -273,15 +366,15 @@
         </td>
       </tr><tr>
         <td>
-          12
+          16
         </td>
         <td>
-          170
+          312
         </td>
         <td>
-          324
+          515
           -
-          353
+          544
         </td>
         <td>
           Apply
@@ -294,15 +387,15 @@
         </td>
       </tr><tr>
         <td>
-          13
+          17
         </td>
         <td>
-          171
+          313
         </td>
         <td>
-          361
+          552
           -
-          406
+          597
         </td>
         <td>
           Apply
@@ -315,15 +408,15 @@
         </td>
       </tr><tr>
         <td>
-          14
+          18
         </td>
         <td>
-          172
+          314
         </td>
         <td>
-          414
+          605
           -
-          474
+          665
         </td>
         <td>
           Apply
@@ -336,36 +429,36 @@
         </td>
       </tr><tr>
         <td>
-          16
+          19
         </td>
         <td>
-          185
+          315
         </td>
         <td>
-          495
+          673
           -
-          792
+          753
         </td>
         <td>
           Apply
         </td>
         <td>
-          scala.collection.generic.GenMapFactory.apply
+          scala.Predef.ArrowAssoc.-&gt;
         </td>
         <td style="background: #AEF1AE">
-          scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;我们玩TicTacToe！&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;请选择语言。&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;现在轮到你了&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;播放机 &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;游戏结束&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;你赢了游戏！&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;游戏是一个领带。&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;该选择无效。&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;请输入一个开放空间的数量。&quot;))
+          scala.Predef.ArrowAssoc[String](&quot;continuePlaying&quot;).-&gt;[String](&quot;Do you want to play again? Input [y] for yes, [n] to exit&quot;)
         </td>
       </tr><tr>
         <td>
-          16
+          21
         </td>
         <td>
-          175
+          318
         </td>
         <td>
-          487
+          765
           -
-          491
+          769
         </td>
         <td>
           Literal
@@ -378,15 +471,15 @@
         </td>
       </tr><tr>
         <td>
-          16
+          21
         </td>
         <td>
-          186
+          333
         </td>
         <td>
-          487
+          765
           -
-          792
+          1213
         </td>
         <td>
           Apply
@@ -395,19 +488,40 @@
           scala.Predef.ArrowAssoc.-&gt;
         </td>
         <td style="background: #AEF1AE">
-          scala.Predef.ArrowAssoc[String](&quot;CN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;我们玩TicTacToe！&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;请选择语言。&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;现在轮到你了&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;播放机 &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;游戏结束&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;你赢了游戏！&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;游戏是一个领带。&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;该选择无效。&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;请输入一个开放空间的数量。&quot;)))
+          scala.Predef.ArrowAssoc[String](&quot;CN&quot;).-&gt;[scala.collection.immutable.Map[String,String]](scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;我们玩TicTacToe！&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;请选择语言。&quot;), scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;选择电脑或人手。&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - 人的&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - 电脑&quot;), scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;选择板的大小。&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;现在轮到你了&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;播放机 &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;游戏结束&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;你赢了游戏！&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;游戏是一个领带。&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;该选择无效。&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;请输入一个开放空间的数量。&quot;)))
         </td>
       </tr><tr>
         <td>
-          17
+          21
         </td>
         <td>
-          176
+          332
         </td>
         <td>
-          506
+          773
           -
-          535
+          1213
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[String, String](scala.Predef.ArrowAssoc[String](&quot;greeting&quot;).-&gt;[String](&quot;我们玩TicTacToe！&quot;), scala.Predef.ArrowAssoc[String](&quot;selectLang&quot;).-&gt;[String](&quot;请选择语言。&quot;), scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;选择电脑或人手。&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - 人的&quot;), scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - 电脑&quot;), scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;选择板的大小。&quot;), scala.Predef.ArrowAssoc[String](&quot;turnPrompt&quot;).-&gt;[String](&quot;现在轮到你了&quot;), scala.Predef.ArrowAssoc[String](&quot;playerAnnounce&quot;).-&gt;[String](&quot;播放机 &quot;), scala.Predef.ArrowAssoc[String](&quot;gameOver&quot;).-&gt;[String](&quot;游戏结束&quot;), scala.Predef.ArrowAssoc[String](&quot;win&quot;).-&gt;[String](&quot;你赢了游戏！&quot;), scala.Predef.ArrowAssoc[String](&quot;tie&quot;).-&gt;[String](&quot;游戏是一个领带。&quot;), scala.Predef.ArrowAssoc[String](&quot;invalidPlay&quot;).-&gt;[String](&quot;该选择无效。&quot;), scala.Predef.ArrowAssoc[String](&quot;inputPrompt&quot;).-&gt;[String](&quot;请输入一个开放空间的数量。&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          319
+        </td>
+        <td>
+          784
+          -
+          813
         </td>
         <td>
           Apply
@@ -420,15 +534,15 @@
         </td>
       </tr><tr>
         <td>
-          18
+          23
         </td>
         <td>
-          177
+          320
         </td>
         <td>
-          543
+          821
           -
-          567
+          845
         </td>
         <td>
           Apply
@@ -441,15 +555,99 @@
         </td>
       </tr><tr>
         <td>
-          19
+          24
         </td>
         <td>
-          178
+          321
         </td>
         <td>
-          575
+          853
           -
-          599
+          885
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;selectPlayerType&quot;).-&gt;[String](&quot;选择电脑或人手。&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          322
+        </td>
+        <td>
+          893
+          -
+          917
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;pTypeHuman&quot;).-&gt;[String](&quot;1 - 人的&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          323
+        </td>
+        <td>
+          925
+          -
+          952
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;pTypeComputer&quot;).-&gt;[String](&quot;2 - 电脑&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          324
+        </td>
+        <td>
+          960
+          -
+          988
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;pickBoardSize&quot;).-&gt;[String](&quot;选择板的大小。&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          325
+        </td>
+        <td>
+          996
+          -
+          1020
         </td>
         <td>
           Apply
@@ -462,15 +660,15 @@
         </td>
       </tr><tr>
         <td>
-          20
+          29
         </td>
         <td>
-          179
+          326
         </td>
         <td>
-          607
+          1028
           -
-          633
+          1054
         </td>
         <td>
           Apply
@@ -483,15 +681,15 @@
         </td>
       </tr><tr>
         <td>
-          21
+          30
         </td>
         <td>
-          180
+          327
         </td>
         <td>
-          641
+          1062
           -
-          661
+          1082
         </td>
         <td>
           Apply
@@ -504,15 +702,15 @@
         </td>
       </tr><tr>
         <td>
-          22
+          31
         </td>
         <td>
-          181
+          328
         </td>
         <td>
-          669
+          1090
           -
-          686
+          1107
         </td>
         <td>
           Apply
@@ -525,15 +723,15 @@
         </td>
       </tr><tr>
         <td>
-          23
+          32
         </td>
         <td>
-          182
+          329
         </td>
         <td>
-          694
+          1115
           -
-          713
+          1134
         </td>
         <td>
           Apply
@@ -546,15 +744,15 @@
         </td>
       </tr><tr>
         <td>
-          24
+          33
         </td>
         <td>
-          183
+          330
         </td>
         <td>
-          721
+          1142
           -
-          746
+          1167
         </td>
         <td>
           Apply
@@ -567,15 +765,15 @@
         </td>
       </tr><tr>
         <td>
-          25
+          34
         </td>
         <td>
-          184
+          331
         </td>
         <td>
-          754
+          1175
           -
-          786
+          1207
         </td>
         <td>
           Apply

@@ -66,6 +66,44 @@ class GameSpec extends FunSpec {
     }
   }
 
+  describe("setPlayer") {
+    it("can select a human player") {
+      def mockHumanSelect(callCount: Int): String = {
+        callCount match {
+          case 1 => "1"
+        }
+      }
+
+      val expected = Map(1 -> ("human", "X"))
+      val actual = Game.setPlayer(
+        testPrint,
+        0,
+        mockHumanSelect,
+        Dialog.lang("EN"),
+        1,
+        "X")
+      assert(actual == expected)
+    }
+
+    it("can select a computer player") {
+      def mockHumanSelect(callCount: Int): String = {
+        callCount match {
+          case 1 => "2"
+        }
+      }
+
+      val expected = Map(1 -> ("computer", "X"))
+      val actual = Game.setPlayer(
+        testPrint,
+        0,
+        mockHumanSelect,
+        Dialog.lang("EN"),
+        1,
+        "X")
+      assert(actual == expected)
+    }
+ }
+
   describe("go") {
     it("the game will finish if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
@@ -149,6 +187,23 @@ class GameSpec extends FunSpec {
         1)
 
       assert(actual == expected)
+    }
+  }
+
+  describe("contLoop") {
+    it("allows the game quit") {
+      def mockContTestInput(callCount: Int): String = {
+        callCount match {
+          case 1 => "2"
+          case 2 => "2"
+          case 3 => "2"
+          case 4 => "3"
+          case 5 => "n"
+        }
+      }
+      val expected = Map(1 -> false)
+      val actual = Game.contLoop(testPrint, mockContTestInput)
+      assert(actual === expected)
     }
   }
 }
