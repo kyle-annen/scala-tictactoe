@@ -1,10 +1,10 @@
-package tictactoe 
+package tictactoe
 
 import org.scalatest.FunSpec
 
 class ViewSpec extends FunSpec {
 
-  
+
   def testPrint(s: String): String = s
   val testBoard3x3blank: List[String] = (1 to 9).toList.map(x=>x.toString)
   val testBoard5x5blank: List[String] = (1 to 25).toList.map(x=>x.toString)
@@ -14,14 +14,14 @@ class ViewSpec extends FunSpec {
       val expected = "\n\n"
       val actual = View.renderWhitespace(testPrint, 2)
 
-      assert(actual === expected)  
-    } 
+      assert(actual === expected)
+    }
   }
 
   describe("renderDialog") {
     it("renders dialog of one string without line breaks") {
       val expected = "this is a test"
-      val actual = View.renderDialog(testPrint, 0, "this is a test") 
+      val actual = View.renderDialog(testPrint, 0, "this is a test")
       assert(actual === expected)
     }
 
@@ -63,27 +63,23 @@ class ViewSpec extends FunSpec {
       val actual = View.formatBoard(testBoard5x5blank)
       assert(actual == expected)
     }
-  } 
+  }
 
   describe("formatRow") {
     it("formats the row of the board") {
       val testRow = List("1","2","X")
-      val expected = " 1 | 2 | X"
-      val actual = View.formatRow(testRow)
+      val expected = " 1 | 2 | X "
+      val actual = View.formatRow(testRow,3)
       assert(actual === expected)
     }
   }
 
   describe("renderBoard") {
     it("renders a 3x3 board") {
-      val expected = "\n 1 | 2 | 3\n===+===+===\n 4 | 5 | 6\n===+===+===\n 7 | 8 | 9\n"
+      val expected = "\n 1 | 2 | 3 \n===+===+===\n 4 | 5 | 6 \n===+===+===\n 7 | 8 | 9 \n"
       val fBoard = View.formatBoard(testBoard3x3blank)
       val actual = View.renderBoard(testPrint,fBoard,0)
       assert(actual === expected)
     }
   }
-
-
-
-  
 }

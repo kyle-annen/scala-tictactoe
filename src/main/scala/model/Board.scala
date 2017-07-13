@@ -52,7 +52,7 @@ object Board {
   }
 
   def checkTie(board: List[String]): Boolean = {
-    checkSpace(board) && checkWin(board)
+    returnValidInputs(board).length == 0
   }
 
   def gameOver(board: List[String]): Boolean = {
