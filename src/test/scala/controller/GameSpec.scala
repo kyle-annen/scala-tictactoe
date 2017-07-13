@@ -9,8 +9,8 @@ class GameSpec extends FunSpec {
 
   def mockInput(callCount: Int): String = {
     callCount match {
-      case 0 => "en"
-      case 1 => "CN"
+      case 1 => "0"
+      case 2 => "2"
     }
   }
 

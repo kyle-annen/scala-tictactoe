@@ -1,18 +1,6 @@
 [0m[[0minfo[0m] [0m[32mGameSpec:[0m[0m
 [0m[[0minfo[0m] [0m[32msetLanguage[0m[0m
-[0m[[0minfo[0m] [0m[31m- sets the language of the game *** FAILED ***[0m[0m
-[0m[[0minfo[0m] [0m[31m  scala.MatchError: 2 (of class java.lang.Integer)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.GameSpec.mockInput(GameSpec.scala:11)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.GameSpec.$anonfun$new$4(GameSpec.scala:64)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.GameSpec.$anonfun$new$4$adapted(GameSpec.scala:64)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.IO$.go$1(IO.scala:26)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.IO$.getValidMove(IO.scala:35)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.Game$.setLanguage(Game.scala:24)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.GameSpec.$anonfun$new$2(GameSpec.scala:64)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
-[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[32m- sets the language of the game[0m[0m
 [0m[[0minfo[0m] [0m[32mgo[0m[0m
 [0m[[0minfo[0m] [0m[32m- the game will finish if there is a winner[0m[0m
 [0m[[0minfo[0m] [0m[32m- the game will end if there is a tie[0m[0m

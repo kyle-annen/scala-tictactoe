@@ -1,4 +1,4 @@
-[0m[[0minfo[0m] [0mUpdating {file:/Users/kyleannen/Code/scala-tictactoe/}root...[0m
+[0m[[0minfo[0m] [0mUpdating {file:/Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/}root...[0m
 [0m[[0mdebug[0m] [0m:: resolving dependencies :: com.example#scalaex_2.12;0.1.0-SNAPSHOT[0m
 [0m[[0mdebug[0m] [0m	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool, scoveragePlugin][0m
 [0m[[0mdebug[0m] [0m	validate = true[0m
@@ -788,20 +788,20 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.2!scala-compiler.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] jline#jline;2.14.3!jline.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 69ms :: artifacts dl 2ms[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT compile produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-compile.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT runtime produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-runtime.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT test produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-test.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT provided produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-provided.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT optional produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-optional.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT compile-internal produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-compile-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT runtime-internal produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-runtime-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT test-internal produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-test-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT plugin produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-plugin.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT sources produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-sources.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT docs produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-docs.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT pom produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-pom.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT scala-tool produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT scoveragePlugin produced in /Users/kyleannen/Code/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-scoveragePlugin.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (69ms resolve - 2ms download)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 74ms :: artifacts dl 4ms[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT compile produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT runtime produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT test produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT provided produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT optional produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT compile-internal produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT runtime-internal produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT test-internal produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT plugin produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT sources produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT docs produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT pom produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT scala-tool produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	report for com.example#scalaex_2.12;0.1.0-SNAPSHOT scoveragePlugin produced in /Users/kyleannen/Code/scala-ttt-refs/scala-tictactoe/target/resolution-cache/reports/com.example-scalaex_2.12-scoveragePlugin.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (74ms resolve - 4ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
