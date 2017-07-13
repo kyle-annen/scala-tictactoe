@@ -1,4 +1,4 @@
-package tictactoe 
+package tictactoe
 
 import org.scalatest.FunSpec
 import org.scalatest.Matchers._
@@ -25,7 +25,8 @@ class DialogSpec extends FunSpec {
         Dialog.lang("EN") should (contain key ("tie"))
         Dialog.lang("EN") should (contain key ("invalidPlay"))
         Dialog.lang("EN") should (contain key ("inputPrompt"))
-      }     
+        Dialog.lang("EN") should (contain key ("pickBoardSize"))
+      }
     }
 
     describe("CN") {
@@ -39,7 +40,8 @@ class DialogSpec extends FunSpec {
         Dialog.lang("CN") should (contain key ("tie"))
         Dialog.lang("CN") should (contain key ("invalidPlay"))
         Dialog.lang("CN") should (contain key ("inputPrompt"))
-      }     
-    } 
+        Dialog.lang("EN") should (contain key ("pickBoardSize"))
+      }
+    }
   }
 }

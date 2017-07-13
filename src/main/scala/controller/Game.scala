@@ -26,6 +26,28 @@ object Game {
     langKey
   }
 
+  def setBoardSize(
+    output: String => Any,
+    leftPadding: Int,
+    getInput: Int => String,
+    dialogLang: Map[String, String]): Int = {
+
+    View.renderDialog(output, leftPadding, dialogLang("pickBoardSize"))
+    val sizeOptions = List("3", "4")
+    for(option <- sizeOptions) {
+      View.renderDialog(output, leftPadding, option + " - " + option + "x" + option)
+    }
+    val sizeSelection = IO.getValidMove(
+      sizeOptions,
+      dialogLang("pickBoardSize"),
+      dialogLang("invalidPlay"),
+      output,
+      getInput,
+      leftPadding,
+      1)
+    sizeSelection.toInt
+  }
+
   def setPlayer(
     output: String => Any,
     leftPadding: Int,
@@ -133,7 +155,6 @@ object Game {
   }
 
   def setup(
-    board: List[String],
     currentPlayer: Int,
     output: String => Any,
     leftPadding: Int,
@@ -147,13 +168,18 @@ object Game {
       val player1 = setPlayer(output, leftPadding, getInput, gameLang, 1, "X")
       val player2 = setPlayer(output, leftPadding, getInput, gameLang, 2, "O")
       val players = List(player1, player2).flatten.toMap
+      val boardDimen: Int = setBoardSize(output, leftPadding, getInput, gameLang)
+      val boardSize: Int = boardDimen * boardDimen
+      val board = Board.initBoard(boardSize)
 
       go(
         board, players, gameLang, false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount)
+
+
     }
 
   def main(args: Array[String]): Unit = {
-    setup(Board.initBoard(16), 1, println, 15, 100, IO.getInput, 1)
+    setup(1, println, 15, 100, IO.getInput, 1)
   }
 }

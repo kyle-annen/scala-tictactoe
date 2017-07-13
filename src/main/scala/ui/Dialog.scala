@@ -8,13 +8,14 @@ object Dialog {
       "selectPlayerType" -> "Choose computer or human player.",
       "pTypeHuman" -> "1 - Human",
       "pTypeComputer" -> "2 - Computer",
+      "pickBoardSize" -> "Select the board size.",
       "turnPrompt" -> "It's your turn.",
       "playerAnnounce" -> "Player ",
       "gameOver" -> "Game Over",
       "win" -> "You have won the game!",
       "tie" -> "The game is a tie.",
       "invalidPlay" -> "That selection is invalid.",
-      "inputPrompt" -> "Please input the number of an open space." 
+      "inputPrompt" -> "Please input the number of an open space."
     ),
     "CN" -> Map(
       "greeting" -> "我们玩TicTacToe！",
@@ -22,6 +23,7 @@ object Dialog {
       "selectPlayerType" -> "选择电脑或人手。",
       "pTypeHuman" -> "1 - 人的",
       "pTypeComputer" -> "2 - 电脑",
+      "pickBoardSize" -> "选择板的大小。",
       "turnPrompt" -> "现在轮到你了",
       "playerAnnounce" -> "播放机 ",
       "gameOver" -> "游戏结束",
@@ -30,5 +32,5 @@ object Dialog {
       "invalidPlay" -> "该选择无效。",
       "inputPrompt" -> "请输入一个开放空间的数量。"
     )
-  ) 
+  )
 }
