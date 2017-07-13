@@ -88,7 +88,7 @@ object Game {
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
-    loopCount: Int): Boolean = {
+    loopCount: Int): Map[Int, Boolean] = {
 
     View.renderWhitespace(output, whiteSpace)
 
@@ -143,7 +143,8 @@ object Game {
       }
 
       View.renderWhitespace(output, 5)
-      true
+      //this is the return value of the game
+      Map(currentPlayer -> isWin)
     } else {
       val nextPlayer: Int = if(currentPlayer == 1) 2 else 1
       val newLoopCount = loopCount + 1
@@ -160,7 +161,7 @@ object Game {
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
-    loopCount: Int): Boolean = {
+    loopCount: Int): Map[Int, Boolean] = {
       View.renderWhitespace(output, whiteSpace)
       val selectedLanguage = setLanguage(output, leftPadding, getInput)
       val gameLang = Dialog.lang(selectedLanguage)

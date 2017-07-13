@@ -4,6 +4,8 @@ import org.scalatest.FunSpec
 
 class AISpec extends FunSpec {
 
+  def testPrint(s: String): String = s
+
   describe("getComputerMove") {
     it("scores a two move board correctly") {
       val testBoard = List(
@@ -33,6 +35,18 @@ class AISpec extends FunSpec {
       val expected: Int = 4
       val actual = AI.getComputerMove(testBoard, "x", "o", "x")
       assert(actual == expected)
+    }
+  }
+  it("will tie given every opponent first move") {
+    val openBoard = (1 to 9).toList.map(x => x.toString)
+    val players = Map(1 -> ("computer", "X"), 2 -> ("computer", "O"))
+    val seedBoards = openBoard.map(x => openBoard.map(cell => if(cell == x) "O" else cell ))
+
+    for(board <- seedBoards) {
+      val actual = Game.go(board, players, Dialog.lang("EN"), false, 1, testPrint, 0, 0, IO.getInput, 1)
+      val expected = Map(2 -> false)
+
+      assert(actual === expected)
     }
   }
 }

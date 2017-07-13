@@ -70,7 +70,7 @@ class GameSpec extends FunSpec {
     it("the game will finish if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val expected = true
+      val expected = Map(1 -> true)
       val actual = Game.go(
         testBoard,
         testPlayers,
@@ -89,7 +89,7 @@ class GameSpec extends FunSpec {
     it("the game will end if there is a tie") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val expected = true
+      val expected = Map(1 -> false)
       val actual = Game.go(
         testBoard,
         testPlayers,
@@ -108,7 +108,7 @@ class GameSpec extends FunSpec {
     it("the game will end early if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val expected = true
+      val expected = Map(1 -> true)
       val actual = Game.go(
         testBoard,
         testPlayers,
@@ -127,58 +127,20 @@ class GameSpec extends FunSpec {
 
   describe("setup") {
 
-    def mockInputEnglish9round(callCount: Int): String = {
-      callCount match {
-        case 1 => "1"
-        case 2 => "1"
-        case 3 => "1"
-        case 4 => "1"
-        case 5 => "1"
-        case 6 => "4"
-        case 7 => "2"
-        case 8 => "6"
-        case 9 => "3"
-        case 10 => "9"
-      }
-    }
-
-    it("English can be chosen and game played") {
-      val testBoard = (1 to 9).toList.map(x => x.toString)
-      val testPlayers = mockPlayers
-      val expected = true
-      val actual = Game.setup(
-        testBoard,
-        1,
-        testPrint,
-        0,
-        0,
-        mockInputEnglish9round,
-        1)
-
-      assert(actual == expected)
-    }
-
     def mockInputChinese9round(callCount: Int): String = {
       callCount match {
-        case 1 => "1"
-        case 2 => "1"
-        case 3 => "1"
-        case 4 => "1"
-        case 5 => "7"
-        case 6 => "2"
-        case 7 => "5"
-        case 8 => "3"
-        case 9 => "8"
-        case 10 => "9"
+        case 1 => "2"
+        case 2 => "2"
+        case 3 => "2"
+        case 4 => "3"
       }
     }
 
-    it("Chinese can be chosen and the game played") {
+    it("language can be chosen and the game played") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val expected = true
+      val expected = Map(1 -> false)
       val actual = Game.setup(
-        testBoard,
         1,
         testPrint,
         0,

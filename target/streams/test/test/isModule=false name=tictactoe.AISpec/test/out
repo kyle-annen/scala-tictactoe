@@ -3,3 +3,4 @@
 [0m[[0minfo[0m] [0m[32m- scores a two move board correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a simple win correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- take the appropriate second move[0m[0m
+[0m[[0minfo[0m] [0m[32m- will tie given every opponent first move[0m[0m
