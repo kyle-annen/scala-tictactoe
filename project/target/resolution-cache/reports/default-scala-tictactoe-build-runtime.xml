@@ -9,7 +9,7 @@
 		extra-sbtVersion="0.13"
 		conf="runtime"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20170713163200"/>
+		date="20170714080716"/>
 	<dependencies>
 		<module organisation="org.scoverage" name="sbt-scoverage">
 			<revision name="1.5.0" status="release" pubdate="20161107142843" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/scoverage/sbt-scoverage" extra-scalaVersion="2.10" extra-sbtVersion="0.13" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="0">
