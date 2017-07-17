@@ -1,8 +1,7 @@
 #Successful Tests
-#Fri Jul 14 09:26:22 CDT 2017
-tictactoe.AISpec=1500042382345
-tictactoe.BoardSpec=1500042375652
-tictactoe.ViewSpec=1500042375636
-tictactoe.GameSpec=1500042381977
-tictactoe.IOSpec=1500042375624
-tictactoe.DialogSpec=1500042375680
+#Mon Jul 17 11:15:51 CDT 2017
+tictactoe.AISpec=1500308151984
+tictactoe.BoardSpec=1500308145028
+tictactoe.GameSpec=1500308151517
+tictactoe.IOSpec=1500308145024
+tictactoe.DialogSpec=1500308145078
