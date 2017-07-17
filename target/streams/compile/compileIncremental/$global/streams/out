@@ -1,15 +1,124 @@
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Initial source changes: [0m
-[0m[[0mdebug[0m] [0m[naha] 	removed:Set()[0m
-[0m[[0mdebug[0m] [0m[naha] 	added: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	removed:Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] 	added: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] 	modified: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated products: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated products: Set(/Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/View$.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/Game.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/Dialog.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/AI.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/View.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/Board$.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/IO$.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/Board.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/Dialog$.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/Game$.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/AI$.class, /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes/tictactoe/IO.class)[0m
 [0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Modified binary dependencies: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Sources indirectly invalidated by:[0m
-[0m[[0mdebug[0m] [0m[naha] 	product: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	product: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] 	binary dep: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	external source: Set()[0m
-[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala, /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Recompiling all 6 sources: invalidated sources (12) exceeded 50.0% of all sources[0m
+[0m[[0minfo[0m] [0mCompiling 6 Scala sources to /Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes...[0m
+[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.15:component from component compiler for Scala 2.12.2[0m
+[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.15:component from component compiler for Scala 2.12.2[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 505fb48a, interfacing (CompilerInterface) with Scala compiler version 2.12.2[0m
+[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/classes:/Users/kyleannen/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.2.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	/Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/classes[0m
+[0m[[0mdebug[0m] [0mScala compilation took 5.471145902 s[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Dialog.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, Dialog, asInstanceOf, synchronized, $isInstanceOf, notifyAll, isInstanceOf, ==, clone, toString, !=, getClass, lang, ne, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala: Set(Dialog, ==, toString, lang)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/model/Board.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, checkSpace, wait, $asInstanceOf, Board, returnRows, returnColumns, equals, asInstanceOf, gameOver, synchronized, $isInstanceOf, checkTie, notifyAll, isInstanceOf, initBoard, ==, clone, checkWin, toString, returnDiagonals, !=, getClass, checkSets, ne, getWinner, returnValidInputs, eq, returnDimension, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/View.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, renderDialog, wait, $asInstanceOf, equals, renderWhitespace, asInstanceOf, synchronized, $isInstanceOf, formatBoard, notifyAll, View, isInstanceOf, formatRow, ==, clone, renderBoard, toString, !=, getClass, ne, padLeft, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala: Set(renderDialog, View)[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala: Set(renderDialog, renderWhitespace, formatBoard, View, ==, renderBoard, toString)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/View.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, renderDialog, wait, $asInstanceOf, equals, renderWhitespace, asInstanceOf, synchronized, $isInstanceOf, formatBoard, notifyAll, View, isInstanceOf, formatRow, ==, clone, renderBoard, toString, !=, getClass, ne, padLeft, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/AI.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, notifyAll, isInstanceOf, ==, getComputerMove, clone, toString, !=, AI, getClass, ne, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/Game.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, setBoardSize, wait, $asInstanceOf, equals, asInstanceOf, contLoop, synchronized, $isInstanceOf, main, notifyAll, isInstanceOf, Game, go, ==, clone, setLanguage, toString, !=, getClass, ne, setPlayer, eq, setup, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Board.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, checkSpace, wait, $asInstanceOf, Board, returnRows, returnColumns, equals, asInstanceOf, gameOver, synchronized, $isInstanceOf, checkTie, notifyAll, isInstanceOf, initBoard, ==, clone, checkWin, toString, returnDiagonals, !=, getClass, checkSets, ne, getWinner, returnValidInputs, eq, returnDimension, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala: Set(Board, checkTie, ==, checkWin, toString, returnValidInputs)[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala: Set(Board, gameOver, initBoard, ==, checkWin, toString, returnValidInputs)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, setBoardSize, wait, $asInstanceOf, equals, asInstanceOf, contLoop, synchronized, $isInstanceOf, main, notifyAll, isInstanceOf, Game, go, ==, clone, setLanguage, toString, !=, getClass, ne, setPlayer, eq, setup, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/IO.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, getUserInput, wait, $asInstanceOf, equals, asInstanceOf, getInput, synchronized, $isInstanceOf, getValidMove, notifyAll, isInstanceOf, getInput$default$1, ==, clone, toString, !=, IO, getClass, ne, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala: Set(getInput, getValidMove, ==, toString, IO)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/ui/Dialog.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, Dialog, asInstanceOf, synchronized, $isInstanceOf, notifyAll, isInstanceOf, ==, clone, toString, !=, getClass, lang, ne, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/controller/IO.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, getUserInput, wait, $asInstanceOf, equals, asInstanceOf, getInput, synchronized, $isInstanceOf, getValidMove, notifyAll, isInstanceOf, getInput$default$1, ==, clone, toString, !=, IO, getClass, ne, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /Users/kyleannen/Code/scala-tictactoe/src/main/scala/AI.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	notify, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, notifyAll, isInstanceOf, ==, getComputerMove, clone, toString, !=, AI, getClass, ne, eq, ##, finalize, hashCode.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/kyleannen/Code/scala-tictactoe/src/main/scala/Game.scala: Set(==, getComputerMove, toString, AI)[0m
+[0m[[0mdebug[0m] [0m[naha] New invalidations:[0m
+[0m[[0mdebug[0m] [0m[naha] 	Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Previously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0mdebug[0m] [0m[naha] 	Set()[0m
+[0m[[0mdebug[0m] [0m[naha] All newly invalidated sources after taking into account (previously) recompiled sources:Set()[0m
