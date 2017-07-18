@@ -5,3 +5,5 @@
 [0m[[0minfo[0m] [0m[32m- take the appropriate second move[0m[0m
 [0m[[0minfo[0m] [0m[32m- will tie given every opponent first move[0m[0m
 [0m[[0minfo[0m] [0m[32m- will win or tie in all possible situations (3x3 board)[0m[0m
+[0m[[0minfo[0m] [0m[31m- will win or tie in all possible situations (4x4 board) *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  true did not equal false (AISpec.scala:111)[0m[0m

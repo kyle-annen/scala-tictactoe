@@ -8,6 +8,8 @@ object AI {
     minPlayerToken: String,
     currentPlayerToken: String): Int = {
 
+    val boardSize = origBoardState.length
+
     def miniMax(
       currentBoard: List[String],
       depth: Int,
@@ -15,11 +17,25 @@ object AI {
       minT: String,
       curT: String): Map[Int, Int]  = {
 
+      val depthLimit = if(boardSize > 9) {
+        if(depth < 4) {
+          4
+        } else if(depth < 8){
+          5
+        } else {
+          9
+        }
+      } else {
+        9
+      }
+
       val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
 
       val scores = openMoves.map(move =>
         //maxpath
-        if(curT == maxT) {
+        if(depth >= depthLimit) {
+          Map(move -> 0)
+        } else if(curT == maxT) {
           val maxScore = 1000 - depth
           val maxBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
           val maxWin = Board.checkWin(maxBoardMove)

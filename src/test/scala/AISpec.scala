@@ -82,7 +82,6 @@ class AISpec extends FunSpec {
           val comTie = Board.checkTie(comBoard)
           if (comWin || comTie) {
             assert(true == true)
-            break
           } else {
             go(comBoard)
           }
@@ -91,4 +90,44 @@ class AISpec extends FunSpec {
     }
     go(startBoard)
   }
+
+  it("will win or tie in all possible situations (4x4 board)") {
+    val startBoard = Board.initBoard(16)
+
+    val humT = "O"
+    val comT = "X"
+
+    def go(bState: List[String]): Unit = {
+      //get the human moves
+      val humOpenMoves = Board.returnValidInputs(bState)
+      //populate all possible moves to the board
+      breakable {
+        for(move <- humOpenMoves) {
+          val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
+          val humWin = Board.checkWin(humMoveBoard)
+          val humTie = Board.checkTie(humMoveBoard)
+          if(humWin) {
+            println(humMoveBoard)
+            assert(humWin == false)
+            break
+          }
+          if(humTie) {
+            assert(humTie == true)
+            break
+          }
+          val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT) + 1).toString
+          val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
+          val comWin = Board.checkWin(comBoard)
+          val comTie = Board.checkTie(comBoard)
+          if (comWin || comTie) {
+            assert(true == true)
+          } else {
+            go(comBoard)
+          }
+        }
+      }
+    }
+    go(startBoard)
+  }
+
 }
