@@ -12,6 +12,37 @@ object AI {
     var max = scala.collection.mutable.Map[String, Int]()
   }
 
+  def getBoardTranspositions(
+    board: List[String],
+    score: Int,
+    p1Token: String,
+    p2Token: String): List[Map[String, Int]] = {
+
+    val generalizedBoard = board.map { x =>
+      if(x == p1Token) {
+        p1Token
+      } else if(x == p2Token) {
+        p2Token
+      } else {
+        "-"
+      }
+    }
+    val rowLists = Board.returnRows(generalizedBoard)
+    val b1 = rowLists.flatten.foldLeft("")(_ + _)
+    val b2 = rowLists.transpose.flatten.foldLeft("")(_ + _)
+    val b3 = b1.reverse
+    val b4 = b2.reverse
+
+    val transpositions = List(
+      Map(b1 -> score),
+      Map(b2 -> score),
+      Map(b3 -> score),
+      Map(b4 -> score)
+    )
+    transpositions
+  }
+
+
   def getComputerMove(
     origBoardState: List[String],
     maxPlayerToken: String,
@@ -84,5 +115,6 @@ object AI {
     val result = miniMax(origBoardState, 1, maxPlayerToken, minPlayerToken, maxPlayerToken)
     result.keys.head
   }
+
 }
 // val board = List("X","O","X","X","O","X","7","8","9")
