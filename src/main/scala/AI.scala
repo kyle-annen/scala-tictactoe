@@ -2,6 +2,16 @@ package tictactoe
 
 object AI {
 
+  class AlphaBeta {
+    var alpha: Double = Double.NegativeInfinity
+    var beta: Double = Double.PositiveInfinity
+  }
+
+  class TranspositionTable {
+    var min = scala.collection.mutable.Map[String, Int]()
+    var max = scala.collection.mutable.Map[String, Int]()
+  }
+
   def getComputerMove(
     origBoardState: List[String],
     maxPlayerToken: String,
@@ -9,6 +19,7 @@ object AI {
     currentPlayerToken: String): Int = {
 
     val boardSize = origBoardState.length
+    val alphaBeta = new AlphaBeta
 
     def miniMax(
       currentBoard: List[String],
@@ -17,17 +28,7 @@ object AI {
       minT: String,
       curT: String): Map[Int, Int]  = {
 
-      val depthLimit = if(boardSize > 9) {
-        if(depth < 4) {
-          4
-        } else if(depth < 8){
-          5
-        } else {
-          9
-        }
-      } else {
-        9
-      }
+      val depthLimit = 100
 
       val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
 
