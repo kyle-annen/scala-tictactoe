@@ -89,7 +89,8 @@ object Game {
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
-    loopCount: Int): Map[Int, Boolean] = {
+    loopCount: Int,
+    ttTable: AI.TranspositionTable): Map[Int, Boolean] = {
 
     View.renderWhitespace(output, whiteSpace)
 
@@ -120,7 +121,7 @@ object Game {
       humanPlay
     } else {
       //AI computer move
-      val compPlay: Int = AI.getComputerMove(board, userToken, oppToken, userToken) + 1
+      val compPlay: Int = AI.getComputerMove(board, userToken, oppToken, userToken, ttTable) + 1
       compPlay
     }
 
@@ -152,7 +153,7 @@ object Game {
 
       go(
         updatedBoard, players, dialogLang, false, nextPlayer, output,
-        leftPadding, whiteSpace, getInput, newLoopCount)
+        leftPadding, whiteSpace, getInput, newLoopCount, ttTable)
     }
   }
 
@@ -174,9 +175,11 @@ object Game {
       val boardSize: Int = boardDimen * boardDimen
       val board = Board.initBoard(boardSize)
 
+      val ttTable = new AI.TranspositionTable
+
       go(
         board, players, gameLang, false, currentPlayer,
-        output, leftPadding, whiteSpace, getInput, loopCount)
+        output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
     }
 
 
