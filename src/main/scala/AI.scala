@@ -53,12 +53,12 @@ object AI {
   }
 
   def checkTransposition(
-    boardState: List[String], 
+    boardState: List[String],
     ttTable: TranspositionTable,
     p1Token: String,
     p2Token: String,
     minOrMax: String): (Boolean, Int) = {
-    val generalizedBoard = boardState.map {x => 
+    val generalizedBoard = boardState.map {x =>
       if(x == p1Token) {
         p1Token
       } else if(x == p2Token) {
@@ -66,10 +66,10 @@ object AI {
       } else {
         "-"
       }
-    } 
+    }
     val path = if(minOrMax == "min") ttTable.min else ttTable.max
     val boardKey = generalizedBoard.foldLeft("")(_ + _)
-    val keyPresent = path.contains(boardKey) 
+    val keyPresent = path.contains(boardKey)
     if(keyPresent) {
       val score = path(boardKey)
       (true, score)
@@ -95,7 +95,7 @@ object AI {
       minT: String,
       curT: String): Map[Int, Int]  = {
 
-      val depthLimit = 6 
+      val depthLimit = if(boardSize > 9) 6 else 9
 
       val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
 
