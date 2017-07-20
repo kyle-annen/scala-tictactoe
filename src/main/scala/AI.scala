@@ -88,7 +88,7 @@ object AI {
       case 16 => difficulty match {
         case "easy" => 1
         case "medium" => 3
-        case "hard" => 6
+        case "hard" => 16
       }
       case 25 => difficulty match {
         case "easy" => 1
@@ -160,12 +160,12 @@ object AI {
           val minWin = Board.checkWin(minBoardMove)
           val minTie = Board.checkTie(minBoardMove)
           if(minWin) {
-            val minTranspositions = getBoardTranspositions(minBoardMove, minScore, maxT, minT)
-            saveTranspositions(ttTable, minTranspositions, "min")
+            /*val minTranspositions = getBoardTranspositions(minBoardMove, minScore, maxT, minT)*/
+            /*saveTranspositions(ttTable, minTranspositions, "min")*/
             Map(move -> minScore)
           } else if(minTie) {
-            val minTieTranspostitions = getBoardTranspositions(minBoardMove, 0, maxT, minT)
-            saveTranspositions(ttTable, minTieTranspostitions, "min")
+           /* val minTieTranspostitions = getBoardTranspositions(minBoardMove, 0, maxT, minT)*/
+            /*saveTranspositions(ttTable, minTieTranspostitions, "min")*/
             Map(move -> 0)
           } else {
             val checkTransTable = checkTransposition(minBoardMove, ttTable, maxT, minT, "min")
@@ -181,6 +181,33 @@ object AI {
       )
 
       val mapScores = scores.flatten.toMap
+
+      //transposition table saving
+/*      val boardScores = mapScores.map { pair =>
+        (
+          currentBoard.map { cell =>
+            if (cell == pair._1.toString) {
+              curT
+            } else {
+              cell
+            }
+          },
+          pair._2
+        )
+      }
+
+      if(curT == maxT) {
+        boardScores.map { boardScore =>
+          val maxTranspositions = getBoardTranspositions(boardScore._1, boardScore._2, maxT, minT)
+          saveTranspositions(ttTable, maxTranspositions, "max")
+        }
+      } else {
+        boardScores.map { boardScore =>
+          val minTranspositions = getBoardTranspositions(boardScore._1, boardScore._2, maxT, minT)
+          saveTranspositions(ttTable, minTranspositions, "min")
+        }
+      }
+*/
 
       if(curT == maxT) {
         val v = -1001

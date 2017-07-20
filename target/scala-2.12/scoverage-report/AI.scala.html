@@ -1,0 +1,4811 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          AI.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
+</span>2 <span style=''>
+</span>3 <span style=''>import scala.annotation.tailrec
+</span>4 <span style=''>
+</span>5 <span style=''>object AI {
+</span>6 <span style=''>
+</span>7 <span style=''>  class AlphaBeta {
+</span>8 <span style=''>    var alpha: Double = </span><span style='background: #AEF1AE'>Double.NegativeInfinity</span><span style=''>
+</span>9 <span style=''>    var beta: Double = </span><span style='background: #AEF1AE'>Double.PositiveInfinity</span><span style=''>
+</span>10 <span style=''>  }
+</span>11 <span style=''>
+</span>12 <span style=''>  class TranspositionTable {
+</span>13 <span style=''>    var min = </span><span style='background: #AEF1AE'>scala.collection.mutable.Map[String, Int]()</span><span style=''>
+</span>14 <span style=''>    var max = </span><span style='background: #AEF1AE'>scala.collection.mutable.Map[String, Int]()</span><span style=''>
+</span>15 <span style=''>  }
+</span>16 <span style=''>
+</span>17 <span style=''>  def getBoardTranspositions(
+</span>18 <span style=''>    board: List[String],
+</span>19 <span style=''>    score: Int,
+</span>20 <span style=''>    p1Token: String,
+</span>21 <span style=''>    p2Token: String): List[(String, Int)] = {
+</span>22 <span style=''>
+</span>23 <span style=''>    val generalizedBoard = </span><span style='background: #AEF1AE'>board.map { x =&gt;
+</span>24 <span style=''></span><span style='background: #AEF1AE'>      x match {
+</span>25 <span style=''></span><span style='background: #AEF1AE'>        case `p1Token` =&gt; p1Token
+</span>26 <span style=''></span><span style='background: #AEF1AE'>        case `p2Token` =&gt; p2Token
+</span>27 <span style=''></span><span style='background: #AEF1AE'>        case _ =&gt; &quot;-&quot;
+</span>28 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>29 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>30 <span style=''>    val rowLists = </span><span style='background: #AEF1AE'>Board.returnRows(generalizedBoard)</span><span style=''>
+</span>31 <span style=''>    val b1 = </span><span style='background: #AEF1AE'>rowLists.flatten.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>32 <span style=''>    val b2 = </span><span style='background: #AEF1AE'>rowLists.transpose.flatten.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>33 <span style=''>    val b3 = </span><span style='background: #AEF1AE'>b1.reverse</span><span style=''>
+</span>34 <span style=''>    val b4 = </span><span style='background: #AEF1AE'>b2.reverse</span><span style=''>
+</span>35 <span style=''>
+</span>36 <span style=''>    val transpositions = </span><span style='background: #AEF1AE'>List(
+</span>37 <span style=''></span><span style='background: #AEF1AE'>      (b1 -&gt; score),
+</span>38 <span style=''></span><span style='background: #AEF1AE'>      (b2 -&gt; score),
+</span>39 <span style=''></span><span style='background: #AEF1AE'>      (b3 -&gt; score),
+</span>40 <span style=''></span><span style='background: #AEF1AE'>      (b4 -&gt; score)
+</span>41 <span style=''></span><span style='background: #AEF1AE'>    )</span><span style=''>
+</span>42 <span style=''>    transpositions
+</span>43 <span style=''>  }
+</span>44 <span style=''>
+</span>45 <span style=''>  def saveTranspositions(
+</span>46 <span style=''>    tt: TranspositionTable,
+</span>47 <span style=''>    values: List[(String, Int)],
+</span>48 <span style=''>    minOrMax: String): Unit = {
+</span>49 <span style=''>    val path = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>tt.min</span><span style=''> else </span><span style='background: #AEF1AE'>tt.max</span><span style=''>
+</span>50 <span style=''>    </span><span style='background: #AEF1AE'>for (value &lt;- values) {
+</span>51 <span style=''></span><span style='background: #AEF1AE'>      path += value</span><span style=''>
+</span>52 <span style=''>    }
+</span>53 <span style=''>  }
+</span>54 <span style=''>
+</span>55 <span style=''>  def checkTransposition(
+</span>56 <span style=''>    boardState: List[String],
+</span>57 <span style=''>    ttTable: TranspositionTable,
+</span>58 <span style=''>    p1Token: String,
+</span>59 <span style=''>    p2Token: String,
+</span>60 <span style=''>    minOrMax: String): (Boolean, Int) = {
+</span>61 <span style=''>    val generalizedBoard = </span><span style='background: #AEF1AE'>boardState.map {x =&gt;
+</span>62 <span style=''></span><span style='background: #AEF1AE'>      if(x == p1Token) {
+</span>63 <span style=''></span><span style='background: #AEF1AE'>        p1Token
+</span>64 <span style=''></span><span style='background: #AEF1AE'>      } else if(x == p2Token) {
+</span>65 <span style=''></span><span style='background: #AEF1AE'>        p2Token
+</span>66 <span style=''></span><span style='background: #AEF1AE'>      } else {
+</span>67 <span style=''></span><span style='background: #AEF1AE'>        &quot;-&quot;
+</span>68 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>69 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>70 <span style=''>    val path = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>ttTable.min</span><span style=''> else </span><span style='background: #AEF1AE'>ttTable.max</span><span style=''>
+</span>71 <span style=''>    val boardKey = </span><span style='background: #AEF1AE'>generalizedBoard.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>72 <span style=''>    val keyPresent = </span><span style='background: #AEF1AE'>path.contains(boardKey)</span><span style=''>
+</span>73 <span style=''>    if(keyPresent) </span><span style='background: #F0ADAD'>{
+</span>74 <span style=''></span><span style='background: #F0ADAD'>      val score = path(boardKey)
+</span>75 <span style=''></span><span style='background: #F0ADAD'>      (true, score)
+</span>76 <span style=''></span><span style='background: #F0ADAD'>    }</span><span style=''> else {
+</span>77 <span style=''>      </span><span style='background: #AEF1AE'>(false, 0)</span><span style=''>
+</span>78 <span style=''>    }
+</span>79 <span style=''>  }
+</span>80 <span style=''>
+</span>81 <span style=''>  def setDepthLimit(boardSize: Int, difficulty: String): Int = {
+</span>82 <span style=''>    boardSize match {
+</span>83 <span style=''>      case 9 =&gt; difficulty match {
+</span>84 <span style=''>        case &quot;easy&quot; =&gt; </span><span style='background: #AEF1AE'>1</span><span style=''>
+</span>85 <span style=''>        case &quot;medium&quot; =&gt; </span><span style='background: #AEF1AE'>3</span><span style=''>
+</span>86 <span style=''>        case &quot;hard&quot; =&gt; </span><span style='background: #AEF1AE'>100</span><span style=''>
+</span>87 <span style=''>      }
+</span>88 <span style=''>      case 16 =&gt; difficulty match {
+</span>89 <span style=''>        case &quot;easy&quot; =&gt; </span><span style='background: #AEF1AE'>1</span><span style=''>
+</span>90 <span style=''>        case &quot;medium&quot; =&gt; </span><span style='background: #AEF1AE'>3</span><span style=''>
+</span>91 <span style=''>        case &quot;hard&quot; =&gt; </span><span style='background: #AEF1AE'>6</span><span style=''>
+</span>92 <span style=''>      }
+</span>93 <span style=''>      case 25 =&gt; difficulty match {
+</span>94 <span style=''>        case &quot;easy&quot; =&gt; </span><span style='background: #AEF1AE'>1</span><span style=''>
+</span>95 <span style=''>        case &quot;medium&quot; =&gt; </span><span style='background: #AEF1AE'>3</span><span style=''>
+</span>96 <span style=''>        case &quot;hard&quot; =&gt; </span><span style='background: #AEF1AE'>5</span><span style=''>
+</span>97 <span style=''>      }
+</span>98 <span style=''>      case _ =&gt; difficulty match {
+</span>99 <span style=''>        case &quot;easy&quot; =&gt; </span><span style='background: #AEF1AE'>1</span><span style=''>
+</span>100 <span style=''>        case &quot;medium&quot; =&gt; </span><span style='background: #AEF1AE'>3</span><span style=''>
+</span>101 <span style=''>        case &quot;hard&quot; =&gt; </span><span style='background: #AEF1AE'>4</span><span style=''>
+</span>102 <span style=''>      }
+</span>103 <span style=''>    }
+</span>104 <span style=''>  }
+</span>105 <span style=''>
+</span>106 <span style=''>  def getComputerMove(
+</span>107 <span style=''>    origBoardState: List[String],
+</span>108 <span style=''>    maxPlayerToken: String,
+</span>109 <span style=''>    minPlayerToken: String,
+</span>110 <span style=''>    currentPlayerToken: String,
+</span>111 <span style=''>    ttTable: TranspositionTable,
+</span>112 <span style=''>    difficulty: String): Int = {
+</span>113 <span style=''>
+</span>114 <span style=''>    val boardSize = </span><span style='background: #AEF1AE'>origBoardState.length</span><span style=''>
+</span>115 <span style=''>    val alphaBeta = </span><span style='background: #AEF1AE'>new AlphaBeta</span><span style=''>
+</span>116 <span style=''>
+</span>117 <span style=''>    val depthLimit = </span><span style='background: #AEF1AE'>setDepthLimit(boardSize, difficulty)</span><span style=''>
+</span>118 <span style=''>
+</span>119 <span style=''>    def miniMax(
+</span>120 <span style=''>      currentBoard: List[String],
+</span>121 <span style=''>      depth: Int,
+</span>122 <span style=''>      maxT: String,
+</span>123 <span style=''>      minT: String,
+</span>124 <span style=''>      curT: String): Map[Int, Int]  = {
+</span>125 <span style=''>
+</span>126 <span style=''>      val openMoves = </span><span style='background: #AEF1AE'>Board.returnValidInputs(currentBoard).map(x =&gt; x.toInt - 1)</span><span style=''>
+</span>127 <span style=''>
+</span>128 <span style=''>      val scores = </span><span style='background: #AEF1AE'>openMoves.map(move =&gt;
+</span>129 <span style=''></span><span style='background: #AEF1AE'>        //maxpath
+</span>130 <span style=''></span><span style='background: #AEF1AE'>        if(depth &gt;= depthLimit) {
+</span>131 <span style=''></span><span style='background: #AEF1AE'>          val depthLimitScore = if(curT == maxT) -1000 + depth + 2 else </span><span style='background: #F0ADAD'>1000 - depth - 2</span><span style='background: #AEF1AE'>
+</span>132 <span style=''></span><span style='background: #AEF1AE'>          Map(move -&gt; depthLimitScore)
+</span>133 <span style=''></span><span style='background: #AEF1AE'>        } else if(curT == maxT) {
+</span>134 <span style=''></span><span style='background: #AEF1AE'>          val maxScore = 1000 - depth
+</span>135 <span style=''></span><span style='background: #AEF1AE'>          val maxBoardMove: List[String] = currentBoard.map(x =&gt; if(x == (move+1).toString) curT else x)
+</span>136 <span style=''></span><span style='background: #AEF1AE'>          val maxWin = Board.checkWin(maxBoardMove)
+</span>137 <span style=''></span><span style='background: #AEF1AE'>          val maxTie = Board.checkTie(maxBoardMove)
+</span>138 <span style=''></span><span style='background: #AEF1AE'>          if(maxWin) {
+</span>139 <span style=''></span><span style='background: #AEF1AE'>            val maxTranspositions = getBoardTranspositions(maxBoardMove, maxScore, maxT, minT)
+</span>140 <span style=''></span><span style='background: #AEF1AE'>            saveTranspositions(ttTable, maxTranspositions, &quot;max&quot;)
+</span>141 <span style=''></span><span style='background: #AEF1AE'>            Map(move -&gt; maxScore)
+</span>142 <span style=''></span><span style='background: #AEF1AE'>          } else if(maxTie) {
+</span>143 <span style=''></span><span style='background: #AEF1AE'>            val maxTieTranspositions = getBoardTranspositions(maxBoardMove, 0, maxT, minT)
+</span>144 <span style=''></span><span style='background: #AEF1AE'>            saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;)
+</span>145 <span style=''></span><span style='background: #AEF1AE'>            Map(move -&gt; 0)
+</span>146 <span style=''></span><span style='background: #AEF1AE'>          } else {
+</span>147 <span style=''></span><span style='background: #AEF1AE'>            val checkTransTable = checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;)
+</span>148 <span style=''></span><span style='background: #AEF1AE'>            if(checkTransTable._1 == true) {
+</span>149 <span style=''></span><span style='background: #AEF1AE'>              </span><span style='background: #F0ADAD'>Map(move -&gt; checkTransTable._2)</span><span style='background: #AEF1AE'>
+</span>150 <span style=''></span><span style='background: #AEF1AE'>            } else {
+</span>151 <span style=''></span><span style='background: #AEF1AE'>              val mmResult = miniMax(maxBoardMove, depth + 1, maxT, minT, minT)
+</span>152 <span style=''></span><span style='background: #AEF1AE'>              val mmScore = mmResult(mmResult.keys.head)
+</span>153 <span style=''></span><span style='background: #AEF1AE'>              Map(move -&gt; mmScore)
+</span>154 <span style=''></span><span style='background: #AEF1AE'>            }
+</span>155 <span style=''></span><span style='background: #AEF1AE'>          }
+</span>156 <span style=''></span><span style='background: #AEF1AE'>        //min path
+</span>157 <span style=''></span><span style='background: #AEF1AE'>        } else {
+</span>158 <span style=''></span><span style='background: #AEF1AE'>          val minScore = -1000 + depth
+</span>159 <span style=''></span><span style='background: #AEF1AE'>          val minBoardMove: List[String] = currentBoard.map(x =&gt; if(x == (move+1).toString) curT else x)
+</span>160 <span style=''></span><span style='background: #AEF1AE'>          val minWin = Board.checkWin(minBoardMove)
+</span>161 <span style=''></span><span style='background: #AEF1AE'>          val minTie = Board.checkTie(minBoardMove)
+</span>162 <span style=''></span><span style='background: #AEF1AE'>          if(minWin) {
+</span>163 <span style=''></span><span style='background: #AEF1AE'>            val minTranspositions = getBoardTranspositions(minBoardMove, minScore, maxT, minT)
+</span>164 <span style=''></span><span style='background: #AEF1AE'>            saveTranspositions(ttTable, minTranspositions, &quot;min&quot;)
+</span>165 <span style=''></span><span style='background: #AEF1AE'>            Map(move -&gt; minScore)
+</span>166 <span style=''></span><span style='background: #AEF1AE'>          } else if(minTie) {
+</span>167 <span style=''></span><span style='background: #AEF1AE'>            val minTieTranspostitions = getBoardTranspositions(minBoardMove, 0, maxT, minT)
+</span>168 <span style=''></span><span style='background: #AEF1AE'>            saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;)
+</span>169 <span style=''></span><span style='background: #AEF1AE'>            Map(move -&gt; 0)
+</span>170 <span style=''></span><span style='background: #AEF1AE'>          } else {
+</span>171 <span style=''></span><span style='background: #AEF1AE'>            val checkTransTable = checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;)
+</span>172 <span style=''></span><span style='background: #AEF1AE'>            if(checkTransTable._1 == true) {
+</span>173 <span style=''></span><span style='background: #AEF1AE'>              </span><span style='background: #F0ADAD'>Map(move -&gt; checkTransTable._2)</span><span style='background: #AEF1AE'>
+</span>174 <span style=''></span><span style='background: #AEF1AE'>            } else {
+</span>175 <span style=''></span><span style='background: #AEF1AE'>              val mmResult = miniMax(minBoardMove, depth + 1, maxT, minT, maxT)
+</span>176 <span style=''></span><span style='background: #AEF1AE'>              val mmScore = mmResult(mmResult.keys.head)
+</span>177 <span style=''></span><span style='background: #AEF1AE'>              Map(move -&gt; mmScore)
+</span>178 <span style=''></span><span style='background: #AEF1AE'>            }
+</span>179 <span style=''></span><span style='background: #AEF1AE'>          }
+</span>180 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>181 <span style=''></span><span style='background: #AEF1AE'>      )</span><span style=''>
+</span>182 <span style=''>
+</span>183 <span style=''>      val mapScores = </span><span style='background: #AEF1AE'>scores.flatten.toMap</span><span style=''>
+</span>184 <span style=''>
+</span>185 <span style=''>      if(</span><span style='background: #AEF1AE'>curT == maxT</span><span style=''>) </span><span style='background: #AEF1AE'>{
+</span>186 <span style=''></span><span style='background: #AEF1AE'>        val v = -1001
+</span>187 <span style=''></span><span style='background: #AEF1AE'>        val maxTupleScore = mapScores.maxBy(_._2)
+</span>188 <span style=''></span><span style='background: #AEF1AE'>        val maxMapScore = Map(maxTupleScore._1 -&gt; maxTupleScore._2)
+</span>189 <span style=''></span><span style='background: #AEF1AE'>        alphaBeta.alpha = List(maxTupleScore._2, alphaBeta.alpha.toInt, v).max
+</span>190 <span style=''></span><span style='background: #AEF1AE'>        if(alphaBeta.beta &lt;= alphaBeta.alpha) {
+</span>191 <span style=''></span><span style='background: #AEF1AE'>          </span><span style='background: #F0ADAD'>Map(maxTupleScore._1 -&gt; v)</span><span style='background: #AEF1AE'>
+</span>192 <span style=''></span><span style='background: #AEF1AE'>        } else {
+</span>193 <span style=''></span><span style='background: #AEF1AE'>          maxMapScore
+</span>194 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>195 <span style=''></span><span style='background: #AEF1AE'>      }</span><span style=''> else </span><span style='background: #AEF1AE'>{
+</span>196 <span style=''></span><span style='background: #AEF1AE'>        val v = 1001
+</span>197 <span style=''></span><span style='background: #AEF1AE'>        val minTupleScore = mapScores.minBy(_._2)
+</span>198 <span style=''></span><span style='background: #AEF1AE'>        val minMapScore = Map(minTupleScore._1 -&gt; minTupleScore._2)
+</span>199 <span style=''></span><span style='background: #AEF1AE'>        alphaBeta.beta = List(minTupleScore._2, alphaBeta.beta.toInt, v).max
+</span>200 <span style=''></span><span style='background: #AEF1AE'>        if(alphaBeta.beta &lt;= alphaBeta.alpha) {
+</span>201 <span style=''></span><span style='background: #AEF1AE'>          </span><span style='background: #F0ADAD'>Map(minTupleScore._1 -&gt; v)</span><span style='background: #AEF1AE'>
+</span>202 <span style=''></span><span style='background: #AEF1AE'>        } else {
+</span>203 <span style=''></span><span style='background: #AEF1AE'>          minMapScore
+</span>204 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>205 <span style=''></span><span style='background: #AEF1AE'>      }</span><span style=''>
+</span>206 <span style=''>    }
+</span>207 <span style=''>    //call the recursive function
+</span>208 <span style=''>    val result = </span><span style='background: #AEF1AE'>miniMax(origBoardState, 1, maxPlayerToken, minPlayerToken, maxPlayerToken)</span><span style=''>
+</span>209 <span style=''>    </span><span style='background: #AEF1AE'>result.keys.head</span><span style=''>
+</span>210 <span style=''>  }
+</span>211 <span style=''>}
+</span>212 <span style=''>// val board = List(&quot;X&quot;,&quot;O&quot;,&quot;X&quot;,&quot;X&quot;,&quot;O&quot;,&quot;X&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;)
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          8
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          109
+          -
+          132
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          -Infinity
+        </td>
+      </tr><tr>
+        <td>
+          9
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          156
+          -
+          179
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          Infinity
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          3
+        </td>
+        <td>
+          228
+          -
+          271
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.mutable.Map.apply[String, Int]()
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          4
+        </td>
+        <td>
+          286
+          -
+          329
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.mutable.Map.apply[String, Int]()
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          7
+        </td>
+        <td>
+          501
+          -
+          637
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          board.map[String, List[String]](((x: String) =&gt; x match {
+  case `p1Token` =&gt; p1Token
+  case `p2Token` =&gt; p2Token
+  case _ =&gt; &quot;-&quot;
+}))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          6
+        </td>
+        <td>
+          511
+          -
+          511
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          5
+        </td>
+        <td>
+          620
+          -
+          623
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          8
+        </td>
+        <td>
+          657
+          -
+          691
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.returnRows
+        </td>
+        <td style="background: #AEF1AE">
+          Board.returnRows(generalizedBoard)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          11
+        </td>
+        <td>
+          735
+          -
+          740
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$1.+(x$2)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          731
+          -
+          733
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          9
+        </td>
+        <td>
+          714
+          -
+          714
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[List[String]]
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          12
+        </td>
+        <td>
+          705
+          -
+          741
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          rowLists.flatten[String](scala.Predef.$conforms[List[String]]).foldLeft[String](&quot;&quot;)(((x$1: String, x$2: String) =&gt; x$1.+(x$2)))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          17
+        </td>
+        <td>
+          755
+          -
+          801
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          rowLists.transpose[String](scala.Predef.$conforms[List[String]]).flatten[String](scala.Predef.$conforms[List[String]]).foldLeft[String](&quot;&quot;)(((x$3: String, x$4: String) =&gt; x$3.+(x$4)))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          14
+        </td>
+        <td>
+          774
+          -
+          774
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[List[String]]
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          13
+        </td>
+        <td>
+          764
+          -
+          764
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[List[String]]
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          795
+          -
+          800
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$3.+(x$4)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          791
+          -
+          793
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          18
+        </td>
+        <td>
+          815
+          -
+          825
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.reverse
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(b1).reverse
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          19
+        </td>
+        <td>
+          839
+          -
+          849
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.reverse
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(b2).reverse
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          24
+        </td>
+        <td>
+          876
+          -
+          970
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[(String, Int)](scala.Predef.ArrowAssoc[String](b1).-&gt;[Int](score), scala.Predef.ArrowAssoc[String](b2).-&gt;[Int](score), scala.Predef.ArrowAssoc[String](b3).-&gt;[Int](score), scala.Predef.ArrowAssoc[String](b4).-&gt;[Int](score))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          20
+        </td>
+        <td>
+          889
+          -
+          900
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](b1).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          21
+        </td>
+        <td>
+          910
+          -
+          921
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](b2).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          22
+        </td>
+        <td>
+          931
+          -
+          942
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](b3).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          23
+        </td>
+        <td>
+          952
+          -
+          963
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](b4).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          26
+        </td>
+        <td>
+          1151
+          -
+          1157
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.min
+        </td>
+        <td style="background: #AEF1AE">
+          tt.min
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          29
+        </td>
+        <td>
+          1163
+          -
+          1169
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          tt.max
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          25
+        </td>
+        <td>
+          1132
+          -
+          1149
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          minOrMax.==(&quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          28
+        </td>
+        <td>
+          1163
+          -
+          1169
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          tt.max
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          27
+        </td>
+        <td>
+          1151
+          -
+          1157
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.min
+        </td>
+        <td style="background: #AEF1AE">
+          tt.min
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          31
+        </td>
+        <td>
+          1174
+          -
+          1217
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.foreach
+        </td>
+        <td style="background: #AEF1AE">
+          values.foreach[scala.collection.mutable.Map[String,Int]](((value: (String, Int)) =&gt; path.+=(value)))
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          30
+        </td>
+        <td>
+          1204
+          -
+          1217
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.mutable.MapLike.+=
+        </td>
+        <td style="background: #AEF1AE">
+          path.+=(value)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          1429
+          -
+          1579
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          boardState.map[String, List[String]](((x: String) =&gt; if (x.==(p1Token))
+  p1Token
+else
+  if (x.==(p2Token))
+    p2Token
+  else
+    &quot;-&quot;))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          39
+        </td>
+        <td>
+          1444
+          -
+          1444
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          32
+        </td>
+        <td>
+          1459
+          -
+          1471
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(p1Token)
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          33
+        </td>
+        <td>
+          1483
+          -
+          1490
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.p1Token
+        </td>
+        <td style="background: #AEF1AE">
+          p1Token
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          38
+        </td>
+        <td>
+          1504
+          -
+          1573
+        </td>
+        <td>
+          If
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          if (x.==(p2Token))
+  p2Token
+else
+  &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          34
+        </td>
+        <td>
+          1507
+          -
+          1519
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(p2Token)
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          35
+        </td>
+        <td>
+          1531
+          -
+          1538
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.p2Token
+        </td>
+        <td style="background: #AEF1AE">
+          p2Token
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          37
+        </td>
+        <td>
+          1562
+          -
+          1565
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          36
+        </td>
+        <td>
+          1562
+          -
+          1565
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          41
+        </td>
+        <td>
+          1598
+          -
+          1615
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          minOrMax.==(&quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          44
+        </td>
+        <td>
+          1634
+          -
+          1645
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.max
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          43
+        </td>
+        <td>
+          1617
+          -
+          1628
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.min
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.min
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          45
+        </td>
+        <td>
+          1634
+          -
+          1645
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.max
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          42
+        </td>
+        <td>
+          1617
+          -
+          1628
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.AI.TranspositionTable.min
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.min
+        </td>
+      </tr><tr>
+        <td>
+          71
+        </td>
+        <td>
+          47
+        </td>
+        <td>
+          1695
+          -
+          1700
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$5.+(x$6)
+        </td>
+      </tr><tr>
+        <td>
+          71
+        </td>
+        <td>
+          46
+        </td>
+        <td>
+          1691
+          -
+          1693
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          71
+        </td>
+        <td>
+          48
+        </td>
+        <td>
+          1665
+          -
+          1701
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          generalizedBoard.foldLeft[String](&quot;&quot;)(((x$5: String, x$6: String) =&gt; x$5.+(x$6)))
+        </td>
+      </tr><tr>
+        <td>
+          72
+        </td>
+        <td>
+          49
+        </td>
+        <td>
+          1723
+          -
+          1746
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.contains
+        </td>
+        <td style="background: #AEF1AE">
+          path.contains(boardKey)
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          52
+        </td>
+        <td>
+          1766
+          -
+          1826
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          {
+  val score: Int = path.apply(boardKey);
+  scala.Tuple2.apply[Boolean, Int](true, score)
+}
+        </td>
+      </tr><tr>
+        <td>
+          74
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          1786
+          -
+          1800
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #F0ADAD">
+          path.apply(boardKey)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          51
+        </td>
+        <td>
+          1807
+          -
+          1820
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Tuple2.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Tuple2.apply[Boolean, Int](true, score)
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          53
+        </td>
+        <td>
+          1840
+          -
+          1850
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Tuple2.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Tuple2.apply[Boolean, Int](false, 0)
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          54
+        </td>
+        <td>
+          1840
+          -
+          1850
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.Tuple2.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Tuple2.apply[Boolean, Int](false, 0)
+        </td>
+      </tr><tr>
+        <td>
+          84
+        </td>
+        <td>
+          55
+        </td>
+        <td>
+          2007
+          -
+          2008
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          85
+        </td>
+        <td>
+          56
+        </td>
+        <td>
+          2034
+          -
+          2035
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          3
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          57
+        </td>
+        <td>
+          2059
+          -
+          2062
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          100
+        </td>
+      </tr><tr>
+        <td>
+          89
+        </td>
+        <td>
+          58
+        </td>
+        <td>
+          2130
+          -
+          2131
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          2157
+          -
+          2158
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          3
+        </td>
+      </tr><tr>
+        <td>
+          91
+        </td>
+        <td>
+          60
+        </td>
+        <td>
+          2182
+          -
+          2183
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          6
+        </td>
+      </tr><tr>
+        <td>
+          94
+        </td>
+        <td>
+          61
+        </td>
+        <td>
+          2251
+          -
+          2252
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          95
+        </td>
+        <td>
+          62
+        </td>
+        <td>
+          2278
+          -
+          2279
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          3
+        </td>
+      </tr><tr>
+        <td>
+          96
+        </td>
+        <td>
+          63
+        </td>
+        <td>
+          2303
+          -
+          2304
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          5
+        </td>
+      </tr><tr>
+        <td>
+          99
+        </td>
+        <td>
+          64
+        </td>
+        <td>
+          2371
+          -
+          2372
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          100
+        </td>
+        <td>
+          65
+        </td>
+        <td>
+          2398
+          -
+          2399
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          3
+        </td>
+      </tr><tr>
+        <td>
+          101
+        </td>
+        <td>
+          66
+        </td>
+        <td>
+          2423
+          -
+          2424
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          4
+        </td>
+      </tr><tr>
+        <td>
+          114
+        </td>
+        <td>
+          67
+        </td>
+        <td>
+          2676
+          -
+          2697
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.length
+        </td>
+        <td style="background: #AEF1AE">
+          origBoardState.length
+        </td>
+      </tr><tr>
+        <td>
+          115
+        </td>
+        <td>
+          68
+        </td>
+        <td>
+          2718
+          -
+          2731
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.AlphaBeta.&lt;init&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          new AI.this.AlphaBeta()
+        </td>
+      </tr><tr>
+        <td>
+          117
+        </td>
+        <td>
+          69
+        </td>
+        <td>
+          2754
+          -
+          2790
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.setDepthLimit
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.setDepthLimit(boardSize, difficulty)
+        </td>
+      </tr><tr>
+        <td>
+          126
+        </td>
+        <td>
+          71
+        </td>
+        <td>
+          3005
+          -
+          3005
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[Int]
+        </td>
+      </tr><tr>
+        <td>
+          126
+        </td>
+        <td>
+          70
+        </td>
+        <td>
+          3011
+          -
+          3022
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(x).toInt.-(1)
+        </td>
+      </tr><tr>
+        <td>
+          126
+        </td>
+        <td>
+          72
+        </td>
+        <td>
+          2964
+          -
+          3023
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          Board.returnValidInputs(currentBoard).map[Int, List[Int]](((x: String) =&gt; scala.Predef.augmentString(x).toInt.-(1)))(immutable.this.List.canBuildFrom[Int])
+        </td>
+      </tr><tr>
+        <td>
+          128
+        </td>
+        <td>
+          155
+        </td>
+        <td>
+          3044
+          -
+          5548
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          openMoves.map[scala.collection.immutable.Map[Int,Int], List[scala.collection.immutable.Map[Int,Int]]](((move: Int) =&gt; if (depth.&gt;=(depthLimit))
+  {
+    val depthLimitScore: Int = if (curT.==(maxT))
+      -1000.+(depth).+(2)
+    else
+      1000.-(depth).-(2);
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](depthLimitScore))
+  }
+else
+  if (curT.==(maxT))
+    {
+      val maxScore: Int = 1000.-(depth);
+      val maxBoardMove: List[String] = currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+        curT
+      else
+        x))(immutable.this.List.canBuildFrom[String]);
+      val maxWin: Boolean = Board.checkWin(maxBoardMove);
+      val maxTie: Boolean = Board.checkTie(maxBoardMove);
+      if (maxWin)
+        {
+          val maxTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, maxScore, maxT, minT);
+          AI.this.saveTranspositions(ttTable, maxTranspositions, &quot;max&quot;);
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](maxScore))
+        }
+      else
+        if (maxTie)
+          {
+            val maxTieTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, 0, maxT, minT);
+            AI.this.saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;);
+            scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+          }
+        else
+          {
+            val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;);
+            if (checkTransTable._1.==(true))
+              scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+            else
+              {
+                val mmResult: Map[Int,Int] = miniMax(maxBoardMove, depth.+(1), maxT, minT, minT);
+                val mmScore: Int = mmResult.apply(mmResult.keys.head);
+                scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+              }
+          }
+    }
+  else
+    {
+      val minScore: Int = -1000.+(depth);
+      val minBoardMove: List[String] = currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+        curT
+      else
+        x))(immutable.this.List.canBuildFrom[String]);
+      val minWin: Boolean = Board.checkWin(minBoardMove);
+      val minTie: Boolean = Board.checkTie(minBoardMove);
+      if (minWin)
+        {
+          val minTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, minScore, maxT, minT);
+          AI.this.saveTranspositions(ttTable, minTranspositions, &quot;min&quot;);
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](minScore))
+        }
+      else
+        if (minTie)
+          {
+            val minTieTranspostitions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, 0, maxT, minT);
+            AI.this.saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;);
+            scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+          }
+        else
+          {
+            val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;);
+            if (checkTransTable._1.==(true))
+              scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+            else
+              {
+                val mmResult: Map[Int,Int] = miniMax(minBoardMove, depth.+(1), maxT, minT, maxT);
+                val mmScore: Int = mmResult.apply(mmResult.keys.head);
+                scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+              }
+          }
+    }))(immutable.this.List.canBuildFrom[scala.collection.immutable.Map[Int,Int]])
+        </td>
+      </tr><tr>
+        <td>
+          128
+        </td>
+        <td>
+          154
+        </td>
+        <td>
+          3057
+          -
+          3057
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[scala.collection.immutable.Map[Int,Int]]
+        </td>
+      </tr><tr>
+        <td>
+          130
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          3095
+          -
+          3114
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.&gt;=
+        </td>
+        <td style="background: #AEF1AE">
+          depth.&gt;=(depthLimit)
+        </td>
+      </tr><tr>
+        <td>
+          130
+        </td>
+        <td>
+          81
+        </td>
+        <td>
+          3116
+          -
+          3255
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val depthLimitScore: Int = if (curT.==(maxT))
+    -1000.+(depth).+(2)
+  else
+    1000.-(depth).-(2);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](depthLimitScore))
+}
+        </td>
+      </tr><tr>
+        <td>
+          131
+        </td>
+        <td>
+          77
+        </td>
+        <td>
+          3190
+          -
+          3206
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #F0ADAD">
+          1000.-(depth).-(2)
+        </td>
+      </tr><tr>
+        <td>
+          131
+        </td>
+        <td>
+          74
+        </td>
+        <td>
+          3153
+          -
+          3165
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          curT.==(maxT)
+        </td>
+      </tr><tr>
+        <td>
+          131
+        </td>
+        <td>
+          76
+        </td>
+        <td>
+          3168
+          -
+          3184
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.Int.+
+        </td>
+        <td style="background: #AEF1AE">
+          -1000.+(depth).+(2)
+        </td>
+      </tr><tr>
+        <td>
+          131
+        </td>
+        <td>
+          78
+        </td>
+        <td>
+          3190
+          -
+          3206
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #F0ADAD">
+          1000.-(depth).-(2)
+        </td>
+      </tr><tr>
+        <td>
+          131
+        </td>
+        <td>
+          75
+        </td>
+        <td>
+          3168
+          -
+          3184
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.+
+        </td>
+        <td style="background: #AEF1AE">
+          -1000.+(depth).+(2)
+        </td>
+      </tr><tr>
+        <td>
+          132
+        </td>
+        <td>
+          80
+        </td>
+        <td>
+          3217
+          -
+          3245
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](depthLimitScore))
+        </td>
+      </tr><tr>
+        <td>
+          132
+        </td>
+        <td>
+          79
+        </td>
+        <td>
+          3221
+          -
+          3244
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](depthLimitScore)
+        </td>
+      </tr><tr>
+        <td>
+          133
+        </td>
+        <td>
+          82
+        </td>
+        <td>
+          3264
+          -
+          3276
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          curT.==(maxT)
+        </td>
+      </tr><tr>
+        <td>
+          133
+        </td>
+        <td>
+          153
+        </td>
+        <td>
+          3261
+          -
+          5540
+        </td>
+        <td>
+          If
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          if (curT.==(maxT))
+  {
+    val maxScore: Int = 1000.-(depth);
+    val maxBoardMove: List[String] = currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+      curT
+    else
+      x))(immutable.this.List.canBuildFrom[String]);
+    val maxWin: Boolean = Board.checkWin(maxBoardMove);
+    val maxTie: Boolean = Board.checkTie(maxBoardMove);
+    if (maxWin)
+      {
+        val maxTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, maxScore, maxT, minT);
+        AI.this.saveTranspositions(ttTable, maxTranspositions, &quot;max&quot;);
+        scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](maxScore))
+      }
+    else
+      if (maxTie)
+        {
+          val maxTieTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, 0, maxT, minT);
+          AI.this.saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;);
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+        }
+      else
+        {
+          val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;);
+          if (checkTransTable._1.==(true))
+            scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+          else
+            {
+              val mmResult: Map[Int,Int] = miniMax(maxBoardMove, depth.+(1), maxT, minT, minT);
+              val mmScore: Int = mmResult.apply(mmResult.keys.head);
+              scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+            }
+        }
+  }
+else
+  {
+    val minScore: Int = -1000.+(depth);
+    val minBoardMove: List[String] = currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+      curT
+    else
+      x))(immutable.this.List.canBuildFrom[String]);
+    val minWin: Boolean = Board.checkWin(minBoardMove);
+    val minTie: Boolean = Board.checkTie(minBoardMove);
+    if (minWin)
+      {
+        val minTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, minScore, maxT, minT);
+        AI.this.saveTranspositions(ttTable, minTranspositions, &quot;min&quot;);
+        scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](minScore))
+      }
+    else
+      if (minTie)
+        {
+          val minTieTranspostitions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, 0, maxT, minT);
+          AI.this.saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;);
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+        }
+      else
+        {
+          val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;);
+          if (checkTransTable._1.==(true))
+            scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+          else
+            {
+              val mmResult: Map[Int,Int] = miniMax(minBoardMove, depth.+(1), maxT, minT, maxT);
+              val mmScore: Int = mmResult.apply(mmResult.keys.head);
+              scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+            }
+        }
+  }
+        </td>
+      </tr><tr>
+        <td>
+          133
+        </td>
+        <td>
+          117
+        </td>
+        <td>
+          3278
+          -
+          4414
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val maxScore: Int = 1000.-(depth);
+  val maxBoardMove: List[String] = currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+    curT
+  else
+    x))(immutable.this.List.canBuildFrom[String]);
+  val maxWin: Boolean = Board.checkWin(maxBoardMove);
+  val maxTie: Boolean = Board.checkTie(maxBoardMove);
+  if (maxWin)
+    {
+      val maxTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, maxScore, maxT, minT);
+      AI.this.saveTranspositions(ttTable, maxTranspositions, &quot;max&quot;);
+      scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](maxScore))
+    }
+  else
+    if (maxTie)
+      {
+        val maxTieTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, 0, maxT, minT);
+        AI.this.saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;);
+        scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+      }
+    else
+      {
+        val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;);
+        if (checkTransTable._1.==(true))
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+        else
+          {
+            val mmResult: Map[Int,Int] = miniMax(maxBoardMove, depth.+(1), maxT, minT, minT);
+            val mmScore: Int = mmResult.apply(mmResult.keys.head);
+            scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+          }
+      }
+}
+        </td>
+      </tr><tr>
+        <td>
+          134
+        </td>
+        <td>
+          83
+        </td>
+        <td>
+          3305
+          -
+          3317
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.-
+        </td>
+        <td style="background: #AEF1AE">
+          1000.-(depth)
+        </td>
+      </tr><tr>
+        <td>
+          135
+        </td>
+        <td>
+          86
+        </td>
+        <td>
+          3410
+          -
+          3414
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.curT
+        </td>
+        <td style="background: #AEF1AE">
+          curT
+        </td>
+      </tr><tr>
+        <td>
+          135
+        </td>
+        <td>
+          89
+        </td>
+        <td>
+          3361
+          -
+          3422
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+  curT
+else
+  x))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          135
+        </td>
+        <td>
+          85
+        </td>
+        <td>
+          3386
+          -
+          3408
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(move.+(1).toString())
+        </td>
+      </tr><tr>
+        <td>
+          135
+        </td>
+        <td>
+          88
+        </td>
+        <td>
+          3377
+          -
+          3377
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          135
+        </td>
+        <td>
+          87
+        </td>
+        <td>
+          3420
+          -
+          3421
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.x
+        </td>
+        <td style="background: #AEF1AE">
+          x
+        </td>
+      </tr><tr>
+        <td>
+          135
+        </td>
+        <td>
+          84
+        </td>
+        <td>
+          3392
+          -
+          3408
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Any.toString
+        </td>
+        <td style="background: #AEF1AE">
+          move.+(1).toString()
+        </td>
+      </tr><tr>
+        <td>
+          136
+        </td>
+        <td>
+          90
+        </td>
+        <td>
+          3446
+          -
+          3474
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkWin
+        </td>
+        <td style="background: #AEF1AE">
+          Board.checkWin(maxBoardMove)
+        </td>
+      </tr><tr>
+        <td>
+          137
+        </td>
+        <td>
+          91
+        </td>
+        <td>
+          3498
+          -
+          3526
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkTie
+        </td>
+        <td style="background: #AEF1AE">
+          Board.checkTie(maxBoardMove)
+        </td>
+      </tr><tr>
+        <td>
+          138
+        </td>
+        <td>
+          96
+        </td>
+        <td>
+          3548
+          -
+          3756
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val maxTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, maxScore, maxT, minT);
+  AI.this.saveTranspositions(ttTable, maxTranspositions, &quot;max&quot;);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](maxScore))
+}
+        </td>
+      </tr><tr>
+        <td>
+          139
+        </td>
+        <td>
+          92
+        </td>
+        <td>
+          3586
+          -
+          3644
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.getBoardTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.getBoardTranspositions(maxBoardMove, maxScore, maxT, minT)
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          93
+        </td>
+        <td>
+          3657
+          -
+          3710
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.saveTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.saveTranspositions(ttTable, maxTranspositions, &quot;max&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          95
+        </td>
+        <td>
+          3723
+          -
+          3744
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](maxScore))
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          94
+        </td>
+        <td>
+          3727
+          -
+          3743
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](maxScore)
+        </td>
+      </tr><tr>
+        <td>
+          142
+        </td>
+        <td>
+          101
+        </td>
+        <td>
+          3773
+          -
+          3973
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val maxTieTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, 0, maxT, minT);
+  AI.this.saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+}
+        </td>
+      </tr><tr>
+        <td>
+          142
+        </td>
+        <td>
+          116
+        </td>
+        <td>
+          3762
+          -
+          4385
+        </td>
+        <td>
+          If
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          if (maxTie)
+  {
+    val maxTieTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(maxBoardMove, 0, maxT, minT);
+    AI.this.saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;);
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+  }
+else
+  {
+    val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;);
+    if (checkTransTable._1.==(true))
+      scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+    else
+      {
+        val mmResult: Map[Int,Int] = miniMax(maxBoardMove, depth.+(1), maxT, minT, minT);
+        val mmScore: Int = mmResult.apply(mmResult.keys.head);
+        scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+      }
+  }
+        </td>
+      </tr><tr>
+        <td>
+          143
+        </td>
+        <td>
+          97
+        </td>
+        <td>
+          3814
+          -
+          3865
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.getBoardTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.getBoardTranspositions(maxBoardMove, 0, maxT, minT)
+        </td>
+      </tr><tr>
+        <td>
+          144
+        </td>
+        <td>
+          98
+        </td>
+        <td>
+          3878
+          -
+          3934
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.saveTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.saveTranspositions(ttTable, maxTieTranspositions, &quot;max&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          145
+        </td>
+        <td>
+          100
+        </td>
+        <td>
+          3947
+          -
+          3961
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+        </td>
+      </tr><tr>
+        <td>
+          145
+        </td>
+        <td>
+          99
+        </td>
+        <td>
+          3951
+          -
+          3960
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0)
+        </td>
+      </tr><tr>
+        <td>
+          146
+        </td>
+        <td>
+          115
+        </td>
+        <td>
+          3979
+          -
+          4385
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;);
+  if (checkTransTable._1.==(true))
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+  else
+    {
+      val mmResult: Map[Int,Int] = miniMax(maxBoardMove, depth.+(1), maxT, minT, minT);
+      val mmScore: Int = mmResult.apply(mmResult.keys.head);
+      scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+    }
+}
+        </td>
+      </tr><tr>
+        <td>
+          147
+        </td>
+        <td>
+          102
+        </td>
+        <td>
+          4015
+          -
+          4075
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.checkTransposition
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.checkTransposition(maxBoardMove, ttTable, maxT, minT, &quot;max&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          148
+        </td>
+        <td>
+          103
+        </td>
+        <td>
+          4091
+          -
+          4117
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Boolean.==
+        </td>
+        <td style="background: #AEF1AE">
+          checkTransTable._1.==(true)
+        </td>
+      </tr><tr>
+        <td>
+          149
+        </td>
+        <td>
+          104
+        </td>
+        <td>
+          4147
+          -
+          4165
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #F0ADAD">
+          checkTransTable._2
+        </td>
+      </tr><tr>
+        <td>
+          149
+        </td>
+        <td>
+          107
+        </td>
+        <td>
+          4135
+          -
+          4166
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+        </td>
+      </tr><tr>
+        <td>
+          149
+        </td>
+        <td>
+          106
+        </td>
+        <td>
+          4135
+          -
+          4166
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+        </td>
+      </tr><tr>
+        <td>
+          149
+        </td>
+        <td>
+          105
+        </td>
+        <td>
+          4139
+          -
+          4165
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2)
+        </td>
+      </tr><tr>
+        <td>
+          150
+        </td>
+        <td>
+          114
+        </td>
+        <td>
+          4186
+          -
+          4373
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val mmResult: Map[Int,Int] = miniMax(maxBoardMove, depth.+(1), maxT, minT, minT);
+  val mmScore: Int = mmResult.apply(mmResult.keys.head);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+}
+        </td>
+      </tr><tr>
+        <td>
+          151
+        </td>
+        <td>
+          109
+        </td>
+        <td>
+          4217
+          -
+          4267
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.miniMax
+        </td>
+        <td style="background: #AEF1AE">
+          miniMax(maxBoardMove, depth.+(1), maxT, minT, minT)
+        </td>
+      </tr><tr>
+        <td>
+          151
+        </td>
+        <td>
+          108
+        </td>
+        <td>
+          4239
+          -
+          4248
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.+
+        </td>
+        <td style="background: #AEF1AE">
+          depth.+(1)
+        </td>
+      </tr><tr>
+        <td>
+          152
+        </td>
+        <td>
+          110
+        </td>
+        <td>
+          4305
+          -
+          4323
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IterableLike.head
+        </td>
+        <td style="background: #AEF1AE">
+          mmResult.keys.head
+        </td>
+      </tr><tr>
+        <td>
+          152
+        </td>
+        <td>
+          111
+        </td>
+        <td>
+          4296
+          -
+          4324
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          mmResult.apply(mmResult.keys.head)
+        </td>
+      </tr><tr>
+        <td>
+          153
+        </td>
+        <td>
+          113
+        </td>
+        <td>
+          4339
+          -
+          4359
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+        </td>
+      </tr><tr>
+        <td>
+          153
+        </td>
+        <td>
+          112
+        </td>
+        <td>
+          4343
+          -
+          4358
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore)
+        </td>
+      </tr><tr>
+        <td>
+          157
+        </td>
+        <td>
+          152
+        </td>
+        <td>
+          4420
+          -
+          5540
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val minScore: Int = -1000.+(depth);
+  val minBoardMove: List[String] = currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+    curT
+  else
+    x))(immutable.this.List.canBuildFrom[String]);
+  val minWin: Boolean = Board.checkWin(minBoardMove);
+  val minTie: Boolean = Board.checkTie(minBoardMove);
+  if (minWin)
+    {
+      val minTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, minScore, maxT, minT);
+      AI.this.saveTranspositions(ttTable, minTranspositions, &quot;min&quot;);
+      scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](minScore))
+    }
+  else
+    if (minTie)
+      {
+        val minTieTranspostitions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, 0, maxT, minT);
+        AI.this.saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;);
+        scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+      }
+    else
+      {
+        val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;);
+        if (checkTransTable._1.==(true))
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+        else
+          {
+            val mmResult: Map[Int,Int] = miniMax(minBoardMove, depth.+(1), maxT, minT, maxT);
+            val mmScore: Int = mmResult.apply(mmResult.keys.head);
+            scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+          }
+      }
+}
+        </td>
+      </tr><tr>
+        <td>
+          158
+        </td>
+        <td>
+          118
+        </td>
+        <td>
+          4448
+          -
+          4460
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.+
+        </td>
+        <td style="background: #AEF1AE">
+          -1000.+(depth)
+        </td>
+      </tr><tr>
+        <td>
+          159
+        </td>
+        <td>
+          119
+        </td>
+        <td>
+          4535
+          -
+          4551
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Any.toString
+        </td>
+        <td style="background: #AEF1AE">
+          move.+(1).toString()
+        </td>
+      </tr><tr>
+        <td>
+          159
+        </td>
+        <td>
+          122
+        </td>
+        <td>
+          4563
+          -
+          4564
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.x
+        </td>
+        <td style="background: #AEF1AE">
+          x
+        </td>
+      </tr><tr>
+        <td>
+          159
+        </td>
+        <td>
+          124
+        </td>
+        <td>
+          4504
+          -
+          4565
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          currentBoard.map[String, List[String]](((x: String) =&gt; if (x.==(move.+(1).toString()))
+  curT
+else
+  x))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          159
+        </td>
+        <td>
+          121
+        </td>
+        <td>
+          4553
+          -
+          4557
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.curT
+        </td>
+        <td style="background: #AEF1AE">
+          curT
+        </td>
+      </tr><tr>
+        <td>
+          159
+        </td>
+        <td>
+          120
+        </td>
+        <td>
+          4529
+          -
+          4551
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(move.+(1).toString())
+        </td>
+      </tr><tr>
+        <td>
+          159
+        </td>
+        <td>
+          123
+        </td>
+        <td>
+          4520
+          -
+          4520
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          160
+        </td>
+        <td>
+          125
+        </td>
+        <td>
+          4589
+          -
+          4617
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkWin
+        </td>
+        <td style="background: #AEF1AE">
+          Board.checkWin(minBoardMove)
+        </td>
+      </tr><tr>
+        <td>
+          161
+        </td>
+        <td>
+          126
+        </td>
+        <td>
+          4641
+          -
+          4669
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.checkTie
+        </td>
+        <td style="background: #AEF1AE">
+          Board.checkTie(minBoardMove)
+        </td>
+      </tr><tr>
+        <td>
+          162
+        </td>
+        <td>
+          131
+        </td>
+        <td>
+          4691
+          -
+          4899
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val minTranspositions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, minScore, maxT, minT);
+  AI.this.saveTranspositions(ttTable, minTranspositions, &quot;min&quot;);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](minScore))
+}
+        </td>
+      </tr><tr>
+        <td>
+          163
+        </td>
+        <td>
+          127
+        </td>
+        <td>
+          4729
+          -
+          4787
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.getBoardTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.getBoardTranspositions(minBoardMove, minScore, maxT, minT)
+        </td>
+      </tr><tr>
+        <td>
+          164
+        </td>
+        <td>
+          128
+        </td>
+        <td>
+          4800
+          -
+          4853
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.saveTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.saveTranspositions(ttTable, minTranspositions, &quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          165
+        </td>
+        <td>
+          130
+        </td>
+        <td>
+          4866
+          -
+          4887
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](minScore))
+        </td>
+      </tr><tr>
+        <td>
+          165
+        </td>
+        <td>
+          129
+        </td>
+        <td>
+          4870
+          -
+          4886
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](minScore)
+        </td>
+      </tr><tr>
+        <td>
+          166
+        </td>
+        <td>
+          151
+        </td>
+        <td>
+          4905
+          -
+          5530
+        </td>
+        <td>
+          If
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          if (minTie)
+  {
+    val minTieTranspostitions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, 0, maxT, minT);
+    AI.this.saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;);
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+  }
+else
+  {
+    val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;);
+    if (checkTransTable._1.==(true))
+      scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+    else
+      {
+        val mmResult: Map[Int,Int] = miniMax(minBoardMove, depth.+(1), maxT, minT, maxT);
+        val mmScore: Int = mmResult.apply(mmResult.keys.head);
+        scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+      }
+  }
+        </td>
+      </tr><tr>
+        <td>
+          166
+        </td>
+        <td>
+          136
+        </td>
+        <td>
+          4916
+          -
+          5118
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val minTieTranspostitions: List[(String, Int)] = AI.this.getBoardTranspositions(minBoardMove, 0, maxT, minT);
+  AI.this.saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+}
+        </td>
+      </tr><tr>
+        <td>
+          167
+        </td>
+        <td>
+          132
+        </td>
+        <td>
+          4958
+          -
+          5009
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.getBoardTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.getBoardTranspositions(minBoardMove, 0, maxT, minT)
+        </td>
+      </tr><tr>
+        <td>
+          168
+        </td>
+        <td>
+          133
+        </td>
+        <td>
+          5022
+          -
+          5079
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.saveTranspositions
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.saveTranspositions(ttTable, minTieTranspostitions, &quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          169
+        </td>
+        <td>
+          134
+        </td>
+        <td>
+          5096
+          -
+          5105
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0)
+        </td>
+      </tr><tr>
+        <td>
+          169
+        </td>
+        <td>
+          135
+        </td>
+        <td>
+          5092
+          -
+          5106
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](0))
+        </td>
+      </tr><tr>
+        <td>
+          170
+        </td>
+        <td>
+          150
+        </td>
+        <td>
+          5124
+          -
+          5530
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val checkTransTable: (Boolean, Int) = AI.this.checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;);
+  if (checkTransTable._1.==(true))
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+  else
+    {
+      val mmResult: Map[Int,Int] = miniMax(minBoardMove, depth.+(1), maxT, minT, maxT);
+      val mmScore: Int = mmResult.apply(mmResult.keys.head);
+      scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+    }
+}
+        </td>
+      </tr><tr>
+        <td>
+          171
+        </td>
+        <td>
+          137
+        </td>
+        <td>
+          5160
+          -
+          5220
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.checkTransposition
+        </td>
+        <td style="background: #AEF1AE">
+          AI.this.checkTransposition(minBoardMove, ttTable, maxT, minT, &quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          172
+        </td>
+        <td>
+          138
+        </td>
+        <td>
+          5236
+          -
+          5262
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Boolean.==
+        </td>
+        <td style="background: #AEF1AE">
+          checkTransTable._1.==(true)
+        </td>
+      </tr><tr>
+        <td>
+          173
+        </td>
+        <td>
+          140
+        </td>
+        <td>
+          5284
+          -
+          5310
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2)
+        </td>
+      </tr><tr>
+        <td>
+          173
+        </td>
+        <td>
+          142
+        </td>
+        <td>
+          5280
+          -
+          5311
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+        </td>
+      </tr><tr>
+        <td>
+          173
+        </td>
+        <td>
+          139
+        </td>
+        <td>
+          5292
+          -
+          5310
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #F0ADAD">
+          checkTransTable._2
+        </td>
+      </tr><tr>
+        <td>
+          173
+        </td>
+        <td>
+          141
+        </td>
+        <td>
+          5280
+          -
+          5311
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](checkTransTable._2))
+        </td>
+      </tr><tr>
+        <td>
+          174
+        </td>
+        <td>
+          149
+        </td>
+        <td>
+          5331
+          -
+          5518
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val mmResult: Map[Int,Int] = miniMax(minBoardMove, depth.+(1), maxT, minT, maxT);
+  val mmScore: Int = mmResult.apply(mmResult.keys.head);
+  scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+}
+        </td>
+      </tr><tr>
+        <td>
+          175
+        </td>
+        <td>
+          144
+        </td>
+        <td>
+          5362
+          -
+          5412
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.miniMax
+        </td>
+        <td style="background: #AEF1AE">
+          miniMax(minBoardMove, depth.+(1), maxT, minT, maxT)
+        </td>
+      </tr><tr>
+        <td>
+          175
+        </td>
+        <td>
+          143
+        </td>
+        <td>
+          5384
+          -
+          5393
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.+
+        </td>
+        <td style="background: #AEF1AE">
+          depth.+(1)
+        </td>
+      </tr><tr>
+        <td>
+          176
+        </td>
+        <td>
+          146
+        </td>
+        <td>
+          5441
+          -
+          5469
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          mmResult.apply(mmResult.keys.head)
+        </td>
+      </tr><tr>
+        <td>
+          176
+        </td>
+        <td>
+          145
+        </td>
+        <td>
+          5450
+          -
+          5468
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IterableLike.head
+        </td>
+        <td style="background: #AEF1AE">
+          mmResult.keys.head
+        </td>
+      </tr><tr>
+        <td>
+          177
+        </td>
+        <td>
+          148
+        </td>
+        <td>
+          5484
+          -
+          5504
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore))
+        </td>
+      </tr><tr>
+        <td>
+          177
+        </td>
+        <td>
+          147
+        </td>
+        <td>
+          5488
+          -
+          5503
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](move).-&gt;[Int](mmScore)
+        </td>
+      </tr><tr>
+        <td>
+          183
+        </td>
+        <td>
+          158
+        </td>
+        <td>
+          5572
+          -
+          5592
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.TraversableOnce.toMap
+        </td>
+        <td style="background: #AEF1AE">
+          scores.flatten[(Int, Int)](scala.Predef.$conforms[scala.collection.immutable.Map[Int,Int]]).toMap[Int, Int](scala.Predef.$conforms[(Int, Int)])
+        </td>
+      </tr><tr>
+        <td>
+          183
+        </td>
+        <td>
+          157
+        </td>
+        <td>
+          5587
+          -
+          5587
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[(Int, Int)]
+        </td>
+      </tr><tr>
+        <td>
+          183
+        </td>
+        <td>
+          156
+        </td>
+        <td>
+          5579
+          -
+          5579
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[scala.collection.immutable.Map[Int,Int]]
+        </td>
+      </tr><tr>
+        <td>
+          185
+        </td>
+        <td>
+          159
+        </td>
+        <td>
+          5603
+          -
+          5615
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          curT.==(maxT)
+        </td>
+      </tr><tr>
+        <td>
+          185
+        </td>
+        <td>
+          179
+        </td>
+        <td>
+          5617
+          -
+          5979
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val v: Int = -1001;
+  val maxTupleScore: (Int, Int) = mapScores.maxBy[Int](((x$7: (Int, Int)) =&gt; x$7._2))(math.this.Ordering.Int);
+  val maxMapScore: scala.collection.immutable.Map[Int,Int] = scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](maxTupleScore._2));
+  alphaBeta.alpha_=(scala.collection.immutable.List.apply[Int](maxTupleScore._2, alphaBeta.alpha.toInt, v).max[Int](math.this.Ordering.Int).toDouble);
+  if (alphaBeta.beta.&lt;=(alphaBeta.alpha))
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](v))
+  else
+    maxMapScore
+}
+        </td>
+      </tr><tr>
+        <td>
+          186
+        </td>
+        <td>
+          160
+        </td>
+        <td>
+          5636
+          -
+          5640
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          -1001
+        </td>
+      </tr><tr>
+        <td>
+          187
+        </td>
+        <td>
+          163
+        </td>
+        <td>
+          5669
+          -
+          5690
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.TraversableOnce.maxBy
+        </td>
+        <td style="background: #AEF1AE">
+          mapScores.maxBy[Int](((x$7: (Int, Int)) =&gt; x$7._2))(math.this.Ordering.Int)
+        </td>
+      </tr><tr>
+        <td>
+          187
+        </td>
+        <td>
+          162
+        </td>
+        <td>
+          5684
+          -
+          5684
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.math.Ordering.Int
+        </td>
+        <td style="background: #AEF1AE">
+          math.this.Ordering.Int
+        </td>
+      </tr><tr>
+        <td>
+          187
+        </td>
+        <td>
+          161
+        </td>
+        <td>
+          5685
+          -
+          5689
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #AEF1AE">
+          x$7._2
+        </td>
+      </tr><tr>
+        <td>
+          188
+        </td>
+        <td>
+          164
+        </td>
+        <td>
+          5721
+          -
+          5737
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._1
+        </td>
+        <td style="background: #AEF1AE">
+          maxTupleScore._1
+        </td>
+      </tr><tr>
+        <td>
+          188
+        </td>
+        <td>
+          167
+        </td>
+        <td>
+          5717
+          -
+          5758
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](maxTupleScore._2))
+        </td>
+      </tr><tr>
+        <td>
+          188
+        </td>
+        <td>
+          166
+        </td>
+        <td>
+          5721
+          -
+          5757
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](maxTupleScore._2)
+        </td>
+      </tr><tr>
+        <td>
+          188
+        </td>
+        <td>
+          165
+        </td>
+        <td>
+          5741
+          -
+          5757
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #AEF1AE">
+          maxTupleScore._2
+        </td>
+      </tr><tr>
+        <td>
+          189
+        </td>
+        <td>
+          169
+        </td>
+        <td>
+          5808
+          -
+          5829
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Double.toInt
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.alpha.toInt
+        </td>
+      </tr><tr>
+        <td>
+          189
+        </td>
+        <td>
+          172
+        </td>
+        <td>
+          5767
+          -
+          5837
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.AlphaBeta.alpha_=
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.alpha_=(scala.collection.immutable.List.apply[Int](maxTupleScore._2, alphaBeta.alpha.toInt, v).max[Int](math.this.Ordering.Int).toDouble)
+        </td>
+      </tr><tr>
+        <td>
+          189
+        </td>
+        <td>
+          168
+        </td>
+        <td>
+          5790
+          -
+          5806
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #AEF1AE">
+          maxTupleScore._2
+        </td>
+      </tr><tr>
+        <td>
+          189
+        </td>
+        <td>
+          171
+        </td>
+        <td>
+          5785
+          -
+          5837
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.toDouble
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[Int](maxTupleScore._2, alphaBeta.alpha.toInt, v).max[Int](math.this.Ordering.Int).toDouble
+        </td>
+      </tr><tr>
+        <td>
+          189
+        </td>
+        <td>
+          170
+        </td>
+        <td>
+          5834
+          -
+          5834
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.math.Ordering.Int
+        </td>
+        <td style="background: #AEF1AE">
+          math.this.Ordering.Int
+        </td>
+      </tr><tr>
+        <td>
+          190
+        </td>
+        <td>
+          173
+        </td>
+        <td>
+          5867
+          -
+          5882
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.AI.AlphaBeta.alpha
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.alpha
+        </td>
+      </tr><tr>
+        <td>
+          190
+        </td>
+        <td>
+          174
+        </td>
+        <td>
+          5849
+          -
+          5882
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Double.&lt;=
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.beta.&lt;=(alphaBeta.alpha)
+        </td>
+      </tr><tr>
+        <td>
+          191
+        </td>
+        <td>
+          176
+        </td>
+        <td>
+          5896
+          -
+          5922
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](v))
+        </td>
+      </tr><tr>
+        <td>
+          191
+        </td>
+        <td>
+          175
+        </td>
+        <td>
+          5900
+          -
+          5921
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](v)
+        </td>
+      </tr><tr>
+        <td>
+          191
+        </td>
+        <td>
+          177
+        </td>
+        <td>
+          5896
+          -
+          5922
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](maxTupleScore._1).-&gt;[Int](v))
+        </td>
+      </tr><tr>
+        <td>
+          193
+        </td>
+        <td>
+          178
+        </td>
+        <td>
+          5950
+          -
+          5961
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.maxMapScore
+        </td>
+        <td style="background: #AEF1AE">
+          maxMapScore
+        </td>
+      </tr><tr>
+        <td>
+          195
+        </td>
+        <td>
+          199
+        </td>
+        <td>
+          5985
+          -
+          6344
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  val v: Int = 1001;
+  val minTupleScore: (Int, Int) = mapScores.minBy[Int](((x$8: (Int, Int)) =&gt; x$8._2))(math.this.Ordering.Int);
+  val minMapScore: scala.collection.immutable.Map[Int,Int] = scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](minTupleScore._2));
+  alphaBeta.beta_=(scala.collection.immutable.List.apply[Int](minTupleScore._2, alphaBeta.beta.toInt, v).max[Int](math.this.Ordering.Int).toDouble);
+  if (alphaBeta.beta.&lt;=(alphaBeta.alpha))
+    scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](v))
+  else
+    minMapScore
+}
+        </td>
+      </tr><tr>
+        <td>
+          196
+        </td>
+        <td>
+          180
+        </td>
+        <td>
+          6003
+          -
+          6007
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1001
+        </td>
+      </tr><tr>
+        <td>
+          197
+        </td>
+        <td>
+          182
+        </td>
+        <td>
+          6051
+          -
+          6051
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.math.Ordering.Int
+        </td>
+        <td style="background: #AEF1AE">
+          math.this.Ordering.Int
+        </td>
+      </tr><tr>
+        <td>
+          197
+        </td>
+        <td>
+          181
+        </td>
+        <td>
+          6052
+          -
+          6056
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #AEF1AE">
+          x$8._2
+        </td>
+      </tr><tr>
+        <td>
+          197
+        </td>
+        <td>
+          183
+        </td>
+        <td>
+          6036
+          -
+          6057
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.TraversableOnce.minBy
+        </td>
+        <td style="background: #AEF1AE">
+          mapScores.minBy[Int](((x$8: (Int, Int)) =&gt; x$8._2))(math.this.Ordering.Int)
+        </td>
+      </tr><tr>
+        <td>
+          198
+        </td>
+        <td>
+          185
+        </td>
+        <td>
+          6108
+          -
+          6124
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #AEF1AE">
+          minTupleScore._2
+        </td>
+      </tr><tr>
+        <td>
+          198
+        </td>
+        <td>
+          184
+        </td>
+        <td>
+          6088
+          -
+          6104
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._1
+        </td>
+        <td style="background: #AEF1AE">
+          minTupleScore._1
+        </td>
+      </tr><tr>
+        <td>
+          198
+        </td>
+        <td>
+          187
+        </td>
+        <td>
+          6084
+          -
+          6125
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](minTupleScore._2))
+        </td>
+      </tr><tr>
+        <td>
+          198
+        </td>
+        <td>
+          186
+        </td>
+        <td>
+          6088
+          -
+          6124
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](minTupleScore._2)
+        </td>
+      </tr><tr>
+        <td>
+          199
+        </td>
+        <td>
+          191
+        </td>
+        <td>
+          6151
+          -
+          6202
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.toDouble
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[Int](minTupleScore._2, alphaBeta.beta.toInt, v).max[Int](math.this.Ordering.Int).toDouble
+        </td>
+      </tr><tr>
+        <td>
+          199
+        </td>
+        <td>
+          190
+        </td>
+        <td>
+          6199
+          -
+          6199
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.math.Ordering.Int
+        </td>
+        <td style="background: #AEF1AE">
+          math.this.Ordering.Int
+        </td>
+      </tr><tr>
+        <td>
+          199
+        </td>
+        <td>
+          189
+        </td>
+        <td>
+          6174
+          -
+          6194
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Double.toInt
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.beta.toInt
+        </td>
+      </tr><tr>
+        <td>
+          199
+        </td>
+        <td>
+          192
+        </td>
+        <td>
+          6134
+          -
+          6202
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.AlphaBeta.beta_=
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.beta_=(scala.collection.immutable.List.apply[Int](minTupleScore._2, alphaBeta.beta.toInt, v).max[Int](math.this.Ordering.Int).toDouble)
+        </td>
+      </tr><tr>
+        <td>
+          199
+        </td>
+        <td>
+          188
+        </td>
+        <td>
+          6156
+          -
+          6172
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Tuple2._2
+        </td>
+        <td style="background: #AEF1AE">
+          minTupleScore._2
+        </td>
+      </tr><tr>
+        <td>
+          200
+        </td>
+        <td>
+          194
+        </td>
+        <td>
+          6214
+          -
+          6247
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Double.&lt;=
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.beta.&lt;=(alphaBeta.alpha)
+        </td>
+      </tr><tr>
+        <td>
+          200
+        </td>
+        <td>
+          193
+        </td>
+        <td>
+          6232
+          -
+          6247
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.AI.AlphaBeta.alpha
+        </td>
+        <td style="background: #AEF1AE">
+          alphaBeta.alpha
+        </td>
+      </tr><tr>
+        <td>
+          201
+        </td>
+        <td>
+          196
+        </td>
+        <td>
+          6261
+          -
+          6287
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](v))
+        </td>
+      </tr><tr>
+        <td>
+          201
+        </td>
+        <td>
+          195
+        </td>
+        <td>
+          6265
+          -
+          6286
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](v)
+        </td>
+      </tr><tr>
+        <td>
+          201
+        </td>
+        <td>
+          197
+        </td>
+        <td>
+          6261
+          -
+          6287
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.Map.apply[Int, Int](scala.Predef.ArrowAssoc[Int](minTupleScore._1).-&gt;[Int](v))
+        </td>
+      </tr><tr>
+        <td>
+          203
+        </td>
+        <td>
+          198
+        </td>
+        <td>
+          6315
+          -
+          6326
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.AI.minMapScore
+        </td>
+        <td style="background: #AEF1AE">
+          minMapScore
+        </td>
+      </tr><tr>
+        <td>
+          208
+        </td>
+        <td>
+          200
+        </td>
+        <td>
+          6402
+          -
+          6476
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.AI.miniMax
+        </td>
+        <td style="background: #AEF1AE">
+          miniMax(origBoardState, 1, maxPlayerToken, minPlayerToken, maxPlayerToken)
+        </td>
+      </tr><tr>
+        <td>
+          209
+        </td>
+        <td>
+          201
+        </td>
+        <td>
+          6481
+          -
+          6497
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IterableLike.head
+        </td>
+        <td style="background: #AEF1AE">
+          result.keys.head
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

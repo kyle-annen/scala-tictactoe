@@ -16,13 +16,10 @@
 [0m[[0minfo[0m] [0m[32mcheckTransposition[0m[0m
 [0m[[0minfo[0m] [0m[32m- will tell if transposition does not exist[0m[0m
 [0m[[0minfo[0m] [0m[32msetDepthLimit[0m[0m
-[0m[[0minfo[0m] [0m[31m- matches the difficulty to the board size and computer AI level *** FAILED ***[0m[0m
-[0m[[0minfo[0m] [0m[31m  4 did not equal 6 (AISpec.scala:103)[0m[0m
+[0m[[0minfo[0m] [0m[32m- matches the difficulty to the board size and computer AI level[0m[0m
 [0m[[0minfo[0m] [0m[32mgetComputerMove[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a two move board correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a simple win correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- take the appropriate second move[0m[0m
 [0m[[0minfo[0m] [0m[32m- will tie given every opponent first move[0m[0m
 [0m[[0minfo[0m] [0m[32m- will win or tie in all possible situations (3x3 board)[0m[0m
-[0m[[0minfo[0m] [0m[31m- will win or tie in all possible situations (4x4 board) *** FAILED ***[0m[0m
-[0m[[0minfo[0m] [0m[31m  true did not equal false (AISpec.scala:221)[0m[0m
