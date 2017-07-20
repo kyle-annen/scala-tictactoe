@@ -31,7 +31,8 @@ object Dialog {
       "win" -> "你赢了游戏！",
       "tie" -> "游戏是一个领带。",
       "invalidPlay" -> "该选择无效。",
-      "inputPrompt" -> "请输入一个开放空间的数量。"
+      "inputPrompt" -> "请输入一个开放空间的数量。",
+      "continuePlaying" -> "你想再玩吗？输入[y] 为是，[n] 退出。"
     )
   )
 }

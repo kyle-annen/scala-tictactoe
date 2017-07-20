@@ -1,5 +1,6 @@
 package tictactoe
-//game object contains the game loop and runs the game
+import scala.annotation.tailrec
+
 object Game {
 
   def setLanguage(
@@ -79,7 +80,7 @@ object Game {
     player
   }
 
-  def go(
+  @tailrec def go(
     board: List[String],
     players: Map[Int, (String, String)],
     dialogLang: Map[String, String],
@@ -163,34 +164,47 @@ object Game {
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
-    loopCount: Int): Map[Int, Boolean] = {
-      View.renderWhitespace(output, whiteSpace)
-      val selectedLanguage = setLanguage(output, leftPadding, getInput)
-      val gameLang = Dialog.lang(selectedLanguage)
+    loopCount: Int,
+    dialogLang: Map[String, String]): Map[Int, Boolean] = {
 
-      val player1 = setPlayer(output, leftPadding, getInput, gameLang, 1, "X")
-      val player2 = setPlayer(output, leftPadding, getInput, gameLang, 2, "O")
+      View.renderWhitespace(output, whiteSpace)
+
+      val player1 = setPlayer(output, leftPadding, getInput, dialogLang, 1, "X")
+      val player2 = setPlayer(output, leftPadding, getInput, dialogLang, 2, "O")
       val players = List(player1, player2).flatten.toMap
-      val boardDimen: Int = setBoardSize(output, leftPadding, getInput, gameLang)
+      val boardDimen: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
       val boardSize: Int = boardDimen * boardDimen
       val board = Board.initBoard(boardSize)
 
       val ttTable = new AI.TranspositionTable
 
       go(
-        board, players, gameLang, false, currentPlayer,
+        board, players, dialogLang, false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
     }
 
-
-  def contLoop(
+  @tailrec def contLoop(
     output: String => Any,
-    getInput: Int => String): Map[Int, Boolean] = {
-    val gameOutcome = setup(1, output, 15, 100, getInput, 1)
+    getInput: Int => String,
+    langSelected: String): Map[Int, Boolean] = {
+
+    View.renderWhitespace(output, 100)
+
+    val selectedLanguage = if (langSelected == "none") {
+      setLanguage(output, 15, getInput)
+    } else {
+      langSelected
+    }
+
+    val dialogLang = Dialog.lang(selectedLanguage)
+
+
+    val gameOutcome = setup(1, output, 15, 100, getInput, 1, dialogLang)
+
     val continuePlaying = IO.getValidMove(
       List("y", "n"),
-      Dialog.lang("EN")("continuePlaying"),
-      Dialog.lang("EN")("invalidPlay"),
+      dialogLang("continuePlaying"),
+      dialogLang("invalidPlay"),
       output,
       getInput,
       15,
@@ -198,13 +212,13 @@ object Game {
     //recursive call
     val contBoolean = if (continuePlaying == "y") true else false
     if(contBoolean) {
-      contLoop(output, getInput)
+      contLoop(output, getInput, selectedLanguage)
     } else {
       gameOutcome
     }
   }
 
   def main(args: Array[String]): Unit = {
-    contLoop(println, IO.getInput)
+    contLoop(println, IO.getInput, "none")
   }
 }

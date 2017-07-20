@@ -4,7 +4,6 @@ import org.scalatest.FunSpec
 
 class ViewSpec extends FunSpec {
 
-
   def testPrint(s: String): String = s
   val testBoard3x3blank: List[String] = (1 to 9).toList.map(x=>x.toString)
   val testBoard4x4blank: List[String] = (1 to 16).toList.map(x=>x.toString)
@@ -14,7 +13,6 @@ class ViewSpec extends FunSpec {
     it("renders n number of linebreaks") {
       val expected = "\n\n"
       val actual = View.renderWhitespace(testPrint, 2)
-
       assert(actual === expected)
     }
   }
@@ -37,7 +35,6 @@ class ViewSpec extends FunSpec {
     it("each message renders on own line") {
       val expected = "1\n2\n3"
       val actual = View.renderDialog(testPrint, 0, "1", "2", "3")
-
       assert(actual === expected)
     }
   }

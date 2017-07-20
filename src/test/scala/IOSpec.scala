@@ -1,11 +1,11 @@
-package tictactoe 
+package tictactoe
 
 import org.scalatest.FunSpec
 
 class IOSpec extends FunSpec {
 
   def testPrint(s: String): Unit = return
-  
+
   def mockInput(callCount: Int): String = {
     callCount match {
       case 0 => "-1"
@@ -34,7 +34,6 @@ class IOSpec extends FunSpec {
 
   describe("getValidMove") {
     it("will not accept bad input") {
-      
       val testString: String = "test string"
       val validList: List[String] = List("1","2","3")
       val expected: String = "1"
@@ -42,10 +41,6 @@ class IOSpec extends FunSpec {
         validList, testString, testString,
         testPrint, mockInput, 0, 0)
       assert(actual === expected)
-    } 
+    }
   }
 }
-
-
-
-

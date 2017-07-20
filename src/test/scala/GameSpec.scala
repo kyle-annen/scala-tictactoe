@@ -190,7 +190,8 @@ class GameSpec extends FunSpec {
         0,
         0,
         mockInputChinese9round,
-        1)
+        1,
+        Dialog.lang("EN"))
 
       assert(actual == expected)
     }
@@ -208,7 +209,7 @@ class GameSpec extends FunSpec {
         }
       }
       val expected = Map(1 -> false)
-      val actual = Game.contLoop(testPrint, mockContTestInput)
+      val actual = Game.contLoop(testPrint, mockContTestInput, "none")
       assert(actual === expected)
     }
   }

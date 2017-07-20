@@ -1,4 +1,20 @@
 [0m[[0minfo[0m] [0m[32mAISpec:[0m[0m
+[0m[[0minfo[0m] [0m[32mAlphaBeta[0m[0m
+[0m[[0minfo[0m] [0m[32m  alpha[0m[0m
+[0m[[0minfo[0m] [0m[32m  - initializes as Negative Infinity[0m[0m
+[0m[[0minfo[0m] [0m[32m  beta[0m[0m
+[0m[[0minfo[0m] [0m[32m  - initializes as Positive Infinity[0m[0m
+[0m[[0minfo[0m] [0m[32mTranspositionTable[0m[0m
+[0m[[0minfo[0m] [0m[32m  min[0m[0m
+[0m[[0minfo[0m] [0m[32m  - a value added can be retrieved with key[0m[0m
+[0m[[0minfo[0m] [0m[32m  max[0m[0m
+[0m[[0minfo[0m] [0m[32m  - a value added can be retrieved with key[0m[0m
+[0m[[0minfo[0m] [0m[32mgetBoardTranspositions[0m[0m
+[0m[[0minfo[0m] [0m[32m- give scores of each 90 degree rotation of board[0m[0m
+[0m[[0minfo[0m] [0m[32msaveTranspositions[0m[0m
+[0m[[0minfo[0m] [0m[32m- saves a transposition list to a transposition table[0m[0m
+[0m[[0minfo[0m] [0m[32mcheckTransposition[0m[0m
+[0m[[0minfo[0m] [0m[32m- will tell if transposition does not exist[0m[0m
 [0m[[0minfo[0m] [0m[32mgetComputerMove[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a two move board correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a simple win correctly[0m[0m
@@ -9,11 +25,11 @@
 [0m[[0minfo[0m] [0m[31m  at scala.collection.TraversableOnce.maxBy(TraversableOnce.scala:236)[0m[0m
 [0m[[0minfo[0m] [0m[31m  at scala.collection.TraversableOnce.maxBy$(TraversableOnce.scala:234)[0m[0m
 [0m[[0minfo[0m] [0m[31m  at scala.collection.AbstractTraversable.maxBy(Traversable.scala:104)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.miniMax$1(AI.scala:161)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.getComputerMove(AI.scala:182)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.AISpec.$anonfun$new$15(AISpec.scala:82)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.miniMax$1(AI.scala:162)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AI$.getComputerMove(AI.scala:183)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AISpec.$anonfun$new$31(AISpec.scala:167)[0m[0m
 [0m[[0minfo[0m] [0m[31m  at scala.collection.immutable.List.foreach(List.scala:389)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.AISpec.$anonfun$new$14(AISpec.scala:70)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AISpec.$anonfun$new$30(AISpec.scala:155)[0m[0m
 [0m[[0minfo[0m] [0m[31m  at scala.util.control.Breaks.breakable(Breaks.scala:38)[0m[0m
-[0m[[0minfo[0m] [0m[31m  at tictactoe.AISpec.go$1(AISpec.scala:70)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at tictactoe.AISpec.go$1(AISpec.scala:155)[0m[0m
 [0m[[0minfo[0m] [0m[31m  ...[0m[0m

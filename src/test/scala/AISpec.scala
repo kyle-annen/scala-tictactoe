@@ -1,5 +1,7 @@
 package tictactoe
 
+import scala.annotation.tailrec
+
 import util.control.Breaks._
 
 import org.scalatest.FunSpec
@@ -7,6 +9,89 @@ import org.scalatest.FunSpec
 class AISpec extends FunSpec {
 
   def testPrint(s: String): String = s
+
+  describe("AlphaBeta") {
+    describe("alpha") {
+      it("initializes as Negative Infinity") {
+        val ab = new AI.AlphaBeta
+        val expected = Double.NegativeInfinity
+        val actual = ab.alpha
+        assert(actual == expected)
+      }
+    }
+
+    describe("beta") {
+      it("initializes as Positive Infinity") {
+        val ab = new AI.AlphaBeta
+        val expected = Double.PositiveInfinity
+        val actual = ab.beta
+        assert(actual == expected)
+      }
+    }
+  }
+
+  describe("TranspositionTable") {
+    describe("min") {
+      it("a value added can be retrieved with key") {
+        val ttTable = new AI.TranspositionTable
+        ttTable.min += ("123" -> -987)
+        val expected = -987
+        val actual = ttTable.min("123")
+        assert(actual == expected)
+      }
+    }
+
+    describe("max") {
+      it("a value added can be retrieved with key") {
+        val ttTable = new AI.TranspositionTable
+        ttTable.max += ("123" -> 987)
+        val expected = 987
+        val actual = ttTable.max("123")
+        assert(actual == expected)
+      }
+    }
+  }
+
+  describe("getBoardTranspositions") {
+    it("give scores of each 90 degree rotation of board") {
+      val testBoard = List("1","2","3","4","5","6","X","O","X")
+      val expected = List(
+        ("------XOX", 987),
+        ("--X--O--X", 987),
+        ("XOX------", 987),
+        ("X--O--X--", 987))
+      val actual = AI.getBoardTranspositions(testBoard, 987, "X","O")
+      assert(actual == expected)
+    }
+  }
+
+  describe("saveTranspositions") {
+    it("saves a transposition list to a transposition table") {
+      val testBoard = List("1","2","3","4","5","6","X","O","X")
+      val ttTable = new AI.TranspositionTable
+      val values = AI.getBoardTranspositions(testBoard, 987, "X","O")
+      AI.saveTranspositions(ttTable, values, "max")
+      assert(ttTable.max.contains("------XOX"))
+      assert(ttTable.max.contains("XOX------"))
+      assert(ttTable.max.contains("--X--O--X"))
+      assert(ttTable.max.contains("X--O--X--"))
+    }
+  }
+
+  describe("checkTransposition") {
+    it("will tell if transposition does not exist") {
+      val testBoard = List("1","2","3","4","5","6","X","O","X")
+      val ttTable = new AI.TranspositionTable
+      val values = AI.getBoardTranspositions(testBoard, 987, "X","O")
+      AI.saveTranspositions(ttTable, values, "max")
+      val testCheckBoard = List("X","2","3","4","5","6","X","O","X")
+      val expected = (false -> 0)
+      val actual = AI.checkTransposition(testCheckBoard, ttTable, "X","O", "max")
+      assert(actual == expected)
+
+
+    }
+  }
 
   describe("getComputerMove") {
     it("scores a two move board correctly") {
@@ -94,43 +179,42 @@ class AISpec extends FunSpec {
     go(startBoard)
   }
 
-  it("will win or tie in all possible situations (4x4 board)") {
-    val startBoard = Board.initBoard(16)
+/*  it("will win or tie in all possible situations (4x4 board)") {*/
+    //val startBoard = Board.initBoard(16)
 
-    val humT = "O"
-    val comT = "X"
-    val ttTable = new AI.TranspositionTable
+    //val humT = "O"
+    //val comT = "X"
+    //val ttTable = new AI.TranspositionTable
 
-    def go(bState: List[String]): Unit = {
-      //get the human moves
-      val humOpenMoves = Board.returnValidInputs(bState)
-      //populate all possible moves to the board
-      breakable {
-        for(move <- humOpenMoves) {
-          val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
-          val humWin = Board.checkWin(humMoveBoard)
-          val humTie = Board.checkTie(humMoveBoard)
-          if(humWin) {
-            println(humMoveBoard)
-            assert(humWin == false)
-            break
-          }
-          if(humTie) {
-            assert(humTie == true)
-          }
-          val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable) + 1).toString
-          val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
-          val comWin = Board.checkWin(comBoard)
-          val comTie = Board.checkTie(comBoard)
-          if (comWin || comTie) {
-            assert(true == true)
-          } else {
-            go(comBoard)
-          }
-        }
-      }
-    }
-    go(startBoard)
-  }
-
+    //def go(bState: List[String]): Unit = {
+      ////get the human moves
+      //val humOpenMoves = Board.returnValidInputs(bState)
+      ////populate all possible moves to the board
+      //breakable {
+        //for(move <- humOpenMoves) {
+          //val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
+          //val humWin = Board.checkWin(humMoveBoard)
+          //val humTie = Board.checkTie(humMoveBoard)
+          //if(humWin) {
+            //println(humMoveBoard)
+            //assert(humWin == false)
+            //break
+          //}
+          //if(humTie) {
+            //assert(humTie == true)
+          //}
+          //val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable) + 1).toString
+          //val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
+          //val comWin = Board.checkWin(comBoard)
+          //val comTie = Board.checkTie(comBoard)
+          //if (comWin || comTie) {
+            //assert(true == true)
+          //} else {
+            //go(comBoard)
+          //}
+        //}
+      //}
+    //}
+    //go(startBoard)
+  /*}*/
 }

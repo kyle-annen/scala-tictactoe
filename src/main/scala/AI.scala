@@ -1,5 +1,7 @@
 package tictactoe
 
+import scala.annotation.tailrec
+
 object AI {
 
   class AlphaBeta {
@@ -125,7 +127,6 @@ object AI {
               val mmScore = mmResult(mmResult.keys.head)
               Map(move -> mmScore)
             }
-            
           }
         //min path
         } else {
@@ -181,14 +182,6 @@ object AI {
     //call the recursive function
     val result = miniMax(origBoardState, 1, maxPlayerToken, minPlayerToken, maxPlayerToken)
     result.keys.head
-  }
-
-  def time[R](block: => R): R = {
-    val t0 = System.nanoTime()
-    val result = block    // call-by-name
-    val t1 = System.nanoTime()
-    println("Elapsed time: " + (t1 - t0)/1000000000.0 + "s")
-    result
   }
 }
 // val board = List("X","O","X","X","O","X","7","8","9")
