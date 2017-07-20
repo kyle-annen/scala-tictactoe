@@ -21,12 +21,10 @@ object AI {
     p2Token: String): List[(String, Int)] = {
 
     val generalizedBoard = board.map { x =>
-      if(x == p1Token) {
-        p1Token
-      } else if(x == p2Token) {
-        p2Token
-      } else {
-        "-"
+      x match {
+        case `p1Token` => p1Token
+        case `p2Token` => p2Token
+        case _ => "-"
       }
     }
     val rowLists = Board.returnRows(generalizedBoard)
@@ -85,7 +83,7 @@ object AI {
       case 9 => difficulty match {
         case "easy" => 1
         case "medium" => 3
-        case "hard" => 9
+        case "hard" => 100
       }
       case 16 => difficulty match {
         case "easy" => 1

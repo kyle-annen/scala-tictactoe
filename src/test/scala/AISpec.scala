@@ -88,10 +88,30 @@ class AISpec extends FunSpec {
       val expected = (false -> 0)
       val actual = AI.checkTransposition(testCheckBoard, ttTable, "X","O", "max")
       assert(actual == expected)
-
-
     }
   }
+
+
+  describe("setDepthLimit") {
+    it("matches the difficulty to the board size and computer AI level") {
+      assert(AI.setDepthLimit(9, "easy") === 1)
+      assert(AI.setDepthLimit(9, "medium") === 3)
+      assert(AI.setDepthLimit(9, "hard") === 100)
+
+      assert(AI.setDepthLimit(16, "easy") === 1)
+      assert(AI.setDepthLimit(16, "medium") === 3)
+      assert(AI.setDepthLimit(16, "hard") === 6)
+
+      assert(AI.setDepthLimit(25, "easy") === 1)
+      assert(AI.setDepthLimit(25, "medium") === 3)
+      assert(AI.setDepthLimit(25, "hard") === 5)
+
+      assert(AI.setDepthLimit(36, "easy") === 1)
+      assert(AI.setDepthLimit(36, "medium") === 3)
+      assert(AI.setDepthLimit(36, "hard") === 4)
+    }
+  }
+
 
   describe("getComputerMove") {
     it("scores a two move board correctly") {
@@ -163,6 +183,7 @@ class AISpec extends FunSpec {
           }
           if(humTie) {
             assert(humTie == true)
+            break
           }
           val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
           val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
@@ -170,6 +191,7 @@ class AISpec extends FunSpec {
           val comTie = Board.checkTie(comBoard)
           if (comWin || comTie) {
             assert(true == true)
+            break
           } else {
             go(comBoard)
           }
@@ -179,42 +201,44 @@ class AISpec extends FunSpec {
     go(startBoard)
   }
 
-/*  it("will win or tie in all possible situations (4x4 board)") {*/
-    //val startBoard = Board.initBoard(16)
+  it("will win or tie in all possible situations (4x4 board)") {
+    val startBoard = (1 to 16).toList.map(x=>x.toString)
+    val humT = "O"
+    val comT = "X"
+    val ttTable = new AI.TranspositionTable
 
-    //val humT = "O"
-    //val comT = "X"
-    //val ttTable = new AI.TranspositionTable
+    def go(bState: List[String]): Unit = {
+      //get the human moves
+      val humOpenMoves = Board.returnValidInputs(bState)
+      //populate all possible moves to the board
+      breakable {
+        for(move <- humOpenMoves) {
+          val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
+          val humWin = Board.checkWin(humMoveBoard)
+          val humTie = Board.checkTie(humMoveBoard)
+          if(humWin) {
+            println(humMoveBoard)
+            assert(humWin == false)
+            break
+          }
+          if(humTie) {
+            assert(humTie == true)
+            break
+          }
+          val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
+          val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
+          val comWin = Board.checkWin(comBoard)
+          val comTie = Board.checkTie(comBoard)
+          if (comWin || comTie) {
+            assert(true == true)
+            break
+          } else {
+            go(comBoard)
+          }
+        }
+      }
+    }
+    go(startBoard)
+  }
 
-    //def go(bState: List[String]): Unit = {
-      ////get the human moves
-      //val humOpenMoves = Board.returnValidInputs(bState)
-      ////populate all possible moves to the board
-      //breakable {
-        //for(move <- humOpenMoves) {
-          //val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
-          //val humWin = Board.checkWin(humMoveBoard)
-          //val humTie = Board.checkTie(humMoveBoard)
-          //if(humWin) {
-            //println(humMoveBoard)
-            //assert(humWin == false)
-            //break
-          //}
-          //if(humTie) {
-            //assert(humTie == true)
-          //}
-          //val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable) + 1).toString
-          //val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
-          //val comWin = Board.checkWin(comBoard)
-          //val comTie = Board.checkTie(comBoard)
-          //if (comWin || comTie) {
-            //assert(true == true)
-          //} else {
-            //go(comBoard)
-          //}
-        //}
-      //}
-    //}
-    //go(startBoard)
-  /*}*/
 }
