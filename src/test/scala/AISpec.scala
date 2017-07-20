@@ -101,7 +101,7 @@ class AISpec extends FunSpec {
         "o","8","9")
       val expectedMove: Int = 8
       val ttTable = new AI.TranspositionTable
-      val actualMove = AI.getComputerMove(testBoard, "x", "o", "x", ttTable)
+      val actualMove = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actualMove === expectedMove)
     }
 
@@ -112,7 +112,7 @@ class AISpec extends FunSpec {
         "7","8","9")
       val expected: Int = 8
       val ttTable = new AI.TranspositionTable
-      val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable)
+      val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actual == expected)
     }
 
@@ -123,13 +123,13 @@ class AISpec extends FunSpec {
         "7","8","9")
       val expected: Int = 4
       val ttTable = new AI.TranspositionTable
-      val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable)
+      val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actual == expected)
     }
   }
   it("will tie given every opponent first move") {
     val openBoard = (1 to 9).toList.map(x => x.toString)
-    val players = Map(1 -> ("computer", "X"), 2 -> ("computer", "O"))
+    val players = Map(1 -> ("computer", "X", "hard"), 2 -> ("computer", "O", "hard"))
     val seedBoards = openBoard.map(x => openBoard.map(cell => if(cell == x) "O" else cell ))
     val ttTable = new AI.TranspositionTable
 
@@ -164,7 +164,7 @@ class AISpec extends FunSpec {
           if(humTie) {
             assert(humTie == true)
           }
-          val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable) + 1).toString
+          val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
           val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
           val comWin = Board.checkWin(comBoard)
           val comTie = Board.checkTie(comBoard)

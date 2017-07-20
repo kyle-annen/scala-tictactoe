@@ -80,15 +80,43 @@ object AI {
     }
   }
 
+  def setDepthLimit(boardSize: Int, difficulty: String): Int = {
+    boardSize match {
+      case 9 => difficulty match {
+        case "easy" => 1
+        case "medium" => 3
+        case "hard" => 9
+      }
+      case 16 => difficulty match {
+        case "easy" => 1
+        case "medium" => 3
+        case "hard" => 6
+      }
+      case 25 => difficulty match {
+        case "easy" => 1
+        case "medium" => 3
+        case "hard" => 5
+      }
+      case _ => difficulty match {
+        case "easy" => 1
+        case "medium" => 3
+        case "hard" => 4
+      }
+    }
+  }
+
   def getComputerMove(
     origBoardState: List[String],
     maxPlayerToken: String,
     minPlayerToken: String,
     currentPlayerToken: String,
-    ttTable: TranspositionTable): Int = {
+    ttTable: TranspositionTable,
+    difficulty: String): Int = {
 
     val boardSize = origBoardState.length
     val alphaBeta = new AlphaBeta
+
+    val depthLimit = setDepthLimit(boardSize, difficulty)
 
     def miniMax(
       currentBoard: List[String],
@@ -97,14 +125,13 @@ object AI {
       minT: String,
       curT: String): Map[Int, Int]  = {
 
-      val depthLimit = if(boardSize > 9) 6 else 9
-
       val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
 
       val scores = openMoves.map(move =>
         //maxpath
         if(depth >= depthLimit) {
-          Map(move -> 0)
+          val depthLimitScore = if(curT == maxT) -1000 + depth + 2 else 1000 - depth - 2
+          Map(move -> depthLimitScore)
         } else if(curT == maxT) {
           val maxScore = 1000 - depth
           val maxBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
