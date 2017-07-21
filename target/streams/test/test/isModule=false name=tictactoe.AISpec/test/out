@@ -9,6 +9,8 @@
 [0m[[0minfo[0m] [0m[32m  - a value added can be retrieved with key[0m[0m
 [0m[[0minfo[0m] [0m[32m  max[0m[0m
 [0m[[0minfo[0m] [0m[32m  - a value added can be retrieved with key[0m[0m
+[0m[[0minfo[0m] [0m[32mswapTranspositionKeys[0m[0m
+[0m[[0minfo[0m] [0m[32m- give the key for same board state with tokens swapped[0m[0m
 [0m[[0minfo[0m] [0m[32mgetBoardTranspositions[0m[0m
 [0m[[0minfo[0m] [0m[32m- give scores of each 90 degree rotation of board[0m[0m
 [0m[[0minfo[0m] [0m[32msaveTranspositions[0m[0m

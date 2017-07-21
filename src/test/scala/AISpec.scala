@@ -52,6 +52,15 @@ class AISpec extends FunSpec {
     }
   }
 
+  describe("swapTranspositionKeys") {
+    it("give the key for same board state with tokens swapped") {
+      val testKey = "---XOX---"
+      val expected = "---OXO---"
+      val actual = AI.swapTranspositionKeys(testKey, "X","O")
+      assert(actual == expected)
+    }
+  }
+
   describe("getBoardTranspositions") {
     it("give scores of each 90 degree rotation of board") {
       val testBoard = List("1","2","3","4","5","6","X","O","X")
@@ -59,7 +68,11 @@ class AISpec extends FunSpec {
         ("------XOX", 987),
         ("--X--O--X", 987),
         ("XOX------", 987),
-        ("X--O--X--", 987))
+        ("X--O--X--", 987),
+        ("------OXO", -987),
+        ("--O--X--O", -987),
+        ("OXO------", -987),
+        ("O--X--O--", -987))
       val actual = AI.getBoardTranspositions(testBoard, 987, "X","O")
       assert(actual == expected)
     }
@@ -146,99 +159,99 @@ class AISpec extends FunSpec {
       val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actual == expected)
     }
-  }
-  it("will tie given every opponent first move") {
-    val openBoard = (1 to 9).toList.map(x => x.toString)
-    val players = Map(1 -> ("computer", "X", "hard"), 2 -> ("computer", "O", "hard"))
-    val seedBoards = openBoard.map(x => openBoard.map(cell => if(cell == x) "O" else cell ))
-    val ttTable = new AI.TranspositionTable
 
-    for(board <- seedBoards) {
-      val actual = Game.go(board, players, Dialog.lang("EN"), false, 1, testPrint, 0, 0, IO.getInput, 1, ttTable)
-      val expected = Map(2 -> false)
+    it("will tie given every opponent first move") {
+      val openBoard = (1 to 9).toList.map(x => x.toString)
+      val players = Map(1 -> ("computer", "X", "hard"), 2 -> ("computer", "O", "hard"))
+      val seedBoards = openBoard.map(x => openBoard.map(cell => if(cell == x) "O" else cell ))
+      val ttTable = new AI.TranspositionTable
 
-      assert(actual === expected)
+      for(board <- seedBoards) {
+        val actual = Game.go(board, players, Dialog.lang("EN"), false, 1, testPrint, 0, 0, IO.getInput, 1, ttTable)
+        val expected = Map(2 -> false)
+
+        assert(actual === expected)
+      }
     }
-  }
 
-  it("will win or tie in all possible situations (3x3 board)") {
-    val startBoard = (1 to 9).toList.map(x=>x.toString)
-    val humT = "O"
-    val comT = "X"
-    val ttTable = new AI.TranspositionTable
+    it("will win or tie in all possible situations (3x3 board)") {
+      val startBoard = (1 to 9).toList.map(x=>x.toString)
+      val humT = "O"
+      val comT = "X"
+      val ttTable = new AI.TranspositionTable
 
-    def go(bState: List[String]): Unit = {
-      //get the human moves
-      val humOpenMoves = Board.returnValidInputs(bState)
-      //populate all possible moves to the board
-      breakable {
-        for(move <- humOpenMoves) {
-          val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
-          val humWin = Board.checkWin(humMoveBoard)
-          val humTie = Board.checkTie(humMoveBoard)
-          if(humWin) {
-            println(humMoveBoard)
-            assert(humWin == false)
-            break
-          }
-          if(humTie) {
-            assert(humTie == true)
-            break
-          }
-          val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
-          val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
-          val comWin = Board.checkWin(comBoard)
-          val comTie = Board.checkTie(comBoard)
-          if (comWin || comTie) {
-            assert(true == true)
-            break
-          } else {
-            go(comBoard)
+      def go(bState: List[String]): Unit = {
+        //get the human moves
+        val humOpenMoves = Board.returnValidInputs(bState)
+        //populate all possible moves to the board
+        breakable {
+          for(move <- humOpenMoves) {
+            val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
+            val humWin = Board.checkWin(humMoveBoard)
+            val humTie = Board.checkTie(humMoveBoard)
+            if(humWin) {
+              println(humMoveBoard)
+              assert(humWin == false)
+              break
+            }
+            if(humTie) {
+              assert(humTie == true)
+              break
+            }
+            val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
+            val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
+            val comWin = Board.checkWin(comBoard)
+            val comTie = Board.checkTie(comBoard)
+            if (comWin || comTie) {
+              assert(true == true)
+              break
+            } else {
+              go(comBoard)
+            }
           }
         }
       }
+      go(startBoard)
     }
-    go(startBoard)
-  }
 
-  /*it("will win or tie in all possible situations (4x4 board)") {*/
-    //val startBoard = (1 to 16).toList.map(x=>x.toString)
-    //val humT = "O"
-    //val comT = "X"
-    //val ttTable = new AI.TranspositionTable
+    /*it("will win or tie in all possible situations (4x4 board)") {*/
+      //val startBoard = (1 to 16).toList.map(x=>x.toString)
+      //val humT = "O"
+      //val comT = "X"
+      //val ttTable = new AI.TranspositionTable
 
-    //def go(bState: List[String]): Unit = {
-      ////get the human moves
-      //val humOpenMoves = Board.returnValidInputs(bState)
-      ////populate all possible moves to the board
-      //breakable {
-        //for(move <- humOpenMoves) {
-          //val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
-          //val humWin = Board.checkWin(humMoveBoard)
-          //val humTie = Board.checkTie(humMoveBoard)
-          //if(humWin) {
-            //println(humMoveBoard)
-            //assert(humWin == false)
-            //break
-          //}
-          //if(humTie) {
-            //assert(humTie == true)
-            //break
-          //}
-          //val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
-          //val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
-          //val comWin = Board.checkWin(comBoard)
-          //val comTie = Board.checkTie(comBoard)
-          //if (comWin || comTie) {
-            //assert(true == true)
-            //break
-          //} else {
-            //go(comBoard)
+      //def go(bState: List[String]): Unit = {
+        ////get the human moves
+        //val humOpenMoves = Board.returnValidInputs(bState)
+        ////populate all possible moves to the board
+        //breakable {
+          //for(move <- humOpenMoves) {
+            //val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
+            //val humWin = Board.checkWin(humMoveBoard)
+            //val humTie = Board.checkTie(humMoveBoard)
+            //if(humWin) {
+              //println(humMoveBoard)
+              //assert(humWin == false)
+              //break
+            //}
+            //if(humTie) {
+              //assert(humTie == true)
+              //break
+            //}
+            //val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
+            //val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
+            //val comWin = Board.checkWin(comBoard)
+            //val comTie = Board.checkTie(comBoard)
+            //if (comWin || comTie) {
+              //assert(true == true)
+              //break
+            //} else {
+              //go(comBoard)
+            //}
           //}
         //}
       //}
-    //}
-    //go(startBoard)
-  /*}*/
-
+      //go(startBoard)
+    /*}*/
+  }
 }
