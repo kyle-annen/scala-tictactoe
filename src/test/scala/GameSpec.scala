@@ -109,7 +109,7 @@ class GameSpec extends FunSpec {
     it("the game will finish if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
       val expected = Map(1 -> true)
       val actual = Game.go(
         testBoard,
@@ -130,7 +130,7 @@ class GameSpec extends FunSpec {
     it("the game will end if there is a tie") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
       val expected = Map(1 -> false)
       val actual = Game.go(
         testBoard,
@@ -151,7 +151,7 @@ class GameSpec extends FunSpec {
     it("the game will end early if there is a winner") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
       val expected = Map(1 -> true)
       val actual = Game.go(
         testBoard,

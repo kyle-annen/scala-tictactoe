@@ -130,7 +130,7 @@ object Game {
     whiteSpace: Int,
     getInput: Int => String,
     loopCount: Int,
-    ttTable: AI.TranspositionTable): Map[Int, Boolean] = {
+    ttTable: TTTable.TranspositionTable): Map[Int, Boolean] = {
 
     View.renderWhitespace(output, whiteSpace)
 
@@ -216,13 +216,13 @@ object Game {
 
       val player1 = setPlayer(output, leftPadding, getInput, dialogLang, 1, "X")
       val player2 = setPlayer(output, leftPadding, getInput, dialogLang, 2, "O")
-      
+
       val players = List(player1, player2).flatten.toMap
       val boardDimen: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
       val boardSize: Int = boardDimen * boardDimen
       val board = Board.initBoard(boardSize)
 
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
 
       go(
         board, players, dialogLang, false, currentPlayer,

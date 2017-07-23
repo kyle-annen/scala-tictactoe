@@ -30,100 +30,27 @@ class AISpec extends FunSpec {
     }
   }
 
-  describe("TranspositionTable") {
-    describe("min") {
-      it("a value added can be retrieved with key") {
-        val ttTable = new AI.TranspositionTable
-        ttTable.min += ("123" -> -987)
-        val expected = -987
-        val actual = ttTable.min("123")
-        assert(actual == expected)
+
+
+    describe("setDepthLimit") {
+      it("matches the difficulty to the board size and computer AI level") {
+        assert(AI.setDepthLimit(9, "easy") === 1)
+        assert(AI.setDepthLimit(9, "medium") === 3)
+        assert(AI.setDepthLimit(9, "hard") === 100)
+
+        assert(AI.setDepthLimit(16, "easy") === 1)
+        assert(AI.setDepthLimit(16, "medium") === 3)
+        assert(AI.setDepthLimit(16, "hard") === 6)
+
+        assert(AI.setDepthLimit(25, "easy") === 1)
+        assert(AI.setDepthLimit(25, "medium") === 3)
+        assert(AI.setDepthLimit(25, "hard") === 5)
+
+        assert(AI.setDepthLimit(36, "easy") === 1)
+        assert(AI.setDepthLimit(36, "medium") === 3)
+        assert(AI.setDepthLimit(36, "hard") === 4)
       }
     }
-
-    describe("max") {
-      it("a value added can be retrieved with key") {
-        val ttTable = new AI.TranspositionTable
-        ttTable.max += ("123" -> 987)
-        val expected = 987
-        val actual = ttTable.max("123")
-        assert(actual == expected)
-      }
-    }
-  }
-
-  describe("swapTranspositionKeys") {
-    it("give the key for same board state with tokens swapped") {
-      val testKey = "---XOX---"
-      val expected = "---OXO---"
-      val actual = AI.swapTranspositionKeys(testKey, "X","O")
-      assert(actual == expected)
-    }
-  }
-
-  describe("getBoardTranspositions") {
-    it("give scores of each 90 degree rotation of board") {
-      val testBoard = List("1","2","3","4","5","6","X","O","X")
-      val expected = List(
-        ("------XOX", 987),
-        ("--X--O--X", 987),
-        ("XOX------", 987),
-        ("X--O--X--", 987),
-        ("------OXO", -987),
-        ("--O--X--O", -987),
-        ("OXO------", -987),
-        ("O--X--O--", -987))
-      val actual = AI.getBoardTranspositions(testBoard, 987, "X","O")
-      assert(actual == expected)
-    }
-  }
-
-  describe("saveTranspositions") {
-    it("saves a transposition list to a transposition table") {
-      val testBoard = List("1","2","3","4","5","6","X","O","X")
-      val ttTable = new AI.TranspositionTable
-      val values = AI.getBoardTranspositions(testBoard, 987, "X","O")
-      AI.saveTranspositions(ttTable, values, "max")
-      assert(ttTable.max.contains("------XOX"))
-      assert(ttTable.max.contains("XOX------"))
-      assert(ttTable.max.contains("--X--O--X"))
-      assert(ttTable.max.contains("X--O--X--"))
-    }
-  }
-
-  describe("checkTransposition") {
-    it("will tell if transposition does not exist") {
-      val testBoard = List("1","2","3","4","5","6","X","O","X")
-      val ttTable = new AI.TranspositionTable
-      val values = AI.getBoardTranspositions(testBoard, 987, "X","O")
-      AI.saveTranspositions(ttTable, values, "max")
-      val testCheckBoard = List("X","2","3","4","5","6","X","O","X")
-      val expected = (false -> 0)
-      val actual = AI.checkTransposition(testCheckBoard, ttTable, "X","O", "max")
-      assert(actual == expected)
-    }
-  }
-
-
-  describe("setDepthLimit") {
-    it("matches the difficulty to the board size and computer AI level") {
-      assert(AI.setDepthLimit(9, "easy") === 1)
-      assert(AI.setDepthLimit(9, "medium") === 3)
-      assert(AI.setDepthLimit(9, "hard") === 100)
-
-      assert(AI.setDepthLimit(16, "easy") === 1)
-      assert(AI.setDepthLimit(16, "medium") === 3)
-      assert(AI.setDepthLimit(16, "hard") === 6)
-
-      assert(AI.setDepthLimit(25, "easy") === 1)
-      assert(AI.setDepthLimit(25, "medium") === 3)
-      assert(AI.setDepthLimit(25, "hard") === 5)
-
-      assert(AI.setDepthLimit(36, "easy") === 1)
-      assert(AI.setDepthLimit(36, "medium") === 3)
-      assert(AI.setDepthLimit(36, "hard") === 4)
-    }
-  }
 
 
   describe("getComputerMove") {
@@ -133,7 +60,7 @@ class AISpec extends FunSpec {
         "x","o","x",
         "o","8","9")
       val expectedMove: Int = 8
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
       val actualMove = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actualMove === expectedMove)
     }
@@ -144,7 +71,7 @@ class AISpec extends FunSpec {
         "4","o","x",
         "7","8","9")
       val expected: Int = 8
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
       val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actual == expected)
     }
@@ -155,7 +82,7 @@ class AISpec extends FunSpec {
         "4","5","6",
         "7","8","9")
       val expected: Int = 4
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
       val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
       assert(actual == expected)
     }
@@ -164,7 +91,7 @@ class AISpec extends FunSpec {
       val openBoard = (1 to 9).toList.map(x => x.toString)
       val players = Map(1 -> ("computer", "X", "hard"), 2 -> ("computer", "O", "hard"))
       val seedBoards = openBoard.map(x => openBoard.map(cell => if(cell == x) "O" else cell ))
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
 
       for(board <- seedBoards) {
         val actual = Game.go(board, players, Dialog.lang("EN"), false, 1, testPrint, 0, 0, IO.getInput, 1, ttTable)
@@ -178,7 +105,7 @@ class AISpec extends FunSpec {
       val startBoard = (1 to 9).toList.map(x=>x.toString)
       val humT = "O"
       val comT = "X"
-      val ttTable = new AI.TranspositionTable
+      val ttTable = new TTTable.TranspositionTable
 
       def go(bState: List[String]): Unit = {
         //get the human moves
