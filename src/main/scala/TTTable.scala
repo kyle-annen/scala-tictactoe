@@ -2,8 +2,8 @@ package tictactoe
 
 object TTTable {
   class TranspositionTable {
-    var min = scala.collection.mutable.Map[String, Int, String]()
-    var max = scala.collection.mutable.Map[String, Int, String]()
+    var min = scala.collection.mutable.Map[String, Int]()
+    var max = scala.collection.mutable.Map[String, Int]()
   }
 
   def swapTranspositionKeys(key: String, p1Token: String, p2Token: String): String = {

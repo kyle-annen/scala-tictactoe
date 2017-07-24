@@ -15,25 +15,34 @@ object AI {
     val outcome: String = o
   }
 
-  def setDepthLimit(boardSize: Int, difficulty: String, depth: Int): Int = {
+  def setDepthLimit(
+    boardSize: Int,
+    difficulty: String,
+    depth: Int): Int = {
     boardSize match {
       case 9 => difficulty match {
         case "easy" => 1
         case "medium" => 3
-        case "hard" => 100
+        case "hard" => 10
       }
       case 16 => depth match {
-        case x if(x <= 7) => difficulty match {
+        case x if(x < 3) => difficulty match {
           case "easy" => 1
           case "medium" => 3
-          case "hard" => 4
+          case "hard" => 6
         }
-        case x if(x > 7)  => difficulty match {
+        case x if(x < 5) => difficulty match {
+          case "easy" => 1
+          case "medium" => 3
+          case "hard" => 9
+        }
+
+        case x if(x >= 7) => difficulty match {
           case "easy" => 1
           case "medium" => 3
           case "hard" => 16
         }
-     }
+      }
       case 25 => difficulty match {
         case "easy" => 1
         case "medium" => 3
@@ -47,96 +56,105 @@ object AI {
     }
   }
 
-  def getComputerMove(
-    origBoardState: List[String],
-    maxPlayerToken: String,
-    minPlayerToken: String,
-    currentPlayerToken: String,
-    ttTable: TTTable.TranspositionTable,
-    difficulty: String): Int = {
+  class AIParams(
+    board: List[String],
+    currDepth: Int,
+    maxT: String,
+    minT: String,
+    curT: String,
+    transTable: TTTable.TranspositionTable,
+    diff: String) {
 
-    val boardSize = origBoardState.length
+    val boardState: List[String] = board
+    val currentDepth: Int = currDepth
+    val maxToken: String = maxT
+    val minToken: String = minT
+    val currentToken: String = curT
+    val ttTable: TTTable.TranspositionTable = transTable
+    val difficulty: String = diff
+    val boardSize: Int = boardState.length
+  }
+
+  def getOpenMoves(board: List[String]): List[Int] = {
+    Board.returnValidInputs(board).map(x => x.toInt)
+  }
+
+  def depthLimitScore(aiParams: AIParams, moveLocation: Int, depthLimit: Int): Score = {
+    val score = if(aiParams.maxToken == aiParams.currentToken) {
+      -1000 + aiParams.currentDepth + 1
+    } else {
+      +1000 - aiParams.currentDepth - 1
+    }
+    new Score(moveLocation, score, "depthLimit")
+  }
+
+  def updateBoard(board: List[String], token: String, move: Int): List[String] = {
+    board.map(x=> if(x == (move).toString) token else x)
+  }
+
+  def getComputerMove(compAiParams: AIParams): Score = {
     val alphaBeta = new AlphaBeta
+    val depthLimit: Int = setDepthLimit(
+        compAiParams.boardSize,
+        compAiParams.difficulty,
+        compAiParams.currentDepth)
 
-
-    def miniMax(
-      currentBoard: List[String],
-      depth: Int,
-      maxT: String,
-      minT: String,
-      curT: String): Map[Int, Int]  = {
-
-      val depthLimit = setDepthLimit(boardSize, difficulty, depth)
-      val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
-
-      val scores = openMoves.map(move =>
-        //maxpath
-        if(depth >= depthLimit) {
-          val depthLimitScore = if(curT == maxT) -1000 + depth + 2 else 1000 - depth - 2
-          new Score(move, depthLimitScore, "depthLimit")
-        } else if(curT == maxT) {
-          val maxScore = 1000 - depth
-          val maxBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
-          val maxWin = Board.checkWin(maxBoardMove)
-          val maxTie = Board.checkTie(maxBoardMove)
-
+    def miniMax(aiParams: AIParams): Score  = {
+      val openMoves: List[Int] = getOpenMoves(aiParams.boardState)
+      val scores = openMoves.map { move =>
+        if(aiParams.currentDepth >= depthLimit) {
+          depthLimitScore(aiParams, move, depthLimit)
+        } else if(aiParams.maxToken == aiParams.currentToken){
+          val maxScore = 1000 - aiParams.currentDepth
+          val maxBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
+          val maxWin = Board.checkWin(maxBoard)
+          val maxTie = Board.checkTie(maxBoard)
           if(maxWin) {
             new Score(move, maxScore, "win")
           } else if(maxTie) {
             new Score(move, 0, "tie")
           } else {
-            val mmResult = miniMax(maxBoardMove, depth + 1, maxT, minT, minT)
-            val mmScore = mmResult(mmResult.keys.head)
-            Map(move -> mmScore)
-            }
+            val maxParams = new AIParams(
+            maxBoard,
+            aiParams.currentDepth + 1,
+            aiParams.maxToken,
+            aiParams.minToken,
+            aiParams.minToken,
+            aiParams.ttTable,
+            aiParams.difficulty)
+            //recursive call
+            miniMax(maxParams)
           }
-        //min path
         } else {
-          val minScore = -1000 + depth
-          val minBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
-          val minWin = Board.checkWin(minBoardMove)
-          val minTie = Board.checkTie(minBoardMove)
+          val minScore = -1000 + aiParams.currentDepth
+          val minBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
+          val minWin = Board.checkWin(minBoard)
+          val minTie = Board.checkTie(minBoard)
           if(minWin) {
             new Score(move, minScore, "win")
           } else if(minTie) {
             new Score(move, 0, "tie")
           } else {
-            val mmResult = miniMax(minBoardMove, depth + 1, maxT, minT, maxT)
-            val mmScore = mmResult(mmResult.keys.head)
-            Map(move -> mmScore)
+            val minParams = new AIParams(
+              minBoard,
+              aiParams.currentDepth + 1,
+              aiParams.maxToken,
+              aiParams.minToken,
+              aiParams.maxToken,
+              aiParams.ttTable,
+              aiParams.difficulty)
+              //recursive call
+            miniMax(minParams)
           }
         }
-      )
-
-      val mapScores = scores.flatten.toMap
-
-
-      if(curT == maxT) {
-        val v = -1001
-        val maxTupleScore = mapScores.maxBy(_._2)
-        val maxMapScore = Map(maxTupleScore._1 -> maxTupleScore._2)
-        alphaBeta.alpha = List(maxTupleScore._2, alphaBeta.alpha.toInt, v).max
-        if(alphaBeta.beta <= alphaBeta.alpha) {
-          Map(maxTupleScore._1 -> v)
-        } else {
-          maxMapScore
-        }
+      }
+      //max path
+      if(aiParams.currentToken == aiParams.maxToken) {
+        scores.minBy(_.value)
       } else {
-        val v = 1001
-        val minTupleScore = mapScores.minBy(_._2)
-        val minMapScore = Map(minTupleScore._1 -> minTupleScore._2)
-        alphaBeta.beta = List(minTupleScore._2, alphaBeta.beta.toInt, v).max
-        if(alphaBeta.beta <= alphaBeta.alpha) {
-          new Score()
-          Map(minTupleScore._1 -> v)
-        } else {
-          minMapScore
-        }
+        scores.maxBy(_.value)
       }
     }
-    //call the recursive function
-    val result = miniMax(origBoardState, 1, maxPlayerToken, minPlayerToken, maxPlayerToken)
-    result.keys.head
+    miniMax(compAiParams)
   }
 }
-// val board = List("X","O","X","X","O","X","7","8","9")

@@ -161,14 +161,16 @@ object Game {
       humanPlay
     } else {
       //AI computer move
-      val compPlay: Int = AI.getComputerMove(
+      val compPlayOptions = new AI.AIParams(
         board,
+        1,
         userToken,
         oppToken,
         userToken,
         ttTable,
-        difficulty) + 1
-      compPlay
+        difficulty)
+      val compPlay: AI.Score = AI.getComputerMove(compPlayOptions)
+      compPlay.position
     }
 
     val updatedBoard: List[String] = board.map(
@@ -243,8 +245,6 @@ object Game {
     }
 
     val dialogLang = Dialog.lang(selectedLanguage)
-
-
     val gameOutcome = setup(1, output, 15, 100, getInput, 1, dialogLang)
 
     val continuePlaying = IO.getValidMove(
