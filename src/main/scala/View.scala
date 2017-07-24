@@ -57,7 +57,3 @@ object View {
     output(formatedBoard)
   }
 }
-
-
-
-

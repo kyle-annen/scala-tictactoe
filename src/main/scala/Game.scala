@@ -1,5 +1,6 @@
 package tictactoe
-//game object contains the game loop and runs the game
+import scala.annotation.tailrec
+
 object Game {
 
   def setLanguage(
@@ -49,13 +50,46 @@ object Game {
     sizeSelection.toInt
   }
 
+  def setDifficulty(
+    output: String => Any,
+    leftPadding: Int,
+    getInput: Int => String,
+    dialogLang: Map[String, String]): String = {
+
+    val easy = "1 - " + dialogLang("easy")
+    val medium = "2 - " + dialogLang("medium")
+    val hard = "3 - " + dialogLang("hard")
+    val difficultyPrompt = dialogLang("selectDifficulty")
+
+    val prompt = difficultyPrompt +
+      "\n" + " " * leftPadding + easy +
+      "\n" + " " * leftPadding + medium +
+      "\n" + " " * leftPadding + hard
+    val validDiffs = List("1","2","3")
+
+    val diffSelection = IO.getValidMove(
+      validDiffs,
+      prompt,
+      dialogLang("invalidPlay"),
+      output,
+      getInput,
+      leftPadding,
+      1)
+
+    diffSelection match  {
+      case "1" => "easy"
+      case "2" => "medium"
+      case "3" => "hard"
+    }
+  }
+
   def setPlayer(
     output: String => Any,
     leftPadding: Int,
     getInput: Int => String,
     dialogLang: Map[String, String],
     playerNum: Int,
-    playerToken: String): Map[Int, (String, String)] = {
+    playerToken: String): Map[Int, (String, String, String)] = {
 
     val pAnnounce = dialogLang("playerAnnounce") + playerNum.toString
     val pPrompt = dialogLang("selectPlayerType")
@@ -75,13 +109,19 @@ object Game {
       leftPadding,
       1)
     val pType = if(playerType == "1") "human" else "computer"
-    val player = Map(playerNum -> (pType, playerToken))
+    val playerDifficulty = if(pType == "computer") {
+        setDifficulty(output, leftPadding, getInput, dialogLang)
+      } else {
+        "none"
+      }
+
+    val player = Map(playerNum -> (pType, playerToken, playerDifficulty))
     player
   }
 
-  def go(
+  @tailrec def go(
     board: List[String],
-    players: Map[Int, (String, String)],
+    players: Map[Int, (String, String, String)],
     dialogLang: Map[String, String],
     gameOver: Boolean,
     currentPlayer: Int,
@@ -89,7 +129,8 @@ object Game {
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
-    loopCount: Int): Map[Int, Boolean] = {
+    loopCount: Int,
+    ttTable: TTTable.TranspositionTable): Map[Int, Boolean] = {
 
     View.renderWhitespace(output, whiteSpace)
 
@@ -104,23 +145,29 @@ object Game {
     val invalidPlay: String = dialogLang("invalidPlay")
     val playerType: String = players(currentPlayer)._1
     val userToken: String = players(currentPlayer)._2
+    val difficulty: String = players(currentPlayer)._3
     val oppToken: String = if(userToken == "X") "O" else "X"
     //get the move value
     val boardMove = if(playerType == "human") {
       //human move
-      val humanPlay: String =
-        IO.getValidMove(
-          validPlays,
-          inputPrompt,
-          invalidPlay,
-          output,
-          getInput,
-          leftPadding,
-          loopCount)
+      val humanPlay: String = IO.getValidMove(
+        validPlays,
+        inputPrompt,
+        invalidPlay,
+        output,
+        getInput,
+        leftPadding,
+        loopCount)
       humanPlay
     } else {
       //AI computer move
-      val compPlay: Int = AI.getComputerMove(board, userToken, oppToken, userToken) + 1
+      val compPlay: Int = AI.getComputerMove(
+        board,
+        userToken,
+        oppToken,
+        userToken,
+        ttTable,
+        difficulty) + 1
       compPlay
     }
 
@@ -152,7 +199,7 @@ object Game {
 
       go(
         updatedBoard, players, dialogLang, false, nextPlayer, output,
-        leftPadding, whiteSpace, getInput, newLoopCount)
+        leftPadding, whiteSpace, getInput, newLoopCount, ttTable)
     }
   }
 
@@ -162,32 +209,48 @@ object Game {
     leftPadding: Int,
     whiteSpace: Int,
     getInput: Int => String,
-    loopCount: Int): Map[Int, Boolean] = {
-      View.renderWhitespace(output, whiteSpace)
-      val selectedLanguage = setLanguage(output, leftPadding, getInput)
-      val gameLang = Dialog.lang(selectedLanguage)
+    loopCount: Int,
+    dialogLang: Map[String, String]): Map[Int, Boolean] = {
 
-      val player1 = setPlayer(output, leftPadding, getInput, gameLang, 1, "X")
-      val player2 = setPlayer(output, leftPadding, getInput, gameLang, 2, "O")
+      View.renderWhitespace(output, whiteSpace)
+
+      val player1 = setPlayer(output, leftPadding, getInput, dialogLang, 1, "X")
+      val player2 = setPlayer(output, leftPadding, getInput, dialogLang, 2, "O")
+
       val players = List(player1, player2).flatten.toMap
-      val boardDimen: Int = setBoardSize(output, leftPadding, getInput, gameLang)
+      val boardDimen: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
       val boardSize: Int = boardDimen * boardDimen
       val board = Board.initBoard(boardSize)
 
+      val ttTable = new TTTable.TranspositionTable
+
       go(
-        board, players, gameLang, false, currentPlayer,
-        output, leftPadding, whiteSpace, getInput, loopCount)
+        board, players, dialogLang, false, currentPlayer,
+        output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
     }
 
-
-  def contLoop(
+  @tailrec def contLoop(
     output: String => Any,
-    getInput: Int => String): Map[Int, Boolean] = {
-    val gameOutcome = setup(1, output, 15, 100, getInput, 1)
+    getInput: Int => String,
+    langSelected: String): Map[Int, Boolean] = {
+
+    View.renderWhitespace(output, 100)
+
+    val selectedLanguage = if (langSelected == "none") {
+      setLanguage(output, 15, getInput)
+    } else {
+      langSelected
+    }
+
+    val dialogLang = Dialog.lang(selectedLanguage)
+
+
+    val gameOutcome = setup(1, output, 15, 100, getInput, 1, dialogLang)
+
     val continuePlaying = IO.getValidMove(
       List("y", "n"),
-      Dialog.lang("EN")("continuePlaying"),
-      Dialog.lang("EN")("invalidPlay"),
+      dialogLang("continuePlaying"),
+      dialogLang("invalidPlay"),
       output,
       getInput,
       15,
@@ -195,13 +258,13 @@ object Game {
     //recursive call
     val contBoolean = if (continuePlaying == "y") true else false
     if(contBoolean) {
-      contLoop(output, getInput)
+      contLoop(output, getInput, selectedLanguage)
     } else {
       gameOutcome
     }
   }
 
   def main(args: Array[String]): Unit = {
-    contLoop(println, IO.getInput)
+    contLoop(println, IO.getInput, "none")
   }
 }

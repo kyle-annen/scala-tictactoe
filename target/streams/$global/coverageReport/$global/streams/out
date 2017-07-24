@@ -5,7 +5,7 @@
 [0m[[0minfo[0m] [0mWritten Cobertura report [/Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/coverage-report/cobertura.xml][0m
 [0m[[0minfo[0m] [0mWritten XML coverage report [/Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/scoverage-report/scoverage.xml][0m
 [0m[[0minfo[0m] [0mWritten HTML coverage report [/Users/kyleannen/Code/scala-tictactoe/target/scala-2.12/scoverage-report/index.html][0m
-[0m[[0minfo[0m] [0mStatement coverage.: 97.57%[0m
-[0m[[0minfo[0m] [0mBranch coverage....: 95.24%[0m
+[0m[[0minfo[0m] [0mStatement coverage.: 94.02%[0m
+[0m[[0minfo[0m] [0mBranch coverage....: 86.76%[0m
 [0m[[0minfo[0m] [0mCoverage reports completed[0m
-[0m[[0minfo[0m] [0mAll done. Coverage was [97.57%][0m
+[0m[[0minfo[0m] [0mAll done. Coverage was [94.02%][0m
