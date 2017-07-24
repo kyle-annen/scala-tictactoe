@@ -34,21 +34,21 @@ class AISpec extends FunSpec {
 
     describe("setDepthLimit") {
       it("matches the difficulty to the board size and computer AI level") {
-        assert(AI.setDepthLimit(9, "easy") === 1)
-        assert(AI.setDepthLimit(9, "medium") === 3)
-        assert(AI.setDepthLimit(9, "hard") === 100)
+        assert(AI.setDepthLimit(9, "easy",0) === 1)
+        assert(AI.setDepthLimit(9, "medium",0) === 3)
+        assert(AI.setDepthLimit(9, "hard",0) === 100)
 
-        assert(AI.setDepthLimit(16, "easy") === 1)
-        assert(AI.setDepthLimit(16, "medium") === 3)
-        assert(AI.setDepthLimit(16, "hard") === 6)
+        assert(AI.setDepthLimit(16, "easy",0) === 1)
+        assert(AI.setDepthLimit(16, "medium",0) === 3)
+        assert(AI.setDepthLimit(16, "hard",0) === 4)
 
-        assert(AI.setDepthLimit(25, "easy") === 1)
-        assert(AI.setDepthLimit(25, "medium") === 3)
-        assert(AI.setDepthLimit(25, "hard") === 5)
+        assert(AI.setDepthLimit(25, "easy",0) === 1)
+        assert(AI.setDepthLimit(25, "medium",0) === 3)
+        assert(AI.setDepthLimit(25, "hard",0) === 5)
 
-        assert(AI.setDepthLimit(36, "easy") === 1)
-        assert(AI.setDepthLimit(36, "medium") === 3)
-        assert(AI.setDepthLimit(36, "hard") === 4)
+        assert(AI.setDepthLimit(36, "easy",0) === 1)
+        assert(AI.setDepthLimit(36, "medium",0) === 3)
+        assert(AI.setDepthLimit(36, "hard",0) === 4)
       }
     }
 
@@ -111,8 +111,8 @@ class AISpec extends FunSpec {
         //get the human moves
         val humOpenMoves = Board.returnValidInputs(bState)
         //populate all possible moves to the board
-        breakable {
-          for(move <- humOpenMoves) {
+        for(move <- humOpenMoves) {
+          breakable {
             val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
             val humWin = Board.checkWin(humMoveBoard)
             val humTie = Board.checkTie(humMoveBoard)
@@ -145,14 +145,14 @@ class AISpec extends FunSpec {
       //val startBoard = (1 to 16).toList.map(x=>x.toString)
       //val humT = "O"
       //val comT = "X"
-      //val ttTable = new AI.TranspositionTable
+      //val ttTable = new TTTable.TranspositionTable
 
       //def go(bState: List[String]): Unit = {
         ////get the human moves
         //val humOpenMoves = Board.returnValidInputs(bState)
         ////populate all possible moves to the board
-        //breakable {
-          //for(move <- humOpenMoves) {
+        //for(move <- humOpenMoves) {
+          //breakable {
             //val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
             //val humWin = Board.checkWin(humMoveBoard)
             //val humTie = Board.checkTie(humMoveBoard)

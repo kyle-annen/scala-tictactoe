@@ -1,11 +1,11 @@
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.ViewSpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.BoardSpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.DialogSpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.AISpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.IOSpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.GameSpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.TTTableSpec, org.scalatest.tools.Framework$$anon$1@6db2bf30, false, [SuiteSelector])[0m
-[0m[[0minfo[0m] [0m[36mRun completed in 8 seconds, 948 milliseconds.[0m[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.ViewSpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.AISpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.DialogSpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.BoardSpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.IOSpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.GameSpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(tictactoe.TTTableSpec, org.scalatest.tools.Framework$$anon$1@bb38c9a, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0m[36mRun completed in 8 seconds, 610 milliseconds.[0m[0m
 [0m[[0minfo[0m] [0m[36mTotal number of tests run: 62[0m[0m
 [0m[[0minfo[0m] [0m[36mSuites: completed 7, aborted 0[0m[0m
 [0m[[0minfo[0m] [0m[36mTests: succeeded 62, failed 0, canceled 0, ignored 0, pending 0[0m[0m

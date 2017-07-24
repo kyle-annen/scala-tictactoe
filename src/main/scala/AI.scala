@@ -9,18 +9,25 @@ object AI {
     var beta: Double = Double.PositiveInfinity
   }
 
-  def setDepthLimit(boardSize: Int, difficulty: String): Int = {
+  def setDepthLimit(boardSize: Int, difficulty: String, depth: Int): Int = {
     boardSize match {
       case 9 => difficulty match {
         case "easy" => 1
         case "medium" => 3
         case "hard" => 100
       }
-      case 16 => difficulty match {
-        case "easy" => 1
-        case "medium" => 3
-        case "hard" => 6
-      }
+      case 16 => depth match {
+        case x if(x <= 7) => difficulty match {
+          case "easy" => 1
+          case "medium" => 3
+          case "hard" => 4
+        }
+        case x if(x > 7)  => difficulty match {
+          case "easy" => 1
+          case "medium" => 3
+          case "hard" => 16
+        }
+     }
       case 25 => difficulty match {
         case "easy" => 1
         case "medium" => 3
@@ -45,7 +52,6 @@ object AI {
     val boardSize = origBoardState.length
     val alphaBeta = new AlphaBeta
 
-    val depthLimit = setDepthLimit(boardSize, difficulty)
 
     def miniMax(
       currentBoard: List[String],
@@ -54,6 +60,7 @@ object AI {
       minT: String,
       curT: String): Map[Int, Int]  = {
 
+      val depthLimit = setDepthLimit(boardSize, difficulty, depth)
       val openMoves = Board.returnValidInputs(currentBoard).map(x => x.toInt - 1)
 
       val scores = openMoves.map(move =>
