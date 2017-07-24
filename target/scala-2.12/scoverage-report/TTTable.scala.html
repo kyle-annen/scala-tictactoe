@@ -1,0 +1,1900 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          TTTable.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package tictactoe
+</span>2 <span style=''>
+</span>3 <span style=''>object TTTable {
+</span>4 <span style=''>  class TranspositionTable {
+</span>5 <span style=''>    var min = </span><span style='background: #AEF1AE'>scala.collection.mutable.Map[String, Int]()</span><span style=''>
+</span>6 <span style=''>    var max = </span><span style='background: #AEF1AE'>scala.collection.mutable.Map[String, Int]()</span><span style=''>
+</span>7 <span style=''>  }
+</span>8 <span style=''>
+</span>9 <span style=''>  def swapTranspositionKeys(key: String, p1Token: String, p2Token: String): String = {
+</span>10 <span style=''>    val swapArray = </span><span style='background: #AEF1AE'>key.split(&quot;&quot;).map { char =&gt;
+</span>11 <span style=''></span><span style='background: #AEF1AE'>      char match {
+</span>12 <span style=''></span><span style='background: #AEF1AE'>        case `p1Token` =&gt; p2Token
+</span>13 <span style=''></span><span style='background: #AEF1AE'>        case `p2Token` =&gt; p1Token
+</span>14 <span style=''></span><span style='background: #AEF1AE'>        case _ =&gt; char
+</span>15 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>16 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>17 <span style=''>    </span><span style='background: #AEF1AE'>swapArray.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>18 <span style=''>  }
+</span>19 <span style=''>
+</span>20 <span style=''>  def getBoardTranspositions(
+</span>21 <span style=''>    board: List[String],
+</span>22 <span style=''>    score: Int,
+</span>23 <span style=''>    p1Token: String,
+</span>24 <span style=''>    p2Token: String): Map[String, List[(String, Int)]] = {
+</span>25 <span style=''>
+</span>26 <span style=''>    val generalizedBoard = </span><span style='background: #AEF1AE'>board.map { x =&gt;
+</span>27 <span style=''></span><span style='background: #AEF1AE'>      x match {
+</span>28 <span style=''></span><span style='background: #AEF1AE'>        case `p1Token` =&gt; p1Token
+</span>29 <span style=''></span><span style='background: #AEF1AE'>        case `p2Token` =&gt; p2Token
+</span>30 <span style=''></span><span style='background: #AEF1AE'>        case _ =&gt; &quot;-&quot;
+</span>31 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>32 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>33 <span style=''>
+</span>34 <span style=''>    val rowLists = </span><span style='background: #AEF1AE'>Board.returnRows(generalizedBoard)</span><span style=''>
+</span>35 <span style=''>    val board1 = </span><span style='background: #AEF1AE'>rowLists.flatten.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>36 <span style=''>    val board2 = </span><span style='background: #AEF1AE'>rowLists.transpose.flatten.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>37 <span style=''>    val board3 = </span><span style='background: #AEF1AE'>board1.reverse</span><span style=''>
+</span>38 <span style=''>    val board4 = </span><span style='background: #AEF1AE'>board2.reverse</span><span style=''>
+</span>39 <span style=''>    val oppBoard1 = </span><span style='background: #AEF1AE'>swapTranspositionKeys(board1, &quot;X&quot;, &quot;O&quot;)</span><span style=''>
+</span>40 <span style=''>    val oppBoard2 = </span><span style='background: #AEF1AE'>swapTranspositionKeys(board2, &quot;X&quot;, &quot;O&quot;)</span><span style=''>
+</span>41 <span style=''>    val oppBoard3 = </span><span style='background: #AEF1AE'>swapTranspositionKeys(board3, &quot;X&quot;, &quot;O&quot;)</span><span style=''>
+</span>42 <span style=''>    val oppBoard4 = </span><span style='background: #AEF1AE'>swapTranspositionKeys(board4, &quot;X&quot;, &quot;O&quot;)</span><span style=''>
+</span>43 <span style=''>
+</span>44 <span style=''>    val transpositions = </span><span style='background: #AEF1AE'>List(
+</span>45 <span style=''></span><span style='background: #AEF1AE'>      board1 -&gt; score,
+</span>46 <span style=''></span><span style='background: #AEF1AE'>      board2 -&gt; score,
+</span>47 <span style=''></span><span style='background: #AEF1AE'>      board3 -&gt; score,
+</span>48 <span style=''></span><span style='background: #AEF1AE'>      board4 -&gt; score)</span><span style=''>
+</span>49 <span style=''>    val oppositeTranspositions = </span><span style='background: #AEF1AE'>List(
+</span>50 <span style=''></span><span style='background: #AEF1AE'>      oppBoard1 -&gt; -score,
+</span>51 <span style=''></span><span style='background: #AEF1AE'>      oppBoard2 -&gt; -score,
+</span>52 <span style=''></span><span style='background: #AEF1AE'>      oppBoard3 -&gt; -score,
+</span>53 <span style=''></span><span style='background: #AEF1AE'>      oppBoard4 -&gt; -score)</span><span style=''>
+</span>54 <span style=''>    </span><span style='background: #AEF1AE'>Map(&quot;current&quot; -&gt; transpositions, &quot;opposite&quot; -&gt; oppositeTranspositions)</span><span style=''>
+</span>55 <span style=''>  }
+</span>56 <span style=''>
+</span>57 <span style=''>  def saveTranspositions(
+</span>58 <span style=''>    tt: TranspositionTable,
+</span>59 <span style=''>    values: Map[String,List[(String, Int)]],
+</span>60 <span style=''>    minOrMax: String): Unit = {
+</span>61 <span style=''>    val currentPath = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #F0ADAD'>tt.min</span><span style=''> else </span><span style='background: #AEF1AE'>tt.max</span><span style=''>
+</span>62 <span style=''>    val oppPath = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;max&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>tt.max</span><span style=''> else </span><span style='background: #F0ADAD'>tt.min</span><span style=''>
+</span>63 <span style=''>    </span><span style='background: #AEF1AE'>for (value &lt;- values(&quot;current&quot;)) {
+</span>64 <span style=''></span><span style='background: #AEF1AE'>      currentPath += value</span><span style=''>
+</span>65 <span style=''>    }
+</span>66 <span style=''>    </span><span style='background: #AEF1AE'>for(value &lt;- values(&quot;opposite&quot;)) {
+</span>67 <span style=''></span><span style='background: #AEF1AE'>      oppPath += value</span><span style=''>
+</span>68 <span style=''>    }
+</span>69 <span style=''>  }
+</span>70 <span style=''>
+</span>71 <span style=''>  def checkTransposition(
+</span>72 <span style=''>    boardState: List[String],
+</span>73 <span style=''>    ttTable: TranspositionTable,
+</span>74 <span style=''>    p1Token: String,
+</span>75 <span style=''>    p2Token: String,
+</span>76 <span style=''>    minOrMax: String): (Boolean, Int) = {
+</span>77 <span style=''>    val generalizedBoard = </span><span style='background: #AEF1AE'>boardState.map {x =&gt;
+</span>78 <span style=''></span><span style='background: #AEF1AE'>      if(x == p1Token) {
+</span>79 <span style=''></span><span style='background: #AEF1AE'>        p1Token
+</span>80 <span style=''></span><span style='background: #AEF1AE'>      } else if(x == p2Token) {
+</span>81 <span style=''></span><span style='background: #AEF1AE'>        p2Token
+</span>82 <span style=''></span><span style='background: #AEF1AE'>      } else {
+</span>83 <span style=''></span><span style='background: #AEF1AE'>        &quot;-&quot;
+</span>84 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>85 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>86 <span style=''>    val path = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>ttTable.min</span><span style=''> else </span><span style='background: #AEF1AE'>ttTable.max</span><span style=''>
+</span>87 <span style=''>    val boardKey = </span><span style='background: #AEF1AE'>generalizedBoard.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
+</span>88 <span style=''>    val keyPresent = </span><span style='background: #AEF1AE'>path.contains(boardKey)</span><span style=''>
+</span>89 <span style=''>    if(keyPresent) </span><span style='background: #F0ADAD'>{
+</span>90 <span style=''></span><span style='background: #F0ADAD'>      val score = path(boardKey)
+</span>91 <span style=''></span><span style='background: #F0ADAD'>      (true, score)
+</span>92 <span style=''></span><span style='background: #F0ADAD'>    }</span><span style=''> else {
+</span>93 <span style=''>      </span><span style='background: #AEF1AE'>(false, 0)</span><span style=''>
+</span>94 <span style=''>    }
+</span>95 <span style=''>  }
+</span>96 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          5
+        </td>
+        <td>
+          444
+        </td>
+        <td>
+          79
+          -
+          122
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.mutable.Map.apply[String, Int]()
+        </td>
+      </tr><tr>
+        <td>
+          6
+        </td>
+        <td>
+          445
+        </td>
+        <td>
+          137
+          -
+          180
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.mutable.Map.apply[String, Int]()
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          448
+        </td>
+        <td>
+          293
+          -
+          444
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.TraversableLike.map
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.refArrayOps[String](key.split(&quot;&quot;)).map[String, Array[String]](((char: String) =&gt; char match {
+  case `p1Token` =&gt; p2Token
+  case `p2Token` =&gt; p1Token
+  case _ =&gt; char
+}))(scala.this.Array.canBuildFrom[String]((ClassTag.apply[String](classOf[java.lang.String]): scala.reflect.ClassTag[String])))
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          447
+        </td>
+        <td>
+          311
+          -
+          311
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.Array.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Array.canBuildFrom[String]((ClassTag.apply[String](classOf[java.lang.String]): scala.reflect.ClassTag[String]))
+        </td>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          446
+        </td>
+        <td>
+          293
+          -
+          306
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.split
+        </td>
+        <td style="background: #AEF1AE">
+          key.split(&quot;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          451
+        </td>
+        <td>
+          449
+          -
+          478
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.refArrayOps[String](swapArray).foldLeft[String](&quot;&quot;)(((x$1: String, x$2: String) =&gt; x$1.+(x$2)))
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          450
+        </td>
+        <td>
+          472
+          -
+          477
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$1.+(x$2)
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          449
+        </td>
+        <td>
+          468
+          -
+          470
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          454
+        </td>
+        <td>
+          663
+          -
+          799
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          board.map[String, List[String]](((x: String) =&gt; x match {
+  case `p1Token` =&gt; p1Token
+  case `p2Token` =&gt; p2Token
+  case _ =&gt; &quot;-&quot;
+}))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          453
+        </td>
+        <td>
+          673
+          -
+          673
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          452
+        </td>
+        <td>
+          782
+          -
+          785
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          455
+        </td>
+        <td>
+          820
+          -
+          854
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Board.returnRows
+        </td>
+        <td style="background: #AEF1AE">
+          Board.returnRows(generalizedBoard)
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          457
+        </td>
+        <td>
+          898
+          -
+          900
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          456
+        </td>
+        <td>
+          881
+          -
+          881
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[List[String]]
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          459
+        </td>
+        <td>
+          872
+          -
+          908
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          rowLists.flatten[String](scala.Predef.$conforms[List[String]]).foldLeft[String](&quot;&quot;)(((x$3: String, x$4: String) =&gt; x$3.+(x$4)))
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          458
+        </td>
+        <td>
+          902
+          -
+          907
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$3.+(x$4)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          460
+        </td>
+        <td>
+          935
+          -
+          935
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[List[String]]
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          463
+        </td>
+        <td>
+          966
+          -
+          971
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$5.+(x$6)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          462
+        </td>
+        <td>
+          962
+          -
+          964
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          461
+        </td>
+        <td>
+          945
+          -
+          945
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[List[String]]
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          464
+        </td>
+        <td>
+          926
+          -
+          972
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          rowLists.transpose[String](scala.Predef.$conforms[List[String]]).flatten[String](scala.Predef.$conforms[List[String]]).foldLeft[String](&quot;&quot;)(((x$5: String, x$6: String) =&gt; x$5.+(x$6)))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          465
+        </td>
+        <td>
+          990
+          -
+          1004
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.reverse
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(board1).reverse
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          466
+        </td>
+        <td>
+          1022
+          -
+          1036
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.IndexedSeqOptimized.reverse
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.augmentString(board2).reverse
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          467
+        </td>
+        <td>
+          1057
+          -
+          1096
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.TTTable.swapTranspositionKeys
+        </td>
+        <td style="background: #AEF1AE">
+          TTTable.this.swapTranspositionKeys(board1, &quot;X&quot;, &quot;O&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          468
+        </td>
+        <td>
+          1117
+          -
+          1156
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.TTTable.swapTranspositionKeys
+        </td>
+        <td style="background: #AEF1AE">
+          TTTable.this.swapTranspositionKeys(board2, &quot;X&quot;, &quot;O&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          469
+        </td>
+        <td>
+          1177
+          -
+          1216
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.TTTable.swapTranspositionKeys
+        </td>
+        <td style="background: #AEF1AE">
+          TTTable.this.swapTranspositionKeys(board3, &quot;X&quot;, &quot;O&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          470
+        </td>
+        <td>
+          1237
+          -
+          1276
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.TTTable.swapTranspositionKeys
+        </td>
+        <td style="background: #AEF1AE">
+          TTTable.this.swapTranspositionKeys(board4, &quot;X&quot;, &quot;O&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          475
+        </td>
+        <td>
+          1303
+          -
+          1400
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[(String, Int)](scala.Predef.ArrowAssoc[String](board1).-&gt;[Int](score), scala.Predef.ArrowAssoc[String](board2).-&gt;[Int](score), scala.Predef.ArrowAssoc[String](board3).-&gt;[Int](score), scala.Predef.ArrowAssoc[String](board4).-&gt;[Int](score))
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          471
+        </td>
+        <td>
+          1315
+          -
+          1330
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](board1).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          472
+        </td>
+        <td>
+          1338
+          -
+          1353
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](board2).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          473
+        </td>
+        <td>
+          1361
+          -
+          1376
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](board3).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          474
+        </td>
+        <td>
+          1384
+          -
+          1399
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](board4).-&gt;[Int](score)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          484
+        </td>
+        <td>
+          1434
+          -
+          1547
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.immutable.List.apply[(String, Int)](scala.Predef.ArrowAssoc[String](oppBoard1).-&gt;[Int](score.unary_-), scala.Predef.ArrowAssoc[String](oppBoard2).-&gt;[Int](score.unary_-), scala.Predef.ArrowAssoc[String](oppBoard3).-&gt;[Int](score.unary_-), scala.Predef.ArrowAssoc[String](oppBoard4).-&gt;[Int](score.unary_-))
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          477
+        </td>
+        <td>
+          1446
+          -
+          1465
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](oppBoard1).-&gt;[Int](score.unary_-)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          476
+        </td>
+        <td>
+          1459
+          -
+          1465
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.unary_-
+        </td>
+        <td style="background: #AEF1AE">
+          score.unary_-
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          478
+        </td>
+        <td>
+          1486
+          -
+          1492
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.unary_-
+        </td>
+        <td style="background: #AEF1AE">
+          score.unary_-
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          479
+        </td>
+        <td>
+          1473
+          -
+          1492
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](oppBoard2).-&gt;[Int](score.unary_-)
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          481
+        </td>
+        <td>
+          1500
+          -
+          1519
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](oppBoard3).-&gt;[Int](score.unary_-)
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          480
+        </td>
+        <td>
+          1513
+          -
+          1519
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.unary_-
+        </td>
+        <td style="background: #AEF1AE">
+          score.unary_-
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          483
+        </td>
+        <td>
+          1527
+          -
+          1546
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](oppBoard4).-&gt;[Int](score.unary_-)
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          482
+        </td>
+        <td>
+          1540
+          -
+          1546
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Int.unary_-
+        </td>
+        <td style="background: #AEF1AE">
+          score.unary_-
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          487
+        </td>
+        <td>
+          1552
+          -
+          1622
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[String, List[(String, Int)]](scala.Predef.ArrowAssoc[String](&quot;current&quot;).-&gt;[List[(String, Int)]](transpositions), scala.Predef.ArrowAssoc[String](&quot;opposite&quot;).-&gt;[List[(String, Int)]](oppositeTranspositions))
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          486
+        </td>
+        <td>
+          1585
+          -
+          1621
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;opposite&quot;).-&gt;[List[(String, Int)]](oppositeTranspositions)
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          485
+        </td>
+        <td>
+          1556
+          -
+          1583
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.ArrowAssoc[String](&quot;current&quot;).-&gt;[List[(String, Int)]](transpositions)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          490
+        </td>
+        <td>
+          1803
+          -
+          1809
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.min
+        </td>
+        <td style="background: #F0ADAD">
+          tt.min
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          489
+        </td>
+        <td>
+          1803
+          -
+          1809
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.min
+        </td>
+        <td style="background: #F0ADAD">
+          tt.min
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          492
+        </td>
+        <td>
+          1815
+          -
+          1821
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          tt.max
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          488
+        </td>
+        <td>
+          1784
+          -
+          1801
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          minOrMax.==(&quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          491
+        </td>
+        <td>
+          1815
+          -
+          1821
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          tt.max
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          496
+        </td>
+        <td>
+          1874
+          -
+          1880
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.min
+        </td>
+        <td style="background: #F0ADAD">
+          tt.min
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          495
+        </td>
+        <td>
+          1862
+          -
+          1868
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          tt.max
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          497
+        </td>
+        <td>
+          1874
+          -
+          1880
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.min
+        </td>
+        <td style="background: #F0ADAD">
+          tt.min
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          494
+        </td>
+        <td>
+          1862
+          -
+          1868
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          tt.max
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          493
+        </td>
+        <td>
+          1843
+          -
+          1860
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          minOrMax.==(&quot;max&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          498
+        </td>
+        <td>
+          1906
+          -
+          1915
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;current&quot;
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          500
+        </td>
+        <td>
+          1885
+          -
+          1946
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.foreach
+        </td>
+        <td style="background: #AEF1AE">
+          values.apply(&quot;current&quot;).foreach[scala.collection.mutable.Map[String,Int]](((value: (String, Int)) =&gt; currentPath.+=(value)))
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          499
+        </td>
+        <td>
+          1926
+          -
+          1946
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.mutable.MapLike.+=
+        </td>
+        <td style="background: #AEF1AE">
+          currentPath.+=(value)
+        </td>
+      </tr><tr>
+        <td>
+          66
+        </td>
+        <td>
+          501
+        </td>
+        <td>
+          1977
+          -
+          1987
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;opposite&quot;
+        </td>
+      </tr><tr>
+        <td>
+          66
+        </td>
+        <td>
+          503
+        </td>
+        <td>
+          1957
+          -
+          2014
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.immutable.List.foreach
+        </td>
+        <td style="background: #AEF1AE">
+          values.apply(&quot;opposite&quot;).foreach[scala.collection.mutable.Map[String,Int]](((value: (String, Int)) =&gt; oppPath.+=(value)))
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          502
+        </td>
+        <td>
+          1998
+          -
+          2014
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.mutable.MapLike.+=
+        </td>
+        <td style="background: #AEF1AE">
+          oppPath.+=(value)
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          512
+        </td>
+        <td>
+          2226
+          -
+          2376
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          boardState.map[String, List[String]](((x: String) =&gt; if (x.==(p1Token))
+  p1Token
+else
+  if (x.==(p2Token))
+    p2Token
+  else
+    &quot;-&quot;))(immutable.this.List.canBuildFrom[String])
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          511
+        </td>
+        <td>
+          2241
+          -
+          2241
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          504
+        </td>
+        <td>
+          2256
+          -
+          2268
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(p1Token)
+        </td>
+      </tr><tr>
+        <td>
+          79
+        </td>
+        <td>
+          505
+        </td>
+        <td>
+          2280
+          -
+          2287
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.TTTable.p1Token
+        </td>
+        <td style="background: #AEF1AE">
+          p1Token
+        </td>
+      </tr><tr>
+        <td>
+          80
+        </td>
+        <td>
+          510
+        </td>
+        <td>
+          2301
+          -
+          2370
+        </td>
+        <td>
+          If
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          if (x.==(p2Token))
+  p2Token
+else
+  &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          80
+        </td>
+        <td>
+          506
+        </td>
+        <td>
+          2304
+          -
+          2316
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          x.==(p2Token)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          507
+        </td>
+        <td>
+          2328
+          -
+          2335
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.TTTable.p2Token
+        </td>
+        <td style="background: #AEF1AE">
+          p2Token
+        </td>
+      </tr><tr>
+        <td>
+          83
+        </td>
+        <td>
+          508
+        </td>
+        <td>
+          2359
+          -
+          2362
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          83
+        </td>
+        <td>
+          509
+        </td>
+        <td>
+          2359
+          -
+          2362
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;-&quot;
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          514
+        </td>
+        <td>
+          2414
+          -
+          2425
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.min
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.min
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          517
+        </td>
+        <td>
+          2431
+          -
+          2442
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.max
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          516
+        </td>
+        <td>
+          2431
+          -
+          2442
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.max
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.max
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          513
+        </td>
+        <td>
+          2395
+          -
+          2412
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #AEF1AE">
+          minOrMax.==(&quot;min&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          86
+        </td>
+        <td>
+          515
+        </td>
+        <td>
+          2414
+          -
+          2425
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.TTTable.TranspositionTable.min
+        </td>
+        <td style="background: #AEF1AE">
+          ttTable.min
+        </td>
+      </tr><tr>
+        <td>
+          87
+        </td>
+        <td>
+          519
+        </td>
+        <td>
+          2492
+          -
+          2497
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          x$7.+(x$8)
+        </td>
+      </tr><tr>
+        <td>
+          87
+        </td>
+        <td>
+          518
+        </td>
+        <td>
+          2488
+          -
+          2490
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;&quot;
+        </td>
+      </tr><tr>
+        <td>
+          87
+        </td>
+        <td>
+          520
+        </td>
+        <td>
+          2462
+          -
+          2498
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.foldLeft
+        </td>
+        <td style="background: #AEF1AE">
+          generalizedBoard.foldLeft[String](&quot;&quot;)(((x$7: String, x$8: String) =&gt; x$7.+(x$8)))
+        </td>
+      </tr><tr>
+        <td>
+          88
+        </td>
+        <td>
+          521
+        </td>
+        <td>
+          2520
+          -
+          2543
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.contains
+        </td>
+        <td style="background: #AEF1AE">
+          path.contains(boardKey)
+        </td>
+      </tr><tr>
+        <td>
+          89
+        </td>
+        <td>
+          524
+        </td>
+        <td>
+          2563
+          -
+          2623
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          {
+  val score: Int = path.apply(boardKey);
+  scala.Tuple2.apply[Boolean, Int](true, score)
+}
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          522
+        </td>
+        <td>
+          2583
+          -
+          2597
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #F0ADAD">
+          path.apply(boardKey)
+        </td>
+      </tr><tr>
+        <td>
+          91
+        </td>
+        <td>
+          523
+        </td>
+        <td>
+          2604
+          -
+          2617
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Tuple2.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Tuple2.apply[Boolean, Int](true, score)
+        </td>
+      </tr><tr>
+        <td>
+          93
+        </td>
+        <td>
+          525
+        </td>
+        <td>
+          2637
+          -
+          2647
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Tuple2.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Tuple2.apply[Boolean, Int](false, 0)
+        </td>
+      </tr><tr>
+        <td>
+          93
+        </td>
+        <td>
+          526
+        </td>
+        <td>
+          2637
+          -
+          2647
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          scala.Tuple2.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Tuple2.apply[Boolean, Int](false, 0)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>
