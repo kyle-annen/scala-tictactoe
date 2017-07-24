@@ -106,96 +106,53 @@ object AI {
         if(aiParams.currentDepth >= depthLimit) {
           depthLimitScore(aiParams, initialMove, depthLimit)
         } else if(aiParams.maxToken == aiParams.currentToken){
-          val transpositionCheck = TTTable.checkTransposition(
-            aiParams.boardState,
-            aiParams.ttTable,
+          val maxScore = 1000 - aiParams.currentDepth
+          val maxBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
+          val maxWin = Board.checkWin(maxBoard)
+          val maxTie = Board.checkTie(maxBoard)
+          if(maxWin) {
+            new Score(initialMove, maxScore, "win")
+          } else if(maxTie) {
+            new Score(initialMove, 0, "tie")
+          } else {
+            val maxParams = new AIParams(
+            maxBoard,
+            aiParams.currentDepth + 1,
             aiParams.maxToken,
             aiParams.minToken,
-            "max")
-          if(transpositionCheck._1 == true) {
-            new Score(initialMove, transpositionCheck._2, "transposition")
+            aiParams.minToken,
+            aiParams.ttTable,
+            aiParams.difficulty)
+            //recursive call
+            miniMax(maxParams, initialMove)
+          }
+        } else {
+          val minScore = -1000 + aiParams.currentDepth
+          val minBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
+          val minWin = Board.checkWin(minBoard)
+          val minTie = Board.checkTie(minBoard)
+          if(minWin) {
+            new Score(initialMove, minScore, "win")
+          } else if(minTie) {
+            new Score(initialMove, 0, "tie")
           } else {
-            val maxScore = 1000 - aiParams.currentDepth
-            val maxBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
-            val maxWin = Board.checkWin(maxBoard)
-            val maxTie = Board.checkTie(maxBoard)
-            if(maxWin) {
-              new Score(initialMove, maxScore, "win")
-            } else if(maxTie) {
-              new Score(initialMove, 0, "tie")
-            } else {
-              val maxParams = new AIParams(
-              maxBoard,
+            val minParams = new AIParams(
+              minBoard,
               aiParams.currentDepth + 1,
               aiParams.maxToken,
               aiParams.minToken,
-              aiParams.minToken,
+              aiParams.maxToken,
               aiParams.ttTable,
               aiParams.difficulty)
               //recursive call
-              miniMax(maxParams, initialMove)
-            }
-          }
-        } else {
-          val transpositionCheck = TTTable.checkTransposition(
-            aiParams.boardState,
-            aiParams.ttTable,
-            aiParams.maxToken,
-            aiParams.minToken,
-            "min")
-          if(transpositionCheck._1 == true) {
-            new Score(initialMove, transpositionCheck._2, "transposition")
-          } else {
-            val minScore = -1000 + aiParams.currentDepth
-            val minBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
-            val minWin = Board.checkWin(minBoard)
-            val minTie = Board.checkTie(minBoard)
-            if(minWin) {
-              new Score(initialMove, minScore, "win")
-            } else if(minTie) {
-              new Score(initialMove, 0, "tie")
-            } else {
-              val minParams = new AIParams(
-                minBoard,
-                aiParams.currentDepth + 1,
-                aiParams.maxToken,
-                aiParams.minToken,
-                aiParams.maxToken,
-                aiParams.ttTable,
-                aiParams.difficulty)
-                //recursive call
-              miniMax(minParams, initialMove)
-            }
+            miniMax(minParams, initialMove)
           }
         }
       }
       //max path
       if(aiParams.currentToken == aiParams.maxToken) {
-        val transFilteredScores = scores.filter(_.outcome != "transposition")
-        val depthFilteredScores = transFilteredScores.filter(_.outcome != "depthLimited")
-        for(score <- depthFilteredScores) {
-          val transBoard = updateBoard(aiParams.boardState, aiParams.maxToken, score.position)
-          val transpositions = TTTable.getBoardTranspositions(
-            transBoard,
-            score.value,
-            aiParams.maxToken,
-            aiParams.minToken)
-          TTTable.saveTranspositions(aiParams.ttTable, transpositions, "max")
-        }
-
         scores.maxBy(_.value)
       } else {
-        val transFilteredScores = scores.filter(_.outcome != "transposition")
-        val depthFilteredScores = transFilteredScores.filter(_.outcome != "depthLimited")
-        for(score <- depthFilteredScores) {
-          val transBoard = updateBoard(aiParams.boardState, aiParams.minToken, score.position)
-          val transpositions = TTTable.getBoardTranspositions(
-            transBoard,
-            score.value,
-            aiParams.maxToken,
-            aiParams.minToken)
-          TTTable.saveTranspositions(aiParams.ttTable, transpositions, "min")
-        }
         scores.minBy(_.value)
       }
     }
