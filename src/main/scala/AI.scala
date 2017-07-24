@@ -9,6 +9,12 @@ object AI {
     var beta: Double = Double.PositiveInfinity
   }
 
+  class Score(p: Int, v: Int, o: String) {
+    val position: Int = p
+    val value: Int = v
+    val outcome: String = o
+  }
+
   def setDepthLimit(boardSize: Int, difficulty: String, depth: Int): Int = {
     boardSize match {
       case 9 => difficulty match {
@@ -67,28 +73,21 @@ object AI {
         //maxpath
         if(depth >= depthLimit) {
           val depthLimitScore = if(curT == maxT) -1000 + depth + 2 else 1000 - depth - 2
-          Map(move -> depthLimitScore)
+          new Score(move, depthLimitScore, "depthLimit")
         } else if(curT == maxT) {
           val maxScore = 1000 - depth
           val maxBoardMove: List[String] = currentBoard.map(x => if(x == (move+1).toString) curT else x)
           val maxWin = Board.checkWin(maxBoardMove)
           val maxTie = Board.checkTie(maxBoardMove)
+
           if(maxWin) {
-/*            val maxTranspositions = getBoardTranspositions(maxBoardMove, maxScore, maxT, minT)*/
-            /*saveTranspositions(ttTable, maxTranspositions, "max")*/
-            Map(move -> maxScore)
+            new Score(move, maxScore, "win")
           } else if(maxTie) {
-  /*          val maxTieTranspositions = getBoardTranspositions(maxBoardMove, 0, maxT, minT)*/
-            /*saveTranspositions(ttTable, maxTieTranspositions, "max")*/
-            Map(move -> 0)
+            new Score(move, 0, "tie")
           } else {
-            val checkTransTable = TTTable.checkTransposition(maxBoardMove, ttTable, maxT, minT, "max")
-            if(checkTransTable._1 == true) {
-              Map(move -> checkTransTable._2)
-            } else {
-              val mmResult = miniMax(maxBoardMove, depth + 1, maxT, minT, minT)
-              val mmScore = mmResult(mmResult.keys.head)
-              Map(move -> mmScore)
+            val mmResult = miniMax(maxBoardMove, depth + 1, maxT, minT, minT)
+            val mmScore = mmResult(mmResult.keys.head)
+            Map(move -> mmScore)
             }
           }
         //min path
@@ -98,53 +97,18 @@ object AI {
           val minWin = Board.checkWin(minBoardMove)
           val minTie = Board.checkTie(minBoardMove)
           if(minWin) {
-            /*val minTranspositions = getBoardTranspositions(minBoardMove, minScore, maxT, minT)*/
-            /*saveTranspositions(ttTable, minTranspositions, "min")*/
-            Map(move -> minScore)
+            new Score(move, minScore, "win")
           } else if(minTie) {
-           /* val minTieTranspostitions = getBoardTranspositions(minBoardMove, 0, maxT, minT)*/
-            /*saveTranspositions(ttTable, minTieTranspostitions, "min")*/
-            Map(move -> 0)
+            new Score(move, 0, "tie")
           } else {
-            val checkTransTable = TTTable.checkTransposition(minBoardMove, ttTable, maxT, minT, "min")
-            if(checkTransTable._1 == true) {
-              Map(move -> checkTransTable._2)
-            } else {
-              val mmResult = miniMax(minBoardMove, depth + 1, maxT, minT, maxT)
-              val mmScore = mmResult(mmResult.keys.head)
-              Map(move -> mmScore)
-            }
+            val mmResult = miniMax(minBoardMove, depth + 1, maxT, minT, maxT)
+            val mmScore = mmResult(mmResult.keys.head)
+            Map(move -> mmScore)
           }
         }
       )
 
       val mapScores = scores.flatten.toMap
-
-      //transposition table saving
-     /* val boardScores = mapScores.map { pair =>*/
-        //(
-          //currentBoard.map { cell =>
-            //if (cell == pair._1.toString) {
-              //curT
-            //} else {
-              //cell
-            //}
-          //},
-          //pair._2
-        //)
-      //}
-
-      //if(curT == maxT) {
-        //boardScores.map { boardScore =>
-          //val maxTranspositions = getBoardTranspositions(boardScore._1, boardScore._2, maxT, minT)
-          //saveTranspositions(ttTable, maxTranspositions, "max")
-        //}
-      //} else {
-        //boardScores.map { boardScore =>
-          //val minTranspositions = getBoardTranspositions(boardScore._1, boardScore._2, maxT, minT)
-          //saveTranspositions(ttTable, minTranspositions, "min")
-        //}
-      /*}*/
 
 
       if(curT == maxT) {
@@ -163,6 +127,7 @@ object AI {
         val minMapScore = Map(minTupleScore._1 -> minTupleScore._2)
         alphaBeta.beta = List(minTupleScore._2, alphaBeta.beta.toInt, v).max
         if(alphaBeta.beta <= alphaBeta.alpha) {
+          new Score()
           Map(minTupleScore._1 -> v)
         } else {
           minMapScore

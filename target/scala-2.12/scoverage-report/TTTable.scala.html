@@ -82,8 +82,8 @@
 </span>58 <span style=''>    tt: TranspositionTable,
 </span>59 <span style=''>    values: Map[String,List[(String, Int)]],
 </span>60 <span style=''>    minOrMax: String): Unit = {
-</span>61 <span style=''>    val currentPath = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #F0ADAD'>tt.min</span><span style=''> else </span><span style='background: #AEF1AE'>tt.max</span><span style=''>
-</span>62 <span style=''>    val oppPath = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;max&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>tt.max</span><span style=''> else </span><span style='background: #F0ADAD'>tt.min</span><span style=''>
+</span>61 <span style=''>    val currentPath = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>tt.min</span><span style=''> else </span><span style='background: #AEF1AE'>tt.max</span><span style=''>
+</span>62 <span style=''>    val oppPath = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>tt.max</span><span style=''> else </span><span style='background: #AEF1AE'>tt.min</span><span style=''>
 </span>63 <span style=''>    </span><span style='background: #AEF1AE'>for (value &lt;- values(&quot;current&quot;)) {
 </span>64 <span style=''></span><span style='background: #AEF1AE'>      currentPath += value</span><span style=''>
 </span>65 <span style=''>    }
@@ -110,10 +110,10 @@
 </span>86 <span style=''>    val path = if(</span><span style='background: #AEF1AE'>minOrMax == &quot;min&quot;</span><span style=''>) </span><span style='background: #AEF1AE'>ttTable.min</span><span style=''> else </span><span style='background: #AEF1AE'>ttTable.max</span><span style=''>
 </span>87 <span style=''>    val boardKey = </span><span style='background: #AEF1AE'>generalizedBoard.foldLeft(&quot;&quot;)(_ + _)</span><span style=''>
 </span>88 <span style=''>    val keyPresent = </span><span style='background: #AEF1AE'>path.contains(boardKey)</span><span style=''>
-</span>89 <span style=''>    if(keyPresent) </span><span style='background: #F0ADAD'>{
-</span>90 <span style=''></span><span style='background: #F0ADAD'>      val score = path(boardKey)
-</span>91 <span style=''></span><span style='background: #F0ADAD'>      (true, score)
-</span>92 <span style=''></span><span style='background: #F0ADAD'>    }</span><span style=''> else {
+</span>89 <span style=''>    if(keyPresent) </span><span style='background: #AEF1AE'>{
+</span>90 <span style=''></span><span style='background: #AEF1AE'>      val score = path(boardKey)
+</span>91 <span style=''></span><span style='background: #AEF1AE'>      (true, score)
+</span>92 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''> else {
 </span>93 <span style=''>      </span><span style='background: #AEF1AE'>(false, 0)</span><span style=''>
 </span>94 <span style=''>    }
 </span>95 <span style=''>  }
@@ -1079,7 +1079,7 @@
         <td>
           tictactoe.TTTable.TranspositionTable.min
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           tt.min
         </td>
       </tr><tr>
@@ -1100,7 +1100,7 @@
         <td>
           tictactoe.TTTable.TranspositionTable.min
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           tt.min
         </td>
       </tr><tr>
@@ -1184,7 +1184,7 @@
         <td>
           tictactoe.TTTable.TranspositionTable.min
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           tt.min
         </td>
       </tr><tr>
@@ -1226,7 +1226,7 @@
         <td>
           tictactoe.TTTable.TranspositionTable.min
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           tt.min
         </td>
       </tr><tr>
@@ -1269,7 +1269,7 @@
           java.lang.Object.==
         </td>
         <td style="background: #AEF1AE">
-          minOrMax.==(&quot;max&quot;)
+          minOrMax.==(&quot;min&quot;)
         </td>
       </tr><tr>
         <td>
@@ -1802,7 +1802,7 @@ else
         <td>
           &lt;nosymbol&gt;
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           {
   val score: Int = path.apply(boardKey);
   scala.Tuple2.apply[Boolean, Int](true, score)
@@ -1826,7 +1826,7 @@ else
         <td>
           scala.collection.MapLike.apply
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           path.apply(boardKey)
         </td>
       </tr><tr>
@@ -1847,7 +1847,7 @@ else
         <td>
           scala.Tuple2.apply
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           scala.Tuple2.apply[Boolean, Int](true, score)
         </td>
       </tr><tr>

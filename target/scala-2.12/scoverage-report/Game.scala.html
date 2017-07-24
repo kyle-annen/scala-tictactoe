@@ -154,7 +154,7 @@
 </span>130 <span style=''>    whiteSpace: Int,
 </span>131 <span style=''>    getInput: Int =&gt; String,
 </span>132 <span style=''>    loopCount: Int,
-</span>133 <span style=''>    ttTable: AI.TranspositionTable): Map[Int, Boolean] = {
+</span>133 <span style=''>    ttTable: TTTable.TranspositionTable): Map[Int, Boolean] = {
 </span>134 <span style=''>
 </span>135 <span style=''>    </span><span style='background: #AEF1AE'>View.renderWhitespace(output, whiteSpace)</span><span style=''>
 </span>136 <span style=''>
@@ -240,13 +240,13 @@
 </span>216 <span style=''>
 </span>217 <span style=''>      val player1 = </span><span style='background: #AEF1AE'>setPlayer(output, leftPadding, getInput, dialogLang, 1, &quot;X&quot;)</span><span style=''>
 </span>218 <span style=''>      val player2 = </span><span style='background: #AEF1AE'>setPlayer(output, leftPadding, getInput, dialogLang, 2, &quot;O&quot;)</span><span style=''>
-</span>219 <span style=''>      
+</span>219 <span style=''>
 </span>220 <span style=''>      val players = </span><span style='background: #AEF1AE'>List(player1, player2).flatten.toMap</span><span style=''>
 </span>221 <span style=''>      val boardDimen: Int = </span><span style='background: #AEF1AE'>setBoardSize(output, leftPadding, getInput, dialogLang)</span><span style=''>
 </span>222 <span style=''>      val boardSize: Int = </span><span style='background: #AEF1AE'>boardDimen * boardDimen</span><span style=''>
 </span>223 <span style=''>      val board = </span><span style='background: #AEF1AE'>Board.initBoard(boardSize)</span><span style=''>
 </span>224 <span style=''>
-</span>225 <span style=''>      val ttTable = </span><span style='background: #AEF1AE'>new AI.TranspositionTable</span><span style=''>
+</span>225 <span style=''>      val ttTable = </span><span style='background: #AEF1AE'>new TTTable.TranspositionTable</span><span style=''>
 </span>226 <span style=''>
 </span>227 <span style=''>      </span><span style='background: #AEF1AE'>go(
 </span>228 <span style=''></span><span style='background: #AEF1AE'>        board, players, dialogLang, false, currentPlayer,
@@ -308,28 +308,7 @@
           11
         </td>
         <td>
-          325
-        </td>
-        <td>
-          219
-          -
-          248
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.MapLike.apply
-        </td>
-        <td style="background: #AEF1AE">
-          Dialog.lang.apply(&quot;EN&quot;).apply(&quot;greeting&quot;)
-        </td>
-      </tr><tr>
-        <td>
-          11
-        </td>
-        <td>
-          326
+          271
         </td>
         <td>
           180
@@ -347,10 +326,31 @@
         </td>
       </tr><tr>
         <td>
+          11
+        </td>
+        <td>
+          270
+        </td>
+        <td>
+          219
+          -
+          248
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Dialog.lang.apply(&quot;EN&quot;).apply(&quot;greeting&quot;)
+        </td>
+      </tr><tr>
+        <td>
           12
         </td>
         <td>
-          327
+          272
         </td>
         <td>
           254
@@ -371,70 +371,28 @@
           13
         </td>
         <td>
-          331
+          274
         </td>
         <td>
-          349
+          316
           -
-          349
+          337
         </td>
         <td>
-          TypeApply
+          Select
         </td>
         <td>
-          scala.collection.immutable.List.canBuildFrom
+          scala.collection.TraversableOnce.size
         </td>
         <td style="background: #AEF1AE">
-          immutable.this.List.canBuildFrom[String]
+          Dialog.lang.keys.size
         </td>
       </tr><tr>
         <td>
           13
         </td>
         <td>
-          328
-        </td>
-        <td>
-          311
-          -
-          312
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          1
-        </td>
-      </tr><tr>
-        <td>
-          13
-        </td>
-        <td>
-          330
-        </td>
-        <td>
-          355
-          -
-          365
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Any.toString
-        </td>
-        <td style="background: #AEF1AE">
-          x.toString()
-        </td>
-      </tr><tr>
-        <td>
-          13
-        </td>
-        <td>
-          332
+          277
         </td>
         <td>
           311
@@ -455,28 +413,70 @@
           13
         </td>
         <td>
-          329
+          276
         </td>
         <td>
-          316
+          349
           -
-          337
+          349
         </td>
         <td>
-          Select
+          TypeApply
         </td>
         <td>
-          scala.collection.TraversableOnce.size
+          scala.collection.immutable.List.canBuildFrom
         </td>
         <td style="background: #AEF1AE">
-          Dialog.lang.keys.size
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          273
+        </td>
+        <td>
+          311
+          -
+          312
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          275
+        </td>
+        <td>
+          355
+          -
+          365
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Any.toString
+        </td>
+        <td style="background: #AEF1AE">
+          x.toString()
         </td>
       </tr><tr>
         <td>
           14
         </td>
         <td>
-          333
+          278
         </td>
         <td>
           386
@@ -497,7 +497,7 @@
           15
         </td>
         <td>
-          339
+          284
         </td>
         <td>
           414
@@ -518,70 +518,7 @@
           16
         </td>
         <td>
-          334
-        </td>
-        <td>
-          497
-          -
-          502
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot; - &quot;
-        </td>
-      </tr><tr>
-        <td>
-          16
-        </td>
-        <td>
-          337
-        </td>
-        <td>
-          488
-          -
-          531
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.lang.String.+
-        </td>
-        <td style="background: #AEF1AE">
-          option.+(&quot; - &quot;).+(langKeys.apply(scala.Predef.augmentString(option).toInt.-(1)))
-        </td>
-      </tr><tr>
-        <td>
-          16
-        </td>
-        <td>
-          336
-        </td>
-        <td>
-          505
-          -
-          531
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.LinearSeqOptimized.apply
-        </td>
-        <td style="background: #AEF1AE">
-          langKeys.apply(scala.Predef.augmentString(option).toInt.-(1))
-        </td>
-      </tr><tr>
-        <td>
-          16
-        </td>
-        <td>
-          335
+          280
         </td>
         <td>
           514
@@ -602,7 +539,7 @@
           16
         </td>
         <td>
-          338
+          283
         </td>
         <td>
           449
@@ -620,10 +557,73 @@
         </td>
       </tr><tr>
         <td>
+          16
+        </td>
+        <td>
+          279
+        </td>
+        <td>
+          497
+          -
+          502
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot; - &quot;
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          282
+        </td>
+        <td>
+          488
+          -
+          531
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          option.+(&quot; - &quot;).+(langKeys.apply(scala.Predef.augmentString(option).toInt.-(1)))
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          281
+        </td>
+        <td>
+          505
+          -
+          531
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.LinearSeqOptimized.apply
+        </td>
+        <td style="background: #AEF1AE">
+          langKeys.apply(scala.Predef.augmentString(option).toInt.-(1))
+        </td>
+      </tr><tr>
+        <td>
           19
         </td>
         <td>
-          343
+          288
         </td>
         <td>
           564
@@ -644,7 +644,7 @@
           21
         </td>
         <td>
-          340
+          285
         </td>
         <td>
           606
@@ -665,7 +665,7 @@
           22
         </td>
         <td>
-          341
+          286
         </td>
         <td>
           645
@@ -686,7 +686,7 @@
           26
         </td>
         <td>
-          342
+          287
         </td>
         <td>
           734
@@ -707,28 +707,7 @@
           27
         </td>
         <td>
-          345
-        </td>
-        <td>
-          755
-          -
-          788
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.LinearSeqOptimized.apply
-        </td>
-        <td style="background: #AEF1AE">
-          langKeys.apply(scala.Predef.augmentString(langSelection).toInt.-(1))
-        </td>
-      </tr><tr>
-        <td>
-          27
-        </td>
-        <td>
-          344
+          289
         </td>
         <td>
           764
@@ -746,31 +725,31 @@
         </td>
       </tr><tr>
         <td>
-          37
+          27
         </td>
         <td>
-          346
+          290
         </td>
         <td>
-          994
+          755
           -
-          1021
+          788
         </td>
         <td>
           Apply
         </td>
         <td>
-          scala.collection.MapLike.apply
+          scala.collection.LinearSeqOptimized.apply
         </td>
         <td style="background: #AEF1AE">
-          dialogLang.apply(&quot;pickBoardSize&quot;)
+          langKeys.apply(scala.Predef.augmentString(langSelection).toInt.-(1))
         </td>
       </tr><tr>
         <td>
           37
         </td>
         <td>
-          347
+          292
         </td>
         <td>
           955
@@ -788,10 +767,31 @@
         </td>
       </tr><tr>
         <td>
+          37
+        </td>
+        <td>
+          291
+        </td>
+        <td>
+          994
+          -
+          1021
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;pickBoardSize&quot;)
+        </td>
+      </tr><tr>
+        <td>
           38
         </td>
         <td>
-          348
+          293
         </td>
         <td>
           1045
@@ -812,7 +812,7 @@
           39
         </td>
         <td>
-          351
+          296
         </td>
         <td>
           1064
@@ -833,28 +833,7 @@
           40
         </td>
         <td>
-          349
-        </td>
-        <td>
-          1138
-          -
-          1176
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.lang.String.+
-        </td>
-        <td style="background: #AEF1AE">
-          option.+(&quot; - &quot;).+(option).+(&quot;x&quot;).+(option)
-        </td>
-      </tr><tr>
-        <td>
-          40
-        </td>
-        <td>
-          350
+          295
         </td>
         <td>
           1099
@@ -872,10 +851,31 @@
         </td>
       </tr><tr>
         <td>
+          40
+        </td>
+        <td>
+          294
+        </td>
+        <td>
+          1138
+          -
+          1176
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          option.+(&quot; - &quot;).+(option).+(&quot;x&quot;).+(option)
+        </td>
+      </tr><tr>
+        <td>
           42
         </td>
         <td>
-          355
+          300
         </td>
         <td>
           1208
@@ -896,7 +896,7 @@
           44
         </td>
         <td>
-          352
+          297
         </td>
         <td>
           1250
@@ -917,7 +917,7 @@
           45
         </td>
         <td>
-          353
+          298
         </td>
         <td>
           1285
@@ -938,7 +938,7 @@
           49
         </td>
         <td>
-          354
+          299
         </td>
         <td>
           1367
@@ -959,7 +959,7 @@
           50
         </td>
         <td>
-          356
+          301
         </td>
         <td>
           1374
@@ -980,7 +980,28 @@
           59
         </td>
         <td>
-          358
+          304
+        </td>
+        <td>
+          1563
+          -
+          1590
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;1 - &quot;.+(dialogLang.apply(&quot;easy&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          303
         </td>
         <td>
           1572
@@ -1001,7 +1022,7 @@
           59
         </td>
         <td>
-          357
+          302
         </td>
         <td>
           1563
@@ -1019,15 +1040,15 @@
         </td>
       </tr><tr>
         <td>
-          59
+          60
         </td>
         <td>
-          359
+          307
         </td>
         <td>
-          1563
+          1608
           -
-          1590
+          1637
         </td>
         <td>
           Apply
@@ -1036,14 +1057,14 @@
           java.lang.String.+
         </td>
         <td style="background: #AEF1AE">
-          &quot;1 - &quot;.+(dialogLang.apply(&quot;easy&quot;))
+          &quot;2 - &quot;.+(dialogLang.apply(&quot;medium&quot;))
         </td>
       </tr><tr>
         <td>
           60
         </td>
         <td>
-          361
+          306
         </td>
         <td>
           1617
@@ -1064,7 +1085,7 @@
           60
         </td>
         <td>
-          360
+          305
         </td>
         <td>
           1608
@@ -1082,15 +1103,15 @@
         </td>
       </tr><tr>
         <td>
-          60
+          61
         </td>
         <td>
-          362
+          310
         </td>
         <td>
-          1608
+          1653
           -
-          1637
+          1680
         </td>
         <td>
           Apply
@@ -1099,14 +1120,14 @@
           java.lang.String.+
         </td>
         <td style="background: #AEF1AE">
-          &quot;2 - &quot;.+(dialogLang.apply(&quot;medium&quot;))
+          &quot;3 - &quot;.+(dialogLang.apply(&quot;hard&quot;))
         </td>
       </tr><tr>
         <td>
           61
         </td>
         <td>
-          364
+          309
         </td>
         <td>
           1662
@@ -1127,7 +1148,7 @@
           61
         </td>
         <td>
-          363
+          308
         </td>
         <td>
           1653
@@ -1145,31 +1166,10 @@
         </td>
       </tr><tr>
         <td>
-          61
-        </td>
-        <td>
-          365
-        </td>
-        <td>
-          1653
-          -
-          1680
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.lang.String.+
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;3 - &quot;.+(dialogLang.apply(&quot;hard&quot;))
-        </td>
-      </tr><tr>
-        <td>
           62
         </td>
         <td>
-          366
+          311
         </td>
         <td>
           1708
@@ -1190,7 +1190,7 @@
           67
         </td>
         <td>
-          367
+          312
         </td>
         <td>
           1757
@@ -1211,7 +1211,7 @@
           68
         </td>
         <td>
-          368
+          313
         </td>
         <td>
           1917
@@ -1232,7 +1232,7 @@
           70
         </td>
         <td>
-          371
+          316
         </td>
         <td>
           1960
@@ -1253,7 +1253,7 @@
           73
         </td>
         <td>
-          369
+          314
         </td>
         <td>
           2015
@@ -1274,7 +1274,7 @@
           77
         </td>
         <td>
-          370
+          315
         </td>
         <td>
           2097
@@ -1295,7 +1295,7 @@
           80
         </td>
         <td>
-          372
+          317
         </td>
         <td>
           2146
@@ -1316,7 +1316,7 @@
           81
         </td>
         <td>
-          373
+          318
         </td>
         <td>
           2171
@@ -1337,7 +1337,7 @@
           82
         </td>
         <td>
-          374
+          319
         </td>
         <td>
           2198
@@ -1358,7 +1358,28 @@
           94
         </td>
         <td>
-          376
+          322
+        </td>
+        <td>
+          2454
+          -
+          2503
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.String.+
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;playerAnnounce&quot;).+(playerNum.toString())
+        </td>
+      </tr><tr>
+        <td>
+          94
+        </td>
+        <td>
+          321
         </td>
         <td>
           2485
@@ -1379,7 +1400,7 @@
           94
         </td>
         <td>
-          375
+          320
         </td>
         <td>
           2465
@@ -1397,31 +1418,10 @@
         </td>
       </tr><tr>
         <td>
-          94
-        </td>
-        <td>
-          377
-        </td>
-        <td>
-          2454
-          -
-          2503
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.lang.String.+
-        </td>
-        <td style="background: #AEF1AE">
-          dialogLang.apply(&quot;playerAnnounce&quot;).+(playerNum.toString())
-        </td>
-      </tr><tr>
-        <td>
           95
         </td>
         <td>
-          378
+          323
         </td>
         <td>
           2522
@@ -1442,7 +1442,7 @@
           96
         </td>
         <td>
-          379
+          324
         </td>
         <td>
           2570
@@ -1463,7 +1463,7 @@
           97
         </td>
         <td>
-          380
+          325
         </td>
         <td>
           2611
@@ -1484,7 +1484,7 @@
           100
         </td>
         <td>
-          381
+          326
         </td>
         <td>
           2656
@@ -1505,7 +1505,7 @@
           102
         </td>
         <td>
-          382
+          327
         </td>
         <td>
           2831
@@ -1526,7 +1526,7 @@
           103
         </td>
         <td>
-          385
+          330
         </td>
         <td>
           2866
@@ -1547,7 +1547,7 @@
           106
         </td>
         <td>
-          383
+          328
         </td>
         <td>
           2923
@@ -1568,7 +1568,7 @@
           110
         </td>
         <td>
-          384
+          329
         </td>
         <td>
           3005
@@ -1589,70 +1589,7 @@
           111
         </td>
         <td>
-          388
-        </td>
-        <td>
-          3046
-          -
-          3053
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;human&quot;
-        </td>
-      </tr><tr>
-        <td>
-          111
-        </td>
-        <td>
-          387
-        </td>
-        <td>
-          3046
-          -
-          3053
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;human&quot;
-        </td>
-      </tr><tr>
-        <td>
-          111
-        </td>
-        <td>
-          390
-        </td>
-        <td>
-          3059
-          -
-          3069
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;computer&quot;
-        </td>
-      </tr><tr>
-        <td>
-          111
-        </td>
-        <td>
-          386
+          331
         </td>
         <td>
           3027
@@ -1673,7 +1610,7 @@
           111
         </td>
         <td>
-          389
+          334
         </td>
         <td>
           3059
@@ -1691,10 +1628,73 @@
         </td>
       </tr><tr>
         <td>
+          111
+        </td>
+        <td>
+          333
+        </td>
+        <td>
+          3046
+          -
+          3053
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;human&quot;
+        </td>
+      </tr><tr>
+        <td>
+          111
+        </td>
+        <td>
+          332
+        </td>
+        <td>
+          3046
+          -
+          3053
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;human&quot;
+        </td>
+      </tr><tr>
+        <td>
+          111
+        </td>
+        <td>
+          335
+        </td>
+        <td>
+          3059
+          -
+          3069
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;computer&quot;
+        </td>
+      </tr><tr>
+        <td>
           112
         </td>
         <td>
-          391
+          336
         </td>
         <td>
           3100
@@ -1715,28 +1715,7 @@
           113
         </td>
         <td>
-          393
-        </td>
-        <td>
-          3131
-          -
-          3187
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          tictactoe.Game.setDifficulty
-        </td>
-        <td style="background: #AEF1AE">
-          Game.this.setDifficulty(output, leftPadding, getInput, dialogLang)
-        </td>
-      </tr><tr>
-        <td>
-          113
-        </td>
-        <td>
-          392
+          337
         </td>
         <td>
           3131
@@ -1754,31 +1733,31 @@
         </td>
       </tr><tr>
         <td>
-          115
+          113
         </td>
         <td>
-          394
+          338
         </td>
         <td>
-          3211
+          3131
           -
-          3217
+          3187
         </td>
         <td>
-          Literal
+          Block
         </td>
         <td>
-          &lt;nosymbol&gt;
+          tictactoe.Game.setDifficulty
         </td>
         <td style="background: #AEF1AE">
-          &quot;none&quot;
+          Game.this.setDifficulty(output, leftPadding, getInput, dialogLang)
         </td>
       </tr><tr>
         <td>
           115
         </td>
         <td>
-          395
+          340
         </td>
         <td>
           3211
@@ -1796,10 +1775,52 @@
         </td>
       </tr><tr>
         <td>
+          115
+        </td>
+        <td>
+          339
+        </td>
+        <td>
+          3211
+          -
+          3217
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;none&quot;
+        </td>
+      </tr><tr>
+        <td>
           118
         </td>
         <td>
-          397
+          343
+        </td>
+        <td>
+          3244
+          -
+          3300
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, (String, String, String)](scala.Predef.ArrowAssoc[Int](playerNum).-&gt;[(String, String, String)](scala.Tuple3.apply[String, String, String](pType, playerToken, playerDifficulty)))
+        </td>
+      </tr><tr>
+        <td>
+          118
+        </td>
+        <td>
+          342
         </td>
         <td>
           3248
@@ -1820,7 +1841,7 @@
           118
         </td>
         <td>
-          396
+          341
         </td>
         <td>
           3248
@@ -1838,36 +1859,15 @@
         </td>
       </tr><tr>
         <td>
-          118
-        </td>
-        <td>
-          398
-        </td>
-        <td>
-          3244
-          -
-          3300
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.generic.GenMapFactory.apply
-        </td>
-        <td style="background: #AEF1AE">
-          scala.Predef.Map.apply[Int, (String, String, String)](scala.Predef.ArrowAssoc[Int](playerNum).-&gt;[(String, String, String)](scala.Tuple3.apply[String, String, String](pType, playerToken, playerDifficulty)))
-        </td>
-      </tr><tr>
-        <td>
           135
         </td>
         <td>
-          399
+          344
         </td>
         <td>
-          3677
+          3682
           -
-          3718
+          3723
         </td>
         <td>
           Apply
@@ -1883,12 +1883,12 @@
           137
         </td>
         <td>
-          400
+          345
         </td>
         <td>
-          3737
+          3742
           -
-          3760
+          3765
         </td>
         <td>
           Apply
@@ -1904,12 +1904,12 @@
           138
         </td>
         <td>
-          401
+          346
         </td>
         <td>
-          3765
+          3770
           -
-          3810
+          3815
         </td>
         <td>
           Apply
@@ -1925,12 +1925,12 @@
           140
         </td>
         <td>
-          402
+          347
         </td>
         <td>
-          3848
+          3853
           -
-          3892
+          3897
         </td>
         <td>
           Apply
@@ -1946,12 +1946,12 @@
           141
         </td>
         <td>
-          403
+          348
         </td>
         <td>
-          3897
+          3902
           -
-          3954
+          3959
         </td>
         <td>
           Apply
@@ -1967,12 +1967,12 @@
           143
         </td>
         <td>
-          404
+          349
         </td>
         <td>
-          3991
+          3996
           -
-          4021
+          4026
         </td>
         <td>
           Apply
@@ -1988,12 +1988,12 @@
           144
         </td>
         <td>
-          405
+          350
         </td>
         <td>
-          4052
+          4057
           -
-          4077
+          4082
         </td>
         <td>
           Apply
@@ -2009,12 +2009,12 @@
           145
         </td>
         <td>
-          406
+          351
         </td>
         <td>
-          4108
+          4113
           -
-          4133
+          4138
         </td>
         <td>
           Apply
@@ -2030,12 +2030,12 @@
           146
         </td>
         <td>
-          407
+          352
         </td>
         <td>
-          4163
+          4168
           -
-          4188
+          4193
         </td>
         <td>
           Select
@@ -2051,12 +2051,12 @@
           147
         </td>
         <td>
-          408
+          353
         </td>
         <td>
-          4217
+          4222
           -
-          4242
+          4247
         </td>
         <td>
           Select
@@ -2072,12 +2072,12 @@
           148
         </td>
         <td>
-          409
+          354
         </td>
         <td>
-          4272
+          4277
           -
-          4297
+          4302
         </td>
         <td>
           Select
@@ -2093,75 +2093,12 @@
           149
         </td>
         <td>
-          412
+          355
         </td>
         <td>
-          4346
+          4333
           -
           4349
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;O&quot;
-        </td>
-      </tr><tr>
-        <td>
-          149
-        </td>
-        <td>
-          414
-        </td>
-        <td>
-          4355
-          -
-          4358
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;X&quot;
-        </td>
-      </tr><tr>
-        <td>
-          149
-        </td>
-        <td>
-          411
-        </td>
-        <td>
-          4346
-          -
-          4349
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          &quot;O&quot;
-        </td>
-      </tr><tr>
-        <td>
-          149
-        </td>
-        <td>
-          410
-        </td>
-        <td>
-          4328
-          -
-          4344
         </td>
         <td>
           Apply
@@ -2177,12 +2114,12 @@
           149
         </td>
         <td>
-          413
+          358
         </td>
         <td>
-          4355
+          4360
           -
-          4358
+          4363
         </td>
         <td>
           Literal
@@ -2195,15 +2132,78 @@
         </td>
       </tr><tr>
         <td>
+          149
+        </td>
+        <td>
+          357
+        </td>
+        <td>
+          4351
+          -
+          4354
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;O&quot;
+        </td>
+      </tr><tr>
+        <td>
+          149
+        </td>
+        <td>
+          359
+        </td>
+        <td>
+          4360
+          -
+          4363
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;X&quot;
+        </td>
+      </tr><tr>
+        <td>
+          149
+        </td>
+        <td>
+          356
+        </td>
+        <td>
+          4351
+          -
+          4354
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;O&quot;
+        </td>
+      </tr><tr>
+        <td>
           151
         </td>
         <td>
-          415
+          360
         </td>
         <td>
-          4407
+          4412
           -
-          4428
+          4433
         </td>
         <td>
           Apply
@@ -2219,12 +2219,12 @@
           151
         </td>
         <td>
-          417
+          362
         </td>
         <td>
-          4430
+          4435
           -
-          4655
+          4660
         </td>
         <td>
           Block
@@ -2243,12 +2243,12 @@
           153
         </td>
         <td>
-          416
+          361
         </td>
         <td>
-          4481
+          4486
           -
-          4633
+          4638
         </td>
         <td>
           Apply
@@ -2264,12 +2264,12 @@
           162
         </td>
         <td>
-          419
+          364
         </td>
         <td>
-          4661
+          4666
           -
-          4866
+          4871
         </td>
         <td>
           Block
@@ -2288,12 +2288,12 @@
           170
         </td>
         <td>
-          418
+          363
         </td>
         <td>
-          4714
+          4719
           -
-          4845
+          4850
         </td>
         <td>
           Apply
@@ -2309,33 +2309,12 @@
           174
         </td>
         <td>
-          424
+          370
         </td>
         <td>
-          4914
+          4910
           -
-          4914
-        </td>
-        <td>
-          TypeApply
-        </td>
-        <td>
-          scala.collection.immutable.List.canBuildFrom
-        </td>
-        <td style="background: #AEF1AE">
-          immutable.this.List.canBuildFrom[String]
-        </td>
-      </tr><tr>
-        <td>
-          174
-        </td>
-        <td>
-          425
-        </td>
-        <td>
-          4905
-          -
-          4978
+          4983
         </td>
         <td>
           ApplyToImplicitArgs
@@ -2351,15 +2330,57 @@ else
         </td>
       </tr><tr>
         <td>
+          174
+        </td>
+        <td>
+          369
+        </td>
+        <td>
+          4919
+          -
+          4919
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[String]
+        </td>
+      </tr><tr>
+        <td>
           175
         </td>
         <td>
-          421
+          367
         </td>
         <td>
-          4931
+          4961
           -
-          4954
+          4970
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          tictactoe.Game.userToken
+        </td>
+        <td style="background: #AEF1AE">
+          userToken
+        </td>
+      </tr><tr>
+        <td>
+          175
+        </td>
+        <td>
+          366
+        </td>
+        <td>
+          4936
+          -
+          4959
         </td>
         <td>
           Apply
@@ -2375,33 +2396,12 @@ else
           175
         </td>
         <td>
-          420
+          368
         </td>
         <td>
-          4936
+          4976
           -
-          4954
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Any.toString
-        </td>
-        <td style="background: #AEF1AE">
-          boardMove.toString()
-        </td>
-      </tr><tr>
-        <td>
-          175
-        </td>
-        <td>
-          423
-        </td>
-        <td>
-          4971
-          -
-          4972
+          4977
         </td>
         <td>
           Ident
@@ -2417,33 +2417,33 @@ else
           175
         </td>
         <td>
-          422
+          365
         </td>
         <td>
-          4956
+          4941
           -
-          4965
+          4959
         </td>
         <td>
-          Ident
+          Apply
         </td>
         <td>
-          tictactoe.Game.userToken
+          scala.Any.toString
         </td>
         <td style="background: #AEF1AE">
-          userToken
+          boardMove.toString()
         </td>
       </tr><tr>
         <td>
           178
         </td>
         <td>
-          426
+          371
         </td>
         <td>
-          5008
+          5013
           -
-          5036
+          5041
         </td>
         <td>
           Apply
@@ -2459,12 +2459,12 @@ else
           180
         </td>
         <td>
-          442
+          387
         </td>
         <td>
-          5055
+          5060
           -
-          5674
+          5679
         </td>
         <td>
           Block
@@ -2492,12 +2492,12 @@ else
           181
         </td>
         <td>
-          427
+          372
         </td>
         <td>
-          5063
+          5068
           -
-          5104
+          5109
         </td>
         <td>
           Apply
@@ -2513,12 +2513,12 @@ else
           182
         </td>
         <td>
-          428
+          373
         </td>
         <td>
-          5146
+          5151
           -
-          5176
+          5181
         </td>
         <td>
           Apply
@@ -2534,12 +2534,12 @@ else
           183
         </td>
         <td>
-          429
+          374
         </td>
         <td>
-          5183
+          5188
           -
-          5230
+          5235
         </td>
         <td>
           Apply
@@ -2555,33 +2555,12 @@ else
           184
         </td>
         <td>
-          430
+          376
         </td>
         <td>
-          5276
+          5242
           -
-          5298
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.MapLike.apply
-        </td>
-        <td style="background: #AEF1AE">
-          dialogLang.apply(&quot;gameOver&quot;)
-        </td>
-      </tr><tr>
-        <td>
-          184
-        </td>
-        <td>
-          431
-        </td>
-        <td>
-          5237
-          -
-          5299
+          5304
         </td>
         <td>
           Apply
@@ -2594,15 +2573,36 @@ else
         </td>
       </tr><tr>
         <td>
+          184
+        </td>
+        <td>
+          375
+        </td>
+        <td>
+          5281
+          -
+          5303
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.MapLike.apply
+        </td>
+        <td style="background: #AEF1AE">
+          dialogLang.apply(&quot;gameOver&quot;)
+        </td>
+      </tr><tr>
+        <td>
           185
         </td>
         <td>
-          432
+          377
         </td>
         <td>
-          5327
+          5332
           -
-          5355
+          5360
         </td>
         <td>
           Apply
@@ -2618,12 +2618,33 @@ else
           188
         </td>
         <td>
-          433
+          379
         </td>
         <td>
-          5442
+          5389
           -
-          5459
+          5465
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.View.renderDialog
+        </td>
+        <td style="background: #AEF1AE">
+          View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang.apply(&quot;win&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          188
+        </td>
+        <td>
+          378
+        </td>
+        <td>
+          5447
+          -
+          5464
         </td>
         <td>
           Apply
@@ -2639,12 +2660,12 @@ else
           188
         </td>
         <td>
-          435
+          380
         </td>
         <td>
-          5384
+          5389
           -
-          5460
+          5465
         </td>
         <td>
           Block
@@ -2657,15 +2678,15 @@ else
         </td>
       </tr><tr>
         <td>
-          188
+          190
         </td>
         <td>
-          434
+          382
         </td>
         <td>
-          5384
+          5489
           -
-          5460
+          5546
         </td>
         <td>
           Apply
@@ -2674,19 +2695,19 @@ else
           tictactoe.View.renderDialog
         </td>
         <td style="background: #AEF1AE">
-          View.renderDialog(output, leftPadding, playerNumAnnounce, dialogLang.apply(&quot;win&quot;))
+          View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;))
         </td>
       </tr><tr>
         <td>
           190
         </td>
         <td>
-          436
+          381
         </td>
         <td>
-          5523
+          5528
           -
-          5540
+          5545
         </td>
         <td>
           Apply
@@ -2702,12 +2723,12 @@ else
           190
         </td>
         <td>
-          438
+          383
         </td>
         <td>
-          5484
+          5489
           -
-          5541
+          5546
         </td>
         <td>
           Block
@@ -2720,36 +2741,15 @@ else
         </td>
       </tr><tr>
         <td>
-          190
-        </td>
-        <td>
-          437
-        </td>
-        <td>
-          5484
-          -
-          5541
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          tictactoe.View.renderDialog
-        </td>
-        <td style="background: #AEF1AE">
-          View.renderDialog(output, leftPadding, dialogLang.apply(&quot;tie&quot;))
-        </td>
-      </tr><tr>
-        <td>
           193
         </td>
         <td>
-          439
+          384
         </td>
         <td>
-          5557
+          5562
           -
-          5589
+          5594
         </td>
         <td>
           Apply
@@ -2765,33 +2765,12 @@ else
           195
         </td>
         <td>
-          441
+          385
         </td>
         <td>
-          5641
+          5650
           -
-          5668
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.collection.generic.GenMapFactory.apply
-        </td>
-        <td style="background: #AEF1AE">
-          scala.Predef.Map.apply[Int, Boolean](scala.Predef.ArrowAssoc[Int](currentPlayer).-&gt;[Boolean](isWin))
-        </td>
-      </tr><tr>
-        <td>
-          195
-        </td>
-        <td>
-          440
-        </td>
-        <td>
-          5645
-          -
-          5667
+          5672
         </td>
         <td>
           Apply
@@ -2804,15 +2783,36 @@ else
         </td>
       </tr><tr>
         <td>
+          195
+        </td>
+        <td>
+          386
+        </td>
+        <td>
+          5646
+          -
+          5673
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenMapFactory.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.Map.apply[Int, Boolean](scala.Predef.ArrowAssoc[Int](currentPlayer).-&gt;[Boolean](isWin))
+        </td>
+      </tr><tr>
+        <td>
           196
         </td>
         <td>
-          450
+          395
         </td>
         <td>
-          5680
+          5685
           -
-          5933
+          5938
         </td>
         <td>
           Block
@@ -2835,36 +2835,15 @@ else
           197
         </td>
         <td>
-          445
+          391
         </td>
         <td>
-          5733
+          5745
           -
-          5734
+          5746
         </td>
         <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          2
-        </td>
-      </tr><tr>
-        <td>
-          197
-        </td>
-        <td>
-          447
-        </td>
-        <td>
-          5740
-          -
-          5741
-        </td>
-        <td>
-          Block
+          Literal
         </td>
         <td>
           &lt;nosymbol&gt;
@@ -2877,33 +2856,12 @@ else
           197
         </td>
         <td>
-          444
+          388
         </td>
         <td>
-          5733
+          5718
           -
-          5734
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          2
-        </td>
-      </tr><tr>
-        <td>
-          197
-        </td>
-        <td>
-          443
-        </td>
-        <td>
-          5713
-          -
-          5731
+          5736
         </td>
         <td>
           Apply
@@ -2919,15 +2877,36 @@ else
           197
         </td>
         <td>
-          446
+          390
         </td>
         <td>
-          5740
+          5738
           -
-          5741
+          5739
         </td>
         <td>
-          Literal
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          2
+        </td>
+      </tr><tr>
+        <td>
+          197
+        </td>
+        <td>
+          392
+        </td>
+        <td>
+          5745
+          -
+          5746
+        </td>
+        <td>
+          Block
         </td>
         <td>
           &lt;nosymbol&gt;
@@ -2937,15 +2916,36 @@ else
         </td>
       </tr><tr>
         <td>
+          197
+        </td>
+        <td>
+          389
+        </td>
+        <td>
+          5738
+          -
+          5739
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          2
+        </td>
+      </tr><tr>
+        <td>
           198
         </td>
         <td>
-          448
+          393
         </td>
         <td>
-          5767
+          5772
           -
-          5780
+          5785
         </td>
         <td>
           Apply
@@ -2961,12 +2961,12 @@ else
           200
         </td>
         <td>
-          449
+          394
         </td>
         <td>
-          5788
+          5793
           -
-          5927
+          5932
         </td>
         <td>
           Apply
@@ -2982,12 +2982,12 @@ else
           215
         </td>
         <td>
-          451
+          396
         </td>
         <td>
-          6162
+          6167
           -
-          6203
+          6208
         </td>
         <td>
           Apply
@@ -3003,12 +3003,12 @@ else
           217
         </td>
         <td>
-          452
+          397
         </td>
         <td>
-          6225
+          6230
           -
-          6285
+          6290
         </td>
         <td>
           Apply
@@ -3024,12 +3024,12 @@ else
           218
         </td>
         <td>
-          453
+          398
         </td>
         <td>
-          6306
+          6311
           -
-          6366
+          6371
         </td>
         <td>
           Apply
@@ -3045,12 +3045,33 @@ else
           220
         </td>
         <td>
-          454
+          400
         </td>
         <td>
-          6417
+          6424
           -
-          6417
+          6424
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.Predef.$conforms
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Predef.$conforms[(Int, (String, String, String))]
+        </td>
+      </tr><tr>
+        <td>
+          220
+        </td>
+        <td>
+          399
+        </td>
+        <td>
+          6416
+          -
+          6416
         </td>
         <td>
           TypeApply
@@ -3066,12 +3087,12 @@ else
           220
         </td>
         <td>
-          456
+          401
         </td>
         <td>
-          6394
+          6393
           -
-          6430
+          6429
         </td>
         <td>
           ApplyToImplicitArgs
@@ -3084,36 +3105,15 @@ else
         </td>
       </tr><tr>
         <td>
-          220
-        </td>
-        <td>
-          455
-        </td>
-        <td>
-          6425
-          -
-          6425
-        </td>
-        <td>
-          TypeApply
-        </td>
-        <td>
-          scala.Predef.$conforms
-        </td>
-        <td style="background: #AEF1AE">
-          scala.Predef.$conforms[(Int, (String, String, String))]
-        </td>
-      </tr><tr>
-        <td>
           221
         </td>
         <td>
-          457
+          402
         </td>
         <td>
-          6459
+          6458
           -
-          6514
+          6513
         </td>
         <td>
           Apply
@@ -3129,12 +3129,12 @@ else
           222
         </td>
         <td>
-          458
+          403
         </td>
         <td>
-          6542
+          6541
           -
-          6565
+          6564
         </td>
         <td>
           Apply
@@ -3150,12 +3150,12 @@ else
           223
         </td>
         <td>
-          459
+          404
         </td>
         <td>
-          6584
+          6583
           -
-          6610
+          6609
         </td>
         <td>
           Apply
@@ -3171,33 +3171,33 @@ else
           225
         </td>
         <td>
-          460
+          405
         </td>
         <td>
-          6632
+          6631
           -
-          6657
+          6661
         </td>
         <td>
           Apply
         </td>
         <td>
-          tictactoe.AI.TranspositionTable.&lt;init&gt;
+          tictactoe.TTTable.TranspositionTable.&lt;init&gt;
         </td>
         <td style="background: #AEF1AE">
-          new AI.TranspositionTable()
+          new TTTable.TranspositionTable()
         </td>
       </tr><tr>
         <td>
           227
         </td>
         <td>
-          461
+          406
         </td>
         <td>
-          6665
+          6669
           -
-          6797
+          6801
         </td>
         <td>
           Apply
@@ -3213,12 +3213,12 @@ else
           237
         </td>
         <td>
-          462
+          407
         </td>
         <td>
-          6940
+          6944
           -
-          6974
+          6978
         </td>
         <td>
           Apply
@@ -3234,12 +3234,12 @@ else
           239
         </td>
         <td>
-          463
+          408
         </td>
         <td>
-          7007
+          7011
           -
-          7029
+          7033
         </td>
         <td>
           Apply
@@ -3255,33 +3255,12 @@ else
           240
         </td>
         <td>
-          465
+          409
         </td>
         <td>
-          7039
+          7043
           -
-          7072
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          tictactoe.Game.setLanguage
-        </td>
-        <td style="background: #AEF1AE">
-          Game.this.setLanguage(output, 15, getInput)
-        </td>
-      </tr><tr>
-        <td>
-          240
-        </td>
-        <td>
-          464
-        </td>
-        <td>
-          7039
-          -
-          7072
+          7076
         </td>
         <td>
           Apply
@@ -3294,15 +3273,36 @@ else
         </td>
       </tr><tr>
         <td>
+          240
+        </td>
+        <td>
+          410
+        </td>
+        <td>
+          7043
+          -
+          7076
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          tictactoe.Game.setLanguage
+        </td>
+        <td style="background: #AEF1AE">
+          Game.this.setLanguage(output, 15, getInput)
+        </td>
+      </tr><tr>
+        <td>
           242
         </td>
         <td>
-          466
+          411
         </td>
         <td>
-          7092
+          7096
           -
-          7104
+          7108
         </td>
         <td>
           Ident
@@ -3318,12 +3318,12 @@ else
           245
         </td>
         <td>
-          467
+          412
         </td>
         <td>
-          7133
+          7137
           -
-          7162
+          7166
         </td>
         <td>
           Apply
@@ -3339,12 +3339,12 @@ else
           248
         </td>
         <td>
-          468
+          413
         </td>
         <td>
-          7187
+          7191
           -
-          7237
+          7241
         </td>
         <td>
           Apply
@@ -3360,12 +3360,12 @@ else
           250
         </td>
         <td>
-          474
+          419
         </td>
         <td>
-          7265
+          7269
           -
-          7422
+          7426
         </td>
         <td>
           Apply
@@ -3381,12 +3381,12 @@ else
           251
         </td>
         <td>
-          469
+          414
         </td>
         <td>
-          7288
+          7292
           -
-          7302
+          7306
         </td>
         <td>
           Apply
@@ -3402,12 +3402,12 @@ else
           252
         </td>
         <td>
-          470
+          415
         </td>
         <td>
-          7310
+          7314
           -
-          7339
+          7343
         </td>
         <td>
           Apply
@@ -3423,12 +3423,12 @@ else
           253
         </td>
         <td>
-          471
+          416
         </td>
         <td>
-          7347
+          7351
           -
-          7372
+          7376
         </td>
         <td>
           Apply
@@ -3444,12 +3444,12 @@ else
           256
         </td>
         <td>
-          472
+          417
         </td>
         <td>
-          7410
+          7414
           -
-          7412
+          7416
         </td>
         <td>
           Literal
@@ -3465,12 +3465,12 @@ else
           257
         </td>
         <td>
-          473
+          418
         </td>
         <td>
-          7420
+          7424
           -
-          7421
+          7425
         </td>
         <td>
           Literal
@@ -3486,54 +3486,12 @@ else
           259
         </td>
         <td>
-          478
+          424
         </td>
         <td>
-          7504
+          7508
           -
-          7509
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          false
-        </td>
-      </tr><tr>
-        <td>
-          259
-        </td>
-        <td>
-          477
-        </td>
-        <td>
-          7494
-          -
-          7498
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #F0ADAD">
-          true
-        </td>
-      </tr><tr>
-        <td>
-          259
-        </td>
-        <td>
-          479
-        </td>
-        <td>
-          7504
-          -
-          7509
+          7513
         </td>
         <td>
           Block
@@ -3549,12 +3507,12 @@ else
           259
         </td>
         <td>
-          476
+          421
         </td>
         <td>
-          7494
-          -
           7498
+          -
+          7502
         </td>
         <td>
           Literal
@@ -3570,12 +3528,12 @@ else
           259
         </td>
         <td>
-          475
+          420
         </td>
         <td>
-          7470
+          7474
           -
-          7492
+          7496
         </td>
         <td>
           Apply
@@ -3588,15 +3546,57 @@ else
         </td>
       </tr><tr>
         <td>
+          259
+        </td>
+        <td>
+          423
+        </td>
+        <td>
+          7508
+          -
+          7513
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          false
+        </td>
+      </tr><tr>
+        <td>
+          259
+        </td>
+        <td>
+          422
+        </td>
+        <td>
+          7498
+          -
+          7502
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          true
+        </td>
+      </tr><tr>
+        <td>
           261
         </td>
         <td>
-          481
+          426
         </td>
         <td>
-          7538
+          7542
           -
-          7582
+          7586
         </td>
         <td>
           Block
@@ -3612,12 +3612,12 @@ else
           261
         </td>
         <td>
-          480
+          425
         </td>
         <td>
-          7538
+          7542
           -
-          7582
+          7586
         </td>
         <td>
           Apply
@@ -3633,12 +3633,12 @@ else
           263
         </td>
         <td>
-          482
+          427
         </td>
         <td>
-          7602
+          7606
           -
-          7613
+          7617
         </td>
         <td>
           Ident
@@ -3654,79 +3654,12 @@ else
           268
         </td>
         <td>
-          487
+          430
         </td>
         <td>
-          7679
+          7706
           -
-          7679
-        </td>
-        <td>
-          Literal
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #F0ADAD">
-          ()
-        </td>
-      </tr><tr>
-        <td>
-          268
-        </td>
-        <td>
-          483
-        </td>
-        <td>
-          7680
-          -
-          7687
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Predef.println
-        </td>
-        <td style="background: #F0ADAD">
-          scala.Predef.println(x)
-        </td>
-      </tr><tr>
-        <td>
-          268
-        </td>
-        <td>
-          486
-        </td>
-        <td>
-          7671
-          -
-          7709
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          tictactoe.Game.contLoop
-        </td>
-        <td style="background: #F0ADAD">
-          Game.this.contLoop({
-  ((x: Any) =&gt; scala.Predef.println(x))
-}, {
-  ((callCount: Int) =&gt; IO.getInput(callCount))
-}, &quot;none&quot;)
-        </td>
-      </tr><tr>
-        <td>
-          268
-        </td>
-        <td>
-          485
-        </td>
-        <td>
-          7702
-          -
-          7708
+          7712
         </td>
         <td>
           Literal
@@ -3742,12 +3675,12 @@ else
           268
         </td>
         <td>
-          484
+          429
         </td>
         <td>
-          7689
+          7693
           -
-          7700
+          7704
         </td>
         <td>
           Apply
@@ -3757,6 +3690,73 @@ else
         </td>
         <td style="background: #F0ADAD">
           IO.getInput(callCount)
+        </td>
+      </tr><tr>
+        <td>
+          268
+        </td>
+        <td>
+          432
+        </td>
+        <td>
+          7683
+          -
+          7683
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          268
+        </td>
+        <td>
+          428
+        </td>
+        <td>
+          7684
+          -
+          7691
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.println
+        </td>
+        <td style="background: #F0ADAD">
+          scala.Predef.println(x)
+        </td>
+      </tr><tr>
+        <td>
+          268
+        </td>
+        <td>
+          431
+        </td>
+        <td>
+          7675
+          -
+          7713
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          tictactoe.Game.contLoop
+        </td>
+        <td style="background: #F0ADAD">
+          Game.this.contLoop({
+  ((x: Any) =&gt; scala.Predef.println(x))
+}, {
+  ((callCount: Int) =&gt; IO.getInput(callCount))
+}, &quot;none&quot;)
         </td>
       </tr>
     </table>

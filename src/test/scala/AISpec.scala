@@ -30,27 +30,37 @@ class AISpec extends FunSpec {
     }
   }
 
-
-
-    describe("setDepthLimit") {
-      it("matches the difficulty to the board size and computer AI level") {
-        assert(AI.setDepthLimit(9, "easy",0) === 1)
-        assert(AI.setDepthLimit(9, "medium",0) === 3)
-        assert(AI.setDepthLimit(9, "hard",0) === 100)
-
-        assert(AI.setDepthLimit(16, "easy",0) === 1)
-        assert(AI.setDepthLimit(16, "medium",0) === 3)
-        assert(AI.setDepthLimit(16, "hard",0) === 4)
-
-        assert(AI.setDepthLimit(25, "easy",0) === 1)
-        assert(AI.setDepthLimit(25, "medium",0) === 3)
-        assert(AI.setDepthLimit(25, "hard",0) === 5)
-
-        assert(AI.setDepthLimit(36, "easy",0) === 1)
-        assert(AI.setDepthLimit(36, "medium",0) === 3)
-        assert(AI.setDepthLimit(36, "hard",0) === 4)
-      }
+  describe("Score") {
+    it("initiallize the passed values") {
+      val testScore = new Score(1, 987, "win")
+      assert(testScore.position == 1)
+      assert(testScore.value == 987)
+      assert(testScore.outcome == "win")
     }
+  }
+
+
+
+
+  describe("setDepthLimit") {
+    it("matches the difficulty to the board size and computer AI level") {
+      assert(AI.setDepthLimit(9, "easy",0) === 1)
+      assert(AI.setDepthLimit(9, "medium",0) === 3)
+      assert(AI.setDepthLimit(9, "hard",0) === 100)
+
+      assert(AI.setDepthLimit(16, "easy",0) === 1)
+      assert(AI.setDepthLimit(16, "medium",0) === 3)
+      assert(AI.setDepthLimit(16, "hard",0) === 4)
+
+      assert(AI.setDepthLimit(25, "easy",0) === 1)
+      assert(AI.setDepthLimit(25, "medium",0) === 3)
+      assert(AI.setDepthLimit(25, "hard",0) === 5)
+
+      assert(AI.setDepthLimit(36, "easy",0) === 1)
+      assert(AI.setDepthLimit(36, "medium",0) === 3)
+      assert(AI.setDepthLimit(36, "hard",0) === 4)
+    }
+  }
 
 
   describe("getComputerMove") {
@@ -141,44 +151,45 @@ class AISpec extends FunSpec {
       go(startBoard)
     }
 
-    /*it("will win or tie in all possible situations (4x4 board)") {*/
-      //val startBoard = (1 to 16).toList.map(x=>x.toString)
-      //val humT = "O"
-      //val comT = "X"
-      //val ttTable = new TTTable.TranspositionTable
+    it("4x4 Computer(Hard) vs Computer(Hard) ends in ties") {
+      val startBoard = Board.initBoard(16)
+      val com1Token = "O"
+      val com2Token = "X"
+      val ttTable = new TTTable.TranspositionTable
 
-      //def go(bState: List[String]): Unit = {
-        ////get the human moves
-        //val humOpenMoves = Board.returnValidInputs(bState)
-        ////populate all possible moves to the board
-        //for(move <- humOpenMoves) {
-          //breakable {
-            //val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
-            //val humWin = Board.checkWin(humMoveBoard)
-            //val humTie = Board.checkTie(humMoveBoard)
-            //if(humWin) {
-              //println(humMoveBoard)
-              //assert(humWin == false)
-              //break
-            //}
-            //if(humTie) {
-              //assert(humTie == true)
-              //break
-            //}
-            //val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
-            //val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
-            //val comWin = Board.checkWin(comBoard)
-            //val comTie = Board.checkTie(comBoard)
-            //if (comWin || comTie) {
-              //assert(true == true)
-              //break
-            //} else {
-              //go(comBoard)
-            //}
-          //}
-        //}
-      //}
-      //go(startBoard)
-    /*}*/
+      def go(bState: List[String]): Unit = {
+        //get the human moves
+        breakable {
+          val com1Move = (AI.getComputerMove(bState, com1Token, com2Token, com1Token, ttTable, "hard") + 1).toString
+          val com1MoveBoard = bState.map(cell => if(cell == com1Move) com1Token else cell)
+          val com1Win = Board.checkWin(com1MoveBoard)
+          val com1Tie = Board.checkTie(com1MoveBoard)
+          if(com1Win) {
+            println(com1MoveBoard)
+            assert(com1Win == false)
+            break
+          }
+          if(com1Tie) {
+            assert(com1Tie == true)
+            break
+          }
+          val com2Move = (AI.getComputerMove(com1MoveBoard, com2Token, com1Token, com2Token, ttTable, "hard") + 1).toString
+          val com2MoveBoard = com1MoveBoard.map(cell => if(cell == com2Move) com2Token else cell)
+          val com2Win = Board.checkWin(com2MoveBoard)
+          val com2Tie = Board.checkTie(com2MoveBoard)
+          if(com2Win) {
+            assert(com2Win == false)
+            break
+          }
+          if (com2Tie) {
+            assert(true == true)
+            break
+          } else {
+            go(com2MoveBoard)
+          }
+        }
+      }
+      go(startBoard)
+    }
   }
 }
