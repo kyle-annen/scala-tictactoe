@@ -185,7 +185,7 @@ class GameSpec extends FunSpec {
     it("language can be chosen and the game played") {
       val testBoard = (1 to 9).toList.map(x => x.toString)
       val testPlayers = mockPlayers
-      val expected = Map(2 -> true)
+      val expected = Map(1 -> true)
       val actual = Game.setup(
         1,
         testPrint,
@@ -210,7 +210,7 @@ class GameSpec extends FunSpec {
           case 5 => "n"
         }
       }
-      val expected = Map(2 -> true)
+      val expected = Map(1 -> true)
       val actual = Game.contLoop(testPrint, mockContTestInput, "none")
       assert(actual === expected)
     }

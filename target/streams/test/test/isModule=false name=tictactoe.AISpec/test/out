@@ -4,12 +4,19 @@
 [0m[[0minfo[0m] [0m[32m  - initializes as Negative Infinity[0m[0m
 [0m[[0minfo[0m] [0m[32m  beta[0m[0m
 [0m[[0minfo[0m] [0m[32m  - initializes as Positive Infinity[0m[0m
+[0m[[0minfo[0m] [0m[32mScore[0m[0m
+[0m[[0minfo[0m] [0m[32m- initiallize the passed values[0m[0m
 [0m[[0minfo[0m] [0m[32msetDepthLimit[0m[0m
 [0m[[0minfo[0m] [0m[32m- matches the difficulty to the board size and computer AI level[0m[0m
 [0m[[0minfo[0m] [0m[32mgetComputerMove[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a two move board correctly[0m[0m
 [0m[[0minfo[0m] [0m[32m- scores a simple win correctly[0m[0m
-[0m[[0minfo[0m] [0m[32m- take the appropriate second move[0m[0m
-[0m[[0minfo[0m] [0m[32m- will tie given every opponent first move[0m[0m
-[0m[[0minfo[0m] [0m[32m- will win or tie in all possible situations (3x3 board)[0m[0m
+[0m[[0minfo[0m] [0m[31m- take the appropriate second move *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  9 did not equal 5 (AISpec.scala:100)[0m[0m
+[0m[[0minfo[0m] [0m[31m- will tie given every opponent first move *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  Map(1 -> true) did not equal Map(2 -> false) (AISpec.scala:113)[0m[0m
+[0m[[0minfo[0m] [0m[31m- will win or tie in all possible situations (3x3 board) *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  true did not equal false (AISpec.scala:134)[0m[0m
+[0m[[0minfo[0m] [0m[31m- will win or tie in all possible situations (4x4 board) *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  true did not equal false (AISpec.scala:175)[0m[0m
 [0m[[0minfo[0m] [0m[32m- 4x4 Computer(Hard) vs Computer(Hard) ends in ties[0m[0m

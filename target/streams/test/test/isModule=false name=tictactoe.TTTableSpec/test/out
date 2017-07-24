@@ -12,3 +12,4 @@
 [0m[[0minfo[0m] [0m[32m  - saves a transposition list to a transposition table[0m[0m
 [0m[[0minfo[0m] [0m[32m  checkTransposition[0m[0m
 [0m[[0minfo[0m] [0m[32m  - will tell if transposition does not exist[0m[0m
+[0m[[0minfo[0m] [0m[32m  - will give the score of a stored transposition[0m[0m

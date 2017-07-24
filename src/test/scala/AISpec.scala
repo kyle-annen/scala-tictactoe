@@ -32,7 +32,7 @@ class AISpec extends FunSpec {
 
   describe("Score") {
     it("initiallize the passed values") {
-      val testScore = new Score(1, 987, "win")
+      val testScore = new AI.Score(1, 987, "win")
       assert(testScore.position == 1)
       assert(testScore.value == 987)
       assert(testScore.outcome == "win")
@@ -46,11 +46,11 @@ class AISpec extends FunSpec {
     it("matches the difficulty to the board size and computer AI level") {
       assert(AI.setDepthLimit(9, "easy",0) === 1)
       assert(AI.setDepthLimit(9, "medium",0) === 3)
-      assert(AI.setDepthLimit(9, "hard",0) === 100)
+      assert(AI.setDepthLimit(9, "hard",0) === 10)
 
       assert(AI.setDepthLimit(16, "easy",0) === 1)
       assert(AI.setDepthLimit(16, "medium",0) === 3)
-      assert(AI.setDepthLimit(16, "hard",0) === 4)
+      assert(AI.setDepthLimit(16, "hard",0) === 6)
 
       assert(AI.setDepthLimit(25, "easy",0) === 1)
       assert(AI.setDepthLimit(25, "medium",0) === 3)
@@ -69,9 +69,10 @@ class AISpec extends FunSpec {
         "x","o","x",
         "x","o","x",
         "o","8","9")
-      val expectedMove: Int = 8
+      val expectedMove: Int = 9
       val ttTable = new TTTable.TranspositionTable
-      val actualMove = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
+      val testParams = new AI.AIParams(testBoard, 1, "x", "o", "x", ttTable, "hard")
+      val actualMove = AI.getComputerMove(testParams).position
       assert(actualMove === expectedMove)
     }
 
@@ -80,9 +81,10 @@ class AISpec extends FunSpec {
         "x","o","x",
         "4","o","x",
         "7","8","9")
-      val expected: Int = 8
+      val expected: Int = 9
       val ttTable = new TTTable.TranspositionTable
-      val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
+      val testParams = new AI.AIParams(testBoard, 1, "x", "o", "x", ttTable, "hard")
+      val actual = AI.getComputerMove(testParams).position
       assert(actual == expected)
     }
 
@@ -91,9 +93,10 @@ class AISpec extends FunSpec {
         "o","2","3",
         "4","5","6",
         "7","8","9")
-      val expected: Int = 4
+      val expected: Int = 5
       val ttTable = new TTTable.TranspositionTable
-      val actual = AI.getComputerMove(testBoard, "x", "o", "x", ttTable, "hard")
+      val testParams = new AI.AIParams(testBoard, 1, "x", "o", "x", ttTable, "hard")
+      val actual = AI.getComputerMove(testParams).position
       assert(actual == expected)
     }
 
@@ -135,7 +138,8 @@ class AISpec extends FunSpec {
               assert(humTie == true)
               break
             }
-            val comMove = (AI.getComputerMove(humMoveBoard, comT, humT, comT, ttTable, "hard") + 1).toString
+            val comParams = new AI.AIParams(humMoveBoard, 1, comT, humT, comT, ttTable, "hard")
+            val comMove = AI.getComputerMove(comParams).position.toString
             val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
             val comWin = Board.checkWin(comBoard)
             val comTie = Board.checkTie(comBoard)
@@ -151,6 +155,46 @@ class AISpec extends FunSpec {
       go(startBoard)
     }
 
+    it("will win or tie in all possible situations (4x4 board)") {
+      val startBoard = Board.initBoard(16)
+      val humT = "O"
+      val comT = "X"
+      val ttTable = new TTTable.TranspositionTable
+
+      def go(bState: List[String]): Unit = {
+        //get the human moves
+        val humOpenMoves = Board.returnValidInputs(bState)
+        //populate all possible moves to the board
+        for(move <- humOpenMoves) {
+          breakable {
+            val humMoveBoard = bState.map(cell => if(cell == move) humT else cell)
+            val humWin = Board.checkWin(humMoveBoard)
+            val humTie = Board.checkTie(humMoveBoard)
+            if(humWin) {
+              println(humMoveBoard)
+              assert(humWin == false)
+              break
+            }
+            if(humTie) {
+              assert(humTie == true)
+              break
+            }
+            val comParams = new AI.AIParams(humMoveBoard, 1, comT, humT, comT, ttTable, "hard")
+            val comMove = AI.getComputerMove(comParams).position.toString
+            val comBoard = humMoveBoard.map(cell => if(cell == comMove) comT else cell)
+            val comWin = Board.checkWin(comBoard)
+            val comTie = Board.checkTie(comBoard)
+            if (comWin || comTie) {
+              assert(true == true)
+              break
+            } else {
+              go(comBoard)
+            }
+          }
+        }
+      }
+      go(startBoard)
+    }
     it("4x4 Computer(Hard) vs Computer(Hard) ends in ties") {
       val startBoard = Board.initBoard(16)
       val com1Token = "O"
@@ -160,7 +204,8 @@ class AISpec extends FunSpec {
       def go(bState: List[String]): Unit = {
         //get the human moves
         breakable {
-          val com1Move = (AI.getComputerMove(bState, com1Token, com2Token, com1Token, ttTable, "hard") + 1).toString
+          val com1Params = new AI.AIParams(bState, 1, com1Token, com2Token, com1Token, ttTable, "hard")
+          val com1Move = AI.getComputerMove(com1Params).position.toString
           val com1MoveBoard = bState.map(cell => if(cell == com1Move) com1Token else cell)
           val com1Win = Board.checkWin(com1MoveBoard)
           val com1Tie = Board.checkTie(com1MoveBoard)
@@ -173,7 +218,8 @@ class AISpec extends FunSpec {
             assert(com1Tie == true)
             break
           }
-          val com2Move = (AI.getComputerMove(com1MoveBoard, com2Token, com1Token, com2Token, ttTable, "hard") + 1).toString
+          val com2Params = new AI.AIParams(com1MoveBoard, 1, com2Token, com1Token, com2Token, ttTable, "hard")
+          val com2Move = AI.getComputerMove(com2Params).position.toString
           val com2MoveBoard = com1MoveBoard.map(cell => if(cell == com2Move) com2Token else cell)
           val com2Win = Board.checkWin(com2MoveBoard)
           val com2Tie = Board.checkTie(com2MoveBoard)
