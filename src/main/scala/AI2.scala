@@ -66,39 +66,45 @@ object AI2 {
 
   }
 
-  def miniMax(boardState: List[String],
-              nodeMap: NodeMap,
-              depth: Depth,
-              maxToken: String,
-              minToken: String,
-              currentToken: String): Node = {
+  @tailrec def miniMax(
+    boardState: List[String],
+    nodeMap: NodeMap,
+    depth: Depth,
+    maxToken: String,
+    minToken: String,
+    currentToken: String): Node = {
 
     val openMoves: List[Position] = generateOpenMoves(boardState)
     val allScored: Boolean = isDepthFinished(nodeMap(depth))
 
     if(allScored && depth == 0) {
       nodeMap(0)
+    } else if(allScored) {
+      //val get max score for depth
+      //add max score to previous depth previous current leaf
+      //remove current depth from nodeTree
+      //change current token
+      //chang depth to depth - 1
+      //recur
+      miniMax()
     } else {
       val position: Position = openMoves.take(1).head
       val tempBoard = updateBoard(boardState, position, currentToken)
-      //should update the current node here, setting the value to current or something
-      val isLeaf: Boolean = generateOpenMoves(tempBoard).isEmpty
+      val tempNodeMap = updateScore(depth,position,nodeMap, new Score(position, 0, "current", false))
+      //should update the current node here, setting the value to active
       val isWin: Boolean = Board.checkWin(tempBoard)
       val isTie: Boolean = Board.checkTie(tempBoard)
 
-      if (isLeaf || isWin || isTie) {
+      if (isWin || isTie) {
         //update the nodeMap with score
         val leafScore = getLeafScore(position, depth, tempBoard, currentToken == maxToken)
-        val newNodeMap = updateScore(depth, position, nodeMap, leafScore)
-        //get the next position on previous depth
-        val depthFinished = isDepthFinished(newNodeMap(depth))
-
-        if(depthFinished) {
-          val changeToken = if(currentToken == maxToken) minToken else maxToken
-          miniMax(boardState, newNodeMap, depth - 1, maxToken, minToken, changeToken)
-        } else {
-          miniMax()
-        }
+        val newNodeMap = updateScore(depth, position, tempNodeMap, leafScore)
+        //call miniMax with new map
+        miniMax(boardState, tempNodeMap, depth, maxToken, minToken, currentToken)
+      } else {
+        //dive deeper
+        val changeToken = if(currentToken == maxToken) minToken else maxToken
+        miniMax(tempBoard, tempNodeMap, depth + 1, maxToken, minToken, changeToken)
       }
     }
   }
