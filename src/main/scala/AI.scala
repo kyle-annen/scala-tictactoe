@@ -5,8 +5,12 @@ import scala.annotation.tailrec
 object AI {
 
   class AlphaBeta {
-    var alpha: Double = Double.NegativeInfinity
-    var beta: Double = Double.PositiveInfinity
+    var alpha = scala.mutable.Map(
+      'score = Double.NegativeInfinity
+      'position = 0)
+    var beta - scala.mutable.Map(
+      'score = Double.PositiveInfinity,
+      'position = 0 )
   }
 
   class Score(p: Int, v: Int, o: String) {
