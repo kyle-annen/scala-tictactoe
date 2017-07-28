@@ -127,6 +127,18 @@ class AISpec extends FunSpec {
     }
   }
 
+  describe("getLeafScore") {
+    it("returns a score of a terminal node") {
+      val testBoard = List("X","X","X","3","4","5","6","7","8","9")
+      val expected = new AI.Score(1, -997, "win", true)
+      val actual = AI.getLeafScore(1, 3, testBoard, false)
+      assert(actual.position == expected.position)
+      assert(actual.value == expected.value)
+      assert(actual.outcome == expected.outcome)
+      assert(actual.finished == expected.finished)
+    }
+  }
+
 
 
 
