@@ -159,9 +159,55 @@ class AISpec extends FunSpec {
       assert(actual(0)(1).outcome == "win")
       assert(actual(0)(1).finished == true)
     }
-
   }
+
+  describe("setDepthScore") {
+    it("sets the heuristic value of child nodes to the parent leaf") {
+      val testNodeMap: AI.NodeMap = Map(
+        0 -> Map(
+          1 -> new AI.Score(1, 0, "current", false),
+          2 -> new AI.Score(2, 0, "none", false),
+        ),
+        1 -> Map(
+          2 -> new AI.Score(2, 999, "win", true)
+        )
+      )
+
+      val actual = AI.setDepthScore(testNodeMap, 1, true)
+      assert(actual(0)(1).value == 999)
+    }
+  }
+
+  describe("getFirstOpenPosition") {
+    it("returns the first open position in a node") {
+       val testNodeMap: AI.NodeMap = Map(
+        0 -> Map(
+          1 -> new AI.Score(1, 0, "current", false),
+          2 -> new AI.Score(2, 0, "none", false),
+        ),
+        1 -> Map(
+          2 -> new AI.Score(2, 999, "win", true)
+        )
+      )
+      val expected = 1
+      val actual = AI.getFirstOpenPosition(testNodeMap, 0)
+      assert(actual == expected)
+    }
+  }
+
+  describe("negaMac") {
+    it("should return scores for an empty board") {
+      val testBoard = Board.initBoard(9)
+      val negaMaxResult = AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X")
+      assert(negaMaxResult.size > 0)
+    }
+  }
+
+
+
+
 }
+
 
 
 

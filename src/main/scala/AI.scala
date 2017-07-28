@@ -23,9 +23,7 @@ object AI {
     board.filter(isAllDigits(_) == true).map(x => x.toInt)
   }
 
-  def generateNodeMap(openMoves: List[Position],
-                      currentDepth: Depth,
-                      previousNodeMap: NodeMap): NodeMap = {
+  def generateNodeMap(openMoves: List[Position], currentDepth: Depth, previousNodeMap: NodeMap): NodeMap = {
 
     val nodes: List[Node] = openMoves.map { position: Position =>
       val score: Score = new Score(position, 0, "none", false)
@@ -63,8 +61,7 @@ object AI {
     stringBoard
   }
 
-  def getLeafScore(position: Position, depth: Depth,
-                   board: List[String], maxPlayer: Boolean): Score = {
+  def getLeafScore(position: Position, depth: Depth, board: List[String], maxPlayer: Boolean): Score = {
     val win: Boolean = Board.checkWin(board)
     val tie: Boolean = Board.checkTie(board)
     val outcome: String = if(win) "win" else "tie"
@@ -73,29 +70,34 @@ object AI {
     new Score(position, score, outcome, true)
   }
 
-  def updateScore(depth: Depth, position: Position,
-                  nodeMap: NodeMap, score: Score): NodeMap = {
+  def updateScore(depth: Depth, position: Position, nodeMap: NodeMap, score: Score): NodeMap = {
     val prunedNode = nodeMap(depth) - position
     val addedNode = prunedNode + (position -> score)
     nodeMap - depth + (depth -> addedNode)
   }
 
-  def setDepthScore(nodeMap: NodeMap, depth: Depth,
-                    maxPlayer: Boolean): NodeMap = {
+  def setDepthScore(nodeMap: NodeMap, depth: Depth, maxPlayer: Boolean): NodeMap = {
     val node: Node = nodeMap(depth)
     val activeParentLeafPosition = getActiveParentLeafPosition(nodeMap, depth)
 
     if(maxPlayer) {
       val maxDepthScore = nodeMap(depth).keys.map(key=>nodeMap(depth)(key).value).max
+      //outcome should propagate from max node
       val newScore = new Score(activeParentLeafPosition, maxDepthScore, "finished", true)
       val updatedNodeMap = updateScore(depth - 1, activeParentLeafPosition, nodeMap, newScore)
       updatedNodeMap - depth
     } else {
       val minDepthScore = nodeMap(depth).keys.map(key=>nodeMap(depth)(key).value).min
+      //outcome should propagate from min node
       val newScore = new Score(activeParentLeafPosition, minDepthScore, "finished", true)
       val updatedNodeMap = updateScore(depth - 1, activeParentLeafPosition, nodeMap, newScore)
       updatedNodeMap - depth
     }
+  }
+
+  def getFirstOpenPosition(nodeMap: NodeMap, depth: Depth): Position = {
+    nodeMap(0).filter(_._2.finished == false).keys.head
+
   }
 
   @tailrec def negaMax(
@@ -106,8 +108,13 @@ object AI {
     minToken: String,
     currentToken: String): Node = {
     val allScored: Boolean = isDepthFinished(nodeMap(depth))
-    if(allScored && depth == 0) {
-      nodeMap(0)//base case returns map of scores
+
+    if(nodeMap(0).size == 0) {
+      val newOpenMoves = generateOpenMoves(boardState)
+      val newNodeMap = generateNodeMap(newOpenMoves,0,Map())
+      negaMax(boardState,newNodeMap,depth,maxToken, minToken, currentToken)
+    } else if(allScored && depth == 0) {
+      nodeMap(0)
     } else if(allScored) {
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
       val scoreDepthAndPrunedNodeMap = setDepthScore(nodeMap, depth, maxToken == currentToken)
@@ -115,8 +122,9 @@ object AI {
       negaMax(previousBoardState, scoreDepthAndPrunedNodeMap, depth - 1, maxToken, minToken, currentToken)
     } else {
       //this needs to be changed to only return the values that are open in the nodeMap
-      val openMoves: List[Position] = generateOpenMoves(boardState)
-      val position: Position = openMoves.take(1).head
+      //val openMoves: List[Position] = generateOpenMoves(boardState)
+      //check the node for open positions to take
+      val position: Position = getFirstOpenPosition(nodeMap, depth)
       val tempBoard = updateBoard(boardState, position, currentToken)
       val tempNodeMap = updateScore(depth, position, nodeMap, new Score(position, 0, "current", false))
       val isWin: Boolean = Board.checkWin(tempBoard)
@@ -127,7 +135,9 @@ object AI {
         negaMax(boardState, newNodeMap, depth, maxToken, minToken, currentToken)
       } else {
         val changeToken = if(currentToken == maxToken) minToken else maxToken
-        negaMax(tempBoard, tempNodeMap, depth + 1, maxToken, minToken, changeToken)
+        val deeperOpenMoves = generateOpenMoves(tempBoard)
+        val deeperNodeMap = generateNodeMap(deeperOpenMoves,depth,tempNodeMap)
+        negaMax(tempBoard, deeperNodeMap, depth + 1, maxToken, minToken, changeToken)
       }
     }
   }
