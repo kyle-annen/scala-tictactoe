@@ -4,162 +4,124 @@ import scala.annotation.tailrec
 
 object AI {
 
-  class AlphaBeta {
-    var alpha = scala.mutable.Map(
-      'score = Double.NegativeInfinity
-      'position = 0)
-    var beta - scala.mutable.Map(
-      'score = Double.PositiveInfinity,
-      'position = 0 )
-  }
+  type Position = Int
 
-  class Score(p: Int, v: Int, o: String) {
-    val position: Int = p
+  class Score(p: Position, v: Int, o: String, f: Boolean) {
+    val position: Position = p
     val value: Int = v
     val outcome: String = o
+    val finished: Boolean = f
   }
 
-  def setDepthLimit(
-    boardSize: Int,
-    difficulty: String,
-    depth: Int): Int = {
-    boardSize match {
-      case 9 => difficulty match {
-        case "easy" => 1
-        case "medium" => 3
-        case "hard" => 10
-      }
-      case 16 => depth match {
-        case x if(x < 3) => difficulty match {
-          case "easy" => 1
-          case "medium" => 3
-          case "hard" => 6
-        }
-        case x if(x < 5) => difficulty match {
-          case "easy" => 1
-          case "medium" => 3
-          case "hard" => 10
-        }
-        case x if(x >= 7) => difficulty match {
-          case "easy" => 1
-          case "medium" => 3
-          case "hard" => 16
-        }
-      }
-      case 25 => difficulty match {
-        case "easy" => 1
-        case "medium" => 3
-        case "hard" => 5
-      }
-      case _ => difficulty match {
-        case "easy" => 1
-        case "medium" => 3
-        case "hard" => 4
-      }
+  type Node = Map[Position, Score]
+  type Depth = Int
+  type NodeMap = Map[Depth, Node]
+
+  def isAllDigits(x: String): Boolean = x forall Character.isDigit
+
+  def generateOpenMoves(board: List[String]): List[Position] = {
+    board.filter(isAllDigits(_) == true).map(x => x.toInt)
+  }
+
+  def generateNodeMap(openMoves: List[Position],
+                      currentDepth: Depth,
+                      previousNodeMap: NodeMap): NodeMap = {
+
+    val nodes: List[Node] = openMoves.map { position: Position =>
+      val score: Score = new Score(position, 0, "none", false)
+      val node: Node = Map(position -> score)
+      node
     }
+
+    val allNodes = nodes.flatten.toMap
+    Map(currentDepth -> allNodes) ++ previousNodeMap
   }
 
-  class AIParams(
-    board: List[String],
-    currDepth: Int,
-    maxT: String,
-    minT: String,
-    curT: String,
-    transTable: TTTable.TranspositionTable,
-    diff: String) {
-
-    val boardState: List[String] = board
-    val currentDepth: Int = currDepth
-    val maxToken: String = maxT
-    val minToken: String = minT
-    val currentToken: String = curT
-    val ttTable: TTTable.TranspositionTable = transTable
-    val difficulty: String = diff
-    val boardSize: Int = boardState.length
+  def isDepthFinished(node: Node): Boolean = {
+    node
+      .keys
+      .map(key => node(key).finished)
+      .forall(x => true == x)
   }
 
-  def getOpenMoves(board: List[String]): List[Int] = {
-    Board.returnValidInputs(board).map(x => x.toInt)
+  def updateBoard(board: List[String], position: Position, token: String): List[String] = {
+    board.map(cell => if(cell == position.toString) token else cell)
   }
 
-  def depthLimitScore(aiParams: AIParams, moveLocation: Int, depthLimit: Int): Score = {
-    val score = if(aiParams.maxToken == aiParams.currentToken) {
-      1000 - aiParams.currentDepth - 2
+  def getActiveParentLeafPosition(nodeMap: NodeMap, depth: Depth): Position = {
+    nodeMap(depth - 1)
+      .filter((t) => t._2.outcome == "current")
+      .keys
+      .head
+  }
+
+  def rollBackBoard(board: List[String], currentDepth: Depth, nodeMap: NodeMap): List[String] = {
+    val rollBackPosition: Position = getActiveParentLeafPosition(nodeMap, currentDepth - 1)
+    updateBoard(board, rollBackPosition, rollBackPosition.toString)
+  }
+
+  def getLeafScore(position: Position, depth: Depth, board: List[String], maxPlayer: Boolean): Score = {
+    val win: Boolean = Board.checkWin(board)
+    val tie: Boolean = Board.checkTie(board)
+    val outcome: String = if(win) "win" else "tie"
+    val rawScore: Int = if(win) 1000 - depth else 0
+    val score: Int = if(maxPlayer) rawScore else rawScore * -1
+    new Score(position, score, outcome, true)
+  }
+
+  def updateScore(depth: Depth, position: Position, nodeMap: NodeMap, score: Score): NodeMap = {
+    val prunedNode = nodeMap(depth) - position
+    val addedNode = prunedNode + (position -> score)
+    nodeMap - depth + (depth -> addedNode)
+  }
+
+  def setDepthScore(nodeMap: NodeMap, depth: Depth, maxPlayer: Boolean): NodeMap = {
+    val node: Node = nodeMap(depth)
+    val activeParentLeafPosition = getActiveParentLeafPosition(nodeMap, depth)
+
+    if(maxPlayer) {
+      val maxDepthScore = nodeMap(depth).keys.map(key=>nodeMap(depth)(key).value).max
+      val newScore = new Score(activeParentLeafPosition, maxDepthScore, "finished", true)
+      val updatedNodeMap = updateScore(depth - 1, activeParentLeafPosition, nodeMap, newScore)
+      updatedNodeMap - depth
     } else {
-      -1000 + aiParams.currentDepth + 2
+      val minDepthScore = nodeMap(depth).keys.map(key=>nodeMap(depth)(key).value).min
+      val newScore = new Score(activeParentLeafPosition, minDepthScore, "finished", true)
+      val updatedNodeMap = updateScore(depth - 1, activeParentLeafPosition, nodeMap, newScore)
+      updatedNodeMap - depth
     }
-    new Score(moveLocation, score, "depthLimit")
   }
 
-  def updateBoard(board: List[String], token: String, move: Int): List[String] = {
-    board.map(x=> if(x == (move).toString) token else x)
-  }
-
-  def getComputerMove(compAiParams: AIParams): Score = {
-    val alphaBeta = new AlphaBeta
-    val depthLimit: Int = setDepthLimit(
-        compAiParams.boardSize,
-        compAiParams.difficulty,
-        compAiParams.currentDepth)
-
-    def miniMax(aiParams: AIParams, firstMove: Int): Score  = {
-      val openMoves: List[Int] = getOpenMoves(aiParams.boardState)
-      val scores = openMoves.map { move =>
-        val initialMove = if(firstMove == 0) move else firstMove.toInt
-
-        if(aiParams.currentDepth >= depthLimit) {
-          depthLimitScore(aiParams, initialMove, depthLimit)
-        } else if(aiParams.maxToken == aiParams.currentToken){
-          val maxScore = 1000 - aiParams.currentDepth
-          val maxBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
-          val maxWin = Board.checkWin(maxBoard)
-          val maxTie = Board.checkTie(maxBoard)
-          if(maxWin) {
-            new Score(initialMove, maxScore, "win")
-          } else if(maxTie) {
-            new Score(initialMove, 0, "tie")
-          } else {
-            val maxParams = new AIParams(
-            maxBoard,
-            aiParams.currentDepth + 1,
-            aiParams.maxToken,
-            aiParams.minToken,
-            aiParams.minToken,
-            aiParams.ttTable,
-            aiParams.difficulty)
-            //recursive call
-            miniMax(maxParams, initialMove)
-          }
-        } else {
-          val minScore = -1000 + aiParams.currentDepth
-          val minBoard = updateBoard(aiParams.boardState, aiParams.currentToken, move)
-          val minWin = Board.checkWin(minBoard)
-          val minTie = Board.checkTie(minBoard)
-          if(minWin) {
-            new Score(initialMove, minScore, "win")
-          } else if(minTie) {
-            new Score(initialMove, 0, "tie")
-          } else {
-            val minParams = new AIParams(
-              minBoard,
-              aiParams.currentDepth + 1,
-              aiParams.maxToken,
-              aiParams.minToken,
-              aiParams.maxToken,
-              aiParams.ttTable,
-              aiParams.difficulty)
-              //recursive call
-            miniMax(minParams, initialMove)
-          }
-        }
-      }
-      //max path
-      if(aiParams.currentToken == aiParams.maxToken) {
-        scores.maxBy(_.value)
+  @tailrec def miniMax(
+    boardState: List[String],
+    nodeMap: NodeMap,
+    depth: Depth,
+    maxToken: String,
+    minToken: String,
+    currentToken: String): Node = {
+    val allScored: Boolean = isDepthFinished(nodeMap(depth))
+    if(allScored && depth == 0) {
+      nodeMap(0)//base case returns map of scores
+    } else if(allScored) {
+      val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
+      val scoreDepthAndPrunedNodeMap = setDepthScore(nodeMap, depth, maxToken == currentToken)
+      val changeToken = if(currentToken == maxToken) minToken else maxToken
+      miniMax(previousBoardState, scoreDepthAndPrunedNodeMap, depth - 1, maxToken, minToken, currentToken)
+    } else {
+      val openMoves: List[Position] = generateOpenMoves(boardState)
+      val position: Position = openMoves.take(1).head
+      val tempBoard = updateBoard(boardState, position, currentToken)
+      val tempNodeMap = updateScore(depth, position, nodeMap, new Score(position, 0, "current", false))
+      val isWin: Boolean = Board.checkWin(tempBoard)
+      val isTie: Boolean = Board.checkTie(tempBoard)
+      if (isWin || isTie) {
+        val leafScore = getLeafScore(position, depth, tempBoard, currentToken == maxToken)
+        val newNodeMap = updateScore(depth, position, tempNodeMap, leafScore)
+        miniMax(boardState, newNodeMap, depth, maxToken, minToken, currentToken)
       } else {
-        scores.minBy(_.value)
+        val changeToken = if(currentToken == maxToken) minToken else maxToken
+        miniMax(tempBoard, tempNodeMap, depth + 1, maxToken, minToken, changeToken)
       }
     }
-    miniMax(compAiParams, 0)
   }
 }

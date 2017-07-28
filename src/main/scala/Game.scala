@@ -118,7 +118,7 @@ object Game {
     val player = Map(playerNum -> (pType, playerToken, playerDifficulty))
     player
   }
-
+/*
   @tailrec def go(
     board: List[String],
     players: Map[Int, (String, String, String)],
@@ -267,4 +267,5 @@ object Game {
   def main(args: Array[String]): Unit = {
     contLoop(println, IO.getInput, "none")
   }
+  */
 }
