@@ -139,9 +139,28 @@ class AISpec extends FunSpec {
     }
   }
 
+  describe("updateScore") {
+    it("updates a score in the nodeMap") {
+      val testNodeMap: AI.NodeMap = Map(
+        0 -> Map(
+          1 -> new AI.Score(1, 987, "win", true),
+          2 -> new AI.Score(2, -987, "current", false),
+        ),
+        1 -> Map()
+      )
+      val updateDepth = 0
+      val updatePosition = 1
+      val updateScore = new AI.Score(1, 999, "win", true)
 
+      val actual = AI.updateScore(updateDepth, updatePosition, testNodeMap, updateScore)
 
+      assert(actual(0)(1).position == updatePosition)
+      assert(actual(0)(1).value == 999)
+      assert(actual(0)(1).outcome == "win")
+      assert(actual(0)(1).finished == true)
+    }
 
+  }
 }
 
 
