@@ -81,15 +81,17 @@ object AI {
     val activeParentLeafPosition = getActiveParentLeafPosition(nodeMap, depth)
 
     if(maxPlayer) {
-      val maxDepthScore = nodeMap(depth).keys.map(key=>nodeMap(depth)(key).value).max
-      //outcome should propagate from max node
-      val newScore = new Score(activeParentLeafPosition, maxDepthScore, "finished", true)
+      val maxScore = nodeMap(depth).maxBy(_._2.value)
+      val maxDepthScore = maxScore._2.value
+      val maxOutcome = maxScore._2.outcome
+      val newScore = new Score(activeParentLeafPosition, maxDepthScore, maxOutcome, true)
       val updatedNodeMap = updateScore(depth - 1, activeParentLeafPosition, nodeMap, newScore)
       updatedNodeMap - depth
     } else {
-      val minDepthScore = nodeMap(depth).keys.map(key=>nodeMap(depth)(key).value).min
-      //outcome should propagate from min node
-      val newScore = new Score(activeParentLeafPosition, minDepthScore, "finished", true)
+      val minScore = nodeMap(depth).minBy(_._2.value)
+      val minDepthScore = minScore._2.value
+      val minOutcome = minScore._2.outcome
+      val newScore = new Score(activeParentLeafPosition, minDepthScore, minOutcome, true)
       val updatedNodeMap = updateScore(depth - 1, activeParentLeafPosition, nodeMap, newScore)
       updatedNodeMap - depth
     }

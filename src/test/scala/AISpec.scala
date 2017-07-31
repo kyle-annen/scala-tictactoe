@@ -244,6 +244,44 @@ class AISpec extends FunSpec {
       }
       go(startBoard)
     }
+
+
+    it("wins or ties in every possible situation on a 4x4 board") {
+      val startBoard = Board.initBoard(16)
+      def go(board: List[String]) {
+        val openMoves = AI.generateOpenMoves(board)
+        openMoves.map { move =>
+          breakable {
+            val humanMoveBoard = board.map(x => if(move.toString == x) "O" else x)
+            val humanWin = Board.checkWin(humanMoveBoard)
+            val humanTie = Board.checkTie(humanMoveBoard)
+            if(humanWin) {
+              assert(true == false)
+              break
+            } else if(humanTie) {
+              assert(true == true)
+              break
+            } else {
+              val compMove = AI.negaMax(humanMoveBoard, Map(0-> Map()), 0, "X","O","X")
+              val compMoveBoard = humanMoveBoard.map(x => if(compMove.toString == x) "X" else x)
+              val compWin = Board.checkWin(compMoveBoard)
+              val compTie = Board.checkTie(compMoveBoard)
+              if(compWin || compTie) {
+                assert(true == true)
+                break
+              } else {
+                go(compMoveBoard)
+              }
+            }
+
+          }
+        }
+      }
+      go(startBoard)
+    }
+
+
+
   }
 }
 
