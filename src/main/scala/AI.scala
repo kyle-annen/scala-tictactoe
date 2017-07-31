@@ -122,16 +122,15 @@ object AI {
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
       val scoreDepthAndPrunedNodeMap = setDepthScore(nodeMap, depth, maxToken == currentToken)
       val changeToken = if(currentToken == maxToken) minToken else maxToken
-      negaMax(previousBoardState, scoreDepthAndPrunedNodeMap, depth - 1, maxToken, minToken, currentToken)
+      negaMax(previousBoardState, scoreDepthAndPrunedNodeMap, depth - 1, maxToken, minToken, changeToken)
     } else {
 
-      //this needs to be changed to only return the values that are open in the nodeMap
-      //val openMoves: List[Position] = generateOpenMoves(boardState)
-      //check the node for open positions to take
+
       val position: Position = getFirstOpenPosition(nodeMap, depth)
       val tempBoard = updateBoard(boardState, position, currentToken)
       val tempNodeMap = updateScore(depth, position, nodeMap, new Score(position, 0, "current", false))
       val isWin: Boolean = Board.checkWin(tempBoard)
+
       val isTie: Boolean = Board.checkTie(tempBoard)
       if (isWin || isTie) {
         val leafScore = getLeafScore(position, depth, tempBoard, currentToken == maxToken)

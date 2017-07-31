@@ -184,9 +184,11 @@ class AISpec extends FunSpec {
         0 -> Map(
           1 -> new AI.Score(1, 0, "current", false),
           2 -> new AI.Score(2, 0, "none", false),
+          3 -> new AI.Score(3, 0, "none", false)
         ),
         1 -> Map(
-          2 -> new AI.Score(2, 999, "win", true)
+          2 -> new AI.Score(2, 999, "win", true),
+          3 -> new AI.Score(3, 987, "win", true)
         )
       )
       val expected = 1
@@ -196,17 +198,20 @@ class AISpec extends FunSpec {
   }
 
   describe("negaMax") {
+    /*
     it("returns scores for an empty board") {
       val testBoard = Board.initBoard(9)
       val negaMaxResult = AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X")
       assert(negaMaxResult.size > 0)
       negaMaxResult.keys.map(k => println(negaMaxResult(k).value))
     }
+    */
 
     it("will block a new move win") {
-      val testBoard = List("O","O","2","X","4","5","6","7","8","9")
+      val testBoard = List("O","O","3","X","5","6","7","8","9")
       val negaMaxResult = AI.negaMax(testBoard, Map(0-> Map()), 0, "X","O","X")
       negaMaxResult.keys.map(key => println(negaMaxResult(key).position + " -> " + negaMaxResult(key).value))
+      println(negaMaxResult.maxBy(k => k._._2.value))
 
     }
   }
