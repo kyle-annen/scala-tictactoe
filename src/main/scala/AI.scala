@@ -108,25 +108,17 @@ object AI {
     minToken: String,
     currentToken: String): Node = {
 
-    println("------Loop Start--------")
-    println("Depth: " + depth)
-    println("NodeMap: " + nodeMap)
-    println("Node: " + nodeMap(depth))
     val allScored: Boolean = isDepthFinished(nodeMap(depth))
 
     if(nodeMap(0).size == 0) {
-      println("Generating first node map.")
       val newOpenMoves = generateOpenMoves(boardState)
       val newNodeMap = generateNodeMap(newOpenMoves,0,Map())
-      println("first Node map \n" + newNodeMap)
       negaMax(boardState,newNodeMap,depth,maxToken, minToken, currentToken)
     } else if(allScored && depth == 0) {
-      println("Game finished, returning initial value.")
       val finalNodeMap = nodeMap(0)
       println(finalNodeMap)
       finalNodeMap
     } else if(allScored) {
-      println("Depth Finished, going up a level.")
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
       val scoreDepthAndPrunedNodeMap = setDepthScore(nodeMap, depth, maxToken == currentToken)
       val changeToken = if(currentToken == maxToken) minToken else maxToken
@@ -148,7 +140,7 @@ object AI {
       } else {
         val changeToken = if(currentToken == maxToken) minToken else maxToken
         val deeperOpenMoves = generateOpenMoves(tempBoard)
-        val deeperNodeMap = generateNodeMap(deeperOpenMoves,depth,tempNodeMap)
+        val deeperNodeMap = generateNodeMap(deeperOpenMoves, depth + 1,tempNodeMap)
         negaMax(tempBoard, deeperNodeMap, depth + 1, maxToken, minToken, changeToken)
       }
     }
