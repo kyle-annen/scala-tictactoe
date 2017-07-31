@@ -195,7 +195,7 @@ class AISpec extends FunSpec {
     }
   }
 
-  describe("negaMac") {
+  describe("negaMax") {
     it("should return scores for an empty board") {
       val testBoard = Board.initBoard(9)
       val negaMaxResult = AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X")

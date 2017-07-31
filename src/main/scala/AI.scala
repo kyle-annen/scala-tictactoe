@@ -96,7 +96,7 @@ object AI {
   }
 
   def getFirstOpenPosition(nodeMap: NodeMap, depth: Depth): Position = {
-    nodeMap(0).filter(_._2.finished == false).keys.head
+    nodeMap(depth).filter(_._2.finished == false).keys.head
 
   }
 
@@ -107,20 +107,32 @@ object AI {
     maxToken: String,
     minToken: String,
     currentToken: String): Node = {
+
+    println("------Loop Start--------")
+    println("Depth: " + depth)
+    println("NodeMap: " + nodeMap)
+    println("Node: " + nodeMap(depth))
     val allScored: Boolean = isDepthFinished(nodeMap(depth))
 
     if(nodeMap(0).size == 0) {
+      println("Generating first node map.")
       val newOpenMoves = generateOpenMoves(boardState)
       val newNodeMap = generateNodeMap(newOpenMoves,0,Map())
+      println("first Node map \n" + newNodeMap)
       negaMax(boardState,newNodeMap,depth,maxToken, minToken, currentToken)
     } else if(allScored && depth == 0) {
-      nodeMap(0)
+      println("Game finished, returning initial value.")
+      val finalNodeMap = nodeMap(0)
+      println(finalNodeMap)
+      finalNodeMap
     } else if(allScored) {
+      println("Depth Finished, going up a level.")
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
       val scoreDepthAndPrunedNodeMap = setDepthScore(nodeMap, depth, maxToken == currentToken)
       val changeToken = if(currentToken == maxToken) minToken else maxToken
       negaMax(previousBoardState, scoreDepthAndPrunedNodeMap, depth - 1, maxToken, minToken, currentToken)
     } else {
+
       //this needs to be changed to only return the values that are open in the nodeMap
       //val openMoves: List[Position] = generateOpenMoves(boardState)
       //check the node for open positions to take
