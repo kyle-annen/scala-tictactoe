@@ -197,27 +197,36 @@ class AISpec extends FunSpec {
     }
   }
 
+  describe("time") {
+    it("checks the compute time of negaMax") {
+      val testBoard = Board.initBoard(9)
+      AI.time { AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X", 10)}
+    }
+  }
+
   describe("negaMax") {
     it("returns scores for an empty board") {
       val testBoard = Board.initBoard(9)
-      val negaMaxResult = AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X")
+      val negaMaxResult = AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X", 10)
       assert(negaMaxResult > 0)
 
     }
 
     it("will block a next move win") {
       val testBoard = List("O","O","3","X","5","6","7","8","9")
-      val negaMaxResult = AI.negaMax(testBoard, Map(0-> Map()), 0, "X","O","X")
+      val negaMaxResult = AI.negaMax(testBoard, Map(0-> Map()), 0, "X","O","X", 10)
       assert(negaMaxResult == 3)
     }
 
     it("wins or ties in every possible situation on a 3x3 board") {
+      var combos: Int = 0
       val startBoard = Board.initBoard(9)
       def go(board: List[String]) {
         val openMoves = AI.generateOpenMoves(board)
         openMoves.map { move =>
           breakable {
             val humanMoveBoard = board.map(x => if(move.toString == x) "O" else x)
+            combos += 1
             val humanWin = Board.checkWin(humanMoveBoard)
             val humanTie = Board.checkTie(humanMoveBoard)
             if(humanWin) {
@@ -227,7 +236,8 @@ class AISpec extends FunSpec {
               assert(true == true)
               break
             } else {
-              val compMove = AI.negaMax(humanMoveBoard, Map(0-> Map()), 0, "X","O","X")
+              val compMove = AI.negaMax(humanMoveBoard, Map(0-> Map()), 0, "X","O","X", 10)
+              combos += 1
               val compMoveBoard = humanMoveBoard.map(x => if(compMove.toString == x) "X" else x)
               val compWin = Board.checkWin(compMoveBoard)
               val compTie = Board.checkTie(compMoveBoard)
@@ -244,44 +254,6 @@ class AISpec extends FunSpec {
       }
       go(startBoard)
     }
-
-
-    it("wins or ties in every possible situation on a 4x4 board") {
-      val startBoard = Board.initBoard(16)
-      def go(board: List[String]) {
-        val openMoves = AI.generateOpenMoves(board)
-        openMoves.map { move =>
-          breakable {
-            val humanMoveBoard = board.map(x => if(move.toString == x) "O" else x)
-            val humanWin = Board.checkWin(humanMoveBoard)
-            val humanTie = Board.checkTie(humanMoveBoard)
-            if(humanWin) {
-              assert(true == false)
-              break
-            } else if(humanTie) {
-              assert(true == true)
-              break
-            } else {
-              val compMove = AI.negaMax(humanMoveBoard, Map(0-> Map()), 0, "X","O","X")
-              val compMoveBoard = humanMoveBoard.map(x => if(compMove.toString == x) "X" else x)
-              val compWin = Board.checkWin(compMoveBoard)
-              val compTie = Board.checkTie(compMoveBoard)
-              if(compWin || compTie) {
-                assert(true == true)
-                break
-              } else {
-                go(compMoveBoard)
-              }
-            }
-
-          }
-        }
-      }
-      go(startBoard)
-    }
-
-
-
   }
 }
 
