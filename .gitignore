@@ -5,3 +5,4 @@ Session.vim
 /projectFilesBackup*
 /.idea*
 .project
+.DS_Store
