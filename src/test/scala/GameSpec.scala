@@ -51,7 +51,7 @@ class GameSpec extends FunSpec {
     }
   }
 
-  val mockPlayers: Map[Int, (String, String, Int)] = Map(1 -> ("human", "X",9), 2 -> ("human", "O", 9))
+  val mockPlayers: Map[Int, (String, String, Int)] = Map(1 -> ("human", "X",3), 2 -> ("human", "O", 3))
 
   describe("setLanguage") {
     it("sets the language of the game") {
@@ -106,7 +106,7 @@ class GameSpec extends FunSpec {
 
   describe("go") {
     it("the game will finish if there is a winner") {
-      val testBoard = (1 to 9).toList.map(x => x.toString)
+      val testBoard = Board.initBoard(9)
       val testPlayers = mockPlayers
       val ttTable = new TTTable.TranspositionTable
       val expected = Map(1 -> true)

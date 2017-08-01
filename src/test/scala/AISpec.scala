@@ -223,17 +223,17 @@ class AISpec extends FunSpec {
       val startBoard = Board.initBoard(9)
       def go(board: List[String]) {
         val openMoves = AI.generateOpenMoves(board)
-        openMoves.map { move =>
+        openMoves.foreach { move =>
           breakable {
             val humanMoveBoard = board.map(x => if(move.toString == x) "O" else x)
             combos += 1
             val humanWin = Board.checkWin(humanMoveBoard)
             val humanTie = Board.checkTie(humanMoveBoard)
             if(humanWin) {
-              assert(true == false)
+              assert(false)
               break
             } else if(humanTie) {
-              assert(true == true)
+              assert(true)
               break
             } else {
               val compMove = AI.negaMax(humanMoveBoard, Map(0-> Map()), 0, "X","O","X", 10)
@@ -242,7 +242,44 @@ class AISpec extends FunSpec {
               val compWin = Board.checkWin(compMoveBoard)
               val compTie = Board.checkTie(compMoveBoard)
               if(compWin || compTie) {
-                assert(true == true)
+                assert(true)
+                break
+              } else {
+                go(compMoveBoard)
+              }
+            }
+
+          }
+        }
+      }
+      go(startBoard)
+    }
+    it("wins or ties in every possible situation on a 4x4 board") {
+      var combos: Int = 0
+      val startBoard = Board.initBoard(16)
+      def go(board: List[String]) {
+        val openMoves = AI.generateOpenMoves(board)
+        openMoves.foreach { move =>
+          breakable {
+            val humanMoveBoard = board.map(x => if(move.toString == x) "O" else x)
+            combos += 1
+            val humanWin = Board.checkWin(humanMoveBoard)
+            val humanTie = Board.checkTie(humanMoveBoard)
+            if(humanWin) {
+              println(humanMoveBoard)
+              assert(false)
+              break
+            } else if(humanTie) {
+              assert(true)
+              break
+            } else {
+              val compMove = AI.negaMax(humanMoveBoard, Map(0-> Map()), 0, "X","O","X", 6)
+              combos += 1
+              val compMoveBoard = humanMoveBoard.map(x => if(compMove.toString == x) "X" else x)
+              val compWin = Board.checkWin(compMoveBoard)
+              val compTie = Board.checkTie(compMoveBoard)
+              if(compWin || compTie) {
+                assert(true)
                 break
               } else {
                 go(compMoveBoard)

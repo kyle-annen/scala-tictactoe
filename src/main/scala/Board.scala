@@ -47,12 +47,10 @@ object Board {
     diaBool || rowBool || colBool
   }
 
-  def checkSpace(board: List[String]): Boolean = {
-    !(returnValidInputs(board).length == 0)
-  }
+  def checkSpace(board: List[String]): Boolean = returnValidInputs(board).nonEmpty
 
   def checkTie(board: List[String]): Boolean = {
-    returnValidInputs(board).length == 0
+    returnValidInputs(board).isEmpty
   }
 
   def gameOver(board: List[String]): Boolean = {
@@ -66,6 +64,6 @@ object Board {
         return set.head
       }
     }
-    return "none"
+    "none"
   }
 }

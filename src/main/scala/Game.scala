@@ -79,9 +79,30 @@ object Game {
     diffSelection match  {
       case "1" => 1
       case "2" => 2
-      case "3" => 9
+      case "3" => 3
     }
   }
+
+  def getDifficulty(board: List[String], difficulty: Int): Int = {
+    val boardSize = Board.returnDimension(board)
+    boardSize match {
+      case 3 => {
+        difficulty match {
+          case 1 => 1
+          case 2 => 4
+          case 3 => 10
+        }
+      }
+      case 4 => {
+        difficulty match {
+          case 1 => 1
+          case 2 => 2
+          case 3 => 4
+        }
+      }
+    }
+  }
+
 
   def setPlayer(
     output: String => Any,
@@ -145,7 +166,8 @@ object Game {
     val invalidPlay: String = dialogLang("invalidPlay")
     val playerType: String = players(currentPlayer)._1
     val userToken: String = players(currentPlayer)._2
-    val difficulty: Int = players(currentPlayer)._3
+    val playerDifficulty: Int = players(currentPlayer)._3
+    val difficulty: Int = getDifficulty(board, playerDifficulty)
     val oppToken: String = if(userToken == "X") "O" else "X"
     //get the move value
     val boardMove = if(playerType == "human") {

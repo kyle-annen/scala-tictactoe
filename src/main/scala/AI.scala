@@ -64,9 +64,10 @@ object AI {
 
   def rollBackBoard(board: List[String], currentDepth: Int, nodeMap: NodeMap): List[String] = {
     val rollBackPosition: Position = getActiveParentLeafPosition(nodeMap, currentDepth)
-    val newBoard = board.patch(rollBackPosition - 1, rollBackPosition.toString, 1)
-    val stringBoard: List[String] = newBoard.map(x => x.toString)
-    stringBoard
+    val newBoard: List[String] = (0 to board.length - 1).map {
+      loc => if(loc == rollBackPosition - 1) rollBackPosition.toString else board(loc)
+    }.toList
+    newBoard
   }
 
   def getLeafScore(position: Position, depth: Int, board: List[String], maxPlayer: Boolean): Score = {
@@ -118,16 +119,16 @@ object AI {
     currentToken: String,
     depthLimit: Int): Position = {
     val allScored: Boolean = isDepthFinished(nodeMap(depth))
-    if(nodeMap(0).size == 0) {
+    if(nodeMap(0).isEmpty) {
       val newOpenMoves = generateOpenMoves(boardState)
       val newNodeMap = generateNodeMap(newOpenMoves,0,Map())
       negaMax(boardState,newNodeMap,depth,maxToken, minToken, currentToken, depthLimit)
     } else if(allScored && depth == 0) {
       val bestMove = nodeMap(0).maxBy(_._2.value)._1
       //this logging below is used to see the scores attributed to the position
-      //nodeMap(0).keys.map { x=>
-      //  println(nodeMap(0)(x).position + " -> " + nodeMap(0)(x).value + " " + nodeMap(0)(x).outcome)
-      //}
+      nodeMap(0).keys.foreach { x=>
+        println(nodeMap(0)(x).position + " -> " + nodeMap(0)(x).value + " " + nodeMap(0)(x).outcome)
+      }
       bestMove
     } else if(allScored) {
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
@@ -137,7 +138,7 @@ object AI {
     } else {
       if (depth >= depthLimit) {
         val position: Position = getFirstOpenPosition(nodeMap, depth)
-        val rawScore: Int = (1000 - depth.toInt - 2)
+        val rawScore: Int = 1000 - depth.toInt - 2
         val depthLimitScore: Int = if(maxToken == currentToken) rawScore else rawScore * -1
         val depthScore: Score = new Score(position, depthLimitScore, "depthLimit", true)
         val depthLimitNodeMap = updateScore(depth, position, nodeMap, depthScore)

@@ -1,3 +1,7 @@
-/target
+/target*
 .idea
 Session.vim
+/project*
+/projectFilesBackup*
+/.idea*
+.project
