@@ -30,7 +30,11 @@ object AI {
     board.filter(isAllDigits(_) == true).map(x => x.toInt)
   }
 
-  def generateNodeMap(openMoves: List[Position], currentDepth: Int, previousNodeMap: NodeMap): NodeMap = {
+  def generateNodeMap(
+    openMoves: List[Position],
+    currentDepth: Int,
+    previousNodeMap: NodeMap): NodeMap = {
+
     val nodes: List[Node] = openMoves.map { position: Position =>
       val score: Score = new Score(position, 0, "none", false)
       val node: Node = Map(position -> score)

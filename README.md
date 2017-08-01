@@ -1,6 +1,18 @@
 # Scala TicTacToe
 [![Build Status](https://travis-ci.org/kyle-annen/scala-tictactoe.svg?branch=master)](https://travis-ci.org/kyle-annen/scala-tictactoe)
 
+# Requirements
+
+- Java 8
+- Scala 2.12
+- install sbt
+
+To run, clone repository and run the following command from the root directory of the cloned repository.
+``` bash
+sbt run
+```
+
+
 # Test Coverage
 
 To run test coverage 
