@@ -100,7 +100,7 @@ class AISpec extends FunSpec {
       val testNodeMap: AI.NodeMap = Map(
         0 -> Map(
           1 -> new AI.Score(1, 987, "win", true),
-          2 -> new AI.Score(2, -987, "current", false),
+          2 -> new AI.Score(2, -987, "current", false)
         ),
         1 -> Map()
       )
