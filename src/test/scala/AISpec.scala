@@ -117,7 +117,7 @@ class AISpec extends FunSpec {
       val testNodeMap: AI.NodeMap = Map(
         0 -> Map(
           1 -> new AI.Score(1, 987, "win", true),
-          2 -> new AI.Score(2, -987, "current", false),
+          2 -> new AI.Score(2, -987, "current", false)
         ),
         1 -> Map()
       )
@@ -144,7 +144,7 @@ class AISpec extends FunSpec {
       val testNodeMap: AI.NodeMap = Map(
         0 -> Map(
           1 -> new AI.Score(1, 987, "win", true),
-          2 -> new AI.Score(2, -987, "current", false),
+          2 -> new AI.Score(2, -987, "current", false)
         ),
         1 -> Map()
       )
@@ -166,7 +166,7 @@ class AISpec extends FunSpec {
       val testNodeMap: AI.NodeMap = Map(
         0 -> Map(
           1 -> new AI.Score(1, 0, "current", false),
-          2 -> new AI.Score(2, 0, "none", false),
+          2 -> new AI.Score(2, 0, "none", false)
         ),
         1 -> Map(
           2 -> new AI.Score(2, 999, "win", true)
@@ -194,13 +194,6 @@ class AISpec extends FunSpec {
       val expected = 1
       val actual = AI.getFirstOpenPosition(testNodeMap, 0)
       assert(actual == expected)
-    }
-  }
-
-  describe("time") {
-    it("checks the compute time of negaMax") {
-      val testBoard = Board.initBoard(9)
-      AI.time { AI.negaMax(testBoard, Map(0 -> Map()), 0, "X","O","X", 10)}
     }
   }
 
