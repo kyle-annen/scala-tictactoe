@@ -84,6 +84,7 @@ object Game {
   }
 
   def getDifficulty(board: List[String], difficulty: Int): Int = {
+    val openSpacesCount = AI.generateOpenMoves(board).size
     val boardSize = Board.returnDimension(board)
     boardSize match {
       case 3 => {
@@ -97,11 +98,15 @@ object Game {
         difficulty match {
           case 1 => 1
           case 2 => 2
-          case 3 => 4
+          case 3 => openSpacesCount match {
+            case x if x > 12 => 2
+            case x if x <= 12 => 6
+          }
         }
       }
     }
   }
+
 
 
   def setPlayer(

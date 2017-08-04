@@ -4,6 +4,7 @@ import scala.annotation.tailrec
 
 object AI {
 
+  var bestMovesNode: Any = 0
   type Position = Int
 
   class Score(p: Position, v: Int, o: String, f: Boolean) {
@@ -124,11 +125,8 @@ object AI {
       val newNodeMap = generateNodeMap(newOpenMoves,0,Map())
       negaMax(boardState,newNodeMap,depth,maxToken, minToken, currentToken, depthLimit)
     } else if(allScored && depth == 0) {
+      bestMovesNode = nodeMap(0)
       val bestMove = nodeMap(0).maxBy(_._2.value)._1
-      //this logging below is used to see the scores attributed to the position
-      nodeMap(0).keys.foreach { x=>
-        println(nodeMap(0)(x).position + " -> " + nodeMap(0)(x).value + " " + nodeMap(0)(x).outcome)
-      }
       bestMove
     } else if(allScored) {
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
