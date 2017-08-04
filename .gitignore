@@ -6,3 +6,5 @@ Session.vim
 /.idea*
 .project
 .DS_Store
+target/*
+target
