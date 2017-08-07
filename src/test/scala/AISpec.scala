@@ -211,6 +211,16 @@ class AISpec extends FunSpec {
       assert(negaMaxResult == 3)
     }
 
+    it("will block a next move win on 4x4") {
+      val testBoard = List(
+        "O", "X", "O", "X",
+        "X", "O", "O", "8",
+        "9", "10","11","12",
+        "13","14","O","16")
+      val negaMaxResult = AI.negaMax(testBoard, Map(0-> Map()), 0, "X","O","X", 6)
+      assert(negaMaxResult == 11)
+    }
+
     it("wins or ties in every possible situation on a 3x3 board") {
       var combos: Int = 0
       val startBoard = Board.initBoard(9)

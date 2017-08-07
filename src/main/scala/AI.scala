@@ -1,6 +1,7 @@
 package tictactoe
 
 import scala.annotation.tailrec
+import scala.util.Random
 
 object AI {
 
@@ -125,9 +126,10 @@ object AI {
       val newNodeMap = generateNodeMap(newOpenMoves,0,Map())
       negaMax(boardState,newNodeMap,depth,maxToken, minToken, currentToken, depthLimit)
     } else if(allScored && depth == 0) {
-      bestMovesNode = nodeMap(0)
-      val bestMove = nodeMap(0).maxBy(_._2.value)._1
-      bestMove
+      val bestScore = nodeMap(0).maxBy(_._2.value)._2.value
+      val bestMoves = nodeMap(0).filter((x) => x._2.value == bestScore).keys.toList
+      val randomBestMove = Random.shuffle(bestMoves).head
+      randomBestMove
     } else if(allScored) {
       val previousBoardState = rollBackBoard(boardState, depth, nodeMap)
       val scoreDepthAndPrunedNodeMap = setDepthScore(nodeMap, depth, maxToken == currentToken)
