@@ -57,12 +57,27 @@ class TTTableSpec extends FunSpec {
         val testBoard = List("1","2","3","4","5","6","X","O","X")
         val ttTable = new TTTable.TranspositionTable
         val values = TTTable.getBoardTranspositions(testBoard, 987, "X","O")
+        val values2 = TTTable.getBoardTranspositions(testBoard, -987, "X", "O")
         val currentValues = values("current")
         TTTable.saveTranspositions(ttTable, values, "max")
+        TTTable.saveTranspositions(ttTable, values2, "min")
         assert(ttTable.max.contains("------XOX"))
         assert(ttTable.max.contains("XOX------"))
         assert(ttTable.max.contains("--X--O--X"))
         assert(ttTable.max.contains("X--O--X--"))
+        assert(ttTable.min.contains("------XOX"))
+        assert(ttTable.min.contains("XOX------"))
+        assert(ttTable.min.contains("--X--O--X"))
+        assert(ttTable.min.contains("X--O--X--"))
+        assert(ttTable.max.contains("------OXO"))
+        assert(ttTable.max.contains("OXO------"))
+        assert(ttTable.max.contains("--O--X--O"))
+        assert(ttTable.max.contains("O--X--O--"))
+        assert(ttTable.min.contains("------OXO"))
+        assert(ttTable.min.contains("OXO------"))
+        assert(ttTable.min.contains("--O--X--O"))
+        assert(ttTable.min.contains("O--X--O--"))
+        assert(ttTable.min("XOX------") == ttTable.max("XOX------") * -1)
       }
     }
 
@@ -77,6 +92,17 @@ class TTTableSpec extends FunSpec {
         val actual = TTTable.checkTransposition(testCheckBoard, ttTable, "X","O", "max")
         assert(actual == expected)
       }
+
+      it("will give the score of a stored transposition") {
+        val testBoard = List("1","2","3","4","5","6","X","O","X")
+        val ttTable = new TTTable.TranspositionTable
+        val values = TTTable.getBoardTranspositions(testBoard, 987, "X","O")
+        TTTable.saveTranspositions(ttTable, values, "max")
+        val testCheckBoard = List("1","2","3","4","5","6","X","O","X")
+        val expected = (true -> 987)
+        val actual = TTTable.checkTransposition(testCheckBoard, ttTable, "X","O", "max")
+        assert(actual == expected)
+     }
     }
   }
 }

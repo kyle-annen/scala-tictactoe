@@ -54,7 +54,7 @@ object Game {
     output: String => Any,
     leftPadding: Int,
     getInput: Int => String,
-    dialogLang: Map[String, String]): String = {
+    dialogLang: Map[String, String]): Int = {
 
     val easy = "1 - " + dialogLang("easy")
     val medium = "2 - " + dialogLang("medium")
@@ -77,11 +77,37 @@ object Game {
       1)
 
     diffSelection match  {
-      case "1" => "easy"
-      case "2" => "medium"
-      case "3" => "hard"
+      case "1" => 1
+      case "2" => 2
+      case "3" => 3
     }
   }
+
+  def getDifficulty(board: List[String], difficulty: Int): Int = {
+    val openSpacesCount = AI.generateOpenMoves(board).size
+    val boardSize = Board.returnDimension(board)
+    boardSize match {
+      case 3 => {
+        difficulty match {
+          case 1 => 1
+          case 2 => 4
+          case 3 => 10
+        }
+      }
+      case 4 => {
+        difficulty match {
+          case 1 => 1
+          case 2 => 2
+          case 3 => openSpacesCount match {
+            case x if x > 12 => 2
+            case x if x <= 12 => 6
+          }
+        }
+      }
+    }
+  }
+
+
 
   def setPlayer(
     output: String => Any,
@@ -89,7 +115,7 @@ object Game {
     getInput: Int => String,
     dialogLang: Map[String, String],
     playerNum: Int,
-    playerToken: String): Map[Int, (String, String, String)] = {
+    playerToken: String): Map[Int, (String, String, Int)] = {
 
     val pAnnounce = dialogLang("playerAnnounce") + playerNum.toString
     val pPrompt = dialogLang("selectPlayerType")
@@ -112,7 +138,7 @@ object Game {
     val playerDifficulty = if(pType == "computer") {
         setDifficulty(output, leftPadding, getInput, dialogLang)
       } else {
-        "none"
+        1
       }
 
     val player = Map(playerNum -> (pType, playerToken, playerDifficulty))
@@ -121,7 +147,7 @@ object Game {
 
   @tailrec def go(
     board: List[String],
-    players: Map[Int, (String, String, String)],
+    players: Map[Int, (String, String, Int)],
     dialogLang: Map[String, String],
     gameOver: Boolean,
     currentPlayer: Int,
@@ -145,7 +171,8 @@ object Game {
     val invalidPlay: String = dialogLang("invalidPlay")
     val playerType: String = players(currentPlayer)._1
     val userToken: String = players(currentPlayer)._2
-    val difficulty: String = players(currentPlayer)._3
+    val playerDifficulty: Int = players(currentPlayer)._3
+    val difficulty: Int = getDifficulty(board, playerDifficulty)
     val oppToken: String = if(userToken == "X") "O" else "X"
     //get the move value
     val boardMove = if(playerType == "human") {
@@ -161,14 +188,15 @@ object Game {
       humanPlay
     } else {
       //AI computer move
-      val compPlay: Int = AI.getComputerMove(
+      val compMove = AI.negaMax(
         board,
+        Map(0->Map()),
+        0,
         userToken,
         oppToken,
         userToken,
-        ttTable,
-        difficulty) + 1
-      compPlay
+        difficulty)
+      compMove
     }
 
     val updatedBoard: List[String] = board.map(
@@ -218,8 +246,8 @@ object Game {
       val player2 = setPlayer(output, leftPadding, getInput, dialogLang, 2, "O")
 
       val players = List(player1, player2).flatten.toMap
-      val boardDimen: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
-      val boardSize: Int = boardDimen * boardDimen
+      val boardDimension: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
+      val boardSize: Int = boardDimension * boardDimension
       val board = Board.initBoard(boardSize)
 
       val ttTable = new TTTable.TranspositionTable
@@ -243,8 +271,6 @@ object Game {
     }
 
     val dialogLang = Dialog.lang(selectedLanguage)
-
-
     val gameOutcome = setup(1, output, 15, 100, getInput, 1, dialogLang)
 
     val continuePlaying = IO.getValidMove(

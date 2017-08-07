@@ -52,6 +52,17 @@ class BoardSpec extends FunSpec {
       val actual: List[List[String]] = Board.returnRows(testBoard)
       assert( actual === expected )
     }
+
+    it("returns the rows of a 4x4 board") {
+      val testBoard: List[String] = Board.initBoard(16)
+      val expected: List[List[String]] = List(
+        List("1","2","3","4"),
+        List("5","6","7","8"),
+        List("9","10","11","12"),
+        List("13","14","15","16"))
+      val actual = Board.returnRows(testBoard)
+      assert(actual == expected)
+    }
   }
 
   describe("returnColumns") {
@@ -64,16 +75,36 @@ class BoardSpec extends FunSpec {
       val actual: List[List[String]] = Board.returnColumns(testBoard)
       assert( actual === expected )
     }
+
+    it("returnts the colums of a 4x4 board") {
+      val testBoard: List[String] = Board.initBoard(16)
+      val expected: List[List[String]] = List(
+        List("1","5","9","13"),
+        List("2","6","10","14"),
+        List("3","7","11","15"),
+        List("4","8","12","16"))
+      val actual = Board.returnColumns(testBoard)
+      assert(actual == expected)
+    }
   }
 
   describe("returnDiagonals") {
     it("returns the diagonals of the board") {
-      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
+      val testBoard: List[String] = Board.initBoard(9)
       val expected: List[List[String]] = List(
         List("1","5","9"),
         List("3","5","7"))
       val actual: List[List[String]] = Board.returnDiagonals(testBoard)
       assert( actual === expected )
+    }
+
+    it("return diagonals of a 4x4 board") {
+      val testBoard = Board.initBoard(16)
+      val expected = List(
+        List("1","6","11","16"),
+        List("4","7","10","13"))
+      val actual = Board.returnDiagonals(testBoard)
+      assert(actual == expected)
     }
   }
 
@@ -93,7 +124,7 @@ class BoardSpec extends FunSpec {
         "x","x","x",
         "4","5","6",
         "7","8","9")
-      val expected: Boolean = false 
+      val expected: Boolean = false
       val actual = Board.checkSets(Board.returnColumns(testBoard))
       assert( actual === expected)
     }
@@ -125,16 +156,27 @@ class BoardSpec extends FunSpec {
         "1","x","x",
         "4","5","6",
         "7","8","9")
-      val expected: Boolean = false 
+      val expected: Boolean = false
       val actual = Board.checkWin(testBoard)
       assert(actual === expected)
     }
-  }
 
+    it("detects a non-winning board on 4x4") {
+      val testBoard: List[String] = List(
+        "X","X","X","4",
+        "5","O","O","8",
+        "X","X","X","O",
+        "O","O","15","O")
+      val expected: Boolean = false
+      val actual = Board.checkWin(testBoard)
+      assert(actual === expected)
+
+    }
+  }
 
   describe("checkSpace") {
     it("detects if there are open spaces on the board") {
-      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
+      val testBoard: List[String] = Board.initBoard(9)
       val expected: Boolean = true
       val actual = Board.checkSpace(testBoard)
       assert(actual === expected)
@@ -150,7 +192,7 @@ class BoardSpec extends FunSpec {
 
   describe("checkTie") {
     it("determins not tie if board is blank") {
-      val testBoard: List[String] = (1 to 9).toList.map(x => x.toString)
+      val testBoard: List[String] = Board.initBoard(9)
       val expected: Boolean = false
       val actual = Board.checkTie(testBoard)
       assert(actual === expected)
@@ -171,7 +213,7 @@ class BoardSpec extends FunSpec {
         "x","o","x",
         "x","o","x",
         "o","x","o")
-      val expected: Boolean = true 
+      val expected: Boolean = true
       val actual = Board.checkTie(testBoard)
       assert(actual === expected)
     }
@@ -181,7 +223,7 @@ class BoardSpec extends FunSpec {
         "x","o","x",
         "x","o","x",
         "o","x","x")
-      val expected: Boolean = true 
+      val expected: Boolean = true
       val actual = Board.checkTie(testBoard)
       assert(actual === expected)
     }
@@ -240,4 +282,6 @@ class BoardSpec extends FunSpec {
       assert(actual === expected)
     }
   }
+
+
 }
