@@ -107,8 +107,6 @@ object Game {
     }
   }
 
-
-
   def setPlayer(
     output: String => Any,
     leftPadding: Int,
@@ -253,7 +251,7 @@ object Game {
       val ttTable = new TTTable.TranspositionTable
 
       go(
-        board, players, dialogLang, false, currentPlayer,
+        board, players, dialogLang, gameOver = false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
     }
 
