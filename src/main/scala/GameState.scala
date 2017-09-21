@@ -4,86 +4,72 @@ import tictactoe.AI.NodeMap
 import tictactoe.AI.negaMax
 
 class GameState(
-               board: List[String],
-               gameOver: Boolean,
-               messages: List[String],
-               humanMove: Int,
-               computerMove: Int,
-               humanToken: String,
-               computerToken: String,
-               gameOutcome: String,
-               gameWinner: String,
-               validSubmission: Boolean) {
-
-  def getBoard: List[String] = board
-
-  def isGameOver: Boolean = gameOver
-
-  def getMessages: List[String] = messages
-
-  def getHumanMove: Int = humanMove
-
-  def getComputerMove: Int = computerMove
-
-  def getHumanToken: String = humanToken
-
-  def getComputerToken: String = computerToken
+               val board: List[String],
+               val gameOver: Boolean,
+               val messages: List[String],
+               val humanMove: Int,
+               val computerMove: Int,
+               val humanToken: String,
+               val computerToken: String,
+               val gameOutcome: String,
+               val gameWinner: String,
+               val validSubmission: Boolean) {
 
   def getLocationValue(position: Int): String = {
     board(position - 1)
   }
 
-  def getGameOutcome: String = gameOutcome
-
-  def getGameWinner: String = gameWinner
-
-  def getValidSubmission: Boolean = validSubmission
-
   def placeHumanMove(): GameState = {
-    val board: List[String] = this.getBoard
-    val boardMove: Int = this.getHumanMove
+    if(!validSubmission) return this
+    if(gameOver) return this
+    val board: List[String] = this.board
+    val boardMove: Int = this.humanMove
     val updatedBoard: List[String] = board.map(
-      x => if (x == boardMove.toString) this.getHumanToken else x
+      x => if (x == boardMove.toString) this.humanToken else x
     )
     new GameState(
       updatedBoard,
-      this.isGameOver,
-      this.getMessages,
-      this.getHumanMove,
-      this.getComputerMove,
-      this.getHumanToken,
-      this.getComputerToken,
-      this.getGameOutcome,
-      this.getGameWinner,
-      this.getValidSubmission)
+      this.gameOver,
+      this.messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      this.gameOutcome,
+      this.gameWinner,
+      this.validSubmission)
   }
 
   def placeComputerMove(): GameState = {
-    val board: List[String] = this.getBoard
-    val boardMove: Int = this.getComputerMove
+    if(!validSubmission) return this
+    if(gameOver) return this
+    val board: List[String] = this.board
+    val boardMove: Int = this.computerMove
     val updatedBoard: List[String] = board.map(
-      x => if (x == boardMove.toString) this.getComputerToken else x
+      x => if (x == boardMove.toString) this.computerToken else x
     )
     new GameState(
       updatedBoard,
-      this.isGameOver,
-      this.getMessages,
-      this.getHumanMove,
-      this.getComputerMove,
-      this.getHumanToken,
-      this.getComputerToken,
-      this.getGameOutcome,
-      this.getGameWinner,
-      this.getValidSubmission)
+      this.gameOver,
+      this.messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      this.gameOutcome,
+      this.gameWinner,
+      this.validSubmission)
   }
 
   def setComputerMove(): GameState = {
-    val boardState: List[String] = this.getBoard
+    if(!validSubmission) return this
+    if(gameOver) return this
+    val boardState: List[String] = this.board
     val startNodeMap: NodeMap = Map(0->Map())
     val startDepth: Int = 0
-    val maxToken: String = this.getComputerToken
-    val minToken: String = this.getHumanToken
-    val currentToken: String = this.getComputerToken
+    val maxToken: String = this.computerToken
+    val minToken: String = this.humanToken
+    val currentToken: String = this.computerToken
     val depthLimit: Int = 9
 
     val computerMove = negaMax(
@@ -96,18 +82,26 @@ class GameState(
       depthLimit)
 
     new GameState(
-      this.getBoard,
-      this.isGameOver,
-      this.getMessages,
-      this.getHumanMove,
+      this.board,
+      this.gameOver,
+      this.messages,
+      this.humanMove,
       computerMove,
-      this.getHumanToken,
-      this.getComputerToken,
-      this.getGameOutcome,
-      this.getGameWinner,
-      this.getValidSubmission)
+      this.humanToken,
+      this.computerToken,
+      this.gameOutcome,
+      this.gameWinner,
+      this.validSubmission)
   }
 
   def validateGameState(): GameState = this
 
+  def addMessages(): GameState = this
+
+  def progressGameState(): GameState = {
+    this.validateGameState()
+      .placeHumanMove()
+      .setComputerMove()
+      .placeComputerMove()
+  }
 }

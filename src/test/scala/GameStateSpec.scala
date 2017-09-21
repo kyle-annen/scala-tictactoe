@@ -18,7 +18,7 @@ class GameStateSpec extends FunSpec{
   describe("GameState") {
     describe("getBoard") {
       it("returns the board") {
-        val actual: List[String] = gameState.getBoard
+        val actual: List[String] = gameState.board
         val expected: List[String] = Board.initBoard(9)
         assert(expected == actual)
       }
@@ -26,7 +26,7 @@ class GameStateSpec extends FunSpec{
 
     describe("isGameOver") {
       it("returns game over status") {
-        val actual: Boolean = gameState.isGameOver
+        val actual: Boolean = gameState.gameOver
         val expected: Boolean = false
         assert(actual == expected)
       }
@@ -34,7 +34,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getMessages") {
       it("returns messages") {
-        val actual: List[String] = gameState.getMessages
+        val actual: List[String] = gameState.messages
         val expected: List[String] = List("hi", "hello", "great game")
         assert(actual == expected)
       }
@@ -42,7 +42,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getHumanMove") {
       it("returns the human move") {
-        val actual: Int = gameState.getHumanMove
+        val actual: Int = gameState.humanMove
         val expected: Int = 1
         assert(actual == expected)
       }
@@ -50,7 +50,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getComputerMove") {
       it("returns the compute move ") {
-        val actual: Int = gameState.getComputerMove
+        val actual: Int = gameState.computerMove
         val expected: Int = -1
         assert(actual == expected)
       }
@@ -58,7 +58,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getHumanToken") {
       it("returns the human token") {
-        val actual: String = gameState.getHumanToken
+        val actual: String = gameState.humanToken
         val expected: String = "X"
         assert(actual == expected)
       }
@@ -66,7 +66,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getComputerToken") {
       it("return the computer token") {
-        val actual: String = gameState.getComputerToken
+        val actual: String = gameState.computerToken
         val expected: String = "O"
         assert(actual == expected)
       }
@@ -82,7 +82,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getGameOutcome") {
       it("returns the game outcome") {
-        val actual = gameState.getGameOutcome
+        val actual = gameState.gameOutcome
         val expected = "none"
         assert(actual == expected)
       }
@@ -90,7 +90,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getGameWinner") {
       it("gets the game winner") {
-        val actual = gameState.getGameWinner
+        val actual = gameState.gameWinner
         val expected = "none"
         assert(actual == expected)
       }
@@ -98,7 +98,7 @@ class GameStateSpec extends FunSpec{
 
     describe("getValidSubmission") {
       it("gets valid submission value ") {
-        val actual = gameState.getValidSubmission
+        val actual = gameState.validSubmission
         val expected = true
         assert(actual == expected)
       }
@@ -107,9 +107,9 @@ class GameStateSpec extends FunSpec{
     describe("placeHumanMove") {
       it("returns and updates board for player move") {
         val testGameState = gameState.placeHumanMove()
-        val expected = testGameState.getHumanToken
-        val humanMovePosition = testGameState.getHumanMove
-        val actual = gameState.getLocationValue(humanMovePosition)
+        val expected = testGameState.humanToken
+        val humanMovePosition = testGameState.humanMove
+        val actual = testGameState.getLocationValue(humanMovePosition)
         assert(actual == expected)
       }
     }
@@ -119,7 +119,7 @@ class GameStateSpec extends FunSpec{
         val testGameState = gameState
           .placeHumanMove()
           .setComputerMove()
-        val computerMove = testGameState.getComputerMove
+        val computerMove = testGameState.computerMove
         assert(computerMove > 0)
       }
     }
@@ -129,11 +129,9 @@ class GameStateSpec extends FunSpec{
         val testGameState = gameState
           .setComputerMove()
           .placeComputerMove()
-
-
-        val compMoveLocation = testGameState.getComputerMove.toInt
+        val compMoveLocation = testGameState.computerMove
         val compMoveLocationValue = testGameState.getLocationValue(compMoveLocation)
-        assert(compMoveLocationValue == testGameState.getComputerToken)
+        assert(compMoveLocationValue == testGameState.computerToken)
       }
     }
 
