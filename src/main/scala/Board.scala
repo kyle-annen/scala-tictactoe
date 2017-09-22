@@ -50,7 +50,8 @@ object Board {
   def checkSpace(board: List[String]): Boolean = returnValidInputs(board).nonEmpty
 
   def checkTie(board: List[String]): Boolean = {
-    returnValidInputs(board).isEmpty
+    val win = checkWin(board)
+    returnValidInputs(board).isEmpty && !win
   }
 
   def gameOver(board: List[String]): Boolean = {

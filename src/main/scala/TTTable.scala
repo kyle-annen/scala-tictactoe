@@ -17,6 +17,7 @@ object TTTable {
     swapArray.foldLeft("")(_ + _)
   }
 
+
   def getBoardTranspositions(
     board: List[String],
     score: Int,

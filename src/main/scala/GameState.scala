@@ -3,17 +3,20 @@ package tictactoe
 import tictactoe.AI.NodeMap
 import tictactoe.AI.negaMax
 
+import scala.collection.mutable.ListBuffer
+
 class GameState(
-               val board: List[String],
-               val gameOver: Boolean,
-               val messages: List[String],
-               val humanMove: Int,
-               val computerMove: Int,
-               val humanToken: String,
-               val computerToken: String,
-               val gameOutcome: String,
-               val gameWinner: String,
-               val validSubmission: Boolean) {
+  val board: List[String],
+  val gameOver: Boolean,
+  val messages: List[String],
+  val humanMove: Int,
+  val computerMove: Int,
+  val humanToken: String,
+  val computerToken: String,
+  val gameOutcome: String,
+  val gameWinner: String,
+  val validSubmission: Boolean,
+  val language: String) {
 
   def getLocationValue(position: Int): String = {
     board(position - 1)
@@ -23,9 +26,8 @@ class GameState(
     if(!validSubmission) return this
     if(gameOver) return this
     val board: List[String] = this.board
-    val boardMove: Int = this.humanMove
     val updatedBoard: List[String] = board.map(
-      x => if (x == boardMove.toString) this.humanToken else x
+      x => if (x == this.humanMove.toString) this.humanToken else x
     )
     new GameState(
       updatedBoard,
@@ -37,7 +39,8 @@ class GameState(
       this.computerToken,
       this.gameOutcome,
       this.gameWinner,
-      this.validSubmission)
+      this.validSubmission,
+      this.language)
   }
 
   def placeComputerMove(): GameState = {
@@ -58,7 +61,8 @@ class GameState(
       this.computerToken,
       this.gameOutcome,
       this.gameWinner,
-      this.validSubmission)
+      this.validSubmission,
+      this.language)
   }
 
   def setComputerMove(): GameState = {
@@ -91,17 +95,119 @@ class GameState(
       this.computerToken,
       this.gameOutcome,
       this.gameWinner,
-      this.validSubmission)
+      this.validSubmission,
+      this.language)
   }
 
-  def validateGameState(): GameState = this
+  def validateGameState(): GameState = {
+    val validSubmission = validHumanMove
 
-  def addMessages(): GameState = this
+     new GameState(
+      this.board,
+      this.gameOver,
+      this.messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      this.gameOutcome,
+      this.gameWinner,
+      validSubmission,
+      this.language)
+  }
+
+  def validHumanMove: Boolean = {
+    Board.returnValidInputs(board).contains(humanMove.toString)
+  }
+
+
+  def checkGameOver(): GameState = {
+    val gameOver = Board.gameOver(board)
+
+    new GameState(
+      this.board,
+      gameOver,
+      this.messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      this.gameOutcome,
+      this.gameWinner,
+      this.validSubmission,
+      this.language)
+  }
+
+  def checkTie(): GameState = {
+    val gameOutcome = if(Board.checkTie(this.board)) "tie" else this.gameOutcome
+
+    new GameState(
+      this.board,
+      this.gameOver,
+      this.messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      gameOutcome,
+      this.gameWinner,
+      this.validSubmission,
+      this.language)
+  }
+
+  def checkWinner(): GameState = {
+    val gameWinner = Board.getWinner(board)
+    val gameOutcome =
+      if(gameWinner == "none") this.gameOutcome else "win"
+
+    new GameState(
+      this.board,
+      this.gameOver,
+      this.messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      gameOutcome,
+      gameWinner,
+      this.validSubmission,
+      this.language)
+  }
+
+  def addMessages(): GameState = {
+    val dialog = Dialog.lang(this.language)
+    var messageBuffer = new ListBuffer[String]
+
+    if(this.gameOver) messageBuffer += dialog("gameOver")
+    if(this.gameOutcome == "tie") messageBuffer += dialog("tie")
+    if(this.gameOutcome == "win") {
+      messageBuffer += dialog("playerAnnounce") + " " + this.gameWinner + ", " + dialog("win")
+    }
+    if(this.gameOutcome == "none") messageBuffer += dialog("inputPrompt")
+    if(!this.validSubmission) messageBuffer += dialog("invalidPlay")
+    val messages = messageBuffer.toList
+
+    new GameState(
+      this.board,
+      this.gameOver,
+      messages,
+      this.humanMove,
+      this.computerMove,
+      this.humanToken,
+      this.computerToken,
+      this.gameOutcome,
+      this.gameWinner,
+      this.validSubmission,
+      this.language)
+  }
 
   def progressGameState(): GameState = {
     this.validateGameState()
       .placeHumanMove()
+      .checkGameOver()
       .setComputerMove()
       .placeComputerMove()
+      .checkGameOver()
+      .addMessages()
   }
 }

@@ -14,7 +14,8 @@ class TicTacToeAPISpec extends FunSpec{
     computerToken = "O",
     gameOutcome = "none",
     gameWinner = "none",
-    validSubmission = true)
+    validSubmission = true,
+    language = "EN")
 
   describe("TicTacToeAPI") {
 
