@@ -2,18 +2,18 @@ package tictactoe
 
 object TicTacToeAPI {
 
-  def startGame: Map[Symbol, String] = {
+  def startGame: Map[String, String] = {
     Map(
       "board" -> "1,2,3,4,5,6,7,8,9",
-      "messages" -> Dialog.lang("EN")
+      "messages" -> Dialog.lang("EN")("greeting")
     )
   }
 
-  def submitParams(params: String): GameState = {
-    val paramMap: Map[String, String] = parseInput(params)
-    val board = validateParam("board", paramMap)
-    val humanMove = validateParam("move", paramMap)
-  }
+//  def submitParams(params: String): GameState = {
+//    val paramMap: Map[String, String] = parseInput(params)
+//    val board = validateParam("board", paramMap)
+//    val humanMove = validateParam("move", paramMap)
+//  }
 
 
 

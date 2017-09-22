@@ -208,6 +208,8 @@ class GameState(
       .setComputerMove()
       .placeComputerMove()
       .checkGameOver()
+      .checkWinner()
+      .checkTie()
       .addMessages()
   }
 }
