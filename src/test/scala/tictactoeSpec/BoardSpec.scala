@@ -1,6 +1,7 @@
-package tictactoe 
+package tictactoeSpec
+
+import com.github.kyleannen.tictactoe.Board
 import org.scalatest._
-import org.scalatest.Matchers._
 
 class BoardSpec extends FunSpec {
 

@@ -1,5 +1,6 @@
-package tictactoe
+package tictactoeSpec
 
+import com.github.kyleannen.tictactoe.Dialog
 import org.scalatest.FunSpec
 import org.scalatest.Matchers._
 

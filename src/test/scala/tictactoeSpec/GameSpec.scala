@@ -1,7 +1,7 @@
-package tictactoe
+package tictactoeSpec
 
+import com.github.kyleannen.tictactoe.{Board, Dialog, Game, TTTable}
 import org.scalatest._
-import org.scalatest.Matchers._
 
 class GameSpec extends FunSpec {
   def testPrint(s: String): Unit = return

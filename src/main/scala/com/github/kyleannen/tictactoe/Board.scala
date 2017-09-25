@@ -1,4 +1,5 @@
-package tictactoe
+package com.github.kyleannen.tictactoe
+
 //Board handles the board initialization and returns states of the board
 object Board {
 

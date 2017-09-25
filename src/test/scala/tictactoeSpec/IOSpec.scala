@@ -1,5 +1,6 @@
-package tictactoe
+package tictactoeSpec
 
+import com.github.kyleannen.tictactoe.IO
 import org.scalatest.FunSpec
 
 class IOSpec extends FunSpec {

@@ -1,5 +1,6 @@
-package tictactoe
+package tictactoeSpec
 
+import com.github.kyleannen.tictactoe.TTTable
 import org.scalatest.FunSpec
 
 class TTTableSpec extends FunSpec {

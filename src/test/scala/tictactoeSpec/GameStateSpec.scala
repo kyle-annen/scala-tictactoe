@@ -1,5 +1,6 @@
-package tictactoe
+package tictactoeSpec
 
+import com.github.kyleannen.tictactoe.{Board, Dialog, GameState}
 import org.scalatest.FunSpec
 
 class GameStateSpec extends FunSpec{
@@ -374,7 +375,7 @@ class GameStateSpec extends FunSpec{
             "X","O","X",
             "O","8","O"),
           gameOver = false,
-          messages = List("hi", "hello", "great game"),
+          messages = List(),
           humanMove = 9,
           computerMove = -1,
           humanToken = "X",

@@ -1,4 +1,4 @@
-package tictactoe
+package com.github.kyleannen.tictactoe
 
 import scala.annotation.tailrec
 import scala.util.Random

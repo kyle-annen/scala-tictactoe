@@ -1,4 +1,4 @@
-package tictactoe
+package com.github.kyleannen.tictactoe
 
 object Dialog {
   val lang = Map(

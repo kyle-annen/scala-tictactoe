@@ -1,4 +1,5 @@
-package tictactoe
+package com.github.kyleannen.tictactoe
+
 import scala.annotation.tailrec
 
 object Game {

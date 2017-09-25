@@ -1,7 +1,6 @@
-package tictactoe
+package com.github.kyleannen.tictactoe
 
-import tictactoe.AI.NodeMap
-import tictactoe.AI.negaMax
+import AI.{NodeMap, negaMax}
 
 import scala.collection.mutable.ListBuffer
 
@@ -100,6 +99,7 @@ class GameState(
   }
 
   def validateGameState(): GameState = {
+    if(!this.validSubmission) return this
     val validSubmission = validHumanMove
 
      new GameState(
@@ -122,6 +122,7 @@ class GameState(
 
 
   def checkGameOver(): GameState = {
+    if(!validSubmission) return this
     val gameOver = Board.gameOver(board)
 
     new GameState(
@@ -139,6 +140,7 @@ class GameState(
   }
 
   def checkTie(): GameState = {
+    if(!validSubmission) return this
     val gameOutcome = if(Board.checkTie(this.board)) "tie" else this.gameOutcome
 
     new GameState(
@@ -156,6 +158,7 @@ class GameState(
   }
 
   def checkWinner(): GameState = {
+    if(!validSubmission) return this
     val gameWinner = Board.getWinner(board)
     val gameOutcome =
       if(gameWinner == "none") this.gameOutcome else "win"
