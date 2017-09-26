@@ -1,6 +1,5 @@
-package tictactoeSpec
+package org.clojars.kyleannen.tictactoe
 
-import com.github.kyleannen.tictactoe.View
 import org.scalatest.FunSpec
 
 class ViewSpec extends FunSpec {

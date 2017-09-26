@@ -1,4 +1,4 @@
-package com.github.kyleannen.tictactoe
+package org.clojars.kyleannen.tictactoe
 
 //Board handles the board initialization and returns states of the board
 object Board {

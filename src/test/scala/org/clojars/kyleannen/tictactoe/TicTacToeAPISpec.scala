@@ -1,6 +1,5 @@
-package tictactoeSpec
+package org.clojars.kyleannen.tictactoe
 
-import com.github.kyleannen.tictactoe.{Dialog, TicTacToeAPI}
 import org.scalatest.FunSpec
 
 class TicTacToeAPISpec extends FunSpec{

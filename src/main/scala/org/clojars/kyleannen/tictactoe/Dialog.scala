@@ -1,4 +1,4 @@
-package com.github.kyleannen.tictactoe
+package org.clojars.kyleannen.tictactoe
 
 object Dialog {
   val lang = Map(

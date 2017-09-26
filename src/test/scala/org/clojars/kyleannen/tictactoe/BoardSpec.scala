@@ -1,6 +1,5 @@
-package tictactoeSpec
+package org.clojars.kyleannen.tictactoe
 
-import com.github.kyleannen.tictactoe.Board
 import org.scalatest._
 
 class BoardSpec extends FunSpec {

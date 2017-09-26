@@ -1,6 +1,5 @@
-package tictactoeSpec
+package org.clojars.kyleannen.tictactoe
 
-import com.github.kyleannen.tictactoe.{Board, Dialog, GameState}
 import org.scalatest.FunSpec
 
 class GameStateSpec extends FunSpec{

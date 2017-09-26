@@ -1,6 +1,6 @@
-package com.github.kyleannen.tictactoe
+package org.clojars.kyleannen.tictactoe
 
-import AI.{NodeMap, negaMax}
+import org.clojars.kyleannen.tictactoe.AI.{NodeMap, negaMax}
 
 import scala.collection.mutable.ListBuffer
 
@@ -206,6 +206,7 @@ class GameState(
 
   def progressGameState(): GameState = {
     this.validateGameState()
+      .checkGameOver()
       .placeHumanMove()
       .checkGameOver()
       .setComputerMove()

@@ -1,6 +1,5 @@
-package tictactoeSpec
+package org.clojars.kyleannen.tictactoe
 
-import com.github.kyleannen.tictactoe.{AI, Board}
 import org.scalatest.FunSpec
 
 import scala.util.control.Breaks._
