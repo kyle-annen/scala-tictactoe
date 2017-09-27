@@ -48,7 +48,7 @@ Have sbt generate the pom.
 
 ``` bash
 sbt makePom
-``
+```
 
 Change directory
 
@@ -59,5 +59,17 @@ cd target
 Copy the compiled POM to pom.xml in target directory
 
 ``` bash
-cp tictactoe-X.X.X-SNAPSHOT.pom pom.xml
+cp tictactoe-X.X.X-SNAPSHOT.pom ../pom.xml
+```
+
+Move back to the root directory.
+
+``` bash
+cd ..
+```
+
+Deploy with Maven.
+
+``` bash
+mvn deploy
 ```
