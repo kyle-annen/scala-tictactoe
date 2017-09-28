@@ -1,4 +1,4 @@
-package tictactoe
+package org.clojars.kyleannen.tictactoe
 
 object TTTable {
   class TranspositionTable {
@@ -16,6 +16,7 @@ object TTTable {
     }
     swapArray.foldLeft("")(_ + _)
   }
+
 
   def getBoardTranspositions(
     board: List[String],

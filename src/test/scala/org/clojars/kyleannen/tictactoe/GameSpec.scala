@@ -1,7 +1,6 @@
-package tictactoe
+package org.clojars.kyleannen.tictactoe
 
 import org.scalatest._
-import org.scalatest.Matchers._
 
 class GameSpec extends FunSpec {
   def testPrint(s: String): Unit = return

@@ -1,4 +1,5 @@
-package tictactoe
+package org.clojars.kyleannen.tictactoe
+
 //Board handles the board initialization and returns states of the board
 object Board {
 
@@ -50,7 +51,8 @@ object Board {
   def checkSpace(board: List[String]): Boolean = returnValidInputs(board).nonEmpty
 
   def checkTie(board: List[String]): Boolean = {
-    returnValidInputs(board).isEmpty
+    val win = checkWin(board)
+    returnValidInputs(board).isEmpty && !win
   }
 
   def gameOver(board: List[String]): Boolean = {

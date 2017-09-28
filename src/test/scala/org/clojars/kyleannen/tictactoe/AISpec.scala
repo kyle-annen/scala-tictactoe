@@ -1,10 +1,8 @@
-package tictactoe
-
-import scala.annotation.tailrec
-
-import util.control.Breaks._
+package org.clojars.kyleannen.tictactoe
 
 import org.scalatest.FunSpec
+
+import scala.util.control.Breaks._
 
 class AISpec extends FunSpec {
 

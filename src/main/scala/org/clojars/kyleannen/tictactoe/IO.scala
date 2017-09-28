@@ -1,10 +1,10 @@
-package tictactoe
+package org.clojars.kyleannen.tictactoe
 
 import scala.annotation.tailrec
 
 object IO {
 
-  //callCount agrument used purely for mocking / testing
+  //callCount argument used purely for mocking / testing
   def getInput(callCount: Int = 0): String = {
     scala.io.StdIn.readLine().trim
   }

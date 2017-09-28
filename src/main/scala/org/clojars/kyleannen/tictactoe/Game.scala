@@ -1,4 +1,5 @@
-package tictactoe
+package org.clojars.kyleannen.tictactoe
+
 import scala.annotation.tailrec
 
 object Game {
@@ -106,8 +107,6 @@ object Game {
       }
     }
   }
-
-
 
   def setPlayer(
     output: String => Any,
@@ -253,7 +252,7 @@ object Game {
       val ttTable = new TTTable.TranspositionTable
 
       go(
-        board, players, dialogLang, false, currentPlayer,
+        board, players, dialogLang, gameOver = false, currentPlayer,
         output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
     }
 

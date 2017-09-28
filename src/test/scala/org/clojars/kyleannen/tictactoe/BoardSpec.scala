@@ -1,6 +1,6 @@
-package tictactoe 
+package org.clojars.kyleannen.tictactoe
+
 import org.scalatest._
-import org.scalatest.Matchers._
 
 class BoardSpec extends FunSpec {
 
@@ -222,7 +222,7 @@ class BoardSpec extends FunSpec {
       val testBoard: List[String] = List(
         "x","o","x",
         "x","o","x",
-        "o","x","x")
+        "o","x","o")
       val expected: Boolean = true
       val actual = Board.checkTie(testBoard)
       assert(actual === expected)
