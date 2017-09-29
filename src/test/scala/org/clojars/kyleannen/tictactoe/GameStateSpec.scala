@@ -3,6 +3,7 @@ package org.clojars.kyleannen.tictactoe
 import org.scalatest.FunSpec
 
 class GameStateSpec extends FunSpec{
+class GameStateSpec extends FunSpec{
   val gameState = new GameState(
     board = Board.initBoard(9),
     gameOver = false,
@@ -158,8 +159,6 @@ class GameStateSpec extends FunSpec{
         assert(!testGameState.validHumanMove)
       }
     }
-
-    describe("validateGameState") (pending)
 
     describe("checkGameOver") {
       it("sets game over when game is over") {
