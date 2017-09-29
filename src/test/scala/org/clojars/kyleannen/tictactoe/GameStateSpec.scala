@@ -3,7 +3,6 @@ package org.clojars.kyleannen.tictactoe
 import org.scalatest.FunSpec
 
 class GameStateSpec extends FunSpec{
-class GameStateSpec extends FunSpec{
   val gameState = new GameState(
     board = Board.initBoard(9),
     gameOver = false,
@@ -414,8 +413,6 @@ class GameStateSpec extends FunSpec{
 
         assert(updatedGameState.messages.contains(expected))
       }
-
-
     }
   }
 }
