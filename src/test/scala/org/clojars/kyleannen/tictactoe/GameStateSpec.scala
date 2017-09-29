@@ -159,8 +159,6 @@ class GameStateSpec extends FunSpec{
       }
     }
 
-    describe("validateGameState") (pending)
-
     describe("checkGameOver") {
       it("sets game over when game is over") {
         val testGameState = new GameState(
@@ -415,8 +413,6 @@ class GameStateSpec extends FunSpec{
 
         assert(updatedGameState.messages.contains(expected))
       }
-
-
     }
   }
 }
