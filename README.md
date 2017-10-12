@@ -1,6 +1,7 @@
 # Scala TicTacToe
 [![Build Status](https://travis-ci.org/kyle-annen/scala-tictactoe.svg?branch=master)](https://travis-ci.org/kyle-annen/scala-tictactoe)
 [![Coverage Status](https://coveralls.io/repos/github/kyle-annen/scala-tictactoe/badge.svg?branch=scoverage)](https://coveralls.io/github/kyle-annen/scala-tictactoe?branch=scoverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/068dd8bb9d70458685228ec9fab3c164)](https://www.codacy.com/app/kyle-annen/scala-tictactoe?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kyle-annen/scala-tictactoe&amp;utm_campaign=Badge_Grade)
 
 # Requirements
 
