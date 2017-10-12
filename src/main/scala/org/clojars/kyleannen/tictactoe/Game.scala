@@ -5,9 +5,9 @@ import scala.annotation.tailrec
 object Game {
 
   def setLanguage(
-    output: String => Any,
-    leftPadding: Int,
-    getInput: Int => String): String = {
+                   output: String => Any,
+                   leftPadding: Int,
+                   getInput: Int => String): String = {
 
     View.renderDialog(output, leftPadding, Dialog.lang("EN")("greeting"))
     View.renderWhitespace(output, 2)
@@ -30,10 +30,10 @@ object Game {
   }
 
   def setBoardSize(
-    output: String => Any,
-    leftPadding: Int,
-    getInput: Int => String,
-    dialogLang: Map[String, String]): Int = {
+                    output: String => Any,
+                    leftPadding: Int,
+                    getInput: Int => String,
+                    dialogLang: Map[String, String]): Int = {
 
     View.renderDialog(output, leftPadding, dialogLang("pickBoardSize"))
     val sizeOptions = List("3", "4")
@@ -52,10 +52,10 @@ object Game {
   }
 
   def setDifficulty(
-    output: String => Any,
-    leftPadding: Int,
-    getInput: Int => String,
-    dialogLang: Map[String, String]): Int = {
+                     output: String => Any,
+                     leftPadding: Int,
+                     getInput: Int => String,
+                     dialogLang: Map[String, String]): Int = {
 
     val easy = "1 - " + dialogLang("easy")
     val medium = "2 - " + dialogLang("medium")
@@ -109,12 +109,12 @@ object Game {
   }
 
   def setPlayer(
-    output: String => Any,
-    leftPadding: Int,
-    getInput: Int => String,
-    dialogLang: Map[String, String],
-    playerNum: Int,
-    playerToken: String): Map[Int, (String, String, Int)] = {
+                 output: String => Any,
+                 leftPadding: Int,
+                 getInput: Int => String,
+                 dialogLang: Map[String, String],
+                 playerNum: Int,
+                 playerToken: String): Map[Int, (String, String, Int)] = {
 
     val pAnnounce = dialogLang("playerAnnounce") + playerNum.toString
     val pPrompt = dialogLang("selectPlayerType")
@@ -135,27 +135,27 @@ object Game {
       1)
     val pType = if(playerType == "1") "human" else "computer"
     val playerDifficulty = if(pType == "computer") {
-        setDifficulty(output, leftPadding, getInput, dialogLang)
-      } else {
-        1
-      }
+      setDifficulty(output, leftPadding, getInput, dialogLang)
+    } else {
+      1
+    }
 
     val player = Map(playerNum -> (pType, playerToken, playerDifficulty))
     player
   }
 
   @tailrec def go(
-    board: List[String],
-    players: Map[Int, (String, String, Int)],
-    dialogLang: Map[String, String],
-    gameOver: Boolean,
-    currentPlayer: Int,
-    output: String => Any,
-    leftPadding: Int,
-    whiteSpace: Int,
-    getInput: Int => String,
-    loopCount: Int,
-    ttTable: TTTable.TranspositionTable): Map[Int, Boolean] = {
+                   board: List[String],
+                   players: Map[Int, (String, String, Int)],
+                   dialogLang: Map[String, String],
+                   gameOver: Boolean,
+                   currentPlayer: Int,
+                   output: String => Any,
+                   leftPadding: Int,
+                   whiteSpace: Int,
+                   getInput: Int => String,
+                   loopCount: Int,
+                   ttTable: TTTable.TranspositionTable): Map[Int, Boolean] = {
 
     View.renderWhitespace(output, whiteSpace)
 
@@ -231,35 +231,35 @@ object Game {
   }
 
   def setup(
-    currentPlayer: Int,
-    output: String => Any,
-    leftPadding: Int,
-    whiteSpace: Int,
-    getInput: Int => String,
-    loopCount: Int,
-    dialogLang: Map[String, String]): Map[Int, Boolean] = {
+             currentPlayer: Int,
+             output: String => Any,
+             leftPadding: Int,
+             whiteSpace: Int,
+             getInput: Int => String,
+             loopCount: Int,
+             dialogLang: Map[String, String]): Map[Int, Boolean] = {
 
-      View.renderWhitespace(output, whiteSpace)
+    View.renderWhitespace(output, whiteSpace)
 
-      val player1 = setPlayer(output, leftPadding, getInput, dialogLang, 1, "X")
-      val player2 = setPlayer(output, leftPadding, getInput, dialogLang, 2, "O")
+    val player1 = setPlayer(output, leftPadding, getInput, dialogLang, 1, "X")
+    val player2 = setPlayer(output, leftPadding, getInput, dialogLang, 2, "O")
 
-      val players = List(player1, player2).flatten.toMap
-      val boardDimension: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
-      val boardSize: Int = boardDimension * boardDimension
-      val board = Board.initBoard(boardSize)
+    val players = List(player1, player2).flatten.toMap
+    val boardDimension: Int = setBoardSize(output, leftPadding, getInput, dialogLang)
+    val boardSize: Int = boardDimension * boardDimension
+    val board = Board.initBoard(boardSize)
 
-      val ttTable = new TTTable.TranspositionTable
+    val ttTable = new TTTable.TranspositionTable
 
-      go(
-        board, players, dialogLang, gameOver = false, currentPlayer,
-        output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
-    }
+    go(
+      board, players, dialogLang, gameOver = false, currentPlayer,
+      output, leftPadding, whiteSpace, getInput, loopCount, ttTable)
+  }
 
   @tailrec def contLoop(
-    output: String => Any,
-    getInput: Int => String,
-    langSelected: String): Map[Int, Boolean] = {
+                         output: String => Any,
+                         getInput: Int => String,
+                         langSelected: String): Map[Int, Boolean] = {
 
     View.renderWhitespace(output, 100)
 

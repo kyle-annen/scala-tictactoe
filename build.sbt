@@ -9,8 +9,10 @@ lazy val root = (project in file(".")).
     )),
     name := "tictactoe",
     libraryDependencies += scalaTest % Test,
+    libraryDependencies += "org.scoverage" % "scalac-scoverage-runtime_2.12" % "1.3.0",
     crossPaths := false,
     publishMavenStyle := true,
+    coverageEnabled := true,
     pomExtra :=
       <licenses>
         <license>
