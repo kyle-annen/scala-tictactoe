@@ -15,16 +15,8 @@ object AI {
     val finished: Boolean = f
   }
 
-  type Node = Map[Position, Score]
   type NodeMap = Map[Int, Node]
-
-  def time[R](block: => R): R = {
-    val t0 = System.nanoTime()
-    val result = block    // call-by-name
-    val t1 = System.nanoTime()
-    println("Elapsed time: " + (t1 - t0) / 1000000 + "ms")
-    result
-  }
+  type Node = Map[Position, Score]
 
   def isAllDigits(x: String): Boolean = x forall Character.isDigit
 
@@ -66,7 +58,7 @@ object AI {
 
   def rollBackBoard(board: List[String], currentDepth: Int, nodeMap: NodeMap): List[String] = {
     val rollBackPosition: Position = getActiveParentLeafPosition(nodeMap, currentDepth)
-    val newBoard: List[String] = (0 to board.length - 1).map {
+    val newBoard: List[String] = board.indices.map {
       loc => if(loc == rollBackPosition - 1) rollBackPosition.toString else board(loc)
     }.toList
     newBoard
@@ -74,9 +66,8 @@ object AI {
 
   def getLeafScore(position: Position, depth: Int, board: List[String], maxPlayer: Boolean): Score = {
     val win: Boolean = Board.checkWin(board)
-    val tie: Boolean = Board.checkTie(board)
     val outcome: String = if(win) "win" else "tie"
-    val rawScore: Int = if(win) (1000 - depth) else 0
+    val rawScore: Int = if(win) 1000 - depth else 0
     val score: Int = if(maxPlayer) rawScore else rawScore * -1
     new Score(position, score, outcome, true)
   }
@@ -88,7 +79,6 @@ object AI {
   }
 
   def setDepthScore(nodeMap: NodeMap, depth: Int, maxPlayer: Boolean): NodeMap = {
-    val node: Node = nodeMap(depth)
     val activeParentLeafPosition = getActiveParentLeafPosition(nodeMap, depth)
 
     if(maxPlayer) {
