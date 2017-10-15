@@ -1,35 +1,33 @@
 package org.clojars.kyleannen.tictactoe
 
+import scala.collection.mutable
+
 object TTTable {
   class TranspositionTable {
-    var min = scala.collection.mutable.Map[String, Int]()
-    var max = scala.collection.mutable.Map[String, Int]()
+    var min: mutable.Map[String, Int] = mutable.Map[String, Int]()
+    var max: mutable.Map[String, Int] = mutable.Map[String, Int]()
   }
 
   def swapTranspositionKeys(key: String, p1Token: String, p2Token: String): String = {
-    val swapArray = key.split("").map { char =>
-      char match {
-        case `p1Token` => p2Token
-        case `p2Token` => p1Token
-        case _ => char
-      }
+    val swapArray = key.split("").map {
+      case `p1Token` => p2Token
+      case `p2Token` => p1Token
+      case char => char
     }
     swapArray.foldLeft("")(_ + _)
   }
 
 
   def getBoardTranspositions(
-    board: List[String],
-    score: Int,
-    p1Token: String,
-    p2Token: String): Map[String, List[(String, Int)]] = {
+                              board: List[String],
+                              score: Int,
+                              p1Token: String,
+                              p2Token: String): Map[String, List[(String, Int)]] = {
 
-    val generalizedBoard = board.map { x =>
-      x match {
-        case `p1Token` => p1Token
-        case `p2Token` => p2Token
-        case _ => "-"
-      }
+    val generalizedBoard = board.map {
+      case `p1Token` => p1Token
+      case `p2Token` => p2Token
+      case _ => "-"
     }
 
     val rowLists = Board.returnRows(generalizedBoard)
@@ -56,9 +54,9 @@ object TTTable {
   }
 
   def saveTranspositions(
-    tt: TranspositionTable,
-    values: Map[String,List[(String, Int)]],
-    minOrMax: String): Unit = {
+                          tt: TranspositionTable,
+                          values: Map[String,List[(String, Int)]],
+                          minOrMax: String): Unit = {
     val currentPath = if(minOrMax == "min") tt.min else tt.max
     val oppPath = if(minOrMax == "min") tt.max else tt.min
     for (value <- values("current")) {
@@ -70,11 +68,11 @@ object TTTable {
   }
 
   def checkTransposition(
-    boardState: List[String],
-    ttTable: TranspositionTable,
-    p1Token: String,
-    p2Token: String,
-    minOrMax: String): (Boolean, Int) = {
+                          boardState: List[String],
+                          ttTable: TranspositionTable,
+                          p1Token: String,
+                          p2Token: String,
+                          minOrMax: String): (Boolean, Int) = {
     val generalizedBoard = boardState.map {x =>
       if(x == p1Token) {
         p1Token

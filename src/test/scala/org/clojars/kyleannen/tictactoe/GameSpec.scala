@@ -52,56 +52,9 @@ class GameSpec extends FunSpec {
 
   val mockPlayers: Map[Int, (String, String, Int)] = Map(1 -> ("human", "X",3), 2 -> ("human", "O", 3))
 
-  describe("setLanguage") {
-    it("sets the language of the game") {
-      val expected = "CN"
-      val actual =
-        Game.setLanguage(
-          testPrint,
-          3,
-          mockInput)
-      assert(actual == expected)
-    }
-  }
 
-  describe("setPlayer") {
-    it("can select a human player") {
-      def mockHumanSelect(callCount: Int): String = {
-        callCount match {
-          case 1 => "1"
-        }
-      }
 
-      val expected = Map(1 -> ("human", "X", 1))
-      val actual = Game.setPlayer(
-        testPrint,
-        0,
-        mockHumanSelect,
-        Dialog.lang("EN"),
-        1,
-        "X")
-      assert(actual == expected)
-    }
 
-    it("can select a computer player") {
-      def mockHumanSelect(callCount: Int): String = {
-        callCount match {
-          case 1 => "2"
-          case 2 => "3"
-        }
-      }
-
-      val expected = Map(1 -> ("computer", "X", 2))
-      val actual = Game.setPlayer(
-        testPrint,
-        0,
-        mockHumanSelect,
-        Dialog.lang("EN"),
-        1,
-        "X")
-      assert(actual == expected)
-    }
- }
 
   describe("go") {
     it("the game will finish if there is a winner") {
@@ -109,17 +62,17 @@ class GameSpec extends FunSpec {
       val testPlayers = mockPlayers
       val ttTable = new TTTable.TranspositionTable
       val actual = Game.go(
-        testBoard,
-        testPlayers,
-        Dialog.lang("EN"),
-        false,
-        1,
-        testPrint,
-        0,
-        0,
-        mockInput9RoundsFinish,
-        1,
-        ttTable).keys.head
+        board = testBoard,
+        players = testPlayers,
+        dialogLang = Dialog.lang("EN"),
+        gameOver = false,
+        currentPlayer = 1,
+        output = testPrint,
+        leftPadding = 0,
+        whiteSpace = 0,
+        getInput = mockInput9RoundsFinish,
+        loopCount = 1,
+        ttTable = ttTable).keys.head
 
       assert(actual == 1 || actual == 2)
     }
@@ -130,16 +83,16 @@ class GameSpec extends FunSpec {
       val ttTable = new TTTable.TranspositionTable
       val actual = Game.go(
         testBoard,
-        testPlayers,
-        Dialog.lang("EN"),
-        false,
-        1,
-        testPrint,
-        0,
-        0,
-        mockInput9RoundsTie,
-        1,
-        ttTable).keys.head
+        players = testPlayers,
+        dialogLang = Dialog.lang("EN"),
+        gameOver = false,
+        currentPlayer = 1,
+        output = testPrint,
+        leftPadding = 0,
+        whiteSpace = 0,
+        getInput = mockInput9RoundsTie,
+        loopCount = 1,
+        ttTable = ttTable).keys.head
 
       assert(actual == 1 || actual == 2)
     }
@@ -151,15 +104,15 @@ class GameSpec extends FunSpec {
       val actual = Game.go(
         testBoard,
         testPlayers,
-        Dialog.lang("EN"),
-        false,
-        1,
-        testPrint,
-        0,
-        0,
-        mockInput5RoundsFinish,
-        1,
-        ttTable).keys.head
+        dialogLang = Dialog.lang("EN"),
+        gameOver = false,
+        currentPlayer = 1,
+        output = testPrint,
+        leftPadding = 0,
+        whiteSpace = 0,
+        getInput = mockInput5RoundsFinish,
+        loopCount = 1,
+        ttTable = ttTable).keys.head
 
       assert(actual == 1 || actual == 2)
     }
@@ -179,13 +132,13 @@ class GameSpec extends FunSpec {
 
     it("language can be chosen and the game played") {
       val actual = Game.setup(
-        1,
-        testPrint,
-        0,
-        0,
-        mockInputChinese9round,
-        1,
-        Dialog.lang("CN")).keys.head
+        currentPlayer = 1,
+        output = testPrint,
+        leftPadding = 0,
+        whiteSpace = 0,
+        getInput = mockInputChinese9round,
+        loopCount = 1,
+        dialogLang = Dialog.lang("CN")).keys.head
 
       assert(actual == 1 || actual == 2)
     }
@@ -202,7 +155,7 @@ class GameSpec extends FunSpec {
           case 5 => "n"
         }
       }
-      val actual = Game.contLoop(testPrint, mockContTestInput, "none").keys.head
+      val actual = Game.continueGameLoop(testPrint, mockContTestInput, "none").keys.head
       assert(actual == 1 || actual == 2)
     }
   }
