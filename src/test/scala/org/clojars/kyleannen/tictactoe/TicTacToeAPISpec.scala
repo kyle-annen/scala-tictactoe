@@ -4,7 +4,6 @@ import org.scalatest.FunSpec
 
 class TicTacToeAPISpec extends FunSpec{
 
-
   describe("TicTacToeAPI") {
     describe("startGame") {
       it("returns a new gameState") {
@@ -19,6 +18,46 @@ class TicTacToeAPISpec extends FunSpec{
 
         assert(messages.contains(greeting))
         assert(messages.contains(inputPrompt))
+      }
+    }
+
+    describe("playRound") {
+      it("places the human move") {
+        val gameState = new GameState(
+          Board.initBoard(9),
+          gameOver = false,
+          messages = List(""),
+          humanMove = 1,
+          computerMove = -1,
+          humanToken = "X",
+          computerToken = "O",
+          gameOutcome = "none",
+          gameWinner = "none",
+          validSubmission = true,
+          language = "EN")
+
+        val nextGameState = TicTacToeAPI.playRound(gameState)
+
+        assert(nextGameState.board(0) == "X")
+      }
+
+      it("makes a computer move") {
+        val gameState = new GameState(
+          Board.initBoard(9),
+          gameOver = false,
+          messages = List(""),
+          humanMove = 1,
+          computerMove = -1,
+          humanToken = "X",
+          computerToken = "O",
+          gameOutcome = "none",
+          gameWinner = "none",
+          validSubmission = true,
+          language = "EN")
+
+        val nextGameState = TicTacToeAPI.playRound(gameState)
+
+        assert(nextGameState.board.contains("O"))
       }
     }
   }
