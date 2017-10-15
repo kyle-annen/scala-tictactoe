@@ -113,6 +113,25 @@ class GameStateSpec extends FunSpec{
         val actual = testGameState.getLocationValue(humanMovePosition)
         assert(actual == expected)
       }
+
+      it("returns the submitted state if game is over") {
+        val gameOverState = new GameState(
+          board = Board.initBoard(9),
+          gameOver = true,
+          messages = List("hi", "hello", "great game"),
+          humanMove = 1,
+          computerMove = -1,
+          humanToken = "X",
+          computerToken = "O",
+          gameOutcome = "none",
+          gameWinner = "none",
+          validSubmission = true,
+          language = "EN")
+          val updatedGameState = gameOverState.placeHumanMove()
+
+          assert(gameOverState.equals(updatedGameState))
+
+      }
     }
 
     describe("setComputerMove") {
@@ -412,6 +431,49 @@ class GameStateSpec extends FunSpec{
         val expected = "Player  X, You have won the game!"
 
         assert(updatedGameState.messages.contains(expected))
+        val expectedGameOutcome = "win"
+        assert(updatedGameState.gameOutcome == expectedGameOutcome)
+      }
+    }
+
+    describe("validateGameState") {
+      it("sets valid game state if move submission is valid") {
+        val testGameState = new GameState(
+          board = List(
+            "X","O","X",
+            "X","O","X",
+            "O","8","9"),
+          gameOver = false,
+          messages = List("hi", "hello", "great game"),
+          humanMove = 9,
+          computerMove = -1,
+          humanToken = "X",
+          computerToken = "O",
+          gameOutcome = "none",
+          gameWinner = "none",
+          validSubmission = true,
+          language = "EN")
+        val updatedTestGameState = testGameState.validateGameState()
+        assert(updatedTestGameState.validSubmission == true)
+      }
+      it("sets invalid game state if move submission is invalid") {
+        val testGameState = new GameState(
+          board = List(
+            "X","O","X",
+            "X","O","X",
+            "O","8","9"),
+          gameOver = false,
+          messages = List("hi", "hello", "great game"),
+          humanMove = 1,
+          computerMove = -1,
+          humanToken = "X",
+          computerToken = "O",
+          gameOutcome = "none",
+          gameWinner = "none",
+          validSubmission = true,
+          language = "EN")
+        val updatedTestGameState = testGameState.validateGameState()
+        assert(updatedTestGameState.validSubmission == false)
       }
     }
   }

@@ -99,8 +99,7 @@ class GameState(
   }
 
   def validateGameState(): GameState = {
-    if(!this.validSubmission) return this
-    val validSubmission = validHumanMove
+    val validSubmission = this.validHumanMove()
 
      new GameState(
       this.board,
@@ -116,8 +115,8 @@ class GameState(
       this.language)
   }
 
-  def validHumanMove: Boolean = {
-    Board.returnValidInputs(board).contains(humanMove.toString)
+  def validHumanMove(): Boolean = {
+    Board.returnValidInputs(this.board).contains(this.humanMove.toString)
   }
 
 
